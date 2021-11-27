@@ -37,6 +37,9 @@
     display: inline-block;
   }
   body { text-align: center; } 
+  
+  ion-content > div { margin-left: 25%; padding-top: 40px;  padding-bottom: 40px; }
+
 </style> 
 <p><a href="https://mybinder.org/v2/gh/3Diot/3Diot.github.io/main?labpath=000_core.ipynb"><img src="https://mybinder.org/badge_logo.svg" alt="Binder" /></a>
 <a href="https://colab.research.google.com/github/3Diot/3Diot.github.io/blob/main/notebooks/000_core.ipynb"><img src="https://pete88b.github.io/fastpages/assets/badges/colab.svg" alt="Binder" /></a>
@@ -51,9 +54,13 @@
 <p>This is just an example of what could be interactive reports! </p>
 <p>Styling and advanced functionality and better data are on the way.</p>
 <h2>The new islands</h2>
-<p>For the follwoing example. I pulled data from: <a>https://www.k1ic.com/archive/cv_stats_20211029.csv</a></p>
-<p>Lets take a look at the most recently listed Islands: </p>
-<img height='500px' src='https://pbs.twimg.com/media/FFIDGogWYAoawza?format=jpg&name=large'><h3>The Data</h3>
+<p>For this demonstration I pulled data from (using Python): <a>https://www.k1ic.com/archive/cv_stats_20211029.csv</a></p>
+<p>There is a lot of data in there. So lets take a look at only the most recently listed Islands (Python): </p>
+<img height='500px' src='https://pbs.twimg.com/media/FFIDGogWYAoawza?format=jpg&name=large'><br><h3>The Data</h3>
+<p>This following interactive pivot table is not usable on mobile but is a very powerful visualization tool.</p>
+<p>I can process raw data, create reports, and share it on the web where it can than be further manipulated &amp; explored!</p>
+<p>Drag and drop attributes from the leftmost into either the X or Y column. </p>
+<p>You can change the visualization and aggregation technique as well.</p>
 
 <!DOCTYPE html>
 <html>
@@ -116,161 +123,270 @@
                 ).show();
              });
         </script>
-        <div id="output" style="display: none;">,Parcel_Id,Name,Description,Traffic_Visits,Owner,Contributors,Kind,Area,Height,Address,Distance,Island,Suburb,Price_Bought_At,Feature_Total,Depth,Width,Volume
-6225,6306, , ,135,0xa253d7cd38dc2d0b2e65ad42a7e4beb3c60a83ad,,plot,481,13,Auahi Space,1599,Honolulu,Honolulu,0,0,0,0,6253
-6266,6373, , ,384,0xa253d7cd38dc2d0b2e65ad42a7e4beb3c60a83ad,,plot,475,13,Hinahina Zone,1388,Pilikai,Pilikai,0,14,0,0,6175
-6285,6392, , ,515,0x1c90d76468176a0caa4baf141677f253f73c83c2,,plot,251,16,3 Pili Kai Road,1405,Pilikai,Pilikai,0,117,0,0,4016
-6322,6429, , ,189,0xf942ce6643bc80d0bcc1bea4fd4657e600a1de88,,plot,305,13,2 Shower Ave,1291,Pilikai,Pilikai,0,2,0,0,3965
-6333,6440, , ,225,0xa253d7cd38dc2d0b2e65ad42a7e4beb3c60a83ad,,plot,350,10,Kuahelani Green,1836,Kauai,Kauai,0,14,0,0,3500
-6287,6394, , ,270,0x5337abb4e405286573d369360b0265731fda0919,,plot,271,12,17 Makuakane Drive,1440,Pilikai,Pilikai,0,0,0,0,3252
-6368,6475, , ,138,0x91d4e02be8755e31a2695feeec29d924d4881258,,plot,203,16,3 Plantation Road,1782,Kauai,Kauai,0,0,0,0,3248
-6312,6419, , ,86,0x4eedcc324605ccd681052a285c3dbfd0e64be205,,plot,246,13,7 Makuakane Drive,1475,Pilikai,Pilikai,0,0,0,0,3198
-6355,6462, , ,348,0x91d4e02be8755e31a2695feeec29d924d4881258,,plot,239,13,17 Punono Drive,1796,Kauai,Kauai,0,0,0,0,3107
-6246,6332, , ,77,0xa253d7cd38dc2d0b2e65ad42a7e4beb3c60a83ad,,plot,220,14,67 Forrest Road,1587,Honolulu,Honolulu,0,0,0,0,3080
-6295,6402,Voxel Haus,The warehouse for everything VOX.,748,0x695c6103e3d7cb9dff2a2f6648c0951dd39f4952,,plot,224,13,29 Haena Terrace,1434,Pilikai,Pilikai,0,327,0,0,2912
-6369,6476, , ,170,0x6b261a3ec2405ae0e8e0546ad6906e65af8b8868,,plot,194,15,29 Ahiu Street,1894,Kauai,Kauai,0,12,0,0,2910
-6241,6327, ,Satoshi Tower ,110,0xc5aff255199683f15d43ec5a60600a112b4532c2,0x916EaE701E48143e712023960545a9dD63412770|0x359C2d3e415361e277AB2034780F91BF238b2B59|0xEA6682f39949B708B00F1D7745f7b5A78D505f67|0x2ee8ac8f62218166f0a9e25bd788d1753c11e946|0x476F248fB8D8736dc84B4c9d7Cc186E5CcA2ad42|0x9d37e2b488EC646629D41A572543E7620C37be53|0x5D30C68C3067d97A3A446d5729749A06A39C6d5c,plot,207,14,5 Akaku Street,1610,Honolulu,Honolulu,0,0,0,0,2898
-6308,6415, , ,197,0x2089035369b33403ddcaba6258c34e0b3ffbbbd9,,plot,181,16,23 Hinahina Street,1375,Pilikai,Pilikai,0,0,0,0,2896
-6311,6418, , ,123,0x40ac989f5ddce35bd51c3a6e2f064d2120e4275e,,plot,169,17,2 Maia Ave,1437,Pilikai,Pilikai,0,11,0,0,2873
-6226,6307, , ,239,0x7e118a15c43b8f56cf69a4536fdd2404ac457552,,plot,179,16,41 Forrest Road,1620,Honolulu,Honolulu,0,0,0,0,2864
-6278,6385,Traps, ,727,0x6439543a2ff1d78d25abdc8daa75bb004e210183,0x695c6103e3d7cb9dff2a2f6648c0951dd39f4952|0x196e919f74baeafca10c313043848c39a8f5effd|0x473b2702c302ef6df351004cbc4d16b5cecc804c,plot,254,11,13 Haena Terrace,1414,Pilikai,Pilikai,0,15,0,0,2794
-6370,6477, , ,124,0x9a1e8645dedec6d45e2058d031b1ca97f815bd2e,,plot,220,12,3 Leleaka Ave,1900,Kauai,Kauai,0,0,0,0,2640
-6329,6436,Aily Gallery Lab, ,107,0x7c5d4db8dce379b7cbccfc08019c20439926ada8,,plot,155,17,2 Kokee Street,1287,Pilikai,Pilikai,0,0,0,0,2635
-6304,6411, , ,87,0x4eedcc324605ccd681052a285c3dbfd0e64be205,,plot,168,15,7 Manako Drive,1449,Pilikai,Pilikai,0,0,0,0,2520
-6350,6457, , ,704,0x91d4e02be8755e31a2695feeec29d924d4881258,,plot,207,12,11 Punono Drive,1787,Kauai,Kauai,0,0,0,0,2484
-6353,6460, , ,236,0x7b19b42564ad1c03625e8306cf20deea2f923a67,0xdf21a82542c489b72af4cbe70731ff9cf280fce4|0xe330Dc28b47d73884AD88837aECfEE1F49Ad7e7b|0xe9956cf72cc8e49d903478142dc8dadb4ee328ff|0xa53f470c3b597803b25e02f75339e22173705254|0x715688B00CeA0a22A6e3B0E2E92A8f99F2677be8|0x1e8E749b2B578E181Ca01962e9448006772b24a2|0xD30a79E487351Eb0064c8a78eb341DA364d78a9a|0xD67c34169b372d5B3932c548a940D4Ea74Fe7aF5,plot,189,13,5 Auahi Road,1847,Kauai,Kauai,0,5,0,0,2457
-6230,6311, , ,109,0xc1efc49285eb5deda2ac887d613242475ed15048,,plot,203,12,23 Forrest Road,1631,Honolulu,Honolulu,0,0,0,0,2436
-6293,6400, , ,219,0xfad0ea578c6c63fe495dc0ef9cf73fc2c69e1f47,0x5d4d0f312de9D57338787308a25D2959978AADf6,plot,303,8,13 Makuakane Drive,1459,Pilikai,Pilikai,0,43,0,0,2424
-6305,6412, , ,75,0x3644c67ba7738046994b7134fd10ab9895504170,,plot,293,8,31 Haena Terrace,1454,Pilikai,Pilikai,0,0,0,0,2344
-6257,6360, , ,46,0x1963203759f5c5eb5c5c916b3509c9f26dd0381a,,plot,227,10,11 Leleaka Road,1610,Honolulu,Honolulu,0,0,0,0,2270
-6346,6453, , ,183,0x5d4d0f312de9d57338787308a25d2959978aadf6,0x8b68B27b480fa5107b0FC370f1A797C9E0D665dd|0xfAD0EA578c6C63fe495dc0EF9cF73fC2c69E1f47,plot,227,10,3 Ahiu Street,1852,Kauai,Kauai,0,0,0,0,2270
-6272,6379, ,Powered by Metaverse Agency,367,0x38d7db71a1be75c52b463eb148c121a5bb418fb9,0x404c5b810e2cf04b82115bf93fa9cce8dac09c96,plot,199,11,41 Makuakane Drive,1408,Pilikai,Pilikai,0,144,0,0,2189
-6362,6469, , ,164,0x91d4e02be8755e31a2695feeec29d924d4881258,,plot,271,8,2 Lanikuhana Street,1771,Kauai,Kauai,0,0,0,0,2168
-6228,6309, , ,139,0xda248cc10b477c1144219183ec87b0621dac37b3,,plot,269,8,29 Forrest Road,1635,Honolulu,Honolulu,0,0,0,0,2152
-6321,6428, , ,98,0x4eedcc324605ccd681052a285c3dbfd0e64be205,,plot,239,9,2 Ekaha Ave,1342,Pilikai,Pilikai,0,0,0,0,2151
-6260,6363, , ,254,0x6439543a2ff1d78d25abdc8daa75bb004e210183,0x695c6103e3d7cb9dff2a2f6648c0951dd39f4952,plot,239,9,23 South Drive,1674,Honolulu,Honolulu,0,94,0,0,2151
-6310,6417, , ,131,0x2089035369b33403ddcaba6258c34e0b3ffbbbd9,,plot,142,15,3 Ekaha Ave,1356,Pilikai,Pilikai,0,0,0,0,2130
-6339,6446,Baby Coby's Cenotaph, ,401,0xc0beefeed699f6d6a08397fcbf8fbadf9f83eb5d,0xfc7e0e880718459c0161242824c4f3e8e230593d,plot,233,9,2 Welehu Terrace,1816,Kauai,Kauai,0,11,0,0,2097
-6342,6449, , ,120,0xac9ad7f3797be989ca2cb474bf809be02deadcbc,,plot,203,10,59 Forrest Ave,1848,Kauai,Kauai,0,0,0,0,2030
-6243,6329, , ,85,0xa253d7cd38dc2d0b2e65ad42a7e4beb3c60a83ad,,plot,153,13,7 South Drive,1660,Honolulu,Honolulu,0,0,0,0,1989
-6307,6414,Richard Dixon Pilikai,Richard Dixon loves you.  https://richarddixonart.com/ https://twitter.com/richarddixonart,746,0x381a000326d7b1b901d75ac1acaed3c92b1eb01f,0xa214384fd96d0883a4e4c75036c2863f0f5995f5,plot,142,14,19 Hinahina Street,1400,Pilikai,Pilikai,0,68,0,0,1988
-6335,6442, , ,283,0xb8427dcc33ec47332583879efd85c0de00583120,,plot,242,8,47 Forrest Ave,1839,Kauai,Kauai,0,84,0,0,1936
-6274,6381, , ,312,0x1ac6a4e952800fe6542823688cc9f27c898f9279,,plot,175,11,7 Haena Terrace,1404,Pilikai,Pilikai,0,0,0,0,1925
-6273,6380, , ,224,0x19f1caede538783d19cb6363349f7807e23367bb,,plot,119,16,37 Makuakane Drive,1424,Pilikai,Pilikai,0,1,0,0,1904
-6281,6388, , ,148,0x8888888888ab9ac60103e4d717a973a7a2728677,0x991BB23cF135b20Cf9aBCb944283Ddb5abe26e40,plot,170,11,17 Haena Terrace,1433,Pilikai,Pilikai,0,9,0,0,1870
-6364,6471, , ,140,0x91d4e02be8755e31a2695feeec29d924d4881258,,plot,207,9,23 Punono Drive,1808,Kauai,Kauai,0,0,0,0,1863
-6254,6357, , ,227,0x6439543a2ff1d78d25abdc8daa75bb004e210183,0x695c6103e3d7cb9dff2a2f6648c0951dd39f4952,plot,107,17,3 Mulehu Terrace,1665,Honolulu,Honolulu,0,0,0,0,1819
-6294,6401, , ,160,0x5337abb4e405286573d369360b0265731fda0919,,plot,224,8,5 Laau Paina Terrace,1365,Pilikai,Pilikai,0,0,0,0,1792
-6229,6310, , ,77,0x6267a49a0ebbb47067cd18e619c5c6bed5111e83,,plot,224,8,31 Forrest Road,1616,Honolulu,Honolulu,0,0,0,0,1792
-6268,6375, ,Metaverse Gallery,523,0x38d7db71a1be75c52b463eb148c121a5bb418fb9,0x404c5b810e2cf04b82115bf93fa9cce8dac09c96,plot,179,10,43 Makuakane Drive,1410,Pilikai,Pilikai,0,290,0,0,1790
-6361,6468, , ,91,0x3644c67ba7738046994b7134fd10ab9895504170,,plot,220,8,5 Leleaka Ave,1880,Kauai,Kauai,0,0,0,0,1760
-6351,6458, , ,309,0x7d36e06251e8376d7194147d9d26214566fac47d,,plot,219,8,11 Ahiu Street,1867,Kauai,Kauai,0,148,0,0,1752
-6359,6466, , ,193,0x5ae9a64f9f5eb912662fe348f8eadf33f0a9de12,,plot,175,10,23 Ahiu Street,1874,Kauai,Kauai,0,7,0,0,1750
-6319,6426, , ,49,0x4eedcc324605ccd681052a285c3dbfd0e64be205,,plot,109,16,2 Mc Neill Road,1498,Pilikai,Pilikai,0,0,0,0,1744
-6347,6454, , ,261,0x7b19b42564ad1c03625e8306cf20deea2f923a67,0xdf21a82542c489b72af4cbe70731ff9cf280fce4|0xe330Dc28b47d73884AD88837aECfEE1F49Ad7e7b|0xa53f470c3b597803b25e02f75339e22173705254|0xe9956cf72cc8e49d903478142dc8dadb4ee328ff|0x715688B00CeA0a22A6e3B0E2E92A8f99F2677be8|0x1e8E749b2B578E181Ca01962e9448006772b24a2|0xD30a79E487351Eb0064c8a78eb341DA364d78a9a|0xD67c34169b372d5B3932c548a940D4Ea74Fe7aF5,plot,215,8,19 Hokuala Ave,1827,Kauai,Kauai,0,22,0,0,1720
-6286,6393,whitelabels,virtual multipurpose space,501,0xf6b11609c3a5bcdeba0eab46799a3ed7c1323db8,0x904f7c7e11471a2ae059c18f1da6fa2094882f9f|0xa69c474714449a7f2065fddebeb8fabd31113d78|0xed14b35ae030c09dc838e7b8d5c4b0e7db9098dc|0xb78e8334eaccea894bfc11eeed1514e1fb78abe1,plot,143,12,17 Uala Terrace,1425,Pilikai,Pilikai,0,127,0,0,1716
-6314,6421, , ,45,0x4eedcc324605ccd681052a285c3dbfd0e64be205,,plot,186,9,5 Mc Neill Road,1485,Pilikai,Pilikai,0,0,0,0,1674
-6367,6474, , ,52,0x3644c67ba7738046994b7134fd10ab9895504170,,plot,152,11,2 Leleaka Ave,1890,Kauai,Kauai,0,0,0,0,1672
-6234,6315, , ,109,0xda248cc10b477c1144219183ec87b0621dac37b3,,plot,164,10,19 Forrest Road,1649,Honolulu,Honolulu,0,0,0,0,1640
-6276,6383,AV Universe, ,541,0x8ed10ca1c0b15353894eecea9e6bc11f15d53e10,0xb00d7ba1c22673ed493274605e4fd1566b98f388,plot,149,11,31 Makuakane Drive,1424,Pilikai,Pilikai,0,50,0,0,1639
-6344,6451, , ,190,0x8323ea41885680bc2dee1b879dff60f75b1a90a3,,plot,179,9,13 Punono Drive,1808,Kauai,Kauai,0,0,0,0,1611
-6267,6374,Hawaii Pad Pilikai, ,464,0x6b484f9a2b4a4cddff14892a80a4d25546424c5f,0xd7d16bcc1a30cf92e594ce7531e84c7e0ce97658|0x4f3d8fe6eecbf30b9987da8def9e45a67e45147b|0x3e401d84ceb24fbdb1aef5d96bc22828fd229933|0x73B4437A4b3e43De673836107437e4f092A363e0,plot,195,8,2 Haena Terrace,1402,Pilikai,Pilikai,0,60,0,0,1560
-6275,6382, , ,220,0x71b49fe06436d997b14228c96ac9bf4439147259,,plot,155,10,11 Haena Terrace,1422,Pilikai,Pilikai,0,123,0,0,1550
-6248,6335, , ,82,0xa253d7cd38dc2d0b2e65ad42a7e4beb3c60a83ad,,plot,155,10,3 Akaku Street,1598,Honolulu,Honolulu,0,0,0,0,1550
-6256,6359, , ,119,0xd27fc8aee201ec6a35f3ae32c457d04c44965158,0x6439543a2fF1d78d25ABDc8DAa75bb004e210183,plot,109,14,2 Kaukalia Ave,1694,Honolulu,Honolulu,0,25,0,0,1526
-6315,6422, , ,140,0x2089035369b33403ddcaba6258c34e0b3ffbbbd9,,plot,97,15,23 Ehako Drive,1371,Pilikai,Pilikai,0,0,0,0,1455
-6372,6479, , ,72,0xb27696c8f4815ffca1ea6ab6fbb3a05ef1302367,,plot,181,8,3 Wekiu Drive,1911,Kauai,Kauai,0,2,0,0,1448
-6354,6461, , ,210,0x7b19b42564ad1c03625e8306cf20deea2f923a67,,plot,181,8,3 Welehu Terrace,1827,Kauai,Kauai,0,0,0,0,1448
-6302,6409, , ,101,0x825b9bd77bd3b8b24dfd5794800aea1394a6378d,,plot,90,16,7 Amau Road,1420,Pilikai,Pilikai,0,0,0,0,1440
-6301,6408,Richard Dixon Pilikai,Richard Dixon loves you.  https://twitter.com/richarddixonart,674,0x381a000326d7b1b901d75ac1acaed3c92b1eb01f,0xa214384fd96d0883a4e4c75036c2863f0f5995f5,plot,90,16,2 Uala Terrace,1406,Pilikai,Pilikai,0,56,0,0,1440
-6297,6404,FLARE 2021, ,413,0x2e1c158b139fbe9251e2db089ec7f3488b670624,0x99fF4b9f38B1DBA80B527a48799cb354f65b6AD8,plot,179,8,2 Pili Kai Road,1425,Pilikai,Pilikai,0,6,0,0,1432
-6313,6420, , ,188,0x45d29b661f9351abb53d3412ffe8852e6708f9d0,,plot,143,10,37 Haena Terrace,1452,Pilikai,Pilikai,0,3,0,0,1430
-6296,6403, , ,145,0xfad0ea578c6c63fe495dc0ef9cf73fc2c69e1f47,0x5d4d0f312de9D57338787308a25D2959978AADf6,plot,143,10,11 Mc Neill Road,1470,Pilikai,Pilikai,0,4,0,0,1430
-6247,6334, , ,98,0xa253d7cd38dc2d0b2e65ad42a7e4beb3c60a83ad,,plot,129,11,3 Keaoopua Terrace,1642,Honolulu,Honolulu,0,0,0,0,1419
-6324,6431,Ghost Isthmus House, ,91,0xf251ca37a80200f7afeff398da0338f4c1f01249,,plot,116,12,5 Shower Ave,1281,Pilikai,Pilikai,0,9,0,0,1392
-6283,6390,Traps, ,653,0x6439543a2ff1d78d25abdc8daa75bb004e210183,0x695c6103e3d7cb9dff2a2f6648c0951dd39f4952|0x196e919f74baeafca10c313043848c39a8f5effd|0x473b2702c302ef6df351004cbc4d16b5cecc804c,plot,169,8,19 Haena Terrace,1423,Pilikai,Pilikai,0,2,0,0,1352
-6250,6338, , ,200,0x6439543a2ff1d78d25abdc8daa75bb004e210183,,plot,167,8,13 South Drive,1659,Honolulu,Honolulu,0,0,0,0,1336
-6232,6313,Hawaii Pad Honolulu, ,220,0x73b4437a4b3e43de673836107437e4f092a363e0,0xd7d16bcc1a30cf92e594ce7531e84c7e0ce97658|0x4f3d8fe6eecbf30b9987da8def9e45a67e45147b|0x3e401d84ceb24fbdb1aef5d96bc22828fd229933|0x73b4437a4b3e43de673836107437e4f092a363e0,plot,167,8,47 Forrest Road,1610,Honolulu,Honolulu,0,14,0,0,1336
-6328,6435, , ,44,0x80fec8f0203cec214269567822c12ddca97b15b8,,plot,132,10,3 Kokee Street,1301,Pilikai,Pilikai,0,0,0,0,1320
-6303,6410, , ,109,0x7d353e6faf6ed7434c7af7d261cdf5e8a9ff31b7,,plot,120,11,11 Makuakane Drive,1459,Pilikai,Pilikai,0,0,0,0,1320
-6300,6407, , ,82,0x2089035369b33403ddcaba6258c34e0b3ffbbbd9,,plot,131,10,31 Hinahina Street,1364,Pilikai,Pilikai,0,0,0,0,1310
-6262,6366,,CTRL Base of Ops,137,0x6439543a2ff1d78d25abdc8daa75bb004e210183,0x695c6103e3d7cb9dff2a2f6648c0951dd39f4952,plot,131,10,37 South Drive,1700,Honolulu,Honolulu,0,2,0,0,1310
-6326,6433,M.V.P. Kahanu Drive, ,85,0xf251ca37a80200f7afeff398da0338f4c1f01249,,plot,129,10,11 Kahanu Drive,1393,Pilikai,Pilikai,0,5,0,0,1290
-6366,6473, , ,152,0x5ae9a64f9f5eb912662fe348f8eadf33f0a9de12,,plot,143,9,31 Ahiu Street,1881,Kauai,Kauai,0,4,0,0,1287
-6334,6441,Baby Coby Seaside, ,356,0xc0beefeed699f6d6a08397fcbf8fbadf9f83eb5d,,plot,98,13,2 Lanipaa Ave,1809,Kauai,Kauai,0,9,0,0,1274
-6259,6362, , ,24,0xa253d7cd38dc2d0b2e65ad42a7e4beb3c60a83ad,,plot,90,14,29 Quinn Street,1600,Honolulu,Honolulu,0,0,0,0,1260
-6290,6397, , ,262,0x280b924d4ee6dbce9563f4960a8e8b1711a93ee7,,plot,125,10,23 Haena Terrace,1448,Pilikai,Pilikai,0,0,0,0,1250
-6343,6450,Chameleon Gallery, ,282,0x598ce158e94a87ebef2c6865d37b63dac4312c06,,plot,125,10,5 Punono Drive,1780,Kauai,Kauai,0,31,0,0,1250
-6289,6396,Allister Growley, ,157,0xe57c7c27681c6578e85604ca0fe88c95e67e8541,,plot,104,12,11 Uala Terrace,1419,Pilikai,Pilikai,0,12,0,0,1248
-6320,6427, , ,119,0x2089035369b33403ddcaba6258c34e0b3ffbbbd9,,plot,153,8,17 Ehako Drive,1363,Pilikai,Pilikai,0,0,0,0,1224
-6252,6345, , ,33,0xa253d7cd38dc2d0b2e65ad42a7e4beb3c60a83ad,,plot,153,8,17 Auahi Ave,1584,Honolulu,Honolulu,0,0,0,0,1224
-6365,6472, , ,207,0x59455ba3d00bb8cbead8fe6db3973210e49d4303,,plot,153,8,7 Leleaka Ave,1889,Kauai,Kauai,0,43,0,0,1224
-6323,6430, , ,48,0x2089035369b33403ddcaba6258c34e0b3ffbbbd9,,plot,149,8,19 Ehako Drive,1380,Pilikai,Pilikai,0,0,0,0,1192
-6327,6434, , ,119,0xf7c66bcd6ea3607174da0bc8458bd1508027e539,,plot,107,11,5 Kokee Street,1295,Pilikai,Pilikai,0,0,0,0,1177
-6349,6456, , ,89,0xa81b875826d7c232b3f675a0ec38e619b0af5538,,plot,116,10,61 Forrest Ave,1841,Kauai,Kauai,0,0,0,0,1160
-6352,6459, , ,82,0x5eb71caeadf22107a578bc5261ec9a1e16fad5f8,,plot,143,8,17 Ahiu Street,1867,Kauai,Kauai,0,0,0,0,1144
-6231,6312, , ,164,0x92dfcf9708de9c7b86808ea50d223eda4a73bebf,,plot,143,8,2 South Drive,1633,Honolulu,Honolulu,0,18,0,0,1144
-6360,6467, , ,162,0x1ce139b73dbc1d855e4b360856ac3885558fc5f8,,plot,125,9,19 Ahiu Street,1882,Kauai,Kauai,0,0,0,0,1125
-6337,6444, , ,190,0xc446569e98466813d4a49cead6d9377215f6e244,,plot,139,8,53 Forrest Ave,1831,Kauai,Kauai,0,1,0,0,1112
-6264,6371, , ,42,0xc48020dc79337fe6331d74570d7e8beddb880f98,,unit,135,8,3b Quinn Street,1637,Honolulu,Honolulu,0,2,0,0,1080
-6288,6395, , ,340,0x1c90d76468176a0caa4baf141677f253f73c83c2,,plot,135,8,7 Pili Kai Road,1396,Pilikai,Pilikai,0,62,0,0,1080
-6245,6331, , ,97,0x4c3cfe2d0ee096c07c6f79f8ec3f1aaf09b83d95,,plot,135,8,3 Quinn Street,1637,Honolulu,Honolulu,0,31,0,0,1080
-6336,6443, , ,155,0x8cb50ec0c202e294afe6efc4bec0535cad578c93,,plot,107,10,7 Punono Drive,1800,Kauai,Kauai,0,8,0,0,1070
-6227,6308, , ,66,0x4ec3bf69cf4eb665ebdd16309ae62babb373b424,,plot,132,8,37 Forrest Road,1612,Honolulu,Honolulu,0,0,0,0,1056
-6299,6406, , ,179,0x1c90d76468176a0caa4baf141677f253f73c83c2,,plot,131,8,5 Pili Kai Road,1413,Pilikai,Pilikai,0,9,0,0,1048
-6318,6425, , ,48,0x4eedcc324605ccd681052a285c3dbfd0e64be205,,plot,103,10,2 Makuakane Drive,1490,Pilikai,Pilikai,0,0,0,0,1030
-6282,6389, , ,281,0x5337abb4e405286573d369360b0265731fda0919,,plot,101,10,19 Makuakane Drive,1435,Pilikai,Pilikai,0,0,0,0,1010
-6239,6324, , ,51,0x38d7db71a1be75c52b463eb148c121a5bb418fb9,,plot,125,8,2 Heiau Road,1619,Honolulu,Honolulu,0,0,0,0,1000
-6356,6463, , ,136,0x7b19b42564ad1c03625e8306cf20deea2f923a67,0xe330Dc28b47d73884AD88837aECfEE1F49Ad7e7b|0xdf21a82542c489b72af4cbe70731ff9cf280fce4|0xe9956cf72cc8e49d903478142dc8dadb4ee328ff|0xa53f470c3b597803b25e02f75339e22173705254|0x715688B00CeA0a22A6e3B0E2E92A8f99F2677be8|0x1e8E749b2B578E181Ca01962e9448006772b24a2|0xD30a79E487351Eb0064c8a78eb341DA364d78a9a|0xD67c34169b372d5B3932c548a940D4Ea74Fe7aF5,plot,71,14,11 Hokuala Ave,1819,Kauai,Kauai,0,8,0,0,994
-6330,6437, , ,324,0x6904dfa88d5345dc7e2de0e1eba32a6c1e672b93,,unit,119,8,2b Laau Paina Terrace,1379,Pilikai,Pilikai,0,23,0,0,952
-6284,6391, , ,889,0x6904dfa88d5345dc7e2de0e1eba32a6c1e672b93,,plot,119,8,2 Laau Paina Terrace,1379,Pilikai,Pilikai,0,34,0,0,952
-6291,6398, , ,105,0x896f4c3876f036829008c19d8d5fe97cc0b8c749,,plot,119,8,5 Manako Drive,1435,Pilikai,Pilikai,0,0,0,0,952
-6309,6416, , ,55,0x799cd72d86a6aa46876c2689a13637cbe6ae89da,,plot,79,12,3 Manako Drive,1444,Pilikai,Pilikai,0,0,0,0,948
-6340,6447,The Philosopher's Beach House,A resting place by the sea... ,208,0xe330dc28b47d73884ad88837aecfee1f49ad7e7b,0xa53f470c3b597803b25e02f75339e22173705254|0xe9956Cf72cC8E49d903478142DC8DADB4Ee328Ff|0xe9956Cf72cC8E49d903478142DC8DADB4Ee328Ff|0x715688b00cea0a22a6e3b0e2e92a8f99f2677be8,plot,79,12,31 Hokuala Ave,1843,Kauai,Kauai,0,63,0,0,948
-6271,6378, , ,622,0x14ecd2b42e6e3ddd5481036be1e4bf45e632ea42,,plot,80,11,7 Paradise Drive,1418,Pilikai,Pilikai,0,28,0,0,880
-6279,6386, , ,292,0x1c90d76468176a0caa4baf141677f253f73c83c2,,plot,97,8,11 Maia Street,1400,Pilikai,Pilikai,0,55,0,0,776
-6358,6465, , ,192,0xf023ff5c1fec2c3367d9811398d0ea80e1098a67,,plot,77,10,19 Punono Drive,1823,Kauai,Kauai,0,9,0,0,770
-6249,6337,Funguy Family Fort, ,183,0xf6b738a8fef757e7b14408ef6a71a4b02e857171,,plot,76,10,11 South Drive,1672,Honolulu,Honolulu,0,44,0,0,760
-6235,6316, , ,121,0x0b2783cb60ff4ec7ca869b30b8dafd801e7224b6,,plot,95,8,3 South Drive,1647,Honolulu,Honolulu,0,10,0,0,760
-6238,6323, , ,224,0x3b97b6cbbfcfff88cf4a175e665c5715a3efe4f0,0xDb08eDbCF449De2A2B27448a8040935802c621F1,plot,95,8,5 Keaoopua Terrace,1640,Honolulu,Honolulu,0,95,0,0,760
-6277,6384, , ,118,0x340dadb2bfe96a78375f9b2c8e4fab805eea9fc9,,plot,95,8,19 Uala Terrace,1419,Pilikai,Pilikai,0,1,0,0,760
-6261,6365,, ,187,0x6439543a2ff1d78d25abdc8daa75bb004e210183,0x695c6103e3d7cb9dff2a2f6648c0951dd39f4952,plot,95,8,29 South Drive,1695,Honolulu,Honolulu,0,1,0,0,760
-6263,6370, , ,22,0xa253d7cd38dc2d0b2e65ad42a7e4beb3c60a83ad,,unit,125,6,2b Heiau Road,1619,Honolulu,Honolulu,0,0,0,0,750
-6341,6448, , ,95,0xac9ad7f3797be989ca2cb474bf809be02deadcbc,,plot,89,8,13 Ahiu Street,1860,Kauai,Kauai,0,8,0,0,712
-6242,6328, , ,129,0xa253d7cd38dc2d0b2e65ad42a7e4beb3c60a83ad,,plot,89,8,2 Keaoopua Terrace,1630,Honolulu,Honolulu,0,0,0,0,712
-6371,6478, , ,106,0x49c83c32ce6dab28e2445e7502a088b9374e8b6a,0xDb08eDbCF449De2A2B27448a8040935802c621F1,plot,64,11,2 Wekiu Drive,1905,Kauai,Kauai,0,43,0,0,704
-6236,6321, , ,163,0xc1dfedd7b8fc3010a42466e51c773068fb95f485,0x7f56993e63c76dbb6fdc4d2df54d10cd24027cb8,plot,87,8,17 Forrest Road,1648,Honolulu,Honolulu,0,29,0,0,696
-6317,6424, , ,61,0xabd7df0e10d85f37a20ba62c75a81f04be29431a,,plot,63,11,43 Haena Terrace,1464,Pilikai,Pilikai,0,0,0,0,693
-6357,6464, , ,50,0xbeb910ae193dc54411747ac236e67d221ff3f1d7,,plot,77,9,3 Auhaele Drive,1874,Kauai,Kauai,0,0,0,0,693
-6251,6339, , ,27,0xa253d7cd38dc2d0b2e65ad42a7e4beb3c60a83ad,,plot,74,9,19 Ahiu Street,1605,Honolulu,Honolulu,0,0,0,0,666
-6244,6330, , ,44,0xa253d7cd38dc2d0b2e65ad42a7e4beb3c60a83ad,,plot,83,8,31 Punono Terrace,1668,Honolulu,Honolulu,0,0,0,0,664
-6331,6438, , ,309,0x6904dfa88d5345dc7e2de0e1eba32a6c1e672b93,,unit,69,9,7b Maia Street,1388,Pilikai,Pilikai,0,27,0,0,621
-6306,6413, , ,154,0x95c184a7217a80e59560897761c4b28622c1beb2,,plot,47,13,2 Paniolo Ave,1421,Pilikai,Pilikai,0,82,0,0,611
-6269,6376, , ,168,0x90aeddd45d3e4027ce75df02324569ab600c6e5c,,plot,76,8,3 Haena Terrace,1402,Pilikai,Pilikai,0,0,0,0,608
-6345,6452, , ,89,0xa253d7cd38dc2d0b2e65ad42a7e4beb3c60a83ad,,plot,76,8,5 Ahiu Street,1862,Kauai,Kauai,0,0,0,0,608
-6258,6361, , ,62,0xa90e0e2ff2991ab05895589bec1411e011828417,0x27B184D9C8C04b19fEdf1Ea460776eCd2264EeB7,plot,76,8,5 Mulehu Terrace,1657,Honolulu,Honolulu,0,18,0,0,608
-6332,6439, , ,79,0x2ac5a5d8ff085d3e4fcf22b45d1e20916d824efc,,unit,76,8,3b Haena Terrace,1402,Pilikai,Pilikai,0,8,0,0,608
-6237,6322, , ,114,0xc4b0f00660592819ed9a38b6affe76e15d0ce502,,plot,53,11,59 Forrest Road,1600,Honolulu,Honolulu,0,0,0,0,583
-6240,6325, , ,108,0x8a5d99776871e968731e94d9ed874aa9171ae0fa,,plot,53,11,2 Akaku Street,1604,Honolulu,Honolulu,0,3,0,0,583
-6325,6432, , ,61,0xca9381109911ea1377bc89c3c3c697a51dc294e9,,plot,71,8,5 Akina Street,1323,Pilikai,Pilikai,0,0,0,0,568
-6253,6356, , ,192,0x6439543a2ff1d78d25abdc8daa75bb004e210183,0x695c6103e3d7cb9dff2a2f6648c0951dd39f4952,plot,71,8,19 South Drive,1674,Honolulu,Honolulu,0,0,0,0,568
-6280,6387, , ,833,0x6904dfa88d5345dc7e2de0e1eba32a6c1e672b93,,plot,69,8,7 Maia Street,1388,Pilikai,Pilikai,0,20,0,0,552
-6292,6399, , ,108,0xf3934d7c25d6dedf3ed2e32ac8af61af41725d6d,,plot,62,8,5 Uala Terrace,1412,Pilikai,Pilikai,0,1,0,0,496
-6373,6480, , ,47,0x08354f45a4be4b9aee45b2c6b096d8f5370a7e44,,unit,76,6,5b Ahiu Street,1862,Kauai,Kauai,0,0,0,0,456
-6338,6445, , ,115,0xc446569e98466813d4a49cead6d9377215f6e244,,plot,34,13,7 Ahiu Street,1856,Kauai,Kauai,0,1,0,0,442
-6233,6314, , ,37,0x8d8bbe54e2798a2443bbd96bf828d6894b67efcb,,plot,55,8,41 Auahi Ave,1607,Honolulu,Honolulu,0,0,0,0,440
-6363,6470, , ,38,0x958410d75bf7543ef6e4dd6134482be368a5712b,,plot,53,8,2 Auhaele Drive,1884,Kauai,Kauai,0,0,0,0,424
-6348,6455, , ,32,0xc4b0f00660592819ed9a38b6affe76e15d0ce502,,plot,47,9,2 Keaoopua Terrace,1864,Kauai,Kauai,0,0,0,0,423
-6265,6372, , ,6,0x2d891ed45c4c3eab978513df4b92a35cf131d2e2,,unit,55,7,41b Auahi Ave,1607,Honolulu,Honolulu,0,0,0,0,385
-6298,6405, , ,50,0x00cf291c713f204b1ac03f86a8ed5d11acb4fb7a,,plot,48,8,2 Manako Drive,1431,Pilikai,Pilikai,0,7,0,0,384
-6255,6358, , ,29,0xa253d7cd38dc2d0b2e65ad42a7e4beb3c60a83ad,,plot,48,8,3 Wekiu Drive,1595,Honolulu,Honolulu,0,0,0,0,384
-6316,6423, , ,43,0x3f0ecb352cb3528cacbc2cb925369f98a2b3f5d4,,plot,34,11,5 Kokee Street,1457,Pilikai,Pilikai,0,0,0,0,374
-6270,6377,Millennium Labs, ,609,0x14ecd2b42e6e3ddd5481036be1e4bf45e632ea42,,plot,44,8,5 Haena Terrace,1414,Pilikai,Pilikai,0,37,0,0,352
+        <div id="output" style="display: none;">,Parcel_Id,Name,Description,Traffic_Visits,Owner,Contributors,Kind,Area,Height,Address,Distance,Island,Suburb,Price_Bought_At,Feature_Total,Depth,Width
+6225,6306, , ,135,0xa253d7cd38dc2d0b2e65ad42a7e4beb3c60a83ad,,plot,481,13,Auahi Space,1599,Honolulu,Honolulu,0,0,0,0
+6226,6307, , ,239,0x7e118a15c43b8f56cf69a4536fdd2404ac457552,,plot,179,16,41 Forrest Road,1620,Honolulu,Honolulu,0,0,0,0
+6227,6308, , ,66,0x4ec3bf69cf4eb665ebdd16309ae62babb373b424,,plot,132,8,37 Forrest Road,1612,Honolulu,Honolulu,0,0,0,0
+6228,6309, , ,139,0xda248cc10b477c1144219183ec87b0621dac37b3,,plot,269,8,29 Forrest Road,1635,Honolulu,Honolulu,0,0,0,0
+6229,6310, , ,77,0x6267a49a0ebbb47067cd18e619c5c6bed5111e83,,plot,224,8,31 Forrest Road,1616,Honolulu,Honolulu,0,0,0,0
+6230,6311, , ,109,0xc1efc49285eb5deda2ac887d613242475ed15048,,plot,203,12,23 Forrest Road,1631,Honolulu,Honolulu,0,0,0,0
+6231,6312, , ,164,0x92dfcf9708de9c7b86808ea50d223eda4a73bebf,,plot,143,8,2 South Drive,1633,Honolulu,Honolulu,0,18,0,0
+6232,6313,Hawaii Pad Honolulu, ,220,0x73b4437a4b3e43de673836107437e4f092a363e0,0xd7d16bcc1a30cf92e594ce7531e84c7e0ce97658|0x4f3d8fe6eecbf30b9987da8def9e45a67e45147b|0x3e401d84ceb24fbdb1aef5d96bc22828fd229933|0x73b4437a4b3e43de673836107437e4f092a363e0,plot,167,8,47 Forrest Road,1610,Honolulu,Honolulu,0,14,0,0
+6233,6314, , ,37,0x8d8bbe54e2798a2443bbd96bf828d6894b67efcb,,plot,55,8,41 Auahi Ave,1607,Honolulu,Honolulu,0,0,0,0
+6234,6315, , ,109,0xda248cc10b477c1144219183ec87b0621dac37b3,,plot,164,10,19 Forrest Road,1649,Honolulu,Honolulu,0,0,0,0
+6235,6316, , ,121,0x0b2783cb60ff4ec7ca869b30b8dafd801e7224b6,,plot,95,8,3 South Drive,1647,Honolulu,Honolulu,0,10,0,0
+6236,6321, , ,163,0xc1dfedd7b8fc3010a42466e51c773068fb95f485,0x7f56993e63c76dbb6fdc4d2df54d10cd24027cb8,plot,87,8,17 Forrest Road,1648,Honolulu,Honolulu,0,29,0,0
+6237,6322, , ,114,0xc4b0f00660592819ed9a38b6affe76e15d0ce502,,plot,53,11,59 Forrest Road,1600,Honolulu,Honolulu,0,0,0,0
+6238,6323, , ,224,0x3b97b6cbbfcfff88cf4a175e665c5715a3efe4f0,0xDb08eDbCF449De2A2B27448a8040935802c621F1,plot,95,8,5 Keaoopua Terrace,1640,Honolulu,Honolulu,0,95,0,0
+6239,6324, , ,51,0x38d7db71a1be75c52b463eb148c121a5bb418fb9,,plot,125,8,2 Heiau Road,1619,Honolulu,Honolulu,0,0,0,0
+6240,6325, , ,108,0x8a5d99776871e968731e94d9ed874aa9171ae0fa,,plot,53,11,2 Akaku Street,1604,Honolulu,Honolulu,0,3,0,0
+6241,6327, ,Satoshi Tower ,110,0xc5aff255199683f15d43ec5a60600a112b4532c2,0x916EaE701E48143e712023960545a9dD63412770|0x359C2d3e415361e277AB2034780F91BF238b2B59|0xEA6682f39949B708B00F1D7745f7b5A78D505f67|0x2ee8ac8f62218166f0a9e25bd788d1753c11e946|0x476F248fB8D8736dc84B4c9d7Cc186E5CcA2ad42|0x9d37e2b488EC646629D41A572543E7620C37be53|0x5D30C68C3067d97A3A446d5729749A06A39C6d5c,plot,207,14,5 Akaku Street,1610,Honolulu,Honolulu,0,0,0,0
+6242,6328, , ,129,0xa253d7cd38dc2d0b2e65ad42a7e4beb3c60a83ad,,plot,89,8,2 Keaoopua Terrace,1630,Honolulu,Honolulu,0,0,0,0
+6243,6329, , ,85,0xa253d7cd38dc2d0b2e65ad42a7e4beb3c60a83ad,,plot,153,13,7 South Drive,1660,Honolulu,Honolulu,0,0,0,0
+6244,6330, , ,44,0xa253d7cd38dc2d0b2e65ad42a7e4beb3c60a83ad,,plot,83,8,31 Punono Terrace,1668,Honolulu,Honolulu,0,0,0,0
+6245,6331, , ,97,0x4c3cfe2d0ee096c07c6f79f8ec3f1aaf09b83d95,,plot,135,8,3 Quinn Street,1637,Honolulu,Honolulu,0,31,0,0
+6246,6332, , ,77,0xa253d7cd38dc2d0b2e65ad42a7e4beb3c60a83ad,,plot,220,14,67 Forrest Road,1587,Honolulu,Honolulu,0,0,0,0
+6247,6334, , ,98,0xa253d7cd38dc2d0b2e65ad42a7e4beb3c60a83ad,,plot,129,11,3 Keaoopua Terrace,1642,Honolulu,Honolulu,0,0,0,0
+6248,6335, , ,82,0xa253d7cd38dc2d0b2e65ad42a7e4beb3c60a83ad,,plot,155,10,3 Akaku Street,1598,Honolulu,Honolulu,0,0,0,0
+6249,6337,Funguy Family Fort, ,183,0xf6b738a8fef757e7b14408ef6a71a4b02e857171,,plot,76,10,11 South Drive,1672,Honolulu,Honolulu,0,44,0,0
+6250,6338, , ,200,0x6439543a2ff1d78d25abdc8daa75bb004e210183,,plot,167,8,13 South Drive,1659,Honolulu,Honolulu,0,0,0,0
+6251,6339, , ,27,0xa253d7cd38dc2d0b2e65ad42a7e4beb3c60a83ad,,plot,74,9,19 Ahiu Street,1605,Honolulu,Honolulu,0,0,0,0
+6252,6345, , ,33,0xa253d7cd38dc2d0b2e65ad42a7e4beb3c60a83ad,,plot,153,8,17 Auahi Ave,1584,Honolulu,Honolulu,0,0,0,0
+6253,6356, , ,192,0x6439543a2ff1d78d25abdc8daa75bb004e210183,0x695c6103e3d7cb9dff2a2f6648c0951dd39f4952,plot,71,8,19 South Drive,1674,Honolulu,Honolulu,0,0,0,0
+6254,6357, , ,227,0x6439543a2ff1d78d25abdc8daa75bb004e210183,0x695c6103e3d7cb9dff2a2f6648c0951dd39f4952,plot,107,17,3 Mulehu Terrace,1665,Honolulu,Honolulu,0,0,0,0
+6255,6358, , ,29,0xa253d7cd38dc2d0b2e65ad42a7e4beb3c60a83ad,,plot,48,8,3 Wekiu Drive,1595,Honolulu,Honolulu,0,0,0,0
+6256,6359, , ,119,0xd27fc8aee201ec6a35f3ae32c457d04c44965158,0x6439543a2fF1d78d25ABDc8DAa75bb004e210183,plot,109,14,2 Kaukalia Ave,1694,Honolulu,Honolulu,0,25,0,0
+6257,6360, , ,46,0x1963203759f5c5eb5c5c916b3509c9f26dd0381a,,plot,227,10,11 Leleaka Road,1610,Honolulu,Honolulu,0,0,0,0
+6258,6361, , ,62,0xa90e0e2ff2991ab05895589bec1411e011828417,0x27B184D9C8C04b19fEdf1Ea460776eCd2264EeB7,plot,76,8,5 Mulehu Terrace,1657,Honolulu,Honolulu,0,18,0,0
+6259,6362, , ,24,0xa253d7cd38dc2d0b2e65ad42a7e4beb3c60a83ad,,plot,90,14,29 Quinn Street,1600,Honolulu,Honolulu,0,0,0,0
+6260,6363, , ,254,0x6439543a2ff1d78d25abdc8daa75bb004e210183,0x695c6103e3d7cb9dff2a2f6648c0951dd39f4952,plot,239,9,23 South Drive,1674,Honolulu,Honolulu,0,94,0,0
+6261,6365,, ,187,0x6439543a2ff1d78d25abdc8daa75bb004e210183,0x695c6103e3d7cb9dff2a2f6648c0951dd39f4952,plot,95,8,29 South Drive,1695,Honolulu,Honolulu,0,1,0,0
+6262,6366,,CTRL Base of Ops,137,0x6439543a2ff1d78d25abdc8daa75bb004e210183,0x695c6103e3d7cb9dff2a2f6648c0951dd39f4952,plot,131,10,37 South Drive,1700,Honolulu,Honolulu,0,2,0,0
+6263,6370, , ,22,0xa253d7cd38dc2d0b2e65ad42a7e4beb3c60a83ad,,unit,125,6,2b Heiau Road,1619,Honolulu,Honolulu,0,0,0,0
+6264,6371, , ,42,0xc48020dc79337fe6331d74570d7e8beddb880f98,,unit,135,8,3b Quinn Street,1637,Honolulu,Honolulu,0,2,0,0
+6265,6372, , ,6,0x2d891ed45c4c3eab978513df4b92a35cf131d2e2,,unit,55,7,41b Auahi Ave,1607,Honolulu,Honolulu,0,0,0,0
+6266,6373, , ,384,0xa253d7cd38dc2d0b2e65ad42a7e4beb3c60a83ad,,plot,475,13,Hinahina Zone,1388,Pilikai,Pilikai,0,14,0,0
+6267,6374,Hawaii Pad Pilikai, ,464,0x6b484f9a2b4a4cddff14892a80a4d25546424c5f,0xd7d16bcc1a30cf92e594ce7531e84c7e0ce97658|0x4f3d8fe6eecbf30b9987da8def9e45a67e45147b|0x3e401d84ceb24fbdb1aef5d96bc22828fd229933|0x73B4437A4b3e43De673836107437e4f092A363e0,plot,195,8,2 Haena Terrace,1402,Pilikai,Pilikai,0,60,0,0
+6268,6375, ,Metaverse Gallery,523,0x38d7db71a1be75c52b463eb148c121a5bb418fb9,0x404c5b810e2cf04b82115bf93fa9cce8dac09c96,plot,179,10,43 Makuakane Drive,1410,Pilikai,Pilikai,0,290,0,0
+6269,6376, , ,168,0x90aeddd45d3e4027ce75df02324569ab600c6e5c,,plot,76,8,3 Haena Terrace,1402,Pilikai,Pilikai,0,0,0,0
+6270,6377,Millennium Labs, ,609,0x14ecd2b42e6e3ddd5481036be1e4bf45e632ea42,,plot,44,8,5 Haena Terrace,1414,Pilikai,Pilikai,0,37,0,0
+6271,6378, , ,622,0x14ecd2b42e6e3ddd5481036be1e4bf45e632ea42,,plot,80,11,7 Paradise Drive,1418,Pilikai,Pilikai,0,28,0,0
+6272,6379, ,Powered by Metaverse Agency,367,0x38d7db71a1be75c52b463eb148c121a5bb418fb9,0x404c5b810e2cf04b82115bf93fa9cce8dac09c96,plot,199,11,41 Makuakane Drive,1408,Pilikai,Pilikai,0,144,0,0
+6273,6380, , ,224,0x19f1caede538783d19cb6363349f7807e23367bb,,plot,119,16,37 Makuakane Drive,1424,Pilikai,Pilikai,0,1,0,0
+6274,6381, , ,312,0x1ac6a4e952800fe6542823688cc9f27c898f9279,,plot,175,11,7 Haena Terrace,1404,Pilikai,Pilikai,0,0,0,0
+6275,6382, , ,220,0x71b49fe06436d997b14228c96ac9bf4439147259,,plot,155,10,11 Haena Terrace,1422,Pilikai,Pilikai,0,123,0,0
+6276,6383,AV Universe, ,541,0x8ed10ca1c0b15353894eecea9e6bc11f15d53e10,0xb00d7ba1c22673ed493274605e4fd1566b98f388,plot,149,11,31 Makuakane Drive,1424,Pilikai,Pilikai,0,50,0,0
+6277,6384, , ,118,0x340dadb2bfe96a78375f9b2c8e4fab805eea9fc9,,plot,95,8,19 Uala Terrace,1419,Pilikai,Pilikai,0,1,0,0
+6278,6385,Traps, ,727,0x6439543a2ff1d78d25abdc8daa75bb004e210183,0x695c6103e3d7cb9dff2a2f6648c0951dd39f4952|0x196e919f74baeafca10c313043848c39a8f5effd|0x473b2702c302ef6df351004cbc4d16b5cecc804c,plot,254,11,13 Haena Terrace,1414,Pilikai,Pilikai,0,15,0,0
+6279,6386, , ,292,0x1c90d76468176a0caa4baf141677f253f73c83c2,,plot,97,8,11 Maia Street,1400,Pilikai,Pilikai,0,55,0,0
+6280,6387, , ,833,0x6904dfa88d5345dc7e2de0e1eba32a6c1e672b93,,plot,69,8,7 Maia Street,1388,Pilikai,Pilikai,0,20,0,0
+6281,6388, , ,148,0x8888888888ab9ac60103e4d717a973a7a2728677,0x991BB23cF135b20Cf9aBCb944283Ddb5abe26e40,plot,170,11,17 Haena Terrace,1433,Pilikai,Pilikai,0,9,0,0
+6282,6389, , ,281,0x5337abb4e405286573d369360b0265731fda0919,,plot,101,10,19 Makuakane Drive,1435,Pilikai,Pilikai,0,0,0,0
+6283,6390,Traps, ,653,0x6439543a2ff1d78d25abdc8daa75bb004e210183,0x695c6103e3d7cb9dff2a2f6648c0951dd39f4952|0x196e919f74baeafca10c313043848c39a8f5effd|0x473b2702c302ef6df351004cbc4d16b5cecc804c,plot,169,8,19 Haena Terrace,1423,Pilikai,Pilikai,0,2,0,0
+6284,6391, , ,889,0x6904dfa88d5345dc7e2de0e1eba32a6c1e672b93,,plot,119,8,2 Laau Paina Terrace,1379,Pilikai,Pilikai,0,34,0,0
+6285,6392, , ,515,0x1c90d76468176a0caa4baf141677f253f73c83c2,,plot,251,16,3 Pili Kai Road,1405,Pilikai,Pilikai,0,117,0,0
+6286,6393,whitelabels,virtual multipurpose space,501,0xf6b11609c3a5bcdeba0eab46799a3ed7c1323db8,0x904f7c7e11471a2ae059c18f1da6fa2094882f9f|0xa69c474714449a7f2065fddebeb8fabd31113d78|0xed14b35ae030c09dc838e7b8d5c4b0e7db9098dc|0xb78e8334eaccea894bfc11eeed1514e1fb78abe1,plot,143,12,17 Uala Terrace,1425,Pilikai,Pilikai,0,127,0,0
+6287,6394, , ,270,0x5337abb4e405286573d369360b0265731fda0919,,plot,271,12,17 Makuakane Drive,1440,Pilikai,Pilikai,0,0,0,0
+6288,6395, , ,340,0x1c90d76468176a0caa4baf141677f253f73c83c2,,plot,135,8,7 Pili Kai Road,1396,Pilikai,Pilikai,0,62,0,0
+6289,6396,Allister Growley, ,157,0xe57c7c27681c6578e85604ca0fe88c95e67e8541,,plot,104,12,11 Uala Terrace,1419,Pilikai,Pilikai,0,12,0,0
+6290,6397, , ,262,0x280b924d4ee6dbce9563f4960a8e8b1711a93ee7,,plot,125,10,23 Haena Terrace,1448,Pilikai,Pilikai,0,0,0,0
+6291,6398, , ,105,0x896f4c3876f036829008c19d8d5fe97cc0b8c749,,plot,119,8,5 Manako Drive,1435,Pilikai,Pilikai,0,0,0,0
+6292,6399, , ,108,0xf3934d7c25d6dedf3ed2e32ac8af61af41725d6d,,plot,62,8,5 Uala Terrace,1412,Pilikai,Pilikai,0,1,0,0
+6293,6400, , ,219,0xfad0ea578c6c63fe495dc0ef9cf73fc2c69e1f47,0x5d4d0f312de9D57338787308a25D2959978AADf6,plot,303,8,13 Makuakane Drive,1459,Pilikai,Pilikai,0,43,0,0
+6294,6401, , ,160,0x5337abb4e405286573d369360b0265731fda0919,,plot,224,8,5 Laau Paina Terrace,1365,Pilikai,Pilikai,0,0,0,0
+6295,6402,Voxel Haus,The warehouse for everything VOX.,748,0x695c6103e3d7cb9dff2a2f6648c0951dd39f4952,,plot,224,13,29 Haena Terrace,1434,Pilikai,Pilikai,0,327,0,0
+6296,6403, , ,145,0xfad0ea578c6c63fe495dc0ef9cf73fc2c69e1f47,0x5d4d0f312de9D57338787308a25D2959978AADf6,plot,143,10,11 Mc Neill Road,1470,Pilikai,Pilikai,0,4,0,0
+6297,6404,FLARE 2021, ,413,0x2e1c158b139fbe9251e2db089ec7f3488b670624,0x99fF4b9f38B1DBA80B527a48799cb354f65b6AD8,plot,179,8,2 Pili Kai Road,1425,Pilikai,Pilikai,0,6,0,0
+6298,6405, , ,50,0x00cf291c713f204b1ac03f86a8ed5d11acb4fb7a,,plot,48,8,2 Manako Drive,1431,Pilikai,Pilikai,0,7,0,0
+6299,6406, , ,179,0x1c90d76468176a0caa4baf141677f253f73c83c2,,plot,131,8,5 Pili Kai Road,1413,Pilikai,Pilikai,0,9,0,0
+6300,6407, , ,82,0x2089035369b33403ddcaba6258c34e0b3ffbbbd9,,plot,131,10,31 Hinahina Street,1364,Pilikai,Pilikai,0,0,0,0
+6301,6408,Richard Dixon Pilikai,Richard Dixon loves you.  https://twitter.com/richarddixonart,674,0x381a000326d7b1b901d75ac1acaed3c92b1eb01f,0xa214384fd96d0883a4e4c75036c2863f0f5995f5,plot,90,16,2 Uala Terrace,1406,Pilikai,Pilikai,0,56,0,0
+6302,6409, , ,101,0x825b9bd77bd3b8b24dfd5794800aea1394a6378d,,plot,90,16,7 Amau Road,1420,Pilikai,Pilikai,0,0,0,0
+6303,6410, , ,109,0x7d353e6faf6ed7434c7af7d261cdf5e8a9ff31b7,,plot,120,11,11 Makuakane Drive,1459,Pilikai,Pilikai,0,0,0,0
+6304,6411, , ,87,0x4eedcc324605ccd681052a285c3dbfd0e64be205,,plot,168,15,7 Manako Drive,1449,Pilikai,Pilikai,0,0,0,0
+6305,6412, , ,75,0x3644c67ba7738046994b7134fd10ab9895504170,,plot,293,8,31 Haena Terrace,1454,Pilikai,Pilikai,0,0,0,0
+6306,6413, , ,154,0x95c184a7217a80e59560897761c4b28622c1beb2,,plot,47,13,2 Paniolo Ave,1421,Pilikai,Pilikai,0,82,0,0
+6307,6414,Richard Dixon Pilikai,Richard Dixon loves you.  https://richarddixonart.com/ https://twitter.com/richarddixonart,746,0x381a000326d7b1b901d75ac1acaed3c92b1eb01f,0xa214384fd96d0883a4e4c75036c2863f0f5995f5,plot,142,14,19 Hinahina Street,1400,Pilikai,Pilikai,0,68,0,0
+6308,6415, , ,197,0x2089035369b33403ddcaba6258c34e0b3ffbbbd9,,plot,181,16,23 Hinahina Street,1375,Pilikai,Pilikai,0,0,0,0
+6309,6416, , ,55,0x799cd72d86a6aa46876c2689a13637cbe6ae89da,,plot,79,12,3 Manako Drive,1444,Pilikai,Pilikai,0,0,0,0
+6310,6417, , ,131,0x2089035369b33403ddcaba6258c34e0b3ffbbbd9,,plot,142,15,3 Ekaha Ave,1356,Pilikai,Pilikai,0,0,0,0
+6311,6418, , ,123,0x40ac989f5ddce35bd51c3a6e2f064d2120e4275e,,plot,169,17,2 Maia Ave,1437,Pilikai,Pilikai,0,11,0,0
+6312,6419, , ,86,0x4eedcc324605ccd681052a285c3dbfd0e64be205,,plot,246,13,7 Makuakane Drive,1475,Pilikai,Pilikai,0,0,0,0
+6313,6420, , ,188,0x45d29b661f9351abb53d3412ffe8852e6708f9d0,,plot,143,10,37 Haena Terrace,1452,Pilikai,Pilikai,0,3,0,0
+6314,6421, , ,45,0x4eedcc324605ccd681052a285c3dbfd0e64be205,,plot,186,9,5 Mc Neill Road,1485,Pilikai,Pilikai,0,0,0,0
+6315,6422, , ,140,0x2089035369b33403ddcaba6258c34e0b3ffbbbd9,,plot,97,15,23 Ehako Drive,1371,Pilikai,Pilikai,0,0,0,0
+6316,6423, , ,43,0x3f0ecb352cb3528cacbc2cb925369f98a2b3f5d4,,plot,34,11,5 Kokee Street,1457,Pilikai,Pilikai,0,0,0,0
+6317,6424, , ,61,0xabd7df0e10d85f37a20ba62c75a81f04be29431a,,plot,63,11,43 Haena Terrace,1464,Pilikai,Pilikai,0,0,0,0
+6318,6425, , ,48,0x4eedcc324605ccd681052a285c3dbfd0e64be205,,plot,103,10,2 Makuakane Drive,1490,Pilikai,Pilikai,0,0,0,0
+6319,6426, , ,49,0x4eedcc324605ccd681052a285c3dbfd0e64be205,,plot,109,16,2 Mc Neill Road,1498,Pilikai,Pilikai,0,0,0,0
+6320,6427, , ,119,0x2089035369b33403ddcaba6258c34e0b3ffbbbd9,,plot,153,8,17 Ehako Drive,1363,Pilikai,Pilikai,0,0,0,0
+6321,6428, , ,98,0x4eedcc324605ccd681052a285c3dbfd0e64be205,,plot,239,9,2 Ekaha Ave,1342,Pilikai,Pilikai,0,0,0,0
+6322,6429, , ,189,0xf942ce6643bc80d0bcc1bea4fd4657e600a1de88,,plot,305,13,2 Shower Ave,1291,Pilikai,Pilikai,0,2,0,0
+6323,6430, , ,48,0x2089035369b33403ddcaba6258c34e0b3ffbbbd9,,plot,149,8,19 Ehako Drive,1380,Pilikai,Pilikai,0,0,0,0
+6324,6431,Ghost Isthmus House, ,91,0xf251ca37a80200f7afeff398da0338f4c1f01249,,plot,116,12,5 Shower Ave,1281,Pilikai,Pilikai,0,9,0,0
+6325,6432, , ,61,0xca9381109911ea1377bc89c3c3c697a51dc294e9,,plot,71,8,5 Akina Street,1323,Pilikai,Pilikai,0,0,0,0
+6326,6433,M.V.P. Kahanu Drive, ,85,0xf251ca37a80200f7afeff398da0338f4c1f01249,,plot,129,10,11 Kahanu Drive,1393,Pilikai,Pilikai,0,5,0,0
+6327,6434, , ,119,0xf7c66bcd6ea3607174da0bc8458bd1508027e539,,plot,107,11,5 Kokee Street,1295,Pilikai,Pilikai,0,0,0,0
+6328,6435, , ,44,0x80fec8f0203cec214269567822c12ddca97b15b8,,plot,132,10,3 Kokee Street,1301,Pilikai,Pilikai,0,0,0,0
+6329,6436,Aily Gallery Lab, ,107,0x7c5d4db8dce379b7cbccfc08019c20439926ada8,,plot,155,17,2 Kokee Street,1287,Pilikai,Pilikai,0,0,0,0
+6330,6437, , ,324,0x6904dfa88d5345dc7e2de0e1eba32a6c1e672b93,,unit,119,8,2b Laau Paina Terrace,1379,Pilikai,Pilikai,0,23,0,0
+6331,6438, , ,309,0x6904dfa88d5345dc7e2de0e1eba32a6c1e672b93,,unit,69,9,7b Maia Street,1388,Pilikai,Pilikai,0,27,0,0
+6332,6439, , ,79,0x2ac5a5d8ff085d3e4fcf22b45d1e20916d824efc,,unit,76,8,3b Haena Terrace,1402,Pilikai,Pilikai,0,8,0,0
+6333,6440, , ,225,0xa253d7cd38dc2d0b2e65ad42a7e4beb3c60a83ad,,plot,350,10,Kuahelani Green,1836,Kauai,Kauai,0,14,0,0
+6334,6441,Baby Coby Seaside, ,356,0xc0beefeed699f6d6a08397fcbf8fbadf9f83eb5d,,plot,98,13,2 Lanipaa Ave,1809,Kauai,Kauai,0,9,0,0
+6335,6442, , ,283,0xb8427dcc33ec47332583879efd85c0de00583120,,plot,242,8,47 Forrest Ave,1839,Kauai,Kauai,0,84,0,0
+6336,6443, , ,155,0x8cb50ec0c202e294afe6efc4bec0535cad578c93,,plot,107,10,7 Punono Drive,1800,Kauai,Kauai,0,8,0,0
+6337,6444, , ,190,0xc446569e98466813d4a49cead6d9377215f6e244,,plot,139,8,53 Forrest Ave,1831,Kauai,Kauai,0,1,0,0
+6338,6445, , ,115,0xc446569e98466813d4a49cead6d9377215f6e244,,plot,34,13,7 Ahiu Street,1856,Kauai,Kauai,0,1,0,0
+6339,6446,Baby Coby's Cenotaph, ,401,0xc0beefeed699f6d6a08397fcbf8fbadf9f83eb5d,0xfc7e0e880718459c0161242824c4f3e8e230593d,plot,233,9,2 Welehu Terrace,1816,Kauai,Kauai,0,11,0,0
+6340,6447,The Philosopher's Beach House,A resting place by the sea... ,208,0xe330dc28b47d73884ad88837aecfee1f49ad7e7b,0xa53f470c3b597803b25e02f75339e22173705254|0xe9956Cf72cC8E49d903478142DC8DADB4Ee328Ff|0xe9956Cf72cC8E49d903478142DC8DADB4Ee328Ff|0x715688b00cea0a22a6e3b0e2e92a8f99f2677be8,plot,79,12,31 Hokuala Ave,1843,Kauai,Kauai,0,63,0,0
+6341,6448, , ,95,0xac9ad7f3797be989ca2cb474bf809be02deadcbc,,plot,89,8,13 Ahiu Street,1860,Kauai,Kauai,0,8,0,0
+6342,6449, , ,120,0xac9ad7f3797be989ca2cb474bf809be02deadcbc,,plot,203,10,59 Forrest Ave,1848,Kauai,Kauai,0,0,0,0
+6343,6450,Chameleon Gallery, ,282,0x598ce158e94a87ebef2c6865d37b63dac4312c06,,plot,125,10,5 Punono Drive,1780,Kauai,Kauai,0,31,0,0
+6344,6451, , ,190,0x8323ea41885680bc2dee1b879dff60f75b1a90a3,,plot,179,9,13 Punono Drive,1808,Kauai,Kauai,0,0,0,0
+6345,6452, , ,89,0xa253d7cd38dc2d0b2e65ad42a7e4beb3c60a83ad,,plot,76,8,5 Ahiu Street,1862,Kauai,Kauai,0,0,0,0
+6346,6453, , ,183,0x5d4d0f312de9d57338787308a25d2959978aadf6,0x8b68B27b480fa5107b0FC370f1A797C9E0D665dd|0xfAD0EA578c6C63fe495dc0EF9cF73fC2c69E1f47,plot,227,10,3 Ahiu Street,1852,Kauai,Kauai,0,0,0,0
+6347,6454, , ,261,0x7b19b42564ad1c03625e8306cf20deea2f923a67,0xdf21a82542c489b72af4cbe70731ff9cf280fce4|0xe330Dc28b47d73884AD88837aECfEE1F49Ad7e7b|0xa53f470c3b597803b25e02f75339e22173705254|0xe9956cf72cc8e49d903478142dc8dadb4ee328ff|0x715688B00CeA0a22A6e3B0E2E92A8f99F2677be8|0x1e8E749b2B578E181Ca01962e9448006772b24a2|0xD30a79E487351Eb0064c8a78eb341DA364d78a9a|0xD67c34169b372d5B3932c548a940D4Ea74Fe7aF5,plot,215,8,19 Hokuala Ave,1827,Kauai,Kauai,0,22,0,0
+6348,6455, , ,32,0xc4b0f00660592819ed9a38b6affe76e15d0ce502,,plot,47,9,2 Keaoopua Terrace,1864,Kauai,Kauai,0,0,0,0
+6349,6456, , ,89,0xa81b875826d7c232b3f675a0ec38e619b0af5538,,plot,116,10,61 Forrest Ave,1841,Kauai,Kauai,0,0,0,0
+6350,6457, , ,704,0x91d4e02be8755e31a2695feeec29d924d4881258,,plot,207,12,11 Punono Drive,1787,Kauai,Kauai,0,0,0,0
+6351,6458, , ,309,0x7d36e06251e8376d7194147d9d26214566fac47d,,plot,219,8,11 Ahiu Street,1867,Kauai,Kauai,0,148,0,0
+6352,6459, , ,82,0x5eb71caeadf22107a578bc5261ec9a1e16fad5f8,,plot,143,8,17 Ahiu Street,1867,Kauai,Kauai,0,0,0,0
+6353,6460, , ,236,0x7b19b42564ad1c03625e8306cf20deea2f923a67,0xdf21a82542c489b72af4cbe70731ff9cf280fce4|0xe330Dc28b47d73884AD88837aECfEE1F49Ad7e7b|0xe9956cf72cc8e49d903478142dc8dadb4ee328ff|0xa53f470c3b597803b25e02f75339e22173705254|0x715688B00CeA0a22A6e3B0E2E92A8f99F2677be8|0x1e8E749b2B578E181Ca01962e9448006772b24a2|0xD30a79E487351Eb0064c8a78eb341DA364d78a9a|0xD67c34169b372d5B3932c548a940D4Ea74Fe7aF5,plot,189,13,5 Auahi Road,1847,Kauai,Kauai,0,5,0,0
+6354,6461, , ,210,0x7b19b42564ad1c03625e8306cf20deea2f923a67,,plot,181,8,3 Welehu Terrace,1827,Kauai,Kauai,0,0,0,0
+6355,6462, , ,348,0x91d4e02be8755e31a2695feeec29d924d4881258,,plot,239,13,17 Punono Drive,1796,Kauai,Kauai,0,0,0,0
+6356,6463, , ,136,0x7b19b42564ad1c03625e8306cf20deea2f923a67,0xe330Dc28b47d73884AD88837aECfEE1F49Ad7e7b|0xdf21a82542c489b72af4cbe70731ff9cf280fce4|0xe9956cf72cc8e49d903478142dc8dadb4ee328ff|0xa53f470c3b597803b25e02f75339e22173705254|0x715688B00CeA0a22A6e3B0E2E92A8f99F2677be8|0x1e8E749b2B578E181Ca01962e9448006772b24a2|0xD30a79E487351Eb0064c8a78eb341DA364d78a9a|0xD67c34169b372d5B3932c548a940D4Ea74Fe7aF5,plot,71,14,11 Hokuala Ave,1819,Kauai,Kauai,0,8,0,0
+6357,6464, , ,50,0xbeb910ae193dc54411747ac236e67d221ff3f1d7,,plot,77,9,3 Auhaele Drive,1874,Kauai,Kauai,0,0,0,0
+6358,6465, , ,192,0xf023ff5c1fec2c3367d9811398d0ea80e1098a67,,plot,77,10,19 Punono Drive,1823,Kauai,Kauai,0,9,0,0
+6359,6466, , ,193,0x5ae9a64f9f5eb912662fe348f8eadf33f0a9de12,,plot,175,10,23 Ahiu Street,1874,Kauai,Kauai,0,7,0,0
+6360,6467, , ,162,0x1ce139b73dbc1d855e4b360856ac3885558fc5f8,,plot,125,9,19 Ahiu Street,1882,Kauai,Kauai,0,0,0,0
+6361,6468, , ,91,0x3644c67ba7738046994b7134fd10ab9895504170,,plot,220,8,5 Leleaka Ave,1880,Kauai,Kauai,0,0,0,0
+6362,6469, , ,164,0x91d4e02be8755e31a2695feeec29d924d4881258,,plot,271,8,2 Lanikuhana Street,1771,Kauai,Kauai,0,0,0,0
+6363,6470, , ,38,0x958410d75bf7543ef6e4dd6134482be368a5712b,,plot,53,8,2 Auhaele Drive,1884,Kauai,Kauai,0,0,0,0
+6364,6471, , ,140,0x91d4e02be8755e31a2695feeec29d924d4881258,,plot,207,9,23 Punono Drive,1808,Kauai,Kauai,0,0,0,0
+6365,6472, , ,207,0x59455ba3d00bb8cbead8fe6db3973210e49d4303,,plot,153,8,7 Leleaka Ave,1889,Kauai,Kauai,0,43,0,0
+6366,6473, , ,152,0x5ae9a64f9f5eb912662fe348f8eadf33f0a9de12,,plot,143,9,31 Ahiu Street,1881,Kauai,Kauai,0,4,0,0
+6367,6474, , ,52,0x3644c67ba7738046994b7134fd10ab9895504170,,plot,152,11,2 Leleaka Ave,1890,Kauai,Kauai,0,0,0,0
+6368,6475, , ,138,0x91d4e02be8755e31a2695feeec29d924d4881258,,plot,203,16,3 Plantation Road,1782,Kauai,Kauai,0,0,0,0
+6369,6476, , ,170,0x6b261a3ec2405ae0e8e0546ad6906e65af8b8868,,plot,194,15,29 Ahiu Street,1894,Kauai,Kauai,0,12,0,0
+6370,6477, , ,124,0x9a1e8645dedec6d45e2058d031b1ca97f815bd2e,,plot,220,12,3 Leleaka Ave,1900,Kauai,Kauai,0,0,0,0
+6371,6478, , ,106,0x49c83c32ce6dab28e2445e7502a088b9374e8b6a,0xDb08eDbCF449De2A2B27448a8040935802c621F1,plot,64,11,2 Wekiu Drive,1905,Kauai,Kauai,0,43,0,0
+6372,6479, , ,72,0xb27696c8f4815ffca1ea6ab6fbb3a05ef1302367,,plot,181,8,3 Wekiu Drive,1911,Kauai,Kauai,0,2,0,0
+6373,6480, , ,47,0x08354f45a4be4b9aee45b2c6b096d8f5370a7e44,,unit,76,6,5b Ahiu Street,1862,Kauai,Kauai,0,0,0,0
 </div>
     </body>
 </html>
+<p>Feel free to explore parcel data about the three islands. Below I have done a few simple operations to peer in the data.</p>
 <h3>Notable Users</h3>
-</details><h3>Interactive Map</h3>
+<br> Owner ID | Total number of parcels owned
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>index</th>
+      <th>Owner</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>0xa253d7cd38dc2d0b2e65ad42a7e4beb3c60a83ad</td>
+      <td>15</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>0x6439543a2ff1d78d25abdc8daa75bb004e210183</td>
+      <td>8</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>0x2089035369b33403ddcaba6258c34e0b3ffbbbd9</td>
+      <td>6</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>0x4eedcc324605ccd681052a285c3dbfd0e64be205</td>
+      <td>6</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>0x91d4e02be8755e31a2695feeec29d924d4881258</td>
+      <td>5</td>
+    </tr>
+  </tbody>
+</table>
+</div>Owner ID | Total Volumn of land owned
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Owner</th>
+      <th>Area</th>
+      <th>Volume</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>0x00cf291c713f204b1ac03f86a8ed5d11acb4fb7a</td>
+      <td>48</td>
+      <td>384</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>0x08354f45a4be4b9aee45b2c6b096d8f5370a7e44</td>
+      <td>76</td>
+      <td>456</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>0x0b2783cb60ff4ec7ca869b30b8dafd801e7224b6</td>
+      <td>95</td>
+      <td>760</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>0x14ecd2b42e6e3ddd5481036be1e4bf45e632ea42</td>
+      <td>124</td>
+      <td>1232</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>0x1963203759f5c5eb5c5c916b3509c9f26dd0381a</td>
+      <td>227</td>
+      <td>2270</td>
+    </tr>
+  </tbody>
+</table>
+</div></details><h3>Interactive Map</h3>
 <p>Coming Soon! You will be able to view the CryptoVoxels map and click on a parcel and view some stats on it.</p>
 <details><summary><h3>Other Ideas</h3>
 </summary> <h4>ObservableHQ Embed -&gt;  Graphs</h4>
