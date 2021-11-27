@@ -1,0 +1,1066 @@
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>PivotTable.js</title>
+
+        <!-- external libs from cdnjs -->
+        <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/c3/0.4.11/c3.min.css">
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.5/d3.min.js"></script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/c3/0.4.11/c3.min.js"></script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery-csv/0.71/jquery.csv-0.71.min.js"></script>
+
+
+        <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/pivottable/2.19.0/pivot.min.css">
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pivottable/2.19.0/pivot.min.js"></script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pivottable/2.19.0/d3_renderers.min.js"></script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pivottable/2.19.0/c3_renderers.min.js"></script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pivottable/2.19.0/export_renderers.min.js"></script>
+
+        <style>
+            body {font-family: Verdana;}
+            .node {
+              border: solid 1px white;
+              font: 10px sans-serif;
+              line-height: 12px;
+              overflow: hidden;
+              position: absolute;
+              text-indent: 2px;
+            }
+            .c3-line, .c3-focused {stroke-width: 3px !important;}
+            .c3-bar {stroke: white !important; stroke-width: 1;}
+            .c3 text { font-size: 12px; color: grey;}
+            .tick line {stroke: white;}
+            .c3-axis path {stroke: grey;}
+            .c3-circle { opacity: 1 !important; }
+            .c3-xgrid-focus {visibility: hidden !important;}
+        </style>
+    </head>
+    <body>
+        <script type="text/javascript">
+            $(function(){
+                if(window.location != window.parent.location)
+                    $("<a>", {target:"_blank", href:""})
+                        .text("[pop out]").prependTo($("body"));
+
+                $("#output").pivotUI(
+                    $.csv.toArrays($("#output").text()),
+                    $.extend({
+                        renderers: $.extend(
+                            $.pivotUtilities.renderers,
+                            $.pivotUtilities.c3_renderers,
+                            $.pivotUtilities.d3_renderers,
+                            $.pivotUtilities.export_renderers
+                            ),
+                        hiddenAttributes: [""]
+                    }, {})
+                ).show();
+             });
+        </script>
+        <div id="output" style="display: none;">,Parcel_Id,Name,Description,Traffic_Visits,Owner,Contributors,Kind,Area,Height,Address,Distance,Island,Suburb,Price_Bought_At,Feature_Total,Depth,Width
+5034,5049, , ,25,0x2d891ed45c4c3eab978513df4b92a35cf131d2e2,,plot,89,17,3 Cognitive Science Square,4212,Test Island,Test Island,0,0,0,0
+5035,5050, , ,16,0x2d891ed45c4c3eab978513df4b92a35cf131d2e2,,plot,27,12,3 Closure Drive,4242,Test Island,Test Island,0,0,0,0
+5036,5051, , ,13,0x2d891ed45c4c3eab978513df4b92a35cf131d2e2,,plot,35,11,2 Agile Software Development Rise,4150,Test Island,Test Island,0,0,0,0
+5037,5052, , ,87,0x2d891ed45c4c3eab978513df4b92a35cf131d2e2,,plot,142,8,61 Computational Biology Gardens,4202,Test Island,Test Island,0,2,0,0
+5038,5053, , ,23,0x2d891ed45c4c3eab978513df4b92a35cf131d2e2,,plot,69,10,23 Comma Separated Values Street,4219,Test Island,Test Island,0,0,0,0
+5039,5054, , ,13,0x2d891ed45c4c3eab978513df4b92a35cf131d2e2,,plot,59,9,13 Object Mews,4161,Test Island,Test Island,0,0,0,0
+5040,5055, , ,22,0x2d891ed45c4c3eab978513df4b92a35cf131d2e2,,plot,89,8,3 Computational Biology Gardens,4192,Test Island,Test Island,0,0,0,0
+5041,5056, , ,17,0x2d891ed45c4c3eab978513df4b92a35cf131d2e2,,plot,131,8,2 Java Fork,4147,Test Island,Test Island,0,0,0,0
+5042,5057, , ,14,0x2d891ed45c4c3eab978513df4b92a35cf131d2e2,,plot,89,8,5 Associative Array Branch,4248,Test Island,Test Island,0,0,0,0
+5043,5058, , ,30,0x2d891ed45c4c3eab978513df4b92a35cf131d2e2,,plot,76,16,19 Comma Separated Values Street,4233,Test Island,Test Island,0,0,0,0
+5044,5059, , ,15,0x2d891ed45c4c3eab978513df4b92a35cf131d2e2,,plot,77,8,2 Computational Biology Gardens,4202,Test Island,Test Island,0,0,0,0
+5045,5060, , ,12,0x2d891ed45c4c3eab978513df4b92a35cf131d2e2,,plot,27,8,5 American Standard Code For Information Interchange Circus,4225,Test Island,Test Island,0,0,0,0
+5046,5061, , ,24,0x2d891ed45c4c3eab978513df4b92a35cf131d2e2,,plot,134,8,2 Cryptography Fork,4183,Test Island,Test Island,0,0,0,0
+5047,5062, , ,24,0x2d891ed45c4c3eab978513df4b92a35cf131d2e2,,plot,142,13,7 Postcondition Branch,4140,Test Island,Test Island,0,0,0,0
+5048,5063, , ,33,0x2d891ed45c4c3eab978513df4b92a35cf131d2e2,,plot,69,9,3 Top Down And Bottom Up Design Quadrant,4182,Test Island,Test Island,0,0,0,0
+5049,5064, , ,23,0x2d891ed45c4c3eab978513df4b92a35cf131d2e2,,plot,99,8,3 Associative Array Branch,4250,Test Island,Test Island,0,0,0,0
+5050,5065, , ,26,0x2d891ed45c4c3eab978513df4b92a35cf131d2e2,,plot,62,9,67 Computational Biology Gardens,4191,Test Island,Test Island,0,0,0,0
+5051,5066, , ,12,0x2d891ed45c4c3eab978513df4b92a35cf131d2e2,,plot,54,14,5 Operator Fork,4162,Test Island,Test Island,0,0,0,0
+5052,5067, , ,17,0x2d891ed45c4c3eab978513df4b92a35cf131d2e2,,plot,59,14,5 Closure Drive,4250,Test Island,Test Island,0,0,0,0
+5053,5068, , ,21,0x2d891ed45c4c3eab978513df4b92a35cf131d2e2,,plot,69,10,3 Event Gardens,4154,Test Island,Test Island,0,0,0,0
+5054,5069, , ,135,0x2d891ed45c4c3eab978513df4b92a35cf131d2e2,,plot,179,8,7 American Standard Code For Information Interchange Circus,4233,Test Island,Test Island,0,12,0,0
+5055,5070, , ,3,0x2d891ed45c4c3eab978513df4b92a35cf131d2e2,,plot,20,12,2 Closure Drive,4250,Test Island,Test Island,0,0,0,0
+5056,5071, , ,19,0x2d891ed45c4c3eab978513df4b92a35cf131d2e2,,plot,65,11,11 Postcondition Branch,4140,Test Island,Test Island,0,0,0,0
+5057,5072, , ,17,0x2d891ed45c4c3eab978513df4b92a35cf131d2e2,,plot,95,11,2 Optical Fiber Bypass,4248,Test Island,Test Island,0,3,0,0
+5058,5073, , ,32,0x2d891ed45c4c3eab978513df4b92a35cf131d2e2,0x4f97fBFeE651D3A1afBEb2356ac9e6EB9EE96312,plot,153,8,19 Object Mews,4171,Test Island,Test Island,0,0,0,0
+5059,5074, , ,13,0x2d891ed45c4c3eab978513df4b92a35cf131d2e2,,plot,87,8,2 Information Visualization Street,4240,Test Island,Test Island,0,0,0,0
+5060,5075, , ,19,0x2d891ed45c4c3eab978513df4b92a35cf131d2e2,,plot,59,12,3 API Rise,4140,Test Island,Test Island,0,0,0,0
+5061,5076, , ,25,0x2d891ed45c4c3eab978513df4b92a35cf131d2e2,,plot,51,10,71 Computational Biology Gardens,4202,Test Island,Test Island,0,0,0,0
+5062,5077, , ,21,0x2d891ed45c4c3eab978513df4b92a35cf131d2e2,,plot,62,15,2 Cognitive Science Square,4212,Test Island,Test Island,0,0,0,0
+5063,5078, , ,8,0x2d891ed45c4c3eab978513df4b92a35cf131d2e2,,plot,29,9,2 Associative Array Branch,4257,Test Island,Test Island,0,0,0,0
+5064,5079, , ,32,0x2d891ed45c4c3eab978513df4b92a35cf131d2e2,,plot,132,10,2 API Rise,4140,Test Island,Test Island,0,0,0,0
+5065,5080, , ,30,0x2d891ed45c4c3eab978513df4b92a35cf131d2e2,,plot,87,8,3 Operator Fork,4171,Test Island,Test Island,0,7,0,0
+5066,5081, , ,15,0x2d891ed45c4c3eab978513df4b92a35cf131d2e2,,plot,99,8,31 Comma Separated Values Street,4219,Test Island,Test Island,0,2,0,0
+5067,5082, , ,10,0x2d891ed45c4c3eab978513df4b92a35cf131d2e2,,plot,59,8,5 Optical Fiber Bypass,4248,Test Island,Test Island,0,0,0,0
+5068,5083, , ,17,0x2d891ed45c4c3eab978513df4b92a35cf131d2e2,,plot,83,8,2 Run Time Error Vale,4140,Test Island,Test Island,0,0,0,0
+5069,5084, , ,10,0x2d891ed45c4c3eab978513df4b92a35cf131d2e2,,plot,39,8,2 American Standard Code For Information Interchange Circus,4225,Test Island,Test Island,0,0,0,0
+5070,5085, , ,24,0x2d891ed45c4c3eab978513df4b92a35cf131d2e2,,plot,120,15,5 Instruction Cycle Circus,4151,Test Island,Test Island,0,0,0,0
+5071,5086, , ,16,0x2d891ed45c4c3eab978513df4b92a35cf131d2e2,,plot,48,9,2 Heap Field,4253,Test Island,Test Island,0,0,0,0
+5072,5087, , ,20,0x2d891ed45c4c3eab978513df4b92a35cf131d2e2,,plot,55,13,5 Routing Table Gardens,4246,Test Island,Test Island,0,0,0,0
+5073,5088, , ,16,0x2d891ed45c4c3eab978513df4b92a35cf131d2e2,,plot,83,8,29 Comma Separated Values Street,4233,Test Island,Test Island,0,0,0,0
+5074,5089, , ,36,0x2d891ed45c4c3eab978513df4b92a35cf131d2e2,,plot,116,9,23 Object Mews,4158,Test Island,Test Island,0,4,0,0
+5075,5090, , ,10,0x2d891ed45c4c3eab978513df4b92a35cf131d2e2,,plot,69,9,2 Event Gardens,4140,Test Island,Test Island,0,0,0,0
+5076,5091, , ,45,0x2d891ed45c4c3eab978513df4b92a35cf131d2e2,,plot,62,16,3 American Standard Code For Information Interchange Circus,4233,Test Island,Test Island,0,12,0,0
+5077,5092, , ,52,0x2d891ed45c4c3eab978513df4b92a35cf131d2e2,,plot,153,8,3 Routing Table Gardens,4246,Test Island,Test Island,0,6,0,0
+5078,5093, , ,15,0x2d891ed45c4c3eab978513df4b92a35cf131d2e2,,plot,69,11,2 Operator Fork,4157,Test Island,Test Island,0,0,0,0
+5079,5094, , ,17,0x2d891ed45c4c3eab978513df4b92a35cf131d2e2,,plot,111,10,3 Information Visualization Street,4252,Test Island,Test Island,0,0,0,0
+5080,5095, , ,12,0x2d891ed45c4c3eab978513df4b92a35cf131d2e2,,plot,51,8,7 Event Gardens,4154,Test Island,Test Island,0,0,0,0
+5081,5096, , ,12,0x2d891ed45c4c3eab978513df4b92a35cf131d2e2,,plot,95,8,7 Information Visualization Street,4240,Test Island,Test Island,0,0,0,0
+5082,5097, , ,13,0x2d891ed45c4c3eab978513df4b92a35cf131d2e2,,plot,59,8,5 Event Gardens,4140,Test Island,Test Island,0,0,0,0
+5083,5098, , ,19,0x2d891ed45c4c3eab978513df4b92a35cf131d2e2,,plot,69,8,2 Parallel Computing Vale,4140,Test Island,Test Island,0,0,0,0
+5084,5099, , ,10,0x2d891ed45c4c3eab978513df4b92a35cf131d2e2,,plot,41,13,2 Instruction Cycle Circus,4151,Test Island,Test Island,0,0,0,0
+5085,5100, , ,13,0x2d891ed45c4c3eab978513df4b92a35cf131d2e2,,plot,71,12,2 Routing Table Gardens,4246,Test Island,Test Island,0,0,0,0
+5086,5101, , ,17,0x2d891ed45c4c3eab978513df4b92a35cf131d2e2,,plot,39,8,11 Event Gardens,4146,Test Island,Test Island,0,0,0,0
+5087,5102, , ,17,0x2d891ed45c4c3eab978513df4b92a35cf131d2e2,,plot,103,10,5 Information Visualization Street,4252,Test Island,Test Island,0,1,0,0
+5088,5103, , ,26,0x2d891ed45c4c3eab978513df4b92a35cf131d2e2,,plot,83,13,3 Instruction Cycle Circus,4140,Test Island,Test Island,0,3,0,0
+5089,5104, , ,21,0x2d891ed45c4c3eab978513df4b92a35cf131d2e2,,plot,59,13,2 Benchmark Drive,4140,Test Island,Test Island,0,0,0,0
+5090,5106, , ,785,0x1fb11840d982a5bb02e1154804cfc9a96af1db83,,plot,69,9,71 Mainnet Bypass,780,Satoshi,Satoshi,0,0,0,0
+5091,5107, , ,798,0x1fb11840d982a5bb02e1154804cfc9a96af1db83,,plot,116,11,73 Mainnet Bypass,764,Satoshi,Satoshi,0,0,0,0
+5092,5108, , ,973,0x1fb11840d982a5bb02e1154804cfc9a96af1db83,,plot,89,8,67 Mainnet Bypass,785,Satoshi,Satoshi,0,0,0,0
+5093,5109, , ,983,0xca50cc37abaa58d19e3a23ccb086f17f8384cb3c,,plot,153,10,61 Mainnet Bypass,771,Satoshi,Satoshi,0,0,0,0
+5094,5110, , ,784,0x1fb11840d982a5bb02e1154804cfc9a96af1db83,,plot,129,8,83 Mainnet Bypass,774,Satoshi,Satoshi,0,0,0,0
+5095,5111, , ,591,0x1fb11840d982a5bb02e1154804cfc9a96af1db83,,plot,103,9,79 Mainnet Bypass,760,Satoshi,Satoshi,0,0,0,0
+5096,5112,Ponlaii , ,2461,0x00493aa44bcfd6f0c2ecc7f8b154e4fb352d1c81,0x476F248fB8D8736dc84B4c9d7Cc186E5CcA2ad42|0xEA6682f39949B708B00F1D7745f7b5A78D505f67|0x916EaE701E48143e712023960545a9dD63412770|0x5D30C68C3067d97A3A446d5729749A06A39C6d5c|0x359C2d3e415361e277AB2034780F91BF238b2B59,plot,209,8,59 Mainnet Bypass,788,Satoshi,Satoshi,0,433,0,0
+5097,5113, , ,722,0xca50cc37abaa58d19e3a23ccb086f17f8384cb3c,,plot,69,10,43 Signature Field,767,Satoshi,Satoshi,0,0,0,0
+5098,5114,Satoshi Auction House,a WizardX gallery,1594,0x44e9d011df8741be2493e99297e9ad67bb1aa85b,0xC454E2B4EbB3C74B2Caf83e74067A8055B375e4E,plot,77,16,2 Bull Avenue,793,Satoshi,Satoshi,0,44,0,0
+5099,5115,The McSquare, ,1061,0xe6e5dbe690cd5a38f1e7f3f23af04ae63f83d950,,plot,109,8,41 Signature Field,750,Satoshi,Satoshi,0,26,0,0
+5100,5116, , ,721,0x1fb11840d982a5bb02e1154804cfc9a96af1db83,,plot,43,8,53 Mainnet Bypass,786,Satoshi,Satoshi,0,0,0,0
+5101,5117, , ,1208,0x19262ffab7fdacde8acfd3847a55eaccc09db1f4,0xfe7d20712d3eceb6884cee123d9de9914a4aff6a|0xb7e06e4259a3d32128213a4cebfa7372ce13047c,plot,90,8,3 Bull Avenue,802,Satoshi,Satoshi,0,8,0,0
+5102,5118,RGBAnksy Satoshi,In the mean streets of Satoshi there's a slum you best avoid ,869,0x4b35237538fe70863d7e7bbbc83f3f621c6c4fb9,0xf251Ca37a80200f7AfefF398DA0338f4C1f01249,plot,59,11,37 Signature Field,758,Satoshi,Satoshi,0,1,0,0
+5103,5119, , ,2018,0x1fb11840d982a5bb02e1154804cfc9a96af1db83,,plot,181,9,3 Bag Grove,787,Satoshi,Satoshi,0,0,0,0
+5104,5120, , ,1622,0x1fb11840d982a5bb02e1154804cfc9a96af1db83,,plot,131,9,2 Flippening Street,775,Satoshi,Satoshi,0,0,0,0
+5105,5121, ,Designed by ME,755,0xe1bdff947510a8e9623cf7f3c6cf6fe5e37c16b8,0x06e09B64929d5f9279E2f94cb763d0D76E99f0d8|0x1e820B5d8ec9712Aa493B8460B8A6e89DB88D60A|0x34231a6b9a27dBF7295989952673B34c405bDb13|0xB5bBe9240c621E90a0508B70B68fd41a761D6f8e|0x9caFF816232fed741896a4e2eA1899002220065d,plot,103,8,89 Mainnet Bypass,755,Satoshi,Satoshi,0,0,0,0
+5106,5122, ,All the good shit ,1155,0xeac4824eecc66901ef40309cb3a4939cff57ffb9,0x56968c268465Bd4453Cd7ea8F8376996b2702Bc4,plot,23,13,2 Gwei Fork,763,Satoshi,Satoshi,0,6,0,0
+5107,5123, , ,958,0x819e2e15fe8df14bad0be5dfecd9802f527573b3,,plot,54,13,97 Mainnet Bypass,771,Satoshi,Satoshi,0,12,0,0
+5108,5124, , ,1173,0x1fb11840d982a5bb02e1154804cfc9a96af1db83,,plot,48,9,7 POS Crescent,808,Satoshi,Satoshi,0,0,0,0
+5109,5125, , ,1979,0xe1bdff947510a8e9623cf7f3c6cf6fe5e37c16b8,,plot,135,8,47 Mainnet Bypass,796,Satoshi,Satoshi,0,0,0,0
+5110,5126, , ,868,0xc51ca0c3bedcc93602777f668767204e416d9855,,plot,24,8,2 Bag Grove,781,Satoshi,Satoshi,0,0,0,0
+5111,5127, , ,3262,0xe1bdff947510a8e9623cf7f3c6cf6fe5e37c16b8,0x3AA4bA80522DeAC3f9B33C5d2Cf0947712bE5b34|0xaf28DF958115BF8D6Fe8c555436fA62e56af4f83|0x7717299f62b51918e37fc5e6766371e61dd7916d|0x680c5913866a960A500fb1a865fb2d577d17f183|0x64CDD4960508Fc50d402B129fB3f6Eb069B4d4d1|0x08247183632937670B262D9425914A2cc14CA7A5|0x113042DbfbcF79229d26FB7702751CFe0088954B|0x7a35234Edf8d37cB1b0674E73A8E84fb9e10D329,plot,87,14,31 Signature Field,743,Satoshi,Satoshi,0,0,0,0
+5112,5128, , ,1120,0x2e4c3fdf26fc81aba5da64978f170b484d94172e,0x5FC9bb884495fcCC780b840367560E8815D09C08|0x5E86f18d50597a0c75dE91972Fc8261b46749FAD|0x411e07616e24Fed46C647Ef3A6325D4c7d0645eb,plot,143,8,2 Block Reward Place,742,Satoshi,Satoshi,0,7,0,0
+5113,5129,Gallery 1990, ,2505,0x0726f2ae54dcd68d09813c9951725b8e50d0ffc2,,plot,59,11,5 Bull Avenue,805,Satoshi,Satoshi,0,0,0,0
+5114,5130, ,Agent by ME,1636,0x4003c7950993db89ada86e34e7b7cd4b75be72ce,0x06e09B64929d5f9279E2f94cb763d0D76E99f0d8|0xB5bBe9240c621E90a0508B70B68fd41a761D6f8e,plot,87,11,2 ATH Landing,765,Satoshi,Satoshi,0,0,0,0
+5115,5131,The Wen Gallery,Based and Wen Pilled,2488,0x213f6b2680dce3e4d0924acff3e4e34520ef9ba1,0x5B53f005de44CC792A2F6C56AEFDD40DB8bfDe77,plot,79,8,29 Signature Field,748,Satoshi,Satoshi,0,127,0,0
+5116,5132,DKBBQ corporate offices, ,1499,0x4e012d25472225f3385baa43ed64dfec5885c51d,,plot,129,10,101 Mainnet Bypass,751,Satoshi,Satoshi,0,29,0,0
+5117,5133, , ,970,0xe1bdff947510a8e9623cf7f3c6cf6fe5e37c16b8,,plot,71,8,3 POS Crescent,811,Satoshi,Satoshi,0,0,0,0
+5118,5134,Welcome to DSC,Billboard of Doge Sound Club,2281,0xed7df3fe8cb3041090ebcb19964d18a20a4593b4,0x80458725879003eafb4f2cb6006f82eab3616901|0x409714664a3Bf32563485AF3B2d8e0eb8FDc2a71,plot,31,11,11 Candle Quadrant,752,Satoshi,Satoshi,0,19,0,0
+5119,5135,Satoshi Bulls Club & Gallery,"<H1>Satoshi Bulls Club & Gallery</H1> The elite <b>'Satoshi Club'</b> and gallery is located at 7 Bull Ave on the Island of Satoshi. <br>For all of those that stack Sats and occasionally buy NFTs. <br><br> <img src=""https://lh3.googleusercontent.com/o7RDy1CfyytPjFOZwusq81o0_kQekmXnBs-M4BRHJSXQPSv-01U7GppqOLIRgAh6GsnOQA2_LIsNsTAmyFmOxQcmH5dNln9cQYMNnw=s0"" width=""300"" height=""300""> <br> <p><b> Property is listed on OpenSea for Sale. The sale does not include any NFTs used in staging.<br>NFTs or art assets will remain until transferred  sold  or replaced.<br>The sale is for the CryptoVoxel location and structure built only. </b></p>",2575,0x9845bc3476d1f891266d2a4c7be093e2527c489c,0x386e96e10447095a99b919defc955c6d4835c279|0x9845BC3476d1F891266D2a4C7Be093E2527c489c,plot,164,8,7 Bull Avenue,812,Satoshi,Satoshi,0,81,0,0
+5120,5136,Satoshi Tower,a WizardX build,2749,0xa20416801ac2eacf2372e825b4a90ef52490c2bb,0xC454E2B4EbB3C74B2Caf83e74067A8055B375e4E,plot,19,17,2 Mining Way,803,Satoshi,Satoshi,0,33,0,0
+5121,5137, , ,1670,0x5e86f18d50597a0c75de91972fc8261b46749fad,,plot,71,10,5 ATH Gardens,736,Satoshi,Satoshi,0,0,0,0
+5122,5138, , ,3474,0xa0ab8eddf14a5174688e2eb1bdb69cdf377142c3,,plot,97,13,5 Bag Grove,785,Satoshi,Satoshi,0,166,0,0
+5123,5139, , ,1652,0x0e51631f1e21bd22c591de48b273df6139d89ea7,0xB5bBe9240c621E90a0508B70B68fd41a761D6f8e|0x06e09B64929d5f9279E2f94cb763d0D76E99f0d8,plot,90,8,103 Mainnet Bypass,764,Satoshi,Satoshi,0,3,0,0
+5124,5140, ,ME's old head office  Multiverse Play's new home.,2383,0x5acfbbf0aa370f232e341bc0b1a40e996c960e07,0x06e09B64929d5f9279E2f94cb763d0D76E99f0d8|0xB5bBe9240c621E90a0508B70B68fd41a761D6f8e|0x080Dc56F9a800e2a426f22098F4E65656E6A3E31,plot,65,17,5 POS Crescent,818,Satoshi,Satoshi,0,95,0,0
+5125,5141, , ,1208,0x1fb11840d982a5bb02e1154804cfc9a96af1db83,,plot,149,8,43 Mainnet Bypass,788,Satoshi,Satoshi,0,0,0,0
+5126,5142,DSC X CBK,Community for Korean generative arts ,3015,0x409714664a3bf32563485af3b2d8e0eb8fdc2a71,0x80458725879003eafb4f2cb6006f82eab3616901|0xED7Df3fE8cB3041090ebCb19964d18A20a4593b4,plot,109,8,7 Candle Quadrant,756,Satoshi,Satoshi,0,159,0,0
+5127,5143,META Architects - 017, ,2458,0xb2d079b1739f086ba3ae57070cb14ea823ab5511,,plot,116,11,2 Sharding Grove,770,Satoshi,Satoshi,0,51,0,0
+5128,5144,@foodmaskuniversity Library Annex, ,2760,0xaa6fd0c3dd82e34b1a0ce7a526235336442fd678,0x2D036b57ec3713704Db5fBdF0eC3F5991cB79A08|0xa58b4a80de82b889ff40e487c58208a429c77f88|0xDb08eDbCF449De2A2B27448a8040935802c621F1|0xe288a00df4b697606078876788e4d64633cd2e01,plot,71,13,41 Mainnet Bypass,802,Satoshi,Satoshi,0,33,0,0
+5129,5145,3 Block Reward Place, ,981,0x46a768c40e8675d472a2443094d81300048e2fa9,,plot,83,9,3 Block Reward Place,739,Satoshi,Satoshi,0,3,0,0
+5130,5146,Empress Trash's Dumpster Palace Gallery,It's a cool place for art that is totally not the Resistance Headquarters.,2794,0x8469b7b08d30c63fea3a248a198de9d634b63d70,0x5a8fd5cceeb4c5f2ef123339403d58d9ec311ce4,plot,89,8,5 Resistance Place,783,Satoshi,Satoshi,0,89,0,0
+5131,5147, ,Parcel of Ruben Alexander! Will have mostly my collections and some of my NFTs/,959,0x10b54d8e8e7ea708e5c71915401261f92e03b376,,plot,90,8,2 Gwei Branch,810,Satoshi,Satoshi,0,32,0,0
+5132,5148, , ,5919,0xa0ab8eddf14a5174688e2eb1bdb69cdf377142c3,,plot,111,10,5 Mining Way,792,Satoshi,Satoshi,0,53,0,0
+5133,5149, , ,1070,0x13816f65ba8195768e6825eb774fd3c6a05a0ac8,,plot,48,8,2 POS Crescent,823,Satoshi,Satoshi,0,0,0,0
+5134,5150,BITPIXI'S BAR 🧚‍♀️🍺,Press space bar to jump when the beat drops! Past live performances by Proletariat  R3LL  Weinbagz  ChadXP  soon ITSOKTOCRY (Gwen Stacy) and more. Hosted official Deadheads reveal party  MetaMural Fest  Sewer Rats Social Club  Pulyxx Foundation drop  LemurLemur mint party  soon Just Bees. Pop-up async movie nights and free drinks!  Bitpixi now works for Cryptovoxels  so this will be a historic place. Resell the free drinks for any price you'd like!,9310,0xb7d3a787a39f25457ca511dc3f0591b546f5e02f,0x7fa597e5a193d9befb9a6d2a1b6191a40e06f84d|0x740b2ea9b6c4b895d0b04c762509c0ddebf5c610|0x1b21a4287cbfa8f81753de2a17028bf2fa231034|0xa797ac344ac4823176481c15ca99a10fc73e0756|0xd8b41b798a7ce8d30cbc87f007ecb95e1d3c876c|0xb7d3a787a39f25457ca511dc3f0591b546f5e02f|0x39188fEaB56e9CfD99EA045a6c62Aa7b880a51a9|0xa58b4a80de82b889ff40e487c58208a429c77f88|0x070472b67db0a109e8ceac51f75b7ec8a52b3725|0x35f9aaa37c8129d7f4c3980f2bb6099c3c2089de|0x0fA074262d6AF761FB57751d610dc92Bac82AEf9,plot,39,10,2 Premining Road,731,Satoshi,Satoshi,0,20,0,0
+5135,5151, ,Ann & Andy's virtual office in the metaverse! come chill & check out our space-themed art shows,8131,0xaf2b3a554b5a902419f09908d588adacf15897ed,0x9857220fceed61123b9ecefa426aa31d49b1e3fe,plot,59,12,23 Signature Field,732,Satoshi,Satoshi,0,13,0,0
+5136,5152,AIMS Gallery_Satoshi,AIMS Art Gallery is Introducing contemporary art.  This is the 2nd gallery in Satoshi City.  [1st Gallery in Origin.](https://www.cryptovoxels.com/play?coords=N@163W 189N),4197,0x80975b048c96995aba6e8976aa1b4e04e04022ef,,plot,143,8,11 Bull Avenue,813,Satoshi,Satoshi,0,105,0,0
+5137,5153, , ,1314,0x13816f65ba8195768e6825eb774fd3c6a05a0ac8,,plot,90,8,107 Mainnet Bypass,747,Satoshi,Satoshi,0,0,0,0
+5138,5154, , ,2902,0x7a44d904e5372f64db51436fcdf4024a8144c383,0xB89bCF31f3A2834f7D2B1aFa6A0ce8aB4342Ac32,plot,59,8,3 Mining Way,807,Satoshi,Satoshi,0,182,0,0
+5139,5155, ,Agent by ME,717,0xaaa2ef3e6d7ecb10678e9c8688bd79ab9118e3c6,0x06e09B64929d5f9279E2f94cb763d0D76E99f0d8|0xB5bBe9240c621E90a0508B70B68fd41a761D6f8e|0xBC2A21A50d88E0A48B75C0a5516ae51BFa45Ce6E,plot,34,13,13 POS Gardens,822,Satoshi,Satoshi,0,0,0,0
+5140,5156,Chaos Metaverse Satoshi HQ, ,1064,0x39188feab56e9cfd99ea045a6c62aa7b880a51a9,0x84A8BD0141905a76624313e59a9EA43b99e2057e,plot,131,17,7 ATH Gardens,729,Satoshi,Satoshi,0,16,0,0
+5141,5157,BITPIXI'S BAR 🧚‍♀️🍺,Press space bar to jump when the beat drops! Past live performances by Proletariat  R3LL  Weinbagz  ChadXP  soon ITSOKTOCRY (Gwen Stacy) and more. Hosted official Deadheads reveal party  MetaMural Fest  Sewer Rats Social Club  Pulyxx Foundation drop  LemurLemur mint party  soon Just Bees. Pop-up async movie nights and free drinks!  Bitpixi now works for Cryptovoxels  so this will be a historic place. Resell the free drinks for any price you'd like!,5012,0xb7d3a787a39f25457ca511dc3f0591b546f5e02f,0xb7d3a787a39f25457ca511dc3f0591b546f5e02f|0x2f2bd3c09c74572751a298c276b1018f39614fe3|0xa58b4a80de82b889ff40e487c58208a429c77f88,plot,103,11,2 ATH Gardens,725,Satoshi,Satoshi,0,85,0,0
+5142,5158,艺术馆, ,2595,0x411e07616e24fed46c647ef3a6325d4c7d0645eb,0x41A2F513BB1433d306da5DE5a537CCa75ec9e073|0xB0eef6392Da5b4a31310F1237092f8950d34df8b,plot,179,9,7 Resistance Place,769,Satoshi,Satoshi,0,127,0,0
+5143,5159,Punk 5340, ,1448,0x4c85ece5bbf191d3e1b76934c8372d4ae3bf6927,,plot,27,9,2 Oracle Drive,829,Satoshi,Satoshi,0,1,0,0
+5144,5160, , ,3910,0x5fc9bb884495fccc780b840367560e8815d09c08,0x41A2F513BB1433d306da5DE5a537CCa75ec9e073|0xe7325073A66Ac1FD14C3625Daa4078B4cDc60B95,plot,179,8,71 FUD Fork,731,Satoshi,Satoshi,0,81,0,0
+5145,5161, , ,727,0xe1bdff947510a8e9623cf7f3c6cf6fe5e37c16b8,0x06e09B64929d5f9279E2f94cb763d0D76E99f0d8,plot,23,8,5 Sharding Grove,782,Satoshi,Satoshi,0,0,0,0
+5146,5162, , ,1852,0x13816f65ba8195768e6825eb774fd3c6a05a0ac8,,plot,83,11,71 51 Attack Street,825,Satoshi,Satoshi,0,0,0,0
+5147,5163, , ,5264,0x13816f65ba8195768e6825eb774fd3c6a05a0ac8,,plot,89,16,61 FUD Fork,737,Satoshi,Satoshi,0,0,0,0
+5148,5164, , ,885,0x13816f65ba8195768e6825eb774fd3c6a05a0ac8,,plot,71,9,67 51 Attack Street,828,Satoshi,Satoshi,0,0,0,0
+5149,5165, , ,1373,0x2d891ed45c4c3eab978513df4b92a35cf131d2e2,,plot,77,8,5 Candle Quadrant,749,Satoshi,Satoshi,0,0,0,0
+5150,5166, , ,1639,0x3dcd9de752c1a556f88d03a61ff304ffee5e715a,,plot,90,8,109 Mainnet Bypass,744,Satoshi,Satoshi,0,1,0,0
+5151,5167,Golden Ratio, ,4386,0x510e74e9cdc8dd5627d652a26e49480a81264ed5,0x3b97b6CbbfCfFf88Cf4a175e665C5715A3efE4F0|0x0E696712DaDEd627f370Ec9Bbf9F7931cf19863D|0x439ad039f0135eD849C1ebf692776265A1015C43|0x3EC01bC8Ab8610BE6F66F55ba2d5B4fa813Bc082,plot,29,11,2 Gas Quadrant,727,Satoshi,Satoshi,0,3,0,0
+5152,5168,@foodmasku University Library,The personal collection of @foodmasku - works by the artist on the first floor  and collected works from other artists in the basement  2nd and 3rd floor. Builder available on commission. Rental-ready.,2723,0xaa6fd0c3dd82e34b1a0ce7a526235336442fd678,0x2D036b57ec3713704Db5fBdF0eC3F5991cB79A08|0xa58b4a80de82b889ff40e487c58208a429c77f88|0xDb08eDbCF449De2A2B27448a8040935802c621F1|0xe288a00df4b697606078876788e4d64633cd2e01,plot,71,15,37 Mainnet Bypass,807,Satoshi,Satoshi,0,96,0,0
+5153,5169, , ,1089,0xe1bdff947510a8e9623cf7f3c6cf6fe5e37c16b8,0x06e09B64929d5f9279E2f94cb763d0D76E99f0d8,plot,35,13,7 Sharding Grove,788,Satoshi,Satoshi,0,1,0,0
+5154,5170, , ,1245,0x2d891ed45c4c3eab978513df4b92a35cf131d2e2,,plot,89,8,3 Candle Quadrant,764,Satoshi,Satoshi,0,0,0,0
+5155,5171, , ,1993,0x2fec5d8835b39f314187dc1da933b273f32f18c3,0x2FEC5d8835b39f314187Dc1Da933B273F32f18c3,plot,71,9,2 Gas Price Lane,824,Satoshi,Satoshi,0,0,0,0
+5156,5172,Encounter cafe,3D staircase maze  for Her and Him  to meet on the rooftop,1502,0x4dc2766db5961075518c75892e98057df61b5ce1,0x06e09B64929d5f9279E2f94cb763d0D76E99f0d8|0xB5bBe9240c621E90a0508B70B68fd41a761D6f8e|0xBC2A21A50d88E0A48B75C0a5516ae51BFa45Ce6E,plot,49,15,31 Mainnet Bypass,797,Satoshi,Satoshi,0,37,0,0
+5157,5173, , ,727,0x13816f65ba8195768e6825eb774fd3c6a05a0ac8,,plot,65,8,11 POS Gardens,830,Satoshi,Satoshi,0,0,0,0
+5158,5174,NotoriousNQ,Owned By Notorious Farmer & NiQu ,4358,0x784b45146dde2232ceb7fb4007d07aac78f8acb6,0x1e00A3DF27562c80216e34947F6D746Cc06e47A6|0x16612F2301A2a55c4D37C8ea295Ba7cB4071CD19|0xb6c9447f79f67a6b2da6ff3519e06db1b63baede|0x20dA165deB81dBB042fE4A9d4808399eF2477c5d,plot,49,11,113 Mainnet Bypass,758,Satoshi,Satoshi,0,30,0,0
+5159,5175, , ,1079,0x13816f65ba8195768e6825eb774fd3c6a05a0ac8,,plot,95,8,59 51 Attack Street,833,Satoshi,Satoshi,0,0,0,0
+5160,5176, , ,1547,0x7a44d904e5372f64db51436fcdf4024a8144c383,,plot,119,9,5 Gas Price Lane,813,Satoshi,Satoshi,0,7,0,0
+5161,5177, , ,1191,0x50a9fa4346a8c2354994982822e9c0cd95cbade7,,plot,29,8,2 Resistance Place,792,Satoshi,Satoshi,0,16,0,0
+5162,5178,AIN Gallery Luna, ,2357,0x7c8a9d9dde058cfa14ccd698390252627f80ef19,0x1877468c0b824e148b8b267f7df8d8997e8f5ce7,plot,168,10,2 Gwei Circus,816,Satoshi,Satoshi,0,13,0,0
+5163,5179,NFT Showroom Gallery,Visit https://nftshowroom.com/  a digital art marketplace on the HIVE blockchain!,6163,0x1a1136a351fb653df6af838442c9fdf44f2f42d8,0xD08F2E9fF48F5D24142CeBAF98655Db237028dD4|0xff03E5DaF6a3C0441795F7DC83B873C2F2567692|0x013D9E53C12866f59bBdCE23D865CAa4470C3E2C|0x10967CC1A80CB84ecD0e4d09299cBCD5410A4Cf6|0xdc6651A641Da3b67f41fC6b15840A5EBBcE9381b,plot,77,12,7 Gas Quadrant,719,Satoshi,Satoshi,0,97,0,0
+5164,5180, , ,1711,0x2d891ed45c4c3eab978513df4b92a35cf131d2e2,,plot,129,16,5 Block Reward Place,728,Satoshi,Satoshi,0,0,0,0
+5165,5181, , ,1464,0x2d891ed45c4c3eab978513df4b92a35cf131d2e2,,plot,97,17,3 ATH Gardens,718,Satoshi,Satoshi,0,0,0,0
+5166,5182,Artvatars Atrium, ,2948,0xca50cc37abaa58d19e3a23ccb086f17f8384cb3c,,plot,155,9,3 Sharding Grove,766,Satoshi,Satoshi,0,228,0,0
+5167,5183, , ,2650,0x7a44d904e5372f64db51436fcdf4024a8144c383,,plot,143,10,13 Sharding Grove,800,Satoshi,Satoshi,0,1,0,0
+5168,5184, , ,1504,0x13816f65ba8195768e6825eb774fd3c6a05a0ac8,,plot,83,8,47 51 Attack Street,836,Satoshi,Satoshi,0,0,0,0
+5169,5185, , ,1178,0x13816f65ba8195768e6825eb774fd3c6a05a0ac8,,plot,64,8,5 POS Gardens,827,Satoshi,Satoshi,0,0,0,0
+5170,5186, , ,861,0x41d3d03753c03afac679f4c18b21c3c960fccc19,,plot,29,9,13 Gas Quadrant,716,Satoshi,Satoshi,0,0,0,0
+5171,5187, ,Agent by ME,2010,0x8f9448bdf80d3ef31ce4e85770462e22ba0488cf,0x06e09B64929d5f9279E2f94cb763d0D76E99f0d8,plot,34,10,3 Resistance Place,783,Satoshi,Satoshi,0,0,0,0
+5172,5188, ,NFTs collected by Jawa,1653,0xa4d8907bf757d268c9d054d8cc274e2f54e7c760,0x6D765f26E56384Ad21c5103995ad1c21FD239589|0x800844813ba610462e621b24AB7aA4476aeE188b|0xd8b09768537ff4c572b11b1bbdb112b1b14cdebb,plot,116,11,53 FUD Fork,742,Satoshi,Satoshi,0,49,0,0
+5173,5189, , ,1484,0x49185f385b83332bda127b46e48d186083ab4988,0x2cd0Cc245291cFEB785980e4f47e06E2FED81868|0xD67c34169b372d5B3932c548a940D4Ea74Fe7aF5|0x7C7C6A6d89abBaD81F79Bcd7bE124428466e331e|0xe7325073A66Ac1FD14C3625Daa4078B4cDc60B95|0xa50Bb794012b9617CdCAC8653f8041842F3c4315|0xAbc9B3AF7ba302c60049Dc826fb2532b37504196,plot,49,11,3 Hardware Wallet Road,724,Satoshi,Satoshi,0,54,0,0
+5174,5190, ,Agent by ME,871,0x7a7c70a2e687b760f05d88aa417b324f2ea8c7ed,0x06e09B64929d5f9279E2f94cb763d0D76E99f0d8|0xB5bBe9240c621E90a0508B70B68fd41a761D6f8e|0xBC2A21A50d88E0A48B75C0a5516ae51BFa45Ce6E,plot,65,11,11 Sharding Grove,784,Satoshi,Satoshi,0,213,0,0
+5175,5191, ,Agent by ME,1295,0xdb2497a2d30906bec48e23ea1b1a78c317f17b50,0x06e09B64929d5f9279E2f94cb763d0D76E99f0d8|0xB5bBe9240c621E90a0508B70B68fd41a761D6f8e|0xBC2A21A50d88E0A48B75C0a5516ae51BFa45Ce6E,plot,47,8,7 POS Gardens,835,Satoshi,Satoshi,0,26,0,0
+5176,5192,Gift Coin HQ,Our virtual HQ office and demo space. Welcome! ,1936,0x8393df6c1e06421aee81024873d1ced82a47588f,0x5bd214C3C6363A5C45C8A617DC91bA064F1F73E6|0xD251F2c35e3B20935d0c49c450dA696C65e3E766|0x96B08513b3506Faa1720B04ec79C1d2c0BDbA437|0xF07CF61B8DAc373fe11EEb7224C3d950a7690Da3|0x96B08513b3506Faa1720B04ec79C1d2c0BDbA437|0x8393DF6c1E06421AeE81024873D1ceD82A47588F,plot,54,10,2 Candle Quadrant,773,Satoshi,Satoshi,0,26,0,0
+5177,5193,Satoshi Gallery,Agent by ME,1520,0xbc2a21a50d88e0a48b75c0a5516ae51bfa45ce6e,0x06e09B64929d5f9279E2f94cb763d0D76E99f0d8,plot,41,14,73 51 Attack Street,840,Satoshi,Satoshi,0,14,0,0
+5178,5194, , ,1484,0x2d891ed45c4c3eab978513df4b92a35cf131d2e2,,plot,153,13,19 Gas Quadrant,709,Satoshi,Satoshi,0,0,0,0
+5179,5195,Attack 51%, ,1946,0xe3262eede42a5eb5189b7a57443257d35f7fb5f7,0x78067a3aC629feC549D296d0D019Ca7E184e5A9b,plot,149,9,41 51 Attack Street,839,Satoshi,Satoshi,0,442,0,0
+5180,5196,1 Voxelmatter Lane, ,870,0x40ac989f5ddce35bd51c3a6e2f064d2120e4275e,,plot,74,13,43 FUD Fork,750,Satoshi,Satoshi,0,0,0,0
+5181,5197, , ,861,0x7a44d904e5372f64db51436fcdf4024a8144c383,,plot,143,9,13 Gas Price Lane,808,Satoshi,Satoshi,0,1,0,0
+5182,5198,NotoriousNQ, ,1178,0xe8dae4180bcfdcd7a10ee0278a802393f6fd282b,0x1e00a3df27562c80216e34947f6d746cc06e47a6|0x20dA165deB81dBB042fE4A9d4808399eF2477c5d,plot,54,9,127 Mainnet Bypass,754,Satoshi,Satoshi,0,27,0,0
+5183,5199,Satoshi Gallery,Agent by ME,1714,0xbc2a21a50d88e0a48b75c0a5516ae51bfa45ce6e,0x06e09B64929d5f9279E2f94cb763d0D76E99f0d8,plot,83,8,61 51 Attack Street,842,Satoshi,Satoshi,0,8,0,0
+5184,5200, ,Agent by ME,2746,0x1698cafe53d00991966819c3ee5274269b494ce7,0x06e09B64929d5f9279E2f94cb763d0D76E99f0d8|0xB5bBe9240c621E90a0508B70B68fd41a761D6f8e|0x1e820B5d8ec9712Aa493B8460B8A6e89DB88D60A|0xfB59AC273799A99DD7f2b6a6a5c705eD3dbEfDd3,plot,120,8,3 Gas Price Lane,834,Satoshi,Satoshi,0,35,0,0
+5185,5201, , ,2278,0x8b8db5b327a3d051367d78b4a028722ee06555f1,0x02CAA5c046D7B9c92E21CaED72D887575adc01a9|0x1Ccd352faDf77E9A2B1768e9B5E3B589209F7515,plot,131,13,29 Mainnet Bypass,801,Satoshi,Satoshi,0,14,0,0
+5186,5202, , ,2654,0xe1bdff947510a8e9623cf7f3c6cf6fe5e37c16b8,0x06e09B64929d5f9279E2f94cb763d0D76E99f0d8,plot,143,8,67 FUD Fork,717,Satoshi,Satoshi,0,0,0,0
+5187,5203, , ,872,0x2d891ed45c4c3eab978513df4b92a35cf131d2e2,,plot,62,15,23 Mainnet Bypass,816,Satoshi,Satoshi,0,0,0,0
+5188,5204,GXChain Core, ,4923,0x240d9bb0954e64d2e237251561eca65718f6f713,0x01A23eba5023064d505dD45FbFA683a601C7685B|0xb417c44eaf67fae2644f5c2cb517c150d705902b,plot,54,11,5 Gas Quadrant,709,Satoshi,Satoshi,0,77,0,0
+5189,5205,unlockable.io, ,6009,0x510e74e9cdc8dd5627d652a26e49480a81264ed5,,plot,89,8,3 Gas Quadrant,709,Satoshi,Satoshi,0,41,0,0
+5190,5206,The Bakery, ,1325,0x626118559fdb2616cffbcea452264e1475a9a912,,plot,116,17,2 Infura Bypass,763,Satoshi,Satoshi,0,15,0,0
+5191,5207, , ,1238,0x033813994ee06a6ddf7bdbebde4f0e2b372b2043,,plot,71,8,2 Bearish Place,796,Satoshi,Satoshi,0,3,0,0
+5192,5208,MVB, ,1302,0x32ab4262df2c10ccc199f5f8e7332ed507ef3ea5,,plot,63,16,2 Hardware Wallet Road,713,Satoshi,Satoshi,0,215,0,0
+5193,5209,The Billboard, ,1445,0xf942ce6643bc80d0bcc1bea4fd4657e600a1de88,0xa2193Ee5868bCE89Cfd7150C7694D0F3b6eFb080,plot,32,10,59 FUD Fork,726,Satoshi,Satoshi,0,26,0,0
+5194,5210,Elit Umbra, ,3737,0xd0f3d1f1c37d9a600e6850c041b1e7c4a92ca681,0x95Af9a2a047D8ad208cE53f3CA3A5E8481482aBe,plot,131,10,5 Hardware Wallet Road,728,Satoshi,Satoshi,0,117,0,0
+5195,5211,7 Premine, ,1571,0x0fd73ea2391d2ee5806a15a22e67d583a403409b,,plot,47,17,7 Premining Circus,787,Satoshi,Satoshi,0,57,0,0
+5196,5212,ME Star Trek Mars, ,2704,0x2e4c3fdf26fc81aba5da64978f170b484d94172e,0x5FC9bb884495fcCC780b840367560E8815D09C08|0x5E86f18d50597a0c75dE91972Fc8261b46749FAD|0x411e07616e24Fed46C647Ef3A6325D4c7d0645eb|0x3AA4bA80522DeAC3f9B33C5d2Cf0947712bE5b34|0xaf28DF958115BF8D6Fe8c555436fA62e56af4f83|0x7717299f62b51918e37fc5e6766371e61dd7916d|0x680c5913866a960A500fb1a865fb2d577d17f183|0x64CDD4960508Fc50d402B129fB3f6Eb069B4d4d1|0x08247183632937670B262D9425914A2cc14CA7A5|0x113042DbfbcF79229d26FB7702751CFe0088954B|0x7a35234Edf8d37cB1b0674E73A8E84fb9e10D329,plot,132,16,3 POS Gardens,823,Satoshi,Satoshi,0,730,0,0
+5197,5213,NFT Lion Cubs - Tower,So with the NEXT Generation taking over the NFTS space Lion Cubs Tower is no different watch this space mwahahahah  IF YOU WOULD LIKE TO REGISTER FOR THE PRESALE BE SURE TO CLICK THE LINK BELOW BEFORE THE LIST IS CLOSED.  GOOD LUCK  https://successleavesclues.com/nftlioncubs/,1420,0xf25ad24b791e37e83f4dadfe212e0e9bb45a1f8b,,plot,153,15,7 Gas Price Lane,827,Satoshi,Satoshi,0,47,0,0
+5198,5214, , ,2198,0x4de76c2fd006f3c9ef7f69e5d6505509e79235af,,plot,153,11,11 Gas Quadrant,702,Satoshi,Satoshi,0,0,0,0
+5199,5215, , ,2601,0x68054004024e88d1de42dc8aa5bcea9afaddde61,,plot,159,14,131 Mainnet Bypass,739,Satoshi,Satoshi,0,0,0,0
+5200,5216,Arbitrage Attack Condo Gallery,Gallery with three floors and rooftop. <br> <p><b> Property is listed on OpenSea for Sale. The sale does not include any NFTs used in staging.<br>NFTs or art assets will remain until transferred  sold  or replaced by the new owner.<br>The sale is for the CryptoVoxel location and structure built only. </b></p>,3123,0x386e96e10447095a99b919defc955c6d4835c279,0x386e96e10447095a99b919defc955c6d4835c279|0x9845bc3476d1f891266d2a4c7be093e2527c489c,plot,134,14,31 51 Attack Street,843,Satoshi,Satoshi,0,76,0,0
+5201,5217,Satoshi Art Center, ,2697,0xc4382e954372498012347a5f3ebe96b2a0f23cd7,0x01e0C7b70E0E05a06c7cC8deeb97Fa03d6a77c9C|0x40A628D16bE2Ba6956F60402b17F52E8bfE32497,plot,194,16,41 FUD Fork,753,Satoshi,Satoshi,0,36,0,0
+5202,5218, , ,571,0x7c9363f704f053e9bc709b50a1bbc6e83884bb61,,plot,164,9,7 Infura Bypass,778,Satoshi,Satoshi,0,1,0,0
+5203,5219, , ,1100,0x2d891ed45c4c3eab978513df4b92a35cf131d2e2,,plot,76,11,53 51 Attack Street,849,Satoshi,Satoshi,0,0,0,0
+5204,5220, , ,1199,0xc4382e954372498012347a5f3ebe96b2a0f23cd7,0x01e0C7b70E0E05a06c7cC8deeb97Fa03d6a77c9C|0x78067a3ac629fec549d296d0d019ca7e184e5a9b,plot,118,12,47 FUD Fork,733,Satoshi,Satoshi,0,0,0,0
+5205,5221, , ,925,0x7a44d904e5372f64db51436fcdf4024a8144c383,,plot,95,17,2 Signature Lane,721,Satoshi,Satoshi,0,0,0,0
+5206,5222, , ,379,0xe1bdff947510a8e9623cf7f3c6cf6fe5e37c16b8,,plot,120,8,17 Sharding Grove,796,Satoshi,Satoshi,0,0,0,0
+5207,5223, , ,572,0xa20416801ac2eacf2372e825b4a90ef52490c2bb,,plot,44,8,17 Fiat Rise,776,Satoshi,Satoshi,0,0,0,0
+5208,5224,CryptoHamsters Store,CryptoHamsters are composed of DNA with 18 genetic instructions  generated randomly. Create your team and be prepared!  🐹 🚀  The older released CryptoHamsters token will have privileges in the future  so take the opportunity.  ### **SOCIAL NETWORKS**   [Twitter](https://twitter.com/0xHamsters) • [Instagram](https://www.instagram.com/cryptohamsters/)  Join the [Discord](https://discord.gg/MGVBr6AxN6)  and live the community  especially if you already have a hamster.  Be sure to visit the **[CryptoHamsters.co](http://cryptohamsters.co/)** to stay up to date.,1937,0xc9e668e1abc646cb1fb6e0d65ec031029681fa47,0xe330Dc28b47d73884AD88837aECfEE1F49Ad7e7b,plot,43,14,13 Bull Avenue,844,Satoshi,Satoshi,0,35,0,0
+5209,5225,MerkleTree,Browse our space filled with a curated selection of NFTs.,1173,0xc12469b7ad27706bbe9872a8a45fd9d461ba2342,,plot,79,9,29 Gas Quadrant,703,Satoshi,Satoshi,0,124,0,0
+5210,5226, ,Designed by ME,363,0xe1bdff947510a8e9623cf7f3c6cf6fe5e37c16b8,0x3AA4bA80522DeAC3f9B33C5d2Cf0947712bE5b34|0xaf28DF958115BF8D6Fe8c555436fA62e56af4f83|0x7717299f62b51918e37fc5e6766371e61dd7916d|0x680c5913866a960A500fb1a865fb2d577d17f183|0x64CDD4960508Fc50d402B129fB3f6Eb069B4d4d1|0x08247183632937670B262D9425914A2cc14CA7A5|0x113042DbfbcF79229d26FB7702751CFe0088954B|0x7a35234Edf8d37cB1b0674E73A8E84fb9e10D329,plot,62,12,11 Gas Price Lane,822,Satoshi,Satoshi,0,0,0,0
+5211,5227, , ,555,0xa20416801ac2eacf2372e825b4a90ef52490c2bb,,plot,23,8,5 Premining Circus,792,Satoshi,Satoshi,0,0,0,0
+5212,5228,Spielraum studio, ,2768,0x98f2c966c12513ea43ef211d8b1d9e8bb500dfee,,plot,131,13,2 POS Gardens,841,Satoshi,Satoshi,0,108,0,0
+5213,5229, ,kwaji hq,532,0x3458fd8f327f270b32092cd406ed8ba97405d9f5,0x3458fd8f327f270b32092cd406ed8ba97405d9f5,plot,65,8,17 Gas Quadrant,698,Satoshi,Satoshi,0,22,0,0
+5214,5230, , ,1969,0x2d891ed45c4c3eab978513df4b92a35cf131d2e2,,plot,98,14,43 51 Attack Street,854,Satoshi,Satoshi,0,0,0,0
+5215,5231, , ,1416,0x40a628d16be2ba6956f60402b17f52e8bfe32497,,plot,83,14,19 Signature Field,711,Satoshi,Satoshi,0,0,0,0
+5216,5232, ,Agent by ME,463,0xc305ed35417ca4d3f3e08ec0a594d32214fb77d6,0xB5bBe9240c621E90a0508B70B68fd41a761D6f8e|0x06e09B64929d5f9279E2f94cb763d0D76E99f0d8|0xBC2A21A50d88E0A48B75C0a5516ae51BFa45Ce6E,plot,55,8,19 Mainnet Bypass,821,Satoshi,Satoshi,0,0,0,0
+5217,5233,#NFTLIONS - Satoshi Square, ,826,0xf25ad24b791e37e83f4dadfe212e0e9bb45a1f8b,,plot,55,8,3 ICO Place,837,Satoshi,Satoshi,0,4,0,0
+5218,5234,08AM,Contemporary Artist 08AM  Gallery www.08AM.net / www.instagram.com/08AM/,3255,0xe37468c8fa3d47b797bc99236903896d26dcc9d8,,plot,53,17,13 Fiat Rise,779,Satoshi,Satoshi,0,139,0,0
+5219,5235,The Wall, ,816,0xfa97c8b9d289fd2a66e1fb14557f53b6d818d0b5,,plot,23,13,13 Bid Price Branch,719,Satoshi,Satoshi,0,18,0,0
+5220,5236, , ,296,0x2d891ed45c4c3eab978513df4b92a35cf131d2e2,,plot,54,8,19 Gas Price Lane,806,Satoshi,Satoshi,0,0,0,0
+5221,5237, , ,2288,0xa73dc2f955bca7f3f2d39c0926583174aa1ef0b4,,plot,83,15,17 Bull Avenue,850,Satoshi,Satoshi,0,0,0,0
+5222,5238,THE UNICORN, ,3236,0x40a628d16be2ba6956f60402b17f52e8bfe32497,0x0E696712DaDEd627f370Ec9Bbf9F7931cf19863D,plot,47,17,17 Signature Field,702,Satoshi,Satoshi,0,168,0,0
+5223,5239,Baby Coby Bull Factory, ,2505,0xc0beefeed699f6d6a08397fcbf8fbadf9f83eb5d,0x86cd531a1abbfe420e8502e92135915964da31a1,plot,167,13,7 Transaction Field,852,Satoshi,Satoshi,0,181,0,0
+5224,5240,Metachi Gallery,Built by ME / Designed by SK,2380,0xbc2a21a50d88e0a48b75c0a5516ae51bfa45ce6e,0x06e09B64929d5f9279E2f94cb763d0D76E99f0d8|0xB5bBe9240c621E90a0508B70B68fd41a761D6f8e|0x12f432bfce6BF6aa818c083D6550DF52100f2E2F|0x84cd9DB80F487a084D33138f18ffC9Efa64dc13f|0x9f3FE8Bb91Ff9C8d8666120aF4cf8b473da26CC4|0x28f096e0Ddd34f37383425c29528ee66202898F4,plot,195,8,3 Signature Lane,704,Satoshi,Satoshi,0,218,0,0
+5225,5241,GEEK MYTH STUDIOS, ,3254,0x29f9ef8286dcc4f9a94340278db01f12c3483988,,plot,35,12,37 51 Attack Street,859,Satoshi,Satoshi,0,188,0,0
+5226,5242, , ,294,0x2d891ed45c4c3eab978513df4b92a35cf131d2e2,,plot,69,8,3 Infura Bypass,762,Satoshi,Satoshi,0,0,0,0
+5227,5243, , ,1780,0x40a628d16be2ba6956f60402b17f52e8bfe32497,0x01e0c7b70e0e05a06c7cc8deeb97fa03d6a77c9c,plot,203,8,7 Bid Price Branch,722,Satoshi,Satoshi,0,0,0,0
+5228,5244,THE CUFF, ,1582,0xa20416801ac2eacf2372e825b4a90ef52490c2bb,,plot,39,10,2 Tokens Bypass,698,Satoshi,Satoshi,0,2,0,0
+5229,5245,The Waffle House,Where the carbs meet the heat.,2502,0xf45b2b7686d38a435e6158296f0f95041ab163d9,0xc93C7f71581DFEAAb59BEd908888dAC5689F312a,plot,51,15,31 FUD Fork,762,Satoshi,Satoshi,0,4,0,0
+5230,5246,ME Star Trek Saturn,Designed by ME,1030,0xe1bdff947510a8e9623cf7f3c6cf6fe5e37c16b8,0x3AA4bA80522DeAC3f9B33C5d2Cf0947712bE5b34|0xaf28DF958115BF8D6Fe8c555436fA62e56af4f83|0x7717299f62b51918e37fc5e6766371e61dd7916d|0x680c5913866a960A500fb1a865fb2d577d17f183|0x64CDD4960508Fc50d402B129fB3f6Eb069B4d4d1|0x08247183632937670B262D9425914A2cc14CA7A5|0x113042DbfbcF79229d26FB7702751CFe0088954B|0x7a35234Edf8d37cB1b0674E73A8E84fb9e10D329,plot,116,12,137 Mainnet Bypass,748,Satoshi,Satoshi,0,603,0,0
+5231,5247, , ,433,0xe1bdff947510a8e9623cf7f3c6cf6fe5e37c16b8,,plot,71,8,5 ICO Place,828,Satoshi,Satoshi,0,0,0,0
+5232,5248, , ,348,0x2d891ed45c4c3eab978513df4b92a35cf131d2e2,,plot,53,12,13 Infura Bypass,792,Satoshi,Satoshi,0,0,0,0
+5233,5249, , ,3641,0x8e79ef9e545fa14e205d89970d50e7caa3456683,0x32123F2A0C733EB80a227a85FFE5029Bd6A72006,plot,167,12,23 51 Attack Street,850,Satoshi,Satoshi,0,73,0,0
+5234,5250, , ,390,0xbbce15ee9bde24b77031ed6a82e9dd9b6c7492dc,,plot,76,11,17 Gas Price Lane,816,Satoshi,Satoshi,0,0,0,0
+5235,5251, , ,621,0x004537fcd9095489ebe38180a382341b962b501d,,plot,111,8,5 Tokens Bypass,691,Satoshi,Satoshi,0,0,0,0
+5236,5252, , ,1062,0x2d891ed45c4c3eab978513df4b92a35cf131d2e2,,plot,97,17,2 Transaction Field,859,Satoshi,Satoshi,0,0,0,0
+5237,5253,♨️, ,526,0x4de89162f766eeb2b0ed7dec561f91f87dd50dc9,0xd81df4d3f230a6787c7253e4df70733c90efdd5c,plot,64,8,17 Mainnet Bypass,815,Satoshi,Satoshi,0,2,0,0
+5238,5254, , ,697,0xa20416801ac2eacf2372e825b4a90ef52490c2bb,,plot,65,15,2 Smart Contract Crescent,728,Satoshi,Satoshi,0,0,0,0
+5239,5255, , ,2823,0xc4382e954372498012347a5f3ebe96b2a0f23cd7,0x01e0C7b70E0E05a06c7cC8deeb97Fa03d6a77c9C|0x78067a3ac629fec549d296d0d019ca7e184e5a9b,plot,155,8,37 FUD Fork,739,Satoshi,Satoshi,0,25,0,0
+5240,5256, , ,442,0xf3934d7c25d6dedf3ed2e32ac8af61af41725d6d,,plot,55,8,139 Mainnet Bypass,737,Satoshi,Satoshi,0,0,0,0
+5241,5257, , ,690,0x2d891ed45c4c3eab978513df4b92a35cf131d2e2,,plot,155,8,3 DAO Field,800,Satoshi,Satoshi,0,0,0,0
+5242,5258, , ,1494,0x2e4c3fdf26fc81aba5da64978f170b484d94172e,0x5FC9bb884495fcCC780b840367560E8815D09C08|0x5E86f18d50597a0c75dE91972Fc8261b46749FAD|0x411e07616e24Fed46C647Ef3A6325D4c7d0645eb,plot,129,9,19 Bull Avenue,850,Satoshi,Satoshi,0,7,0,0
+5243,5259, , ,1220,0x081e92f8b195999d71b8c88d042da75f8be8ed9f,0x3953E9D7067E49c593609894544D57c887A242eC,plot,181,9,13 Mainnet Bypass,823,Satoshi,Satoshi,0,0,0,0
+5244,5260, , ,511,0x2d891ed45c4c3eab978513df4b92a35cf131d2e2,,plot,43,8,5 Infura Bypass,774,Satoshi,Satoshi,0,0,0,0
+5245,5261,CryptoArt Gallery,Designed by SK / Agent by ME,1953,0x632c4710f4f8acc54662b7e633f96e853e527995,0x06e09B64929d5f9279E2f94cb763d0D76E99f0d8|0xB5bBe9240c621E90a0508B70B68fd41a761D6f8e,plot,237,8,23 Gas Quadrant,684,Satoshi,Satoshi,0,253,0,0
+5246,5262,ALIEN HONEY GALLERY,**Buy on Opensea:** https://opensea.io/collection/alien-honey-wearables <br> **Buy with HIVE:** https://nftshowroom.com/alienwearables/gallery,1494,0x1a1136a351fb653df6af838442c9fdf44f2f42d8,,plot,101,10,2 Hot Wallet Street,837,Satoshi,Satoshi,0,35,0,0
+5247,5263, , ,856,0x2d891ed45c4c3eab978513df4b92a35cf131d2e2,,plot,142,8,7 Signature Lane,715,Satoshi,Satoshi,0,0,0,0
+5248,5264, , ,400,0x080dc56f9a800e2a426f22098f4e65656e6a3e31,,plot,71,8,11 Tokens Bypass,687,Satoshi,Satoshi,0,0,0,0
+5249,5265, , ,2229,0x34231a6b9a27dbf7295989952673b34c405bdb13,0x41A2F513BB1433d306da5DE5a537CCa75ec9e073|0x1e820B5d8ec9712Aa493B8460B8A6e89DB88D60A|0xfB59AC273799A99DD7f2b6a6a5c705eD3dbEfDd3,plot,116,9,23 FUD Fork,764,Satoshi,Satoshi,0,2,0,0
+5250,5266,Metachi HQ,Built by ME / Designed by SK,2950,0xbc2a21a50d88e0a48b75c0a5516ae51bfa45ce6e,0x06e09B64929d5f9279E2f94cb763d0D76E99f0d8|0xB5bBe9240c621E90a0508B70B68fd41a761D6f8e|0x12f432bfce6BF6aa818c083D6550DF52100f2E2F|0x84cd9DB80F487a084D33138f18ffC9Efa64dc13f|0x9f3FE8Bb91Ff9C8d8666120aF4cf8b473da26CC4|0x28f096e0Ddd34f37383425c29528ee66202898F4,plot,111,14,37 Gas Quadrant,696,Satoshi,Satoshi,0,177,0,0
+5251,5267, , ,735,0x2d891ed45c4c3eab978513df4b92a35cf131d2e2,,plot,59,8,3 Premining Circus,796,Satoshi,Satoshi,0,0,0,0
+5252,5268,Garrick.eth,garrick.eth  Designed By: @bitpixi,1034,0x828d3fff01cf78c96495ab1bd2c1e1b1b2384a9a,0xB7D3A787a39f25457CA511dC3f0591b546f5e02f|0x7514c98e42ab83bc914411e18b7703f5c9699ae5,plot,41,14,29 Gas Price Lane,801,Satoshi,Satoshi,0,29,0,0
+5253,5269, , ,833,0xe1bdff947510a8e9623cf7f3c6cf6fe5e37c16b8,,plot,119,8,2 ICO Place,846,Satoshi,Satoshi,0,0,0,0
+5254,5270,Labyrinth,Can you navigate the labyrinth and find the treasure? 🔥NFT's to be claimed🔥,5713,0x6ee52ddbc80aaeef68023d484cf7f9444d10ea21,0xF3555D421c3f3A15091c508ED564bcE3ed0B1f3d,plot,98,8,29 51 Attack Street,863,Satoshi,Satoshi,0,73,0,0
+5255,5271,Forest Spaces,<b>Welcome to Forest Spaces</b> </br> Drop into a state of soft  somatic awareness and sensory-based liminality.,3232,0xb3d89ce6002e17812adb8f7e5d7ec6cd7cb84c75,0xc93c7f71581dfeaab59bed908888dac5689f312a|0xd81df4d3f230a6787c7253e4df70733c90efdd5c,plot,80,9,11 Fiat Rise,784,Satoshi,Satoshi,0,116,0,0
+5256,5272,Bambo , ,843,0x24777ca8e50c9cec03b89aa65eacdac5279db7a8,0x57157Acd57D98Dcc79E87Ea035EF4f6Bdea928da,plot,120,8,11 Infura Bypass,778,Satoshi,Satoshi,0,3,0,0
+5257,5273,ME Star Trek Uranus, ,1589,0x2e4c3fdf26fc81aba5da64978f170b484d94172e,0x5FC9bb884495fcCC780b840367560E8815D09C08|0x5E86f18d50597a0c75dE91972Fc8261b46749FAD|0x411e07616e24Fed46C647Ef3A6325D4c7d0645eb|0x3AA4bA80522DeAC3f9B33C5d2Cf0947712bE5b34|0xaf28DF958115BF8D6Fe8c555436fA62e56af4f83|0x7717299f62b51918e37fc5e6766371e61dd7916d|0x680c5913866a960A500fb1a865fb2d577d17f183|0x64CDD4960508Fc50d402B129fB3f6Eb069B4d4d1|0x08247183632937670B262D9425914A2cc14CA7A5|0x113042DbfbcF79229d26FB7702751CFe0088954B|0x7a35234Edf8d37cB1b0674E73A8E84fb9e10D329|0xa3916bfC6a6E0FFB4b53DE20a98A0B55E9A0825e|0x80fb55a55d6b277d9c0a7b0b2b926903f8a4bc57,plot,186,12,11 Nonce Place,842,Satoshi,Satoshi,0,363,0,0
+5258,5274, ,Agent by ME,597,0x31b9e999b188696d210c562e7dad24a90082d45b,0xB5bBe9240c621E90a0508B70B68fd41a761D6f8e|0x06e09B64929d5f9279E2f94cb763d0D76E99f0d8,plot,87,8,11 ICO Place,823,Satoshi,Satoshi,0,0,0,0
+5259,5275, , ,1200,0x40a628d16be2ba6956f60402b17f52e8bfe32497,,plot,120,8,13 Signature Field,698,Satoshi,Satoshi,0,0,0,0
+5260,5276,Neo Lightning Rod,Neo Lightning Rod by The Black Fractal.,2638,0x2fec5d8835b39f314187dc1da933b273f32f18c3,0x2FEC5d8835b39f314187Dc1Da933B273F32f18c3,plot,15,16,29 FUD Fork,755,Satoshi,Satoshi,0,339,0,0
+5261,5277, , ,939,0x2d891ed45c4c3eab978513df4b92a35cf131d2e2,,plot,139,14,5 Winter Street,866,Satoshi,Satoshi,0,0,0,0
+5262,5278, , ,1061,0x7035453761e7a852e72f6aa2a1ca7f3c4c10e86b,,plot,119,12,2 Sharding Road,758,Satoshi,Satoshi,0,20,0,0
+5263,5279, , ,493,0x2d891ed45c4c3eab978513df4b92a35cf131d2e2,,plot,53,9,149 Mainnet Bypass,746,Satoshi,Satoshi,0,0,0,0
+5264,5280, , ,1783,0x7478742ffb2f1082d4c8f2039af4161f97b3bc2a,,plot,71,8,11 Signature Field,691,Satoshi,Satoshi,0,0,0,0
+5265,5281, , ,762,0x40a628d16be2ba6956f60402b17f52e8bfe32497,,plot,153,8,11 Bid Price Branch,703,Satoshi,Satoshi,0,0,0,0
+5266,5282, , ,706,0x2d891ed45c4c3eab978513df4b92a35cf131d2e2,,plot,55,10,5 Signature Lane,705,Satoshi,Satoshi,0,0,0,0
+5267,5283, , ,1988,0xc4382e954372498012347a5f3ebe96b2a0f23cd7,0x01e0C7b70E0E05a06c7cC8deeb97Fa03d6a77c9C|0x40A628D16bE2Ba6956F60402b17F52E8bfE32497|0x78067a3ac629fec549d296d0d019ca7e184e5a9b,plot,90,12,3 Bid Price Branch,733,Satoshi,Satoshi,0,7,0,0
+5268,5284, , ,675,0x2d891ed45c4c3eab978513df4b92a35cf131d2e2,,plot,63,11,23 Gas Price Lane,812,Satoshi,Satoshi,0,0,0,0
+5269,5285, , ,836,0x080dc56f9a800e2a426f22098f4e65656e6a3e31,,plot,71,9,3 Tokens Bypass,685,Satoshi,Satoshi,0,0,0,0
+5270,5286, , ,1172,0x40a628d16be2ba6956f60402b17f52e8bfe32497,0x01e0c7b70e0e05a06c7cc8deeb97fa03d6a77c9c,plot,43,9,5 Bid Price Branch,719,Satoshi,Satoshi,0,5,0,0
+5271,5287,♨️, ,968,0x4de89162f766eeb2b0ed7dec561f91f87dd50dc9,0xd81df4d3f230a6787c7253e4df70733c90efdd5c,plot,39,14,11 Mainnet Bypass,821,Satoshi,Satoshi,0,1,0,0
+5272,5288, , ,369,0xe1bdff947510a8e9623cf7f3c6cf6fe5e37c16b8,,plot,43,9,17 Infura Bypass,792,Satoshi,Satoshi,0,0,0,0
+5273,5289,Labyrinth,Who am I? Where is this place? What was I born for? 🔥NFTs to be claimed🔥,4375,0x6ee52ddbc80aaeef68023d484cf7f9444d10ea21,0xF3555D421c3f3A15091c508ED564bcE3ed0B1f3d,plot,71,15,19 51 Attack Street,868,Satoshi,Satoshi,0,78,0,0
+5274,5290,Neo Power Construct,Neo Power Construct by The Black Fractal  Sculpture  Gallery and Retail Space,1756,0x2fec5d8835b39f314187dc1da933b273f32f18c3,0x2FEC5d8835b39f314187Dc1Da933B273F32f18c3,plot,35,8,2 Mainnet Street,748,Satoshi,Satoshi,0,443,0,0
+5275,5291,Blueberry Labs HQ,A place to show off NFT art and to show off the latest Blueberry pancakes web3 projects!! ,2783,0xb00cd8e790ec45971a04695849a17a647eb74463,0xA83Db13e2AaB594040E35137578Cc693B420A2E8|0xb4C374F1837ef355cA308b8024Fd4555aEF3bbE7|0x9878a805031185737D9c19dc23f782fb9f408fe4|0xB00CD8e790eC45971A04695849a17a647eB74463|0xFA167F0b067aD4211632D939207a327e734B26C7,plot,175,17,13 Nonce Place,855,Satoshi,Satoshi,0,125,0,0
+5276,5292,0x681 gallery,0x681 gallery https://opensea.io/0x681Cbae1C41e5eeC8411dD8e009fA71F81D03F7F,818,0x681cbae1c41e5eec8411dd8e009fa71f81d03f7f,,plot,220,8,7 ICO Place,838,Satoshi,Satoshi,0,55,0,0
+5277,5293, , ,1377,0x2d891ed45c4c3eab978513df4b92a35cf131d2e2,,plot,90,8,3 Winter Street,872,Satoshi,Satoshi,0,0,0,0
+5278,5294, , ,4099,0x2d891ed45c4c3eab978513df4b92a35cf131d2e2,,plot,59,11,23 Bull Avenue,866,Satoshi,Satoshi,0,0,0,0
+5279,5295, , ,834,0x2e4c3fdf26fc81aba5da64978f170b484d94172e,0x5FC9bb884495fcCC780b840367560E8815D09C08|0x5E86f18d50597a0c75dE91972Fc8261b46749FAD|0x411e07616e24Fed46C647Ef3A6325D4c7d0645eb,plot,125,8,31 Gas Quadrant,682,Satoshi,Satoshi,0,6,0,0
+5280,5296,CryptoArt Gallery,Designed by SK / Agent by ME,657,0x2e4c3fdf26fc81aba5da64978f170b484d94172e,0x06e09B64929d5f9279E2f94cb763d0D76E99f0d8,plot,83,8,13 Tokens Bypass,679,Satoshi,Satoshi,0,16,0,0
+5281,5297,CLTR GALLERY,First Floor: BanklessDAO weekly NFT artist showcase. Every Friday at 2pm EST  the BanklessDAO showcases a new artists and auctions off exclusive NFT's. If you are interested in working with the BanklessDAO on a showcase  reach out to @thecryptobushi on Twitter.   Second Floor: BanklessDAO Perchy Gallery. Perchy is an artist who is documenting the interesting and hilarious nuances that go along with being a member in a DAO.   Third Floor: A collection of physical pieces by Crypto Bushi that document the uprising of crypto technologies  DAO's  and the evolution of money and the worlds financial system.  ,954,0x02bebb44a4fe9eb0c0aa0205a2494394b32d3534,0x29104975057C20062596FB755047c1C9fb59daaE,plot,24,11,2 DAO Field,816,Satoshi,Satoshi,0,113,0,0
+5282,5298,Voxel PunkCats, ,1903,0xd81df4d3f230a6787c7253e4df70733c90efdd5c,0xc93c7f71581dfeaab59bed908888dac5689f312a|0xb3d89ce6002e17812adb8f7e5d7ec6cd7cb84c75,plot,47,12,7 Fiat Rise,779,Satoshi,Satoshi,0,90,0,0
+5283,5299, , ,88,0x2d891ed45c4c3eab978513df4b92a35cf131d2e2,,plot,151,10,151 Mainnet Bypass,722,Satoshi,Satoshi,0,0,0,0
+5284,5300,Ayame Annex, ,2589,0xc0beefeed699f6d6a08397fcbf8fbadf9f83eb5d,0x86cd531a1abbfe420e8502e92135915964da31a1,plot,83,14,5 Transaction Field,870,Satoshi,Satoshi,0,81,0,0
+5285,5301,EBOY A,,2638,0x8869e7b48e33c5f1fffb0f15f6084c7b438d6371,0x2536c09e5f5691498805884fa37811be3b2bddb4|0x30850e42ec479521Faa52B42cf3e01347dD6D23e,plot,97,16,43 Gas Quadrant,692,Satoshi,Satoshi,0,23,0,0
+5286,5302, , ,614,0xe1bdff947510a8e9623cf7f3c6cf6fe5e37c16b8,,plot,76,8,37 Gas Price Lane,796,Satoshi,Satoshi,0,0,0,0
+5287,5303, , ,656,0x2d891ed45c4c3eab978513df4b92a35cf131d2e2,,plot,64,8,2 Premining Circus,805,Satoshi,Satoshi,0,0,0,0
+5288,5304, , ,369,0x080dc56f9a800e2a426f22098f4e65656e6a3e31,,plot,84,8,7 Tokens Bypass,676,Satoshi,Satoshi,0,0,0,0
+5289,5305,Nervous.eth / harper.eth, ,2791,0xe7e84204b7e180454e5c40d0e04d346214a83f85,0x5D334bF9D32c6Bf5655De7479b34Fa0d0C44bfF3|0xE7e84204B7e180454e5C40d0e04D346214a83f85,plot,116,13,5 Fiat Rise,789,Satoshi,Satoshi,0,58,0,0
+5290,5306,ME Star Trek Jupiter, ,1514,0x2e4c3fdf26fc81aba5da64978f170b484d94172e,0x5FC9bb884495fcCC780b840367560E8815D09C08|0x5E86f18d50597a0c75dE91972Fc8261b46749FAD|0x411e07616e24Fed46C647Ef3A6325D4c7d0645eb|0x3AA4bA80522DeAC3f9B33C5d2Cf0947712bE5b34|0xaf28DF958115BF8D6Fe8c555436fA62e56af4f83|0x7717299f62b51918e37fc5e6766371e61dd7916d|0x680c5913866a960A500fb1a865fb2d577d17f183|0x64CDD4960508Fc50d402B129fB3f6Eb069B4d4d1|0x08247183632937670B262D9425914A2cc14CA7A5|0x113042DbfbcF79229d26FB7702751CFe0088954B|0x7a35234Edf8d37cB1b0674E73A8E84fb9e10D329,plot,143,8,3 Transaction Field,873,Satoshi,Satoshi,0,556,0,0
+5291,5307, , ,566,0x2d891ed45c4c3eab978513df4b92a35cf131d2e2,,plot,79,11,31 Gas Price Lane,809,Satoshi,Satoshi,0,0,0,0
+5292,5308, , ,661,0x9293c35d6e1524609b7221a1c9a8d52dc81ba62c,,plot,83,17,7 Mainnet Bypass,832,Satoshi,Satoshi,0,4,0,0
+5293,5309,ME Star Trek Venus,Agent By ME Designed by SK,1961,0x2e4c3fdf26fc81aba5da64978f170b484d94172e,0x5FC9bb884495fcCC780b840367560E8815D09C08|0x5E86f18d50597a0c75dE91972Fc8261b46749FAD|0x7a35234Edf8d37cB1b0674E73A8E84fb9e10D329|0x113042DbfbcF79229d26FB7702751CFe0088954B|0x08247183632937670B262D9425914A2cc14CA7A5|0x64CDD4960508Fc50d402B129fB3f6Eb069B4d4d1|0x680c5913866a960A500fb1a865fb2d577d17f183|0xaf28DF958115BF8D6Fe8c555436fA62e56af4f83|0x7717299f62b51918e37fc5e6766371e61dd7916d|0x3AA4bA80522DeAC3f9B33C5d2Cf0947712bE5b34|0xaf28DF958115BF8D6Fe8c555436fA62e56af4f83|0x7717299f62b51918e37fc5e6766371e61dd7916d|0x680c5913866a960A500fb1a865fb2d577d17f183|0x64CDD4960508Fc50d402B129fB3f6Eb069B4d4d1|0x08247183632937670B262D9425914A2cc14CA7A5|0x113042DbfbcF79229d26FB7702751CFe0088954B|0x7a35234Edf8d37cB1b0674E73A8E84fb9e10D329,plot,111,8,13 51 Attack Street,864,Satoshi,Satoshi,0,532,0,0
+5294,5310,Scoopy Center, ,1656,0x784b45146dde2232ceb7fb4007d07aac78f8acb6,0xf8bff350ad1c49081df4d4debabc33054ac046a7|0x16612F2301A2a55c4D37C8ea295Ba7cB4071CD19|0x20dA165deB81dBB042fE4A9d4808399eF2477c5d,plot,95,10,13 Signature Lane,711,Satoshi,Satoshi,0,50,0,0
+5295,5311, , ,1347,0x40a628d16be2ba6956f60402b17f52e8bfe32497,0xDf52f38C5ea0DEE250a7cC93dEa68EA8b8AaB094|0x01e0c7b70e0e05a06c7cc8deeb97fa03d6a77c9c|0x78067a3ac629fec549d296d0d019ca7e184e5a9b,plot,109,10,2 Hash Circus,710,Satoshi,Satoshi,0,7,0,0
+5296,5312,Atelier omi,welcome to omi's Atelier.,1880,0xc9d19a28b43c36b2498233d9cd0998a6ee3b4c54,,plot,107,8,13 FUD Fork,771,Satoshi,Satoshi,0,1,0,0
+5297,5313,ME Lost Temple,Built by ME / Designed by VM,2982,0xbc2a21a50d88e0a48b75c0a5516ae51bfa45ce6e,0x680c5913866a960A500fb1a865fb2d577d17f183|0x64CDD4960508Fc50d402B129fB3f6Eb069B4d4d1|0x08247183632937670B262D9425914A2cc14CA7A5|0x113042DbfbcF79229d26FB7702751CFe0088954B,plot,83,13,29 Bull Avenue,865,Satoshi,Satoshi,0,6,0,0
+5298,5314,CharityPops, ,1689,0x784b45146dde2232ceb7fb4007d07aac78f8acb6,0xf8bff350ad1c49081df4d4debabc33054ac046a7|0x0D79749E4c95B234c85480c8b467607D203CED02|0x20dA165deB81dBB042fE4A9d4808399eF2477c5d,plot,64,14,157 Mainnet Bypass,743,Satoshi,Satoshi,0,5,0,0
+5299,5315, , ,1343,0x40a628d16be2ba6956f60402b17f52e8bfe32497,0x01e0c7b70e0e05a06c7cc8deeb97fa03d6a77c9c,plot,64,12,2 Bid Price Branch,726,Satoshi,Satoshi,0,13,0,0
+5300,5316,The Holy Fool, ,2720,0x62f099a34f01d57c67a100851184bea0d48b45f6,,plot,129,15,19 FUD Fork,752,Satoshi,Satoshi,0,93,0,0
+5301,5317, , ,251,0x2d891ed45c4c3eab978513df4b92a35cf131d2e2,,plot,49,12,2 KYC Fork,824,Satoshi,Satoshi,0,0,0,0
+5302,5318,ME Lost Temple,Built by ME / Designed by VM,1763,0xbc2a21a50d88e0a48b75c0a5516ae51bfa45ce6e,0x680c5913866a960A500fb1a865fb2d577d17f183|0x64CDD4960508Fc50d402B129fB3f6Eb069B4d4d1|0x08247183632937670B262D9425914A2cc14CA7A5|0x113042DbfbcF79229d26FB7702751CFe0088954B,plot,215,8,3 DAO Close,859,Satoshi,Satoshi,0,34,0,0
+5303,5319, , ,578,0xd42d52b709829926531c64a32f2713b4dc8ea6f6,0xBf366AC0f44Da27e9bcE103329858e8758E09AB4|0x5B728D775AB6B5B9954CCdF8926C78a83f4A0087|0xAE1A641D4C0270B7A85959D6F6495a721DEB1Be7,plot,83,11,13 ICO Place,834,Satoshi,Satoshi,0,58,0,0
+5304,5320, , ,563,0x2d891ed45c4c3eab978513df4b92a35cf131d2e2,,plot,55,10,11 Signature Lane,702,Satoshi,Satoshi,0,0,0,0
+5305,5321, , ,1409,0x2d891ed45c4c3eab978513df4b92a35cf131d2e2,,plot,129,12,11 Resistance Circus,878,Satoshi,Satoshi,0,0,0,0
+5306,5322, , ,587,0x2d891ed45c4c3eab978513df4b92a35cf131d2e2,,plot,142,9,3 Winter Close,878,Satoshi,Satoshi,0,0,0,0
+5307,5323, , ,861,0x2d891ed45c4c3eab978513df4b92a35cf131d2e2,,plot,35,8,2 Mainnet Field,783,Satoshi,Satoshi,0,0,0,0
+5308,5324, , ,1432,0x62f099a34f01d57c67a100851184bea0d48b45f6,,plot,167,12,41 Gas Quadrant,677,Satoshi,Satoshi,0,20,0,0
+5309,5325, , ,1528,0x7fec057e463f9e3afcbc33750b0d6fa436e88a5f,,plot,34,17,2 Winter Street,880,Satoshi,Satoshi,0,28,0,0
+5310,5326, , ,784,0x080dc56f9a800e2a426f22098f4e65656e6a3e31,,plot,71,11,5 Altcoin Gardens,676,Satoshi,Satoshi,0,0,0,0
+5311,5327, , ,358,0x2d891ed45c4c3eab978513df4b92a35cf131d2e2,,plot,84,9,2 DAO Close,850,Satoshi,Satoshi,0,0,0,0
+5312,5328, , ,423,0xee620a0991d57f464aad452789a4564ba51245e8,,plot,71,8,3 Bounty Cross,848,Satoshi,Satoshi,0,0,0,0
+5313,5329, , ,463,0x40a628d16be2ba6956f60402b17f52e8bfe32497,,plot,119,9,7 Signature Field,687,Satoshi,Satoshi,0,0,0,0
+5314,5330,NFT Lions Marina - Satoshi, ,735,0xf25ad24b791e37e83f4dadfe212e0e9bb45a1f8b,,plot,41,13,5 Sharding Road,758,Satoshi,Satoshi,0,15,0,0
+5315,5331, , ,3220,0x82c86895041f069ead3d95cd00ff7bd665bb09d7,,plot,69,15,17 51 Attack Street,874,Satoshi,Satoshi,0,11,0,0
+5316,5332,NFT Lions Marina - Satoshi, ,1572,0xf25ad24b791e37e83f4dadfe212e0e9bb45a1f8b,,plot,143,17,3 Sharding Road,767,Satoshi,Satoshi,0,89,0,0
+5317,5333, , ,837,0x40a628d16be2ba6956f60402b17f52e8bfe32497,,plot,111,11,5 Signature Field,677,Satoshi,Satoshi,0,0,0,0
+5318,5334, , ,420,0xee620a0991d57f464aad452789a4564ba51245e8,,plot,80,8,5 Nonce Place,854,Satoshi,Satoshi,0,0,0,0
+5319,5335, , ,2233,0xc1575f0d1eccce82aa1ac374fce36163d98ed00f,0xb7d3a787a39f25457ca511dc3f0591b546f5e02f|0x39188fEaB56e9CfD99EA045a6c62Aa7b880a51a9|0x84A8BD0141905a76624313e59a9EA43b99e2057e,plot,80,16,19 Tokenomics Rise,737,Satoshi,Satoshi,0,35,0,0
+5320,5336,The Shilla Bee Hive, ,1500,0x6d2900f27d3b4d03832b5cfb3992427bb232d3c7,0x6d2900f27D3b4d03832b5cfb3992427BB232D3c7|0x09c7b90C32d5c028f468B494969d8249c1eeE184|0x6cff6019ee642d71fa81d45d029f541ff8b46f7e|0x7BD69d24a9B2f2ba32A0061309D767C4235e87Df|0x71cA7186485E429ff4d88c075C064fAee8c95761|0x385d375f287a17CDF87d2E669aA68f8DdB525d4E|0x4753037e9309e7b9B5B163B6A91C37af071CfbB1|0x0F398F8E611C5db4c0a60B0Db14ddd06DC0BE862|0xd81828436eb757475A6624D9250D08A60c6228C2|0xbCD50Ab8a34A450Cd355A01438054Cd0fd0ab6CA,plot,220,16,7 Altcoin Gardens,665,Satoshi,Satoshi,0,130,0,0
+5321,5337, , ,929,0x0563dbcd1b92e394edbcaa3373f214a0cb6a18a9,,plot,71,8,5 Mainnet Bypass,825,Satoshi,Satoshi,0,0,0,0
+5322,5338, , ,864,0x40a628d16be2ba6956f60402b17f52e8bfe32497,,plot,59,14,2 Testnet Square,696,Satoshi,Satoshi,0,0,0,0
+5323,5339, , ,1211,0xa73dc2f955bca7f3f2d39c0926583174aa1ef0b4,,plot,119,8,53 Gas Quadrant,688,Satoshi,Satoshi,0,0,0,0
+5324,5340, , ,1542,0x40a628d16be2ba6956f60402b17f52e8bfe32497,0x01e0c7b70e0e05a06c7cc8deeb97fa03d6a77c9c,plot,116,14,3 Bull Quadrant,718,Satoshi,Satoshi,0,8,0,0
+5325,5341,43 Gas Price Lane INEN,INspireENcrypt Tower,860,0xe4fe7da1a0f15a71e33856f56256c273e243f25b,,plot,17,15,43 Gas Price Lane,795,Satoshi,Satoshi,0,29,0,0
+5326,5342, , ,199,0x2e4c3fdf26fc81aba5da64978f170b484d94172e,0x5FC9bb884495fcCC780b840367560E8815D09C08|0x5E86f18d50597a0c75dE91972Fc8261b46749FAD|0x411e07616e24Fed46C647Ef3A6325D4c7d0645eb|0x3AA4bA80522DeAC3f9B33C5d2Cf0947712bE5b34|0xaf28DF958115BF8D6Fe8c555436fA62e56af4f83|0x7717299f62b51918e37fc5e6766371e61dd7916d|0x680c5913866a960A500fb1a865fb2d577d17f183|0x64CDD4960508Fc50d402B129fB3f6Eb069B4d4d1|0x08247183632937670B262D9425914A2cc14CA7A5|0x113042DbfbcF79229d26FB7702751CFe0088954B|0x7a35234Edf8d37cB1b0674E73A8E84fb9e10D329,plot,129,8,5 KYC Fork,820,Satoshi,Satoshi,0,9,0,0
+5327,5343, , ,1971,0x550e970e31a45b06df01a00b1c89a478d4d5e00a,0xb7d3a787a39f25457ca511dc3f0591b546f5e02f|0x5f8b9B4541Ecef965424f1dB923806aAD626Add2,plot,90,13,17 FUD Fork,758,Satoshi,Satoshi,0,92,0,0
+5328,5344,THE CROWD, ,2072,0xc93c7f71581dfeaab59bed908888dac5689f312a,0xb3d89CE6002e17812adb8F7E5D7ec6CD7CB84C75|0xD81DF4D3f230a6787c7253E4df70733c90eFdD5c,plot,125,13,3 Pool Fork,810,Satoshi,Satoshi,0,31,0,0
+5329,5345,,Agent by ME & Designed by SK,1766,0x21551f5166feaf8932526e4280c5b78e1ffeb4f7,0x06e09B64929d5f9279E2f94cb763d0D76E99f0d8|0x5FC9bb884495fcCC780b840367560E8815D09C08|0x5E86f18d50597a0c75dE91972Fc8261b46749FAD|0x411e07616e24Fed46C647Ef3A6325D4c7d0645eb,plot,95,12,17 Tokens Bypass,665,Satoshi,Satoshi,0,1,0,0
+5330,5346, ,Welcome to C.C.DAO,35202,0x0d504013ce4a7ac56622686bcca0da3653ceb11d,0xa9998d10c484694A6862937D908667C4fdD36712|0xDBC1457a83559d072653Da076a7519ad7a998fD3,plot,107,12,31 Bull Avenue,875,Satoshi,Satoshi,0,92,0,0
+5331,5347, , ,543,0x080dc56f9a800e2a426f22098f4e65656e6a3e31,,plot,89,8,7 Nonce Place,865,Satoshi,Satoshi,0,0,0,0
+5332,5348, , ,762,0x2d891ed45c4c3eab978513df4b92a35cf131d2e2,,plot,90,8,2 Winter Close,884,Satoshi,Satoshi,0,0,0,0
+5333,5349, , ,215,0x2d891ed45c4c3eab978513df4b92a35cf131d2e2,,plot,41,8,2 Wei Rise,845,Satoshi,Satoshi,0,0,0,0
+5334,5350, , ,1073,0x9293c35d6e1524609b7221a1c9a8d52dc81ba62c,,plot,223,10,3 Mainnet Bypass,836,Satoshi,Satoshi,0,0,0,0
+5335,5351,CharityPops, ,2439,0x784b45146dde2232ceb7fb4007d07aac78f8acb6,0x0d79749e4c95b234c85480c8b467607d203ced02|0x3c5406c0a7fa0089c5a2c2af57cd8021e30aaa8d|0xddeb57f951c4d4fe98a2c9f378967e7dbe95624a|0x1e00a3df27562c80216e34947f6d746cc06e47a6|0xfff52f7056f548d0caa625f52ef35c289404dd49|0xf8bff350ad1c49081df4d4debabc33054ac046a7|0x0D79749E4c95B234c85480c8b467607D203CED02|0x39ebe8d2eeda70f6a2701ff01e9ec07a29e4774a|0x20dA165deB81dBB042fE4A9d4808399eF2477c5d,plot,194,11,163 Mainnet Bypass,738,Satoshi,Satoshi,0,37,0,0
+5336,5352,NFT Lions - Satoshi, ,1558,0xf25ad24b791e37e83f4dadfe212e0e9bb45a1f8b,,plot,181,8,11 51 Attack Street,876,Satoshi,Satoshi,0,15,0,0
+5337,5353, , ,1529,0x41a2f513bb1433d306da5de5a537cca75ec9e073,0xea4a2793A2a43Db3f5823B675E08FdDc5734524c|0xaA8E079C420d8b950129b5A007bD4374673CAe65|0x24EA7Bd29891997715c407cb595873c4D9ecb5A8|0xCDcE1Aad15Cd0f0E6B43301881CB32238E042DD3|0x8cC73A4B134f539BfF05eE4DE8d3C2B686F4AE3e,plot,207,8,2 Block Reward Gardens,662,Satoshi,Satoshi,0,44,0,0
+5338,5354, , ,247,0x529b09ba2d4a6817c877f846ae47b1980d7e7f5e,,plot,29,9,5 Resistance Circus,892,Satoshi,Satoshi,0,11,0,0
+5339,5355, , ,723,0x2e4c3fdf26fc81aba5da64978f170b484d94172e,0x5FC9bb884495fcCC780b840367560E8815D09C08|0x5E86f18d50597a0c75dE91972Fc8261b46749FAD|0x411e07616e24Fed46C647Ef3A6325D4c7d0645eb,plot,111,8,167 Mainnet Bypass,727,Satoshi,Satoshi,0,7,0,0
+5340,5356,Satoshi 111m  17m , ,911,0xc5def245a621ea10edc4073002eb8354d65d414e,,plot,111,17,41 Gas Price Lane,805,Satoshi,Satoshi,0,0,0,0
+5341,5357,Best viewing platform,Agent by ME,760,0xbc2a21a50d88e0a48b75c0a5516ae51bfa45ce6e,0x06e09B64929d5f9279E2f94cb763d0D76E99f0d8,plot,79,9,19 Signature Lane,707,Satoshi,Satoshi,0,0,0,0
+5342,5358, , ,1114,0x2e4c3fdf26fc81aba5da64978f170b484d94172e,0x5FC9bb884495fcCC780b840367560E8815D09C08|0x5E86f18d50597a0c75dE91972Fc8261b46749FAD|0x411e07616e24Fed46C647Ef3A6325D4c7d0645eb,plot,125,9,2 Altcoin Quadrant,718,Satoshi,Satoshi,0,0,0,0
+5343,5359,., ,2157,0x1166eb4a91641367914501d2cddb168701130dfe,,plot,142,8,7 FUD Fork,780,Satoshi,Satoshi,0,544,0,0
+5344,5360, , ,777,0x2d891ed45c4c3eab978513df4b92a35cf131d2e2,,plot,59,8,47 Gas Quadrant,679,Satoshi,Satoshi,0,0,0,0
+5345,5361,0N1 Force,0N1 Force HQ in Cryptovoxels. Show off your strength  style  and spirit.  0N1 Force are 7 777 generative side-profile picture NFTs.   Visit 0N1Force.com.,3083,0xb4126067708ef50b5828a179941f66d60b032be8,,plot,131,10,2 DAG Road,778,Satoshi,Satoshi,0,47,0,0
+5346,5362,GXC Blockhouse, ,1240,0x240d9bb0954e64d2e237251561eca65718f6f713,0xB417c44eaF67fae2644f5c2cB517C150d705902B|0x01A23eba5023064d505dD45FbFA683a601C7685B|0xe7325073A66Ac1FD14C3625Daa4078B4cDc60B95|0x7338550A38D47DF34A813E73fAF9350cE52af42B|0x41A2F513BB1433d306da5DE5a537CCa75ec9e073|0xB0eef6392Da5b4a31310F1237092f8950d34df8b,plot,167,9,2 Altcoin Gardens,664,Satoshi,Satoshi,0,63,0,0
+5347,5363, , ,747,0x40a628d16be2ba6956f60402b17f52e8bfe32497,,plot,164,11,3 Signature Field,678,Satoshi,Satoshi,0,0,0,0
+5348,5364,MUZI Gallery,Welcome to MUZI Gallery!,2652,0x99e19c8cc0818340f11b1f687d08a2a2b78d7e22,0x41A2F513BB1433d306da5DE5a537CCa75ec9e073|0x0e21cDdC8eDb9Ba1d036A1D0884c255afFDeb20d|0xe7325073A66Ac1FD14C3625Daa4078B4cDc60B95,plot,155,9,2 POW Gardens,885,Satoshi,Satoshi,0,73,0,0
+5349,5365,OBEY GIANT, ,2861,0xca31e53aa808fe22bf0a0100d6b2fe5e12250cac,0xc93c7f71581dfeaab59bed908888dac5689f312a,plot,109,8,3 Fiat Rise,799,Satoshi,Satoshi,0,35,0,0
+5350,5366,NFT Lions Marina - Satoshi,Welcome to NFT Lions Marina  Here you will find a collection of NFT Lions along with some of my personal work. Father of #NFTLIONS  If you do not know my name yet I apologise I am working on that.   My name is Ricky O'Donnell you will be able to find me on Twitter and Instagram on the handle rickyodonnell79.  I have been in the world of Animation & Film for over 20 years and am the CEO of RJDM.com. A Cancer survivor and here to make friends all over the planet so my kids have friends all over the world.  Thank you for taking the time to visit one of my virtual properties please feel free to look around and maybe even purchase a piece of art.  KEEP SAFE  KEEP WELL & STAY AWESOME,1452,0xf25ad24b791e37e83f4dadfe212e0e9bb45a1f8b,,plot,77,17,7 Sharding Road,754,Satoshi,Satoshi,0,117,0,0
+5351,5367, , ,1469,0xe1bdff947510a8e9623cf7f3c6cf6fe5e37c16b8,,plot,89,12,7 51 Attack Street,873,Satoshi,Satoshi,0,18,0,0
+5352,5368, , ,2320,0xc1575f0d1eccce82aa1ac374fce36163d98ed00f,0xb7d3a787a39f25457ca511dc3f0591b546f5e02f|0x39188fEaB56e9CfD99EA045a6c62Aa7b880a51a9|0x84A8BD0141905a76624313e59a9EA43b99e2057e,plot,143,12,13 Tokenomics Rise,742,Satoshi,Satoshi,0,43,0,0
+5353,5369,ME Lost Temple,Built by ME / Designed by VM,3156,0xbc2a21a50d88e0a48b75c0a5516ae51bfa45ce6e,0x680c5913866a960A500fb1a865fb2d577d17f183|0x64CDD4960508Fc50d402B129fB3f6Eb069B4d4d1|0x08247183632937670B262D9425914A2cc14CA7A5|0x113042DbfbcF79229d26FB7702751CFe0088954B,plot,135,11,37 Bull Avenue,876,Satoshi,Satoshi,0,45,0,0
+5354,5370, , ,381,0x2d891ed45c4c3eab978513df4b92a35cf131d2e2,,plot,65,8,17 Signature Lane,697,Satoshi,Satoshi,0,0,0,0
+5355,5371,RYE'S TIME CAPSULE 🏴‍☠️,### RyeSocrates' time capsule created by his mother  bitpixi in the year 2020-2021.  ## To be opened as early as October  2033.,1439,0x5aaef3cc9c1fb5cb3e771f77979d08b3440f2674,0xb7d3a787a39f25457ca511dc3f0591b546f5e02f|0x2f2bd3c09c74572751a298c276b1018f39614fe3,plot,55,8,2 Mainnet Bypass,830,Satoshi,Satoshi,0,114,0,0
+5356,5372, , ,551,0x40a628d16be2ba6956f60402b17f52e8bfe32497,,plot,63,8,7 Bull Quadrant,693,Satoshi,Satoshi,0,0,0,0
+5357,5373, , ,473,0x799cd72d86a6aa46876c2689a13637cbe6ae89da,,plot,79,8,5 DAO Close,863,Satoshi,Satoshi,0,0,0,0
+5358,5374,RIvermenverse,河里人 RivermenNFT 是源自国建团队 Cthuwork&NA作品《Voxel版清明上河图》，基于区块链技术创作的新形式NFT集换式加密收藏艺术品。 《Voxel版清明上河图》是基于中国十大传世名画《清明上河图》长图卷，抽提精要再演绎的3D艺术作品。 website：https://rivermen.io/,1607,0x057ee17c467852f4df0946fdcac72359d11eb555,0x56859C3682Ed257DEDAb079D8Cb2b9E39e7FA000,plot,53,14,11 FUD Fork,770,Satoshi,Satoshi,0,7,0,0
+5359,5375, , ,612,0x40a628d16be2ba6956f60402b17f52e8bfe32497,,plot,47,11,2 Signature Field,672,Satoshi,Satoshi,0,0,0,0
+5360,5376, , ,1740,0x570ff649bb5ae8e032a4f9456aa1ad74cc3f3e8f,0x9d3F36be8462ff2468b9fbb2B44e52d49F1eC792,plot,71,8,3 Nonce Way,890,Satoshi,Satoshi,0,105,0,0
+5361,5378, , ,543,0x799cd72d86a6aa46876c2689a13637cbe6ae89da,,plot,63,8,7 DAO Close,873,Satoshi,Satoshi,0,0,0,0
+5362,5379,Satoshi Beach,Agent by ME,368,0xbc2a21a50d88e0a48b75c0a5516ae51bfa45ce6e,0x06e09B64929d5f9279E2f94cb763d0D76E99f0d8,plot,98,8,2 Bounty Cross,854,Satoshi,Satoshi,0,0,0,0
+5363,5380,THE CROWD,THE CROWD encompasses many many projects involving Sean Bonner and friends. This space will showcase various works  exhibitions and products as well as related events. Be sure to check the gallery spaces on all floors as they will rotate regularly.,3063,0xc93c7f71581dfeaab59bed908888dac5689f312a,0xb3d89CE6002e17812adb8F7E5D7ec6CD7CB84C75|0xD81DF4D3f230a6787c7253E4df70733c90eFdD5c,plot,97,14,2 Pool Fork,816,Satoshi,Satoshi,0,52,0,0
+5364,5381, , ,466,0xd1e0eb60bda1c098353d08a167b011ea8bcd38fa,,plot,179,15,3 KYC Fork,833,Satoshi,Satoshi,0,0,0,0
+5365,5382,,Agent by ME & Designed by SK,2472,0x21551f5166feaf8932526e4280c5b78e1ffeb4f7,0x06e09B64929d5f9279E2f94cb763d0D76E99f0d8|0x5FC9bb884495fcCC780b840367560E8815D09C08|0x5E86f18d50597a0c75dE91972Fc8261b46749FAD|0x411e07616e24Fed46C647Ef3A6325D4c7d0645eb,plot,47,8,5 Faucet Drive,659,Satoshi,Satoshi,0,103,0,0
+5366,5383, , ,843,0x2d891ed45c4c3eab978513df4b92a35cf131d2e2,,plot,65,8,53 Gas Price Lane,790,Satoshi,Satoshi,0,0,0,0
+5367,5384,NFZY, ,3118,0xa6c0f7bde119930fb919ed02f8155887ecf0d756,0xE03A8F31084E0999457ddC18de85e5F5819d4b5F|0x4ea324A72848F8A689110E41f891A512eF7BDA7b|0x6dfa20170603c53220cdd61ea8d7de9b7ed725ef,plot,107,12,5 Block Reward Gardens,671,Satoshi,Satoshi,0,251,0,0
+5368,5385, , ,668,0x2d891ed45c4c3eab978513df4b92a35cf131d2e2,,plot,89,13,2 Resistance Circus,894,Satoshi,Satoshi,0,0,0,0
+5369,5386, , ,1332,0x40a628d16be2ba6956f60402b17f52e8bfe32497,0x22D0dd987014f2e4F20E64425EC6051426F528D6,plot,207,17,5 Bull Quadrant,696,Satoshi,Satoshi,0,1,0,0
+5370,5387,,,1734,0xbc2a21a50d88e0a48b75c0a5516ae51bfa45ce6e,,plot,95,13,23 Tokenomics Rise,724,Satoshi,Satoshi,0,0,0,0
+5371,5388, , ,1186,0x12d5cae401268d459484eb4a00c55fa6acc73398,,plot,191,9,2 Arbitrage Landing,858,Satoshi,Satoshi,0,0,0,0
+5372,5389,NFT Lions Marina - Satoshi, ,1328,0xf25ad24b791e37e83f4dadfe212e0e9bb45a1f8b,,plot,79,8,11 Sharding Road,764,Satoshi,Satoshi,0,31,0,0
+5373,5390,PixaLyfe Community HUB, ,1952,0x7ca6b4645b71f874a35bec18f0e997e51d8d815c,0xc6b6d06cb653362388Fb381475707eA3A6F9bbf2,plot,116,12,2 Nonce Way,894,Satoshi,Satoshi,0,3,0,0
+5374,5391, ME Star Trek Mercury,Built by ME / Designed by VM,2744,0xbc2a21a50d88e0a48b75c0a5516ae51bfa45ce6e,0x3AA4bA80522DeAC3f9B33C5d2Cf0947712bE5b34|0xaf28DF958115BF8D6Fe8c555436fA62e56af4f83|0x7717299f62b51918e37fc5e6766371e61dd7916d|0x680c5913866a960A500fb1a865fb2d577d17f183|0x64CDD4960508Fc50d402B129fB3f6Eb069B4d4d1|0x08247183632937670B262D9425914A2cc14CA7A5|0x113042DbfbcF79229d26FB7702751CFe0088954B|0x7a35234Edf8d37cB1b0674E73A8E84fb9e10D329,plot,142,10,17 Double Spend Rise,890,Satoshi,Satoshi,0,746,0,0
+5375,5392,Best viewing platform,Agent by ME,1459,0xbc2a21a50d88e0a48b75c0a5516ae51bfa45ce6e,0x06e09B64929d5f9279E2f94cb763d0D76E99f0d8,plot,59,12,23 Signature Lane,705,Satoshi,Satoshi,0,0,0,0
+5376,5393, , ,217,0x2d891ed45c4c3eab978513df4b92a35cf131d2e2,,plot,63,8,11 KYC Fork,818,Satoshi,Satoshi,0,0,0,0
+5377,5394,Satoshi Beach,Agent by ME,312,0xbc2a21a50d88e0a48b75c0a5516ae51bfa45ce6e,0x06e09B64929d5f9279E2f94cb763d0D76E99f0d8,plot,53,8,2 Nonce Place,864,Satoshi,Satoshi,0,0,0,0
+5378,5395, , ,206,0x2d891ed45c4c3eab978513df4b92a35cf131d2e2,,plot,41,8,5 Wei Rise,855,Satoshi,Satoshi,0,0,0,0
+5379,5396,Elder House, ,885,0x7a44d904e5372f64db51436fcdf4024a8144c383,,plot,41,8,2 Bull Quadrant,713,Satoshi,Satoshi,0,0,0,0
+5380,5397, , ,1031,0x2d891ed45c4c3eab978513df4b92a35cf131d2e2,,plot,119,11,61 Gas Quadrant,683,Satoshi,Satoshi,0,0,0,0
+5381,5398, , ,2212,0x41a2f513bb1433d306da5de5a537cca75ec9e073,0xea4a2793A2a43Db3f5823B675E08FdDc5734524c|0x24EA7Bd29891997715c407cb595873c4D9ecb5A8|0xaA8E079C420d8b950129b5A007bD4374673CAe65|0xCDcE1Aad15Cd0f0E6B43301881CB32238E042DD3,plot,107,12,3 Block Reward Gardens,662,Satoshi,Satoshi,0,67,0,0
+5382,5399, ,Agent by ME,1160,0x997ed526a26b09416b3ec6a30b4e866377079018,0xB5bBe9240c621E90a0508B70B68fd41a761D6f8e|0x06e09B64929d5f9279E2f94cb763d0D76E99f0d8|0xBC2A21A50d88E0A48B75C0a5516ae51BFa45Ce6E,plot,90,11,7 Faucet Drive,655,Satoshi,Satoshi,0,127,0,0
+5383,5400, , ,1128,0x6cf879fbb0da9445550e69a4b993142bc2066726,0x94aa50fe3c1ad32b0419004eee4f278ca3908876|0xbe829b4904d3279678b632eb37d64bd5ba0a11ad|0x6b0a60ff5715a17123afa34927c1e299a15e73a9|0xf9117ae62fc43605b12b98c527bac262bb517461|0x899259C561BF60F41c8218db2450DCE25FBf3e87|0x3b3ac88fdfd33d8eb95d62d884ac552e46894887,plot,23,8,5 FUD Fork,775,Satoshi,Satoshi,0,78,0,0
+5384,5401, , ,1444,0x2d891ed45c4c3eab978513df4b92a35cf131d2e2,,plot,167,17,3 Altcoin Gardens,652,Satoshi,Satoshi,0,0,0,0
+5385,5402,OBEY GIANT, ,2585,0xca31e53aa808fe22bf0a0100d6b2fe5e12250cac,0xc93c7f71581dfeaab59bed908888dac5689f312a,plot,49,9,2 Fiat Rise,805,Satoshi,Satoshi,0,9,0,0
+5386,5403,PixaLyfe Community HUB, ,863,0x7ca6b4645b71f874a35bec18f0e997e51d8d815c,0xc6b6d06cb653362388Fb381475707eA3A6F9bbf2,plot,116,8,7 Resistance Circus,898,Satoshi,Satoshi,0,1,0,0
+5387,5404, , ,2467,0x2d891ed45c4c3eab978513df4b92a35cf131d2e2,,plot,29,10,29 Signature Lane,696,Satoshi,Satoshi,0,0,0,0
+5388,5405, , ,3793,0x6cef15e37392f13d0873dc18497ca8087c681e01,|0xf4fF19C30c98533fd6D3cEcF09b3d6802e470dD0,plot,95,15,17 Tokenomics Rise,728,Satoshi,Satoshi,0,76,0,0
+5389,5406,ME HQ,Built by ME / Designed by SK,2712,0xbc2a21a50d88e0a48b75c0a5516ae51bfa45ce6e,0x06e09B64929d5f9279E2f94cb763d0D76E99f0d8,plot,164,16,47 Gas Price Lane,800,Satoshi,Satoshi,0,492,0,0
+5390,5407,Satoshi Beach,Agent by ME,555,0xbc2a21a50d88e0a48b75c0a5516ae51bfa45ce6e,0x06e09B64929d5f9279E2f94cb763d0D76E99f0d8,plot,98,8,3 Nonce Place,872,Satoshi,Satoshi,0,0,0,0
+5391,5408, , ,1328,0x06e09b64929d5f9279e2f94cb763d0d76e99f0d8,0x1e820B5d8ec9712Aa493B8460B8A6e89DB88D60A,plot,103,12,2 51 Attack Street,760,Satoshi,Satoshi,0,0,0,0
+5392,5409,Street Art Social Club, ,3635,0x740b2ea9b6c4b895d0b04c762509c0ddebf5c610,,plot,168,9,2 FUD Fork,787,Satoshi,Satoshi,0,219,0,0
+5393,5410, , ,892,0x2e4c3fdf26fc81aba5da64978f170b484d94172e,0x5FC9bb884495fcCC780b840367560E8815D09C08|0x5E86f18d50597a0c75dE91972Fc8261b46749FAD|0x411e07616e24Fed46C647Ef3A6325D4c7d0645eb,plot,131,8,5 51 Attack Street,885,Satoshi,Satoshi,0,5,0,0
+5394,5411, , ,310,0x7351321fec0596c20de2b4f0ffc4b9125eb0df52,,plot,62,10,3 Wei Rise,849,Satoshi,Satoshi,0,0,0,0
+5395,5412, , ,1079,0x1faeffe0ef6020ce181e6ff14f3824cc114020cd,,plot,71,12,3 DAG Road,775,Satoshi,Satoshi,0,31,0,0
+5396,5413, , ,1536,0x2d891ed45c4c3eab978513df4b92a35cf131d2e2,,plot,54,12,11 Double Spend Rise,896,Satoshi,Satoshi,0,0,0,0
+5397,5414, , ,444,0x2d891ed45c4c3eab978513df4b92a35cf131d2e2,,plot,29,11,19 Double Spend Rise,903,Satoshi,Satoshi,0,0,0,0
+5398,5415,Vache Morte Gallery, ,1517,0x1a1136a351fb653df6af838442c9fdf44f2f42d8,0xD08F2E9fF48F5D24142CeBAF98655Db237028dD4,plot,69,12,7 Wei Rise,860,Satoshi,Satoshi,0,54,0,0
+5399,5417,Satoshi Beach,Agent by ME,849,0xbc2a21a50d88e0a48b75c0a5516ae51bfa45ce6e,0x06e09B64929d5f9279E2f94cb763d0D76E99f0d8,plot,62,9,2 51 Attack Street,882,Satoshi,Satoshi,0,29,0,0
+5400,5418, , ,1432,0x2d891ed45c4c3eab978513df4b92a35cf131d2e2,,plot,97,9,59 Gas Quadrant,667,Satoshi,Satoshi,0,0,0,0
+5401,5419,,Agent by ME & Designed by SK,1889,0x21551f5166feaf8932526e4280c5b78e1ffeb4f7,0x06e09B64929d5f9279E2f94cb763d0D76E99f0d8|0x5FC9bb884495fcCC780b840367560E8815D09C08|0x5E86f18d50597a0c75dE91972Fc8261b46749FAD|0x411e07616e24Fed46C647Ef3A6325D4c7d0645eb,plot,63,9,2 Faucet Drive,648,Satoshi,Satoshi,0,0,0,0
+5402,5420, , ,364,0x2e4c3fdf26fc81aba5da64978f170b484d94172e,0x5FC9bb884495fcCC780b840367560E8815D09C08|0x5E86f18d50597a0c75dE91972Fc8261b46749FAD|0x411e07616e24Fed46C647Ef3A6325D4c7d0645eb,plot,129,9,7 KYC Fork,829,Satoshi,Satoshi,0,9,0,0
+5403,5421, , ,3834,0x47afc628f4c40a778316128ca3026c5e2f79cb3d,0x4fA7Fc217d2Da64b617eED770286fCC48BaF4022,plot,71,11,71 Gas Quadrant,681,Satoshi,Satoshi,0,755,0,0
+5404,5422, , ,1085,0x41a2f513bb1433d306da5de5a537cca75ec9e073,0xea4a2793A2a43Db3f5823B675E08FdDc5734524c|0x24EA7Bd29891997715c407cb595873c4D9ecb5A8|0xaA8E079C420d8b950129b5A007bD4374673CAe65|0xCDcE1Aad15Cd0f0E6B43301881CB32238E042DD3,plot,71,8,7 Block Reward Gardens,659,Satoshi,Satoshi,0,23,0,0
+5405,5423,Chaim Investment Advisors,Financial Education and learning space of Chaim Investment Advisors.,911,0x94a91ef7380eee29a2fec51821717c2ec0f0da29,,plot,103,10,3 Resistance Circus,903,Satoshi,Satoshi,0,50,0,0
+5406,5424, , ,728,0xf9b0e05c931621d29eb2e992d43662e8a4991725,,plot,35,17,61 Gas Price Lane,787,Satoshi,Satoshi,0,10,0,0
+5407,5425,ARTJEDI's EXHIBITION SPACE , ,1383,0x77037050bb27ae8f09118a0c480224d897589c65,0xb135b48e52f2d34b51e7dedefde2c54cef95cf98,plot,103,17,7 Tokenomics Rise,754,Satoshi,Satoshi,0,98,0,0
+5408,5426, , ,1046,0x080dc56f9a800e2a426f22098f4e65656e6a3e31,,plot,90,11,5 POW Street,651,Satoshi,Satoshi,0,0,0,0
+5409,5427,ME HQ,Built by ME / Designed by SK,2093,0xbc2a21a50d88e0a48b75c0a5516ae51bfa45ce6e,0x06e09B64929d5f9279E2f94cb763d0D76E99f0d8,plot,76,9,17 KYC Fork,814,Satoshi,Satoshi,0,136,0,0
+5410,5428,Haolinju Restaurant,Designed by SK / Agent by ME,1549,0x73dfb4ba8fff9a975a28ff169157c7b71b9574ae,0x06e09B64929d5f9279E2f94cb763d0D76E99f0d8|0xAdD9A18c69a363fa7c57596baE702B5eb8eCb4f6|0xBC2A21A50d88E0A48B75C0a5516ae51BFa45Ce6E,plot,83,9,3 Faucet Drive,644,Satoshi,Satoshi,0,147,0,0
+5411,5429, , ,909,0x2d891ed45c4c3eab978513df4b92a35cf131d2e2,,plot,49,12,13 Double Spend Rise,906,Satoshi,Satoshi,0,0,0,0
+5412,5430,ARTJEDI's POWERHOUSE of IMPACT, ,1585,0x77037050bb27ae8f09118a0c480224d897589c65,0x50E05Fa93C604b02F7c4D4B0Aa328287b1545650,plot,107,8,11 Tokenomics Rise,735,Satoshi,Satoshi,0,80,0,0
+5413,5431, , ,14,0x2d891ed45c4c3eab978513df4b92a35cf131d2e2,,plot,103,17,3 Smart Contract Crescent,907,Satoshi,Satoshi,0,0,0,0
+5414,5432,ME Panda Gallery,Agent by ME,2281,0xe1bdff947510a8e9623cf7f3c6cf6fe5e37c16b8,0x06e09B64929d5f9279E2f94cb763d0D76E99f0d8|0xe7325073A66Ac1FD14C3625Daa4078B4cDc60B95|0x7338550A38D47DF34A813E73fAF9350cE52af42B|0x41A2F513BB1433d306da5DE5a537CCa75ec9e073|0x5bF834Ed10a0E980DA72bd9A47df62E9dC61610f,plot,98,11,3 Infura Field,712,Satoshi,Satoshi,0,25,0,0
+5415,5433, , ,745,0x2d891ed45c4c3eab978513df4b92a35cf131d2e2,,plot,89,10,11 Wei Rise,856,Satoshi,Satoshi,0,0,0,0
+5416,5434,Crypto Stone, ,2793,0x7a44d904e5372f64db51436fcdf4024a8144c383,0xB89bCF31f3A2834f7D2B1aFa6A0ce8aB4342Ac32|0x50265991A1D83B0E065812d6B53e4cb6850Ed4bE|0x45b86a477b2E7333AFD6Ced4499198911F35739c,plot,125,13,5 Double Spend Rise,898,Satoshi,Satoshi,0,46,0,0
+5417,5435, , ,656,0x2e4c3fdf26fc81aba5da64978f170b484d94172e,0x5FC9bb884495fcCC780b840367560E8815D09C08|0x5E86f18d50597a0c75dE91972Fc8261b46749FAD|0x411e07616e24Fed46C647Ef3A6325D4c7d0645eb,plot,98,8,3 51 Attack Street,891,Satoshi,Satoshi,0,4,0,0
+5418,5436,ME HQ,Built by ME / Designed by SK,1294,0xbc2a21a50d88e0a48b75c0a5516ae51bfa45ce6e,0x06e09B64929d5f9279E2f94cb763d0D76E99f0d8|0xAdD9A18c69a363fa7c57596baE702B5eb8eCb4f6,plot,79,8,59 Gas Price Lane,796,Satoshi,Satoshi,0,30,0,0
+5419,5437, , ,2103,0xabc9b3af7ba302c60049dc826fb2532b37504196,,plot,164,12,3 FUD Fork,773,Satoshi,Satoshi,0,0,0,0
+5420,5438, , ,1468,0xa20416801ac2eacf2372e825b4a90ef52490c2bb,,plot,125,11,67 Gas Quadrant,664,Satoshi,Satoshi,0,0,0,0
+5421,5439,Haolinju Restaurant,Designed by SK / Agent by ME,1833,0x73dfb4ba8fff9a975a28ff169157c7b71b9574ae,0x06e09B64929d5f9279E2f94cb763d0D76E99f0d8|0xAdD9A18c69a363fa7c57596baE702B5eb8eCb4f6|0xBC2A21A50d88E0A48B75C0a5516ae51BFa45Ce6E,plot,71,10,2 POW Street,641,Satoshi,Satoshi,0,200,0,0
+5422,5440,ME Panda Gallery,Agent by ME,3053,0xe1bdff947510a8e9623cf7f3c6cf6fe5e37c16b8,0x06e09B64929d5f9279E2f94cb763d0D76E99f0d8|0xe7325073A66Ac1FD14C3625Daa4078B4cDc60B95|0x7338550A38D47DF34A813E73fAF9350cE52af42B|0x41A2F513BB1433d306da5DE5a537CCa75ec9e073|0x5bF834Ed10a0E980DA72bd9A47df62E9dC61610f,plot,76,8,2 Infura Field,717,Satoshi,Satoshi,0,31,0,0
+5423,5441,Space Invasion, ,634,0x036403fbfe5e7349f09cb1b2275e4a652ea565d4,,plot,48,8,7 Tokenomics Quadrant,649,Satoshi,Satoshi,0,31,0,0
+5424,5442, , ,1452,0xe1bdff947510a8e9623cf7f3c6cf6fe5e37c16b8,0x06e09B64929d5f9279E2f94cb763d0D76E99f0d8|0xAdD9A18c69a363fa7c57596baE702B5eb8eCb4f6,plot,51,13,13 KYC Fork,827,Satoshi,Satoshi,0,14,0,0
+5425,5443, , ,680,0x2e4c3fdf26fc81aba5da64978f170b484d94172e,0x5FC9bb884495fcCC780b840367560E8815D09C08|0x5E86f18d50597a0c75dE91972Fc8261b46749FAD|0x411e07616e24Fed46C647Ef3A6325D4c7d0645eb,plot,104,8,2 Smart Contract Crescent,911,Satoshi,Satoshi,0,4,0,0
+5426,5444, , ,974,0x2d891ed45c4c3eab978513df4b92a35cf131d2e2,,plot,203,15,2 Hash Bypass,844,Satoshi,Satoshi,0,0,0,0
+5427,5445, , ,495,0xe1bdff947510a8e9623cf7f3c6cf6fe5e37c16b8,0x06e09B64929d5f9279E2f94cb763d0D76E99f0d8,plot,48,14,5 Tokenomics Rise,747,Satoshi,Satoshi,0,0,0,0
+5428,5446, , ,1023,0x2d891ed45c4c3eab978513df4b92a35cf131d2e2,,plot,119,11,11 Block Reward Gardens,652,Satoshi,Satoshi,0,0,0,0
+5429,5447,ME HQ,Built by ME / Designed by SK,1529,0xbc2a21a50d88e0a48b75c0a5516ae51bfa45ce6e,0x06e09B64929d5f9279E2f94cb763d0D76E99f0d8,plot,95,8,23 KYC Fork,806,Satoshi,Satoshi,0,23,0,0
+5430,5448, , ,856,0xabc9b3af7ba302c60049dc826fb2532b37504196,,plot,120,12,2 Tokenomics Rise,764,Satoshi,Satoshi,0,0,0,0
+5431,5449,EulerBeach,A beach front music gallery and performance center for EulerBeats fans and artists.,4662,0x204b3890832745afee898bf0e7236e32d6a57b96,0x65f1944DbE4420A23A75116EB35eD0b8aE088D4B|0xD1D2E0F64BD4Da4Ca4D6B64d104fEC0bD777AE6E|0xCBF0Fc044206cea3def49a8c52ff98D6011C185a,plot,194,11,3 POW Street,634,Satoshi,Satoshi,0,119,0,0
+5432,5450,Crypto Stone, ,2332,0x7a44d904e5372f64db51436fcdf4024a8144c383,0xB89bCF31f3A2834f7D2B1aFa6A0ce8aB4342Ac32|0x50265991A1D83B0E065812d6B53e4cb6850Ed4bE|0x45b86a477b2E7333AFD6Ced4499198911F35739c|0xB5bBe9240c621E90a0508B70B68fd41a761D6f8e,plot,167,8,3 Double Spend Rise,902,Satoshi,Satoshi,0,34,0,0
+5433,5452, , ,2046,0x2e4c3fdf26fc81aba5da64978f170b484d94172e,0x5FC9bb884495fcCC780b840367560E8815D09C08|0x5E86f18d50597a0c75dE91972Fc8261b46749FAD|0x411e07616e24Fed46C647Ef3A6325D4c7d0645eb,plot,134,11,2 Stale Crescent,914,Satoshi,Satoshi,0,4,0,0
+5434,5453, , ,1476,0x2d891ed45c4c3eab978513df4b92a35cf131d2e2,,plot,83,8,7 Double Spend Rise,912,Satoshi,Satoshi,0,0,0,0
+5435,5454,ME Lover's Garden,Built by ME / Designed by SK,2472,0xbc2a21a50d88e0a48b75c0a5516ae51bfa45ce6e,0x06e09B64929d5f9279E2f94cb763d0D76E99f0d8|0xB5bBe9240c621E90a0508B70B68fd41a761D6f8e,plot,101,16,3 Hash Bypass,842,Satoshi,Satoshi,0,21,0,0
+5436,5455, , ,439,0x9f0574a5f28779a1a682cfe4bbd090ee058d07aa,0x3c6156D036601e99ee5fA121561470e6cEe3b02e,plot,23,8,2 Stale Rise,839,Satoshi,Satoshi,0,0,0,0
+5437,5456,Satoshi  70 m2  13m Height, ,1459,0xdfaadb6648088bdb87255333c0543ba7a6532fb5,,plot,69,13,19 KYC Fork,821,Satoshi,Satoshi,0,0,0,0
+5438,5457, , ,437,0xa73dc2f955bca7f3f2d39c0926583174aa1ef0b4,,plot,39,8,5 Tokenomics Quadrant,643,Satoshi,Satoshi,0,0,0,0
+5439,5458, , ,574,0x37b988a8ffd386f24d2792ef4fc2d50c8242a1c3,0x4fA7Fc217d2Da64b617eED770286fCC48BaF4022,plot,39,10,13 Block Reward Gardens,650,Satoshi,Satoshi,0,229,0,0
+5440,5459, , ,843,0x34231a6b9a27dbf7295989952673b34c405bdb13,,plot,39,15,3 Pump Field,736,Satoshi,Satoshi,0,0,0,0
+5441,5460, , ,447,0xe1bdff947510a8e9623cf7f3c6cf6fe5e37c16b8,0x06e09B64929d5f9279E2f94cb763d0D76E99f0d8,plot,118,8,3 Tokenomics Rise,751,Satoshi,Satoshi,0,0,0,0
+5442,5461,K24 Ventures,Designed by SK / Agent by ME,1143,0x73dfb4ba8fff9a975a28ff169157c7b71b9574ae,0x06e09B64929d5f9279E2f94cb763d0D76E99f0d8|0x9caFF816232fed741896a4e2eA1899002220065d,plot,104,13,3 Tokenomics Quadrant,631,Satoshi,Satoshi,0,0,0,0
+5443,5462, , ,606,0xa73dc2f955bca7f3f2d39c0926583174aa1ef0b4,,plot,87,9,2 Bag Square,639,Satoshi,Satoshi,0,0,0,0
+5444,5463,DoraBaby's Land, ,1925,0x76ddc5d9270f37cbaecd718a20392ce38c7a11a6,0xe7325073A66Ac1FD14C3625Daa4078B4cDc60B95|0x7338550A38D47DF34A813E73fAF9350cE52af42B|0x41A2F513BB1433d306da5DE5a537CCa75ec9e073|0xD67c34169b372d5B3932c548a940D4Ea74Fe7aF5|0xF63359537515529B7D19b6939DC46F96d16b8910|0xAf35B0d7ae49b4d6593E568cb755359A007B725D,plot,195,8,2 Bear Lane,826,Satoshi,Satoshi,0,51,0,0
+5445,5464,Bored Mummy Waking Up Galleria,Bored Mummy Waking Up NFT Gallery Launch Date 8/8 ,12318,0x71649d768128dfc64734cb58713e972e045421dc,0xfF18c05805F4c17f1febcF348Fed04F8204DA2fd|0x37ED6e5D9952BaEF7058c4c51f4091E7214Cb5af,plot,83,17,3 Stale Crescent,923,Satoshi,Satoshi,0,234,0,0
+5446,5465, , ,1676,0x080dc56f9a800e2a426f22098f4e65656e6a3e31,,plot,119,8,2 Double Spend Rise,918,Satoshi,Satoshi,0,0,0,0
+5447,5467,ME Lover's Garden,Built by ME / Designed by SK,6549,0xbc2a21a50d88e0a48b75c0a5516ae51bfa45ce6e,0x06e09B64929d5f9279E2f94cb763d0D76E99f0d8|0xB5bBe9240c621E90a0508B70B68fd41a761D6f8e,plot,87,13,3 Stale Rise,847,Satoshi,Satoshi,0,104,0,0
+5448,5468, , ,892,0xa73dc2f955bca7f3f2d39c0926583174aa1ef0b4,,plot,64,9,2 Tokenomics Quadrant,628,Satoshi,Satoshi,0,0,0,0
+5449,5469, , ,512,0xe1bdff947510a8e9623cf7f3c6cf6fe5e37c16b8,0x06e09B64929d5f9279E2f94cb763d0D76E99f0d8,plot,159,10,2 Pump Field,741,Satoshi,Satoshi,0,2,0,0
+5450,5470,Bored Mummy Waking Up Galleria,8 888 Unique Bored Mummy NFT space for Bored Mummy Family💕,9941,0x3088245c03a47fa124af9990b87c9f6df9c27e67,0x71649d768128DfC64734CB58713e972e045421Dc|0x37ED6e5D9952BaEF7058c4c51f4091E7214Cb5af|0xfF18c05805F4c17f1febcF348Fed04F8204DA2fd,plot,167,8,2 Blockchain Fork,927,Satoshi,Satoshi,0,373,0,0
+5451,5471,🐼 （Ting Song Museum）, ,2777,0xb8220a035997d105084771439ec5f5a75a8829ee,0x41A2F513BB1433d306da5DE5a537CCa75ec9e073|0x99E19c8CC0818340F11B1F687d08a2A2B78d7e22|0x0e21cDdC8eDb9Ba1d036A1D0884c255afFDeb20d|0xe7325073A66Ac1FD14C3625Daa4078B4cDc60B95|0xD67c34169b372d5B3932c548a940D4Ea74Fe7aF5,plot,142,8,2 Fiat Street,623,Satoshi,Satoshi,0,94,0,0
+5452,5473,ME Lover's Garden,Built by ME / Designed by SK,7488,0xbc2a21a50d88e0a48b75c0a5516ae51bfa45ce6e,0x06e09B64929d5f9279E2f94cb763d0D76E99f0d8|0xB5bBe9240c621E90a0508B70B68fd41a761D6f8e,plot,87,10,3 Bear Lane,843,Satoshi,Satoshi,0,69,0,0
+5453,5482, , ,319,0x2d891ed45c4c3eab978513df4b92a35cf131d2e2,,plot,79,15,71 Vittorio Ave,948,Miami,Miami,0,0,0,0
+5454,5483, , ,247,0x2d891ed45c4c3eab978513df4b92a35cf131d2e2,,plot,101,13,61 Vittorio Ave,946,Miami,Miami,0,0,0,0
+5455,5484, , ,441,0x2d891ed45c4c3eab978513df4b92a35cf131d2e2,,plot,181,9,67 Vittorio Ave,931,Miami,Miami,0,0,0,0
+5456,5485, , ,353,0x2d891ed45c4c3eab978513df4b92a35cf131d2e2,,plot,233,8,59 Vittorio Ave,929,Miami,Miami,0,0,0,0
+5457,5486, , ,294,0x2e4c3fdf26fc81aba5da64978f170b484d94172e,0x5FC9bb884495fcCC780b840367560E8815D09C08|0x5E86f18d50597a0c75dE91972Fc8261b46749FAD|0x411e07616e24Fed46C647Ef3A6325D4c7d0645eb,plot,191,8,37 Vista Ln,953,Miami,Miami,0,8,0,0
+5458,5487,,Built by ME / Designed by SC,547,0xbc2a21a50d88e0a48b75c0a5516ae51bfa45ce6e,0x06e09B64929d5f9279E2f94cb763d0D76E99f0d8|0x1e820B5d8ec9712Aa493B8460B8A6e89DB88D60A|0xB5bBe9240c621E90a0508B70B68fd41a761D6f8e|0xBC2A21A50d88E0A48B75C0a5516ae51BFa45Ce6E|0x9caFF816232fed741896a4e2eA1899002220065d,plot,254,15,31 Vista Ln,952,Miami,Miami,0,0,0,0
+5459,5488,#NFTLIONS - MIAMI, ,1010,0xf25ad24b791e37e83f4dadfe212e0e9bb45a1f8b,,plot,179,13,2 Vista Ct,919,Miami,Miami,0,181,0,0
+5460,5489, , ,590,0xf25ad24b791e37e83f4dadfe212e0e9bb45a1f8b,,plot,69,9,3 Vista Ct,920,Miami,Miami,0,26,0,0
+5461,5490, , ,360,0x080dc56f9a800e2a426f22098f4e65656e6a3e31,,plot,168,8,73 Vittorio Ave,933,Miami,Miami,0,0,0,0
+5462,5491, , ,136,0x9f7b6411607304cf2f1ed58ca82f96490d30dd84,,plot,29,8,53 Vittorio Ave,935,Miami,Miami,0,0,0,0
+5463,5492, , ,207,0x2d891ed45c4c3eab978513df4b92a35cf131d2e2,,plot,95,8,47 Vittorio Ave,945,Miami,Miami,0,0,0,0
+5464,5493, , ,451,0xdc8bbacac5142a91637c4ebbdf33946bfb48bc50,,plot,89,8,29 Vista Ln,969,Miami,Miami,0,18,0,0
+5465,5494, , ,326,0x2fec5d8835b39f314187dc1da933b273f32f18c3,0x2FEC5d8835b39f314187Dc1Da933B273F32f18c3,plot,77,12,79 Vittorio Ave,951,Miami,Miami,0,11,0,0
+5466,5495, , ,302,0x84ab6aeda45c85b910c363a454c5c0e93d8691a2,,plot,97,9,2 Thomas Ave,922,Miami,Miami,0,1,0,0
+5467,5496,MVB, ,419,0x32ab4262df2c10ccc199f5f8e7332ed507ef3ea5,,plot,142,17,3 Turkey Run Terrace,957,Miami,Miami,0,131,0,0
+5468,5497,CHURCHILL'S , ,889,0xff22455eafae32f1680eacf9ebc962fd4f22b35d,,plot,48,16,5 Vista Ct,909,Miami,Miami,0,10,0,0
+5469,5498, , ,218,0xbdb4e903f78561d2989ea9b39fa67e568d55503d,,plot,69,16,5 Roberts Rd,961,Miami,Miami,0,1,0,0
+5470,5499, , ,286,0x2e4c3fdf26fc81aba5da64978f170b484d94172e,0x5FC9bb884495fcCC780b840367560E8815D09C08|0x5E86f18d50597a0c75dE91972Fc8261b46749FAD|0x411e07616e24Fed46C647Ef3A6325D4c7d0645eb,plot,134,8,23 Vista Ln,972,Miami,Miami,0,4,0,0
+5471,5500, , ,890,0xbb314b9ad7ca68399ebddf87b07e58f3ccc5a41a,0x3b97b6CbbfCfFf88Cf4a175e665C5715A3efE4F0,plot,76,10,2 Palm Ln,908,Miami,Miami,0,20,0,0
+5472,5501, , ,530,0x081e92f8b195999d71b8c88d042da75f8be8ed9f,0x3953E9D7067E49c593609894544D57c887A242eC,plot,224,17,2 Turkey Run Terrace,970,Miami,Miami,0,0,0,0
+5473,5502,GTK TAX LAWYERS | TAX ADVISORS | EXPERTS IN CRYPTOCURRENCY TAXATION,GTK Tax Lawyers | Tax Advisors an Accountants for Cryptocurrency  DeFi  NFT  Play-to-earn | Germany | Bonn | Brühl | Bornheim | Berlin | Hamburg | www.gtkr.de | www.gtkp.de | RA Martin Figatowski  LL.M. (Tax),453,0x469c33dd60bee4a8946a9cac61c93b16b23e9e62,,plot,89,10,43 Vittorio Ave,934,Miami,Miami,0,18,0,0
+5474,5503, , ,212,0x2e4c3fdf26fc81aba5da64978f170b484d94172e,0x5FC9bb884495fcCC780b840367560E8815D09C08|0x5E86f18d50597a0c75dE91972Fc8261b46749FAD|0x411e07616e24Fed46C647Ef3A6325D4c7d0645eb,plot,119,8,7 Treasure Trove Ln,971,Miami,Miami,0,4,0,0
+5475,5504,MKEA,Agent by ME,329,0xbc2a21a50d88e0a48b75c0a5516ae51bfa45ce6e,0x06e09B64929d5f9279E2f94cb763d0D76E99f0d8,plot,199,9,2 Palmetto Ave,920,Miami,Miami,0,0,0,0
+5476,5505, , ,263,0xe88540354a9565300d2e7109d7737508f4155a4d,,plot,167,8,41 Vittorio Ave,944,Miami,Miami,0,0,0,0
+5477,5506, , ,789,0x2e4c3fdf26fc81aba5da64978f170b484d94172e,0x5FC9bb884495fcCC780b840367560E8815D09C08|0x5E86f18d50597a0c75dE91972Fc8261b46749FAD|0x411e07616e24Fed46C647Ef3A6325D4c7d0645eb,plot,170,9,7 Vista Ct,898,Miami,Miami,0,6,0,0
+5478,5507, , ,530,0x081e92f8b195999d71b8c88d042da75f8be8ed9f,,plot,194,8,83 Vittorio Ave,935,Miami,Miami,0,0,0,0
+5479,5508,AIN Gallery Miami, ,528,0x7c8a9d9dde058cfa14ccd698390252627f80ef19,0x98f2c966c12513ea43ef211d8b1d9e8bb500dfee,plot,119,8,19 Vista Ln,982,Miami,Miami,0,74,0,0
+5480,5509,SCHWAB BEAUBOURG GALLERY,Physical art gallery based in Paris  35  rue Quincampoix 75004 PARIS  France https://www.galerieschwabbeaubourg.com/,761,0xbc5979a67284a85b4f1868043c7901b4f5a7534e,0x96DB33c5cbE2909E1580c0b2079d747768E958e8,plot,98,10,3 Thomas Ave,920,Miami,Miami,0,126,0,0
+5481,5510,MKEA,Agent by ME,506,0xbc2a21a50d88e0a48b75c0a5516ae51bfa45ce6e,0x06e09B64929d5f9279E2f94cb763d0D76E99f0d8,plot,199,10,11 Tennessee Rd,910,Miami,Miami,0,0,0,0
+5482,5511, , ,1486,0x080dc56f9a800e2a426f22098f4e65656e6a3e31,,plot,284,9,3 Talavera St,899,Miami,Miami,0,0,0,0
+5483,5512, , ,181,0x13816f65ba8195768e6825eb774fd3c6a05a0ac8,0x6b42E2D304b5719c460106d8cB0D3b76B4109b12,plot,149,8,3 Roberts Rd,960,Miami,Miami,0,0,0,0
+5484,5513, , ,182,0xba993c1fee51a4a937bb6a8b7b74cd8dffdca1a4,,plot,47,13,2 Rice St,984,Miami,Miami,0,0,0,0
+5485,5514, , ,865,0x2e4c3fdf26fc81aba5da64978f170b484d94172e,0x5FC9bb884495fcCC780b840367560E8815D09C08|0x5E86f18d50597a0c75dE91972Fc8261b46749FAD|0x411e07616e24Fed46C647Ef3A6325D4c7d0645eb,plot,179,12,11 Vista Ct,894,Miami,Miami,0,6,0,0
+5486,5515, , ,274,0x204a5dffc2c08e6bbd2ef15b5e44e271f846fbf8,,plot,99,8,5 Treasure Trove Ln,975,Miami,Miami,0,1,0,0
+5487,5516,Teleport Miami,Teleport to ME HQ and the whole CV Metaverse,573,0xbc2a21a50d88e0a48b75c0a5516ae51bfa45ce6e,0x06e09B64929d5f9279E2f94cb763d0D76E99f0d8,plot,237,9,89 Vittorio Ave,953,Miami,Miami,0,1,0,0
+5488,5517,SKIES MIAMI, ,122,0xba993c1fee51a4a937bb6a8b7b74cd8dffdca1a4,,plot,103,8,2 Tallahassee Rd,985,Miami,Miami,0,0,0,0
+5489,5518, , ,204,0x2e4c3fdf26fc81aba5da64978f170b484d94172e,0x5FC9bb884495fcCC780b840367560E8815D09C08|0x5E86f18d50597a0c75dE91972Fc8261b46749FAD|0x411e07616e24Fed46C647Ef3A6325D4c7d0645eb,plot,90,9,37 Vittorio Ave,926,Miami,Miami,0,4,0,0
+5490,5519,GEMZ HQ,GEMZ BABY GEMZ ,1727,0x85a19dd2ad0d1d2b25bb164810fad08cdc0b33d7,0x1E3C06381A11375AAeE09c0A368c81E950211EA7,plot,103,17,97 Vittorio Ave,938,Miami,Miami,0,257,0,0
+5491,5520, , ,585,0x2e4c3fdf26fc81aba5da64978f170b484d94172e,0x5FC9bb884495fcCC780b840367560E8815D09C08|0x5E86f18d50597a0c75dE91972Fc8261b46749FAD|0x411e07616e24Fed46C647Ef3A6325D4c7d0645eb,plot,186,8,3 Venetian Way,922,Miami,Miami,0,6,0,0
+5492,5521, , ,2473,0x7b5585f5d6c1bc085566bc7dad4a181cad553142,0xF7A504932F5DBaad1f62204eD7f189e727013263|0xb3D622E38014ec11F384ED434669ca16461a10d7,plot,143,8,2 Talavera St,904,Miami,Miami,0,0,0,0
+5493,5522,Miami  221m * 9m Height, ,490,0x8a19c4403d010e04b850f71298607ce13256fe76,,plot,220,9,13 Tennessee Rd,890,Miami,Miami,0,0,0,0
+5494,5523,WizarDAO HQ, ,287,0x7ca6b4645b71f874a35bec18f0e997e51d8d815c,0xc6b6d06cb653362388Fb381475707eA3A6F9bbf2,plot,191,14,3 Viera Ave,992,Miami,Miami,0,1,0,0
+5495,5524, , ,283,0x080dc56f9a800e2a426f22098f4e65656e6a3e31,,plot,271,8,61 Via Abitare Way,990,Miami,Miami,0,0,0,0
+5496,5525, , ,295,0x2d891ed45c4c3eab978513df4b92a35cf131d2e2,,plot,220,8,31 Vittorio Ave,943,Miami,Miami,0,0,0,0
+5497,5526, , ,279,0x080dc56f9a800e2a426f22098f4e65656e6a3e31,,plot,220,17,5 Turkey Run Terrace,974,Miami,Miami,0,0,0,0
+5498,5527,Club Neon,Club Neon by The Black Fractal  Night Club  Art Gallery and Retail Space,2295,0x429f13e4ec5e57c9ae2388c5020e372f73fe168a,0xD67c34169b372d5B3932c548a940D4Ea74Fe7aF5|0x4bd3d08bae19c45b3bce064bfec0d5865baf458a|0x6FE30cB188BeBA39b4516Af42CFaE189BC43Fb99|0xAbc9B3AF7ba302c60049Dc826fb2532b37504196,plot,215,12,61 Virginia St,882,Miami,Miami,0,294,0,0
+5499,5528,Benny Boy's Fuck Place, ,697,0x96eead4cf15be74b20f02c32bc2dbeb6494b5c17,,plot,89,8,2 Village Green Dr,885,Miami,Miami,0,6,0,0
+5500,5529, , ,564,0xb66c25d27fc323b12986861a443c0ab3554ebd34,,plot,95,13,53 Via Abitare Way,989,Miami,Miami,0,33,0,0
+5501,5530,MVG,Built by ME / Designed by SK,1012,0xbc2a21a50d88e0a48b75c0a5516ae51bfa45ce6e,0x06e09B64929d5f9279E2f94cb763d0D76E99f0d8|0x1e820B5d8ec9712Aa493B8460B8A6e89DB88D60A|0xB5bBe9240c621E90a0508B70B68fd41a761D6f8e|0xBC2A21A50d88E0A48B75C0a5516ae51BFa45Ce6E|0x9caFF816232fed741896a4e2eA1899002220065d,plot,152,11,101 Vittorio Ave,956,Miami,Miami,0,54,0,0
+5502,5531, , ,246,0xb476f5efb15c4fa42bd210550e87dc1cf8b51d1e,,plot,111,8,7 Viera Ave,996,Miami,Miami,0,15,0,0
+5503,5532, , ,342,0x3458fd8f327f270b32092cd406ed8ba97405d9f5,0xfe7d20712d3eceb6884cee123d9de9914a4aff6a,plot,155,14,5 Tennessee Rd,909,Miami,Miami,0,3,0,0
+5504,5533, , ,675,0x48d30af746bf65eba727719b60aff68febb0ae3c,,plot,289,17,2 Treasure Trove Ln,973,Miami,Miami,0,0,0,0
+5505,5534, , ,209,0x080dc56f9a800e2a426f22098f4e65656e6a3e31,,plot,116,8,2 Roberts Rd,960,Miami,Miami,0,0,0,0
+5506,5535,Miami  126m * 16m Height, ,1908,0x8a19c4403d010e04b850f71298607ce13256fe76,,plot,125,16,5 Village Green Dr,886,Miami,Miami,0,0,0,0
+5507,5536, , ,200,0x2e4c3fdf26fc81aba5da64978f170b484d94172e,0x5FC9bb884495fcCC780b840367560E8815D09C08|0x5E86f18d50597a0c75dE91972Fc8261b46749FAD|0x411e07616e24Fed46C647Ef3A6325D4c7d0645eb,plot,142,8,29 Vittorio Ave,926,Miami,Miami,0,4,0,0
+5508,5537,Alina Dreiman, ,861,0x59d2c715ab5beeca6649b8d4b5f45072edc37073,,plot,119,8,3 Treasure Trove Ln,988,Miami,Miami,0,1,0,0
+5509,5538, , ,284,0x2d891ed45c4c3eab978513df4b92a35cf131d2e2,,plot,107,8,7 Tennessee Rd,896,Miami,Miami,0,0,0,0
+5510,5539, , ,951,0x7b5585f5d6c1bc085566bc7dad4a181cad553142,0xF7A504932F5DBaad1f62204eD7f189e727013263,plot,167,8,7 Venetian Way,906,Miami,Miami,0,14,0,0
+5511,5540, , ,225,0x2d891ed45c4c3eab978513df4b92a35cf131d2e2,,plot,153,11,11 Viera Ave,997,Miami,Miami,0,0,0,0
+5512,5541, , ,357,0xd9d23db5632262033ad9f73ac8fbba8d76d00188,,plot,71,10,103 Vittorio Ave,945,Miami,Miami,0,6,0,0
+5513,5542,great view, ,866,0x081e92f8b195999d71b8c88d042da75f8be8ed9f,0xa9edda14477d46847206a30b676b1BFC9A0D886b,plot,116,16,53 Virginia St,881,Miami,Miami,0,18,0,0
+5514,5543,Gallery90,This is Gallery90: https://www.instagram.com/_gallery.90. ------>>>https://twitter.com/Gallery_90,2875,0xad3e8565fea8d59d48a874cd9d87eee4559ffc39,,plot,83,9,11 Village Green Dr,889,Miami,Miami,0,93,0,0
+5515,5544, , ,126,0xe2cf8924f929f2c280c55d1b89fc9ee9e59525ae,,plot,135,13,7 Turkey Run Terrace,976,Miami,Miami,0,0,0,0
+5516,5545, , ,280,0x28b8d4f7516a112e2e2fd462293a1c27cde327a7,,plot,116,9,2 Venetian Way,932,Miami,Miami,0,2,0,0
+5517,5546,Luna, ,331,0x0d0b3b531cdbb38f854613969d83334cd73dc7cb,0x1d6b509a0df53ce05c35ec07ede7f97e3c603c4a,plot,77,12,2 Tennessee Rd,909,Miami,Miami,0,5,0,0
+5518,5547,Open Your Mind, ,433,0x59d2c715ab5beeca6649b8d4b5f45072edc37073,,plot,71,8,43 Via Abitare Way,998,Miami,Miami,0,0,0,0
+5519,5548, , ,60,0x2d891ed45c4c3eab978513df4b92a35cf131d2e2,,plot,125,8,17 Viera Ave,995,Miami,Miami,0,0,0,0
+5520,5549, , ,262,0x081e92f8b195999d71b8c88d042da75f8be8ed9f,0xa2193Ee5868bCE89Cfd7150C7694D0F3b6eFb080|0xB605eD642b5D897d845c84b97ac804Ac764A977E,plot,107,14,2 Viera Ave,1012,Miami,Miami,0,20,0,0
+5521,5550, , ,331,0x2d891ed45c4c3eab978513df4b92a35cf131d2e2,,plot,203,14,41 Virginia St,879,Miami,Miami,0,0,0,0
+5522,5551,Gallery of Ten80,Visit to see the work and collection of Ten80,170,0x4f32a800978b09720f327334893bfef2e5db3f88,,plot,98,13,67 Via Abitare Way,1010,Miami,Miami,0,22,0,0
+5523,5552, ,QAO Museum,1454,0x2d75e425789af735081f6db184f0148349abac0b,0x6a5952F58D91E3c9A34b026428BE39cF0cB28E14|0xd2c9A9656c38D315139d8A47A261480ae84061be|0x5900A2c48e35336C74A52e82c8A9ccbBD8bd193C|0x72e799f0f64AF130740A765E45b6323Abf058B87,plot,179,14,3 Village Green Dr,871,Miami,Miami,0,82,0,0
+5524,5553, , ,373,0xe69e5c7816bb9e9575c96a7eddbffcba2a17c6b5,,plot,186,8,23 Vittorio Ave,942,Miami,Miami,0,2,0,0
+5525,5554, , ,307,0x2d891ed45c4c3eab978513df4b92a35cf131d2e2,,plot,64,14,67 Virginia St,867,Miami,Miami,0,0,0,0
+5526,5555, ,Welcome to Multiverse Play!,1274,0xd589a999b7f71365939bc2a96249e2b9ea315685,,plot,227,11,17 Village Green Dr,890,Miami,Miami,0,8,0,0
+5527,5556, , ,388,0x2d891ed45c4c3eab978513df4b92a35cf131d2e2,,plot,143,13,37 Via Abitare Way,987,Miami,Miami,0,0,0,0
+5528,5557,NOW THAT'S CLASS...,FOR SALE! ,292,0x3078f22015436d621062f7cc8334774eb5685e97,,plot,153,9,59 Via Abitare Way,1009,Miami,Miami,0,3,0,0
+5529,5558, , ,193,0x21551f5166feaf8932526e4280c5b78e1ffeb4f7,0x5FC9bb884495fcCC780b840367560E8815D09C08|0x5E86f18d50597a0c75dE91972Fc8261b46749FAD|0x411e07616e24Fed46C647Ef3A6325D4c7d0645eb,plot,143,8,5 Viera Ave,1013,Miami,Miami,0,8,0,0
+5530,5559,Aims Gallery,For sale,449,0x13816f65ba8195768e6825eb774fd3c6a05a0ac8,,plot,207,8,59 Virginia St,865,Miami,Miami,0,17,0,0
+5531,5560, , ,761,0x7a44d904e5372f64db51436fcdf4024a8144c383,,plot,223,12,107 Vittorio Ave,958,Miami,Miami,0,1,0,0
+5532,5561,POORSTUDIO, ,385,0xa287c992edcc454f3c1a4278b1b9149a991a7b12,0x178f2f1F1655dB83d9FB7a9037CD55817e28e121,plot,55,12,29 Trapp Ave,963,Miami,Miami,0,0,0,0
+5533,5562,Holograph Gallery, ,676,0x94a91ef7380eee29a2fec51821717c2ec0f0da29,0x3b97b6CbbfCfFf88Cf4a175e665C5715A3efE4F0,plot,152,14,3 Tennessee Rd,888,Miami,Miami,0,75,0,0
+5534,5563,UFO Docking Station,UFO Docking Station by The Black Fractal,645,0x081e92f8b195999d71b8c88d042da75f8be8ed9f,,plot,223,16,5 Venetian Way,914,Miami,Miami,0,119,0,0
+5535,5564, , ,345,0xd59e35bc7c5660ca88119d828672e31094686671,,plot,59,11,47 Virginia St,871,Miami,Miami,0,0,0,0
+5536,5565, , ,92,0x13816f65ba8195768e6825eb774fd3c6a05a0ac8,,plot,251,9,19 Viera Ave,996,Miami,Miami,0,2,0,0
+5537,5566, , ,211,0xc2bb6c36f36f14c3e6f93305cbfd64ed6665ccb9,,plot,47,8,47 Via Abitare Way,1008,Miami,Miami,0,0,0,0
+5538,5567, , ,398,0x7a44d904e5372f64db51436fcdf4024a8144c383,,plot,191,13,3 Trillo Ave,972,Miami,Miami,0,1,0,0
+5539,5568, , ,215,0x6d67e3d0ebf8bf1710e4158432c0e24392cea666,,plot,134,8,19 Vittorio Ave,929,Miami,Miami,0,0,0,0
+5540,5569, , ,455,0x21551f5166feaf8932526e4280c5b78e1ffeb4f7,0x5FC9bb884495fcCC780b840367560E8815D09C08|0x5E86f18d50597a0c75dE91972Fc8261b46749FAD|0x411e07616e24Fed46C647Ef3A6325D4c7d0645eb,plot,111,8,7 Village Green Dr,870,Miami,Miami,0,6,0,0
+5541,5570, , ,138,0x21551f5166feaf8932526e4280c5b78e1ffeb4f7,0x5FC9bb884495fcCC780b840367560E8815D09C08|0x5E86f18d50597a0c75dE91972Fc8261b46749FAD|0x411e07616e24Fed46C647Ef3A6325D4c7d0645eb,plot,127,10,29 Via Abitare Way,987,Miami,Miami,0,8,0,0
+5542,5571, , ,414,0xa0ab8eddf14a5174688e2eb1bdb69cdf377142c3,,plot,209,12,19 Tigertail Ave,915,Miami,Miami,0,1,0,0
+5543,5572, , ,128,0x5ec3f2498e544a9e94eb6aaee312e7bfd42374dd,,plot,87,8,2 Trillo Ave,987,Miami,Miami,0,0,0,0
+5544,5573, , ,331,0x093d87b2c0871e0d758a3fbcf5a387b7bdf642b4,,plot,47,15,43 Virginia St,870,Miami,Miami,0,16,0,0
+5545,5574, , ,269,0xf7a6574fb1757a348fa1a44e5cc95a9d8e091c52,,plot,71,14,41 Via Abitare Way,1008,Miami,Miami,0,0,0,0
+5546,5575, , ,478,0x2d891ed45c4c3eab978513df4b92a35cf131d2e2,,plot,135,9,17 Vittorio Ave,942,Miami,Miami,0,0,0,0
+5547,5576, , ,452,0x8ccf4f26c11aad085e356a6f6d46a09ec18b1e0c,,plot,215,9,13 Vista Ct,859,Miami,Miami,0,0,0,0
+5548,5577, , ,116,0x2d891ed45c4c3eab978513df4b92a35cf131d2e2,,plot,104,8,17 Vista Ln,1025,Miami,Miami,0,0,0,0
+5549,5578, , ,181,0x2d891ed45c4c3eab978513df4b92a35cf131d2e2,,plot,95,8,19 Trapp Ave,963,Miami,Miami,0,0,0,0
+5550,5579, , ,289,0xbc2a21a50d88e0a48b75c0a5516ae51bfa45ce6e,,plot,335,10,109 Vittorio Ave,939,Miami,Miami,0,0,0,0
+5551,5580, , ,183,0x2d891ed45c4c3eab978513df4b92a35cf131d2e2,,plot,80,12,29 Virginia St,879,Miami,Miami,0,0,0,0
+5552,5581, , ,260,0x1ff2875cd548eeae6d22f26bae2d72a50fd143c7,,plot,220,10,23 Trapp Ave,975,Miami,Miami,0,0,0,0
+5553,5582, , ,303,0xe1bdff947510a8e9623cf7f3c6cf6fe5e37c16b8,,plot,179,8,11 Venetian Way,899,Miami,Miami,0,0,0,0
+5554,5583, , ,591,0xe773382a7574de1c82b1f67099e680c043048708,0xbcd11037513c18cc56f22b1da6263d344a237b1a|0x7e97e648B6576187f1A4a03b194CBFD4eE76F543,plot,239,16,13 Viera Ave,1016,Miami,Miami,0,39,0,0
+5555,5584,skyfly.eth, ,281,0x7a832c86002323a5de3a317b3281eb88ec3b2c00,0xD95011d7A10aD34153E4C30054Ce5AF0Df21Efc3,plot,90,13,3 Tamiami Canal Rd,1026,Miami,Miami,0,181,0,0
+5556,5585, , ,178,0xbc2a21a50d88e0a48b75c0a5516ae51bfa45ce6e,,plot,104,17,2 Venera Ave,935,Miami,Miami,0,0,0,0
+5557,5586,Buddha Temple,discord LVC#1427,1073,0x5acfbbf0aa370f232e341bc0b1a40e996c960e07,,plot,255,11,13 Village Green Dr,870,Miami,Miami,0,101,0,0
+5558,5587, , ,138,0x2d891ed45c4c3eab978513df4b92a35cf131d2e2,,plot,125,11,29 Viera Ave,999,Miami,Miami,0,0,0,0
+5559,5588, , ,360,0xbc2a21a50d88e0a48b75c0a5516ae51bfa45ce6e,,plot,341,10,17 Tigertail Ave,892,Miami,Miami,0,0,0,0
+5560,5589, , ,340,0x2d891ed45c4c3eab978513df4b92a35cf131d2e2,,plot,153,11,13 Vista Ln,1025,Miami,Miami,0,0,0,0
+5561,5590, , ,179,0xbca1c6a1a36faed9a6744e72ca6a4525277fc2d6,0xcd293c6ed1d22c87e0f23d5036c002fc714d1ab8,plot,63,8,2 Royal Rd,862,Miami,Miami,0,12,0,0
+5562,5591, , ,157,0x2d891ed45c4c3eab978513df4b92a35cf131d2e2,,plot,65,14,17 Vista Ct,852,Miami,Miami,0,0,0,0
+5563,5592, , ,154,0x2d891ed45c4c3eab978513df4b92a35cf131d2e2,,plot,55,8,37 Virginia St,861,Miami,Miami,0,0,0,0
+5564,5593, , ,373,0x2d891ed45c4c3eab978513df4b92a35cf131d2e2,,plot,104,16,2 Orange St,1020,Miami,Miami,0,0,0,0
+5565,5594, , ,234,0x2d891ed45c4c3eab978513df4b92a35cf131d2e2,,plot,164,11,11 The Village Way,850,Miami,Miami,0,0,0,0
+5566,5595, , ,151,0x2d891ed45c4c3eab978513df4b92a35cf131d2e2,,plot,89,8,5 The Village Way,849,Miami,Miami,0,0,0,0
+5567,5596,DO ACADEMY, ,509,0x3f5e9475d9fbeb96220655e2c5df28b56d5559a2,0x2E963314B87163BCd906788aC13465a30F89c7a9|0x7f54C3B2FF72C167F647E514aA56338987bDd1f9,plot,103,15,2 Pheasant Ln,1024,Miami,Miami,0,0,0,0
+5568,5597,IVY GREEN,FOR SALE,148,0x13816f65ba8195768e6825eb774fd3c6a05a0ac8,,plot,74,8,23 Village Green Dr,894,Miami,Miami,0,2,0,0
+5569,5598, , ,156,0x13816f65ba8195768e6825eb774fd3c6a05a0ac8,,plot,95,8,5 Trillo Ave,989,Miami,Miami,0,5,0,0
+5570,5599, , ,85,0x13816f65ba8195768e6825eb774fd3c6a05a0ac8,,plot,79,11,113 Vittorio Ave,962,Miami,Miami,0,0,0,0
+5571,5600,Afrodroids Lab, ,482,0x5842d56659699c6990052e2a42b62c6d70692816,,plot,251,8,5 Venera Ave,918,Miami,Miami,0,3,0,0
+5572,5601, , ,189,0x2d891ed45c4c3eab978513df4b92a35cf131d2e2,,plot,209,10,31 Via Abitare Way,1007,Miami,Miami,0,0,0,0
+5573,5602,nextstation,nextstation ist der plan,340,0x4bdcf662c1d25bbc5622ddf25c96d4606c006777,,plot,79,14,11 Vittorio Ave,922,Miami,Miami,0,6,0,0
+5574,5603, , ,861,0x89ed233e387cdef852f0ea118e1aef83d51a980f,0xFedeA86Ebec8DDE40a2ddD1d156350C62C6697E4,plot,89,8,13 Vittorio Ave,942,Miami,Miami,0,164,0,0
+5575,5604, , ,214,0x2d891ed45c4c3eab978513df4b92a35cf131d2e2,,plot,233,9,2 The Village Way,848,Miami,Miami,0,0,0,0
+5576,5605, , ,363,0x7a832c86002323a5de3a317b3281eb88ec3b2c00,0x297233a7042541D8D3DB5227F75E2d8aBC1A3909,plot,159,13,19 Village Green Dr,873,Miami,Miami,0,0,0,0
+5577,5606, , ,238,0x13816f65ba8195768e6825eb774fd3c6a05a0ac8,,plot,153,8,31 Virginia St,861,Miami,Miami,0,0,0,0
+5578,5607, , ,354,0xdc8bbacac5142a91637c4ebbdf33946bfb48bc50,,plot,135,13,17 Trapp Ave,975,Miami,Miami,0,37,0,0
+5579,5608,$XONE Gallery,,240,0x15c52c9d1fcbea3cd0b6c48926f54772652efdca,,plot,83,8,23 Via Abitare Way,996,Miami,Miami,0,1,0,0
+5580,5609, , ,78,0x2d891ed45c4c3eab978513df4b92a35cf131d2e2,,plot,34,8,11 Tigertail Ave,915,Miami,Miami,0,0,0,0
+5581,5610, , ,349,0x2d891ed45c4c3eab978513df4b92a35cf131d2e2,,plot,161,12,23 Viera Ave,1019,Miami,Miami,0,0,0,0
+5582,5611, , ,215,0x13816f65ba8195768e6825eb774fd3c6a05a0ac8,,plot,195,8,7 Trillo Ave,973,Miami,Miami,0,0,0,0
+5583,5612, , ,324,0x0726f2ae54dcd68d09813c9951725b8e50d0ffc2,,plot,77,9,19 Vista Ct,849,Miami,Miami,0,0,0,0
+5584,5613, , ,260,0x7a832c86002323a5de3a317b3281eb88ec3b2c00,0x297233a7042541D8D3DB5227F75E2d8aBC1A3909,plot,134,8,2 Tamiami Canal Rd,1032,Miami,Miami,0,154,0,0
+5585,5614, , ,367,0xe64ddadbdbd11b21112107ac2d0cfb978bdacea7,,plot,149,17,19 Virginia St,878,Miami,Miami,0,3,0,0
+5586,5615, , ,207,0xbc2a21a50d88e0a48b75c0a5516ae51bfa45ce6e,,plot,287,8,37 Viera Ave,1000,Miami,Miami,0,0,0,0
+5587,5616, , ,242,0xe2e8d1bc8cc2afce8332f5cff5a36fb966805856,,plot,101,8,3 Utopia Ct,851,Miami,Miami,0,0,0,0
+5588,5617, , ,187,0x13ddf16f41f9a634eaca69be176773fe5c629c1e,0xFedeA86Ebec8DDE40a2ddD1d156350C62C6697E4,plot,76,8,13 Trapp Ave,964,Miami,Miami,0,1,0,0
+5589,5618, , ,153,0xbc2a21a50d88e0a48b75c0a5516ae51bfa45ce6e,,plot,132,8,13 Tigertail Ave,892,Miami,Miami,0,0,0,0
+5590,5619, , ,104,0x2d891ed45c4c3eab978513df4b92a35cf131d2e2,,plot,87,8,7 Vista Ln,1039,Miami,Miami,0,0,0,0
+5591,5620, , ,244,0x2d891ed45c4c3eab978513df4b92a35cf131d2e2,,plot,356,8,11 Vista Ln,1036,Miami,Miami,0,0,0,0
+5592,5621,HAXXX, ,469,0x338050301df259ab1aee79026e6e1bff7b10c899,,plot,149,8,11 Venera Ave,904,Miami,Miami,0,134,0,0
+5593,5622,Digital Sailor, ,270,0xf260c40170706292ee41294bca6a15d7ee214f25,,plot,71,8,17 Towerside Terrace,1037,Miami,Miami,0,24,0,0
+5594,5623,Zardoz Tower 3,"Showcasing the ""TOMORROW PEOPLE"" NFT collection by Hey Pablo!",251,0x5d0ed5eb34c3de684e6c720892201c11f11c7bb0,,plot,119,17,7 Utopia Ct,854,Miami,Miami,0,58,0,0
+5595,5624, ,여기 위쪽의 Visit을 클릭해 주세요!! [Visit](https://www.cryptovoxels.com/play?coords=N@1034E 73S 3U)  그러면 안에서 둘러볼 수 있습니다.!!  안녕하세요~ 아크인사이트의 랜드입니다.!!  각종 AMA  전시회  이벤트  등등 가능하며  관심 있으신 분들은 언제든 문의주세요~  [아크인사이트 페이지](https://linktr.ee/ArkInsight)  [아크인사이트 레퍼럴 혜택](https://linktr.ee/ArkSupport)    ,903,0xd96e09913ee3e3afafe0921e2baf973aac8483d9,,plot,269,13,11 Towerside Terrace,1027,Miami,Miami,0,498,0,0
+5596,5625,Paddy_Stash NFT Museuem,Paddy_Stash NFT Museum  Built by The Black Fractal,474,0x57115f7d04c16f3983802b7c5a2d5089a188d76a,0x2FEC5d8835b39f314187Dc1Da933B273F32f18c3,plot,233,10,7 Vittorio Ave,942,Miami,Miami,0,261,0,0
+5597,5626, , ,145,0x2d891ed45c4c3eab978513df4b92a35cf131d2e2,,plot,118,11,2 Tuttle Blvd,1038,Miami,Miami,0,0,0,0
+5598,5627, , ,190,0x2d891ed45c4c3eab978513df4b92a35cf131d2e2,,plot,139,10,2 Old Cutler Rd,1022,Miami,Miami,0,0,0,0
+5599,5628,$XONE Tower, ,238,0x15c52c9d1fcbea3cd0b6c48926f54772652efdca,,plot,41,17,17 Via Abitare Way,996,Miami,Miami,0,4,0,0
+5600,5629, , ,385,0x2b47c57a4c9fc1649b43500f4c0cda6cf29be278,,plot,164,9,31 Viera Ave,1021,Miami,Miami,0,0,0,0
+5601,5630,Derpie Sex Dungeon, ,129,0xeac4824eecc66901ef40309cb3a4939cff57ffb9,,plot,159,8,19 Via Abitare Way,1006,Miami,Miami,0,8,0,0
+5602,5631, , ,197,0x0328c8b74fc29943b1c6be6cba3f94119366e9b7,,plot,111,8,127 Vittorio Ave,964,Miami,Miami,0,18,0,0
+5603,5632, , ,251,0x6a414e78f9761dace8cc24b5f9fd4a0574b2ae78,,plot,159,14,131 Vittorio Ave,945,Miami,Miami,0,10,0,0
+5604,5633,The Philosopher's Gallery,A gallery on Cryptovoxels for The Philosopher  The Alchemist  DJ The Chef and their partners.,2072,0xe330dc28b47d73884ad88837aecfee1f49ad7e7b,0xa53f470c3b597803b25e02f75339e22173705254|0xe67d7b4befbc089902067e6ca4ba8b8093575bb8|0xe9956Cf72cC8E49d903478142DC8DADB4Ee328Ff,plot,89,15,11 Trapp Ave,975,Miami,Miami,0,267,0,0
+5605,5634, , ,194,0x2d891ed45c4c3eab978513df4b92a35cf131d2e2,,plot,175,8,23 Virginia St,863,Miami,Miami,0,0,0,0
+5606,5635,Sebhado's homestead, ,357,0x302b9dfc92da56a19477c891a7b95cb7e32a5a69,,plot,104,11,31 Village Green Dr,898,Miami,Miami,0,3,0,0
+5607,5636,pizza plaza,metaverse navigation station  easy exploration. In pizza plaza  you can easily find tourist destinations  so you don’t need to waste most of your time looking for attractions!,878,0xe92dedd00454bee1117c06036769943fbe60b5e7,0x4198d4aA9D9F87c9edF6f64202436CD95A4D1856,plot,103,9,7 The Village Way,837,Miami,Miami,0,14,0,0
+5608,5637, , ,134,0xcb7e9e305fa4afa4cf5b414120c560ad3ed75a53,,plot,62,8,5 Venetian Way S,1036,Miami,Miami,0,0,0,0
+5609,5638, , ,135,0x6e63a4caeccb4f341ee9c9175c9cc554bdb6d10b,,plot,83,8,5 Palmetto Ct,843,Miami,Miami,0,5,0,0
+5610,5639, , ,133,0xe1bdff947510a8e9623cf7f3c6cf6fe5e37c16b8,,plot,167,12,5 Vittorio Ave,926,Miami,Miami,0,0,0,0
+5611,5640,Shapes Casino & Gallery, ,570,0xc14482897ac3c8c2b80cf64b9cda9e84415c0069,,plot,83,12,23 Vista Ct,839,Miami,Miami,0,61,0,0
+5612,5641,siftware.com, ,510,0xe64ddadbdbd11b21112107ac2d0cfb978bdacea7,,plot,99,10,13 Virginia St,878,Miami,Miami,0,0,0,0
+5613,5642, , ,126,0xe1bdff947510a8e9623cf7f3c6cf6fe5e37c16b8,,plot,191,10,13 Utopia Ct,856,Miami,Miami,0,0,0,0
+5614,5643, , ,130,0xe1bdff947510a8e9623cf7f3c6cf6fe5e37c16b8,,plot,168,8,11 Trillo Ave,992,Miami,Miami,0,0,0,0
+5615,5644, , ,219,0x2bf034eccebc8cd60dab9c249b6c2996dcb7d8ec,,plot,41,13,2 Utopia Ct,841,Miami,Miami,0,0,0,0
+5616,5645, , ,76,0xe1bdff947510a8e9623cf7f3c6cf6fe5e37c16b8,,plot,153,8,7 Tigertail Ave,915,Miami,Miami,0,0,0,0
+5617,5646, , ,456,0x98199e7107451473e5af629e585cd20e5f2a75c0,,plot,139,11,13 Trillo Ave,976,Miami,Miami,0,6,0,0
+5618,5647, , ,296,0xb8bbfdc90365843f2937e73e9ddda5ef7132ef56,,plot,48,11,7 Trapp Ave,964,Miami,Miami,0,2,0,0
+5619,5648,【BCA】Metaopus.co,【BCA】Metaopus.co,384,0x081e92f8b195999d71b8c88d042da75f8be8ed9f,,plot,335,17,29 Village Green Dr,864,Miami,Miami,0,2,0,0
+5620,5649, , ,393,0xe1bdff947510a8e9623cf7f3c6cf6fe5e37c16b8,,plot,189,8,29 Vista Ct,828,Miami,Miami,0,0,0,0
+5621,5650, , ,235,0x88b503c81a4fb9c9c5464dd3c6835fc34b2cc85d,,plot,125,14,3 Palmetto Ct,843,Miami,Miami,0,3,0,0
+5622,5651,Temple of Thades,Gallery of the Descendants...  https://opensea.io/collection/descendants,391,0x195acaf2ccb5d388f4f5a03030ad765d74d94f3f,,plot,53,17,7 Venera Ave,917,Miami,Miami,0,63,0,0
+5623,5652, , ,107,0x2d891ed45c4c3eab978513df4b92a35cf131d2e2,,plot,179,8,7 Tuttle Blvd,1044,Miami,Miami,0,0,0,0
+5624,5653,DeathPunks Miami,on loan from WizardX for a build,580,0x44e9d011df8741be2493e99297e9ad67bb1aa85b,0xc454e2b4ebb3c74b2caf83e74067a8055b375e4e|0xFd5F6F62B0E3731266C136Fd8Ee84E3feb2D30FE|0x1a8a81651582F74b283A6f46BEc63394cd01572B,plot,179,8,11 Via Abitare Way,984,Miami,Miami,0,26,0,0
+5625,5654, , ,431,0x2d891ed45c4c3eab978513df4b92a35cf131d2e2,,plot,197,16,3 Venera Ave,930,Miami,Miami,0,0,0,0
+5626,5655, , ,145,0x2d891ed45c4c3eab978513df4b92a35cf131d2e2,,plot,239,17,19 Tower Rd,1016,Miami,Miami,0,0,0,0
+5627,5656, , ,349,0x581c529193f3d7bb2b496ba49c932ba67f71a4aa,,plot,55,9,5 Towerside Terrace,1036,Miami,Miami,0,29,0,0
+5628,5657,Map Art, ,1082,0x7b19b42564ad1c03625e8306cf20deea2f923a67,,plot,224,17,3 Tyler St,1032,Miami,Miami,0,46,0,0
+5629,5658,TRON  ECO HQ,Built by ME / Designed by SK,186,0xbc2a21a50d88e0a48b75c0a5516ae51bfa45ce6e,0x06e09B64929d5f9279E2f94cb763d0D76E99f0d8|0x1e820B5d8ec9712Aa493B8460B8A6e89DB88D60A|0x34231a6b9a27dBF7295989952673B34c405bDb13|0xB5bBe9240c621E90a0508B70B68fd41a761D6f8e|0x9caFF816232fed741896a4e2eA1899002220065d,plot,161,8,5 Vista Ln,1050,Miami,Miami,0,0,0,0
+5630,5659, , ,84,0x2d891ed45c4c3eab978513df4b92a35cf131d2e2,,plot,95,8,5 Utopia Ct,837,Miami,Miami,0,0,0,0
+5631,5660, , ,97,0xa490d754e9b06580c8113365de3f0bf8672b7b3e,,plot,220,8,47 Viera Ave,1005,Miami,Miami,0,1,0,0
+5632,5661, , ,296,0xe96decb942b8b5c6bd57f08f146fca12772cb1ef,0x2FEC5d8835b39f314187Dc1Da933B273F32f18c3,plot,107,9,5 Robinson St,847,Miami,Miami,0,0,0,0
+5633,5662, , ,217,0x2d891ed45c4c3eab978513df4b92a35cf131d2e2,,plot,87,9,17 Virginia St,863,Miami,Miami,0,0,0,0
+5634,5663, , ,54,0x3644c67ba7738046994b7134fd10ab9895504170,,plot,71,8,41 Viera Ave,1024,Miami,Miami,0,2,0,0
+5635,5664, , ,247,0x28bcc9e808e471aec71dd1da4a7a690858739b03,,plot,189,11,5 Tigertail Ave,901,Miami,Miami,0,0,0,0
+5636,5665, , ,216,0x2d891ed45c4c3eab978513df4b92a35cf131d2e2,,plot,95,9,43 Village Green Dr,902,Miami,Miami,0,0,0,0
+5637,5666,The Exhibit, ,81,0xeac4824eecc66901ef40309cb3a4939cff57ffb9,,plot,239,11,3 The Village Way,824,Miami,Miami,0,1,0,0
+5638,5667, , ,225,0x9755152494c54c681b932d23b94984551014a322,,plot,55,11,2 Towerside Terrace,1036,Miami,Miami,0,0,0,0
+5639,5668, , ,146,0x3185fad637cf50bae9ad59329abe9060ce2776e5,0x0513D5738e0D436C54Ac9f006edEf193f14bA337,plot,194,14,37 Village Green Dr,880,Miami,Miami,0,0,0,0
+5640,5669,156m², ,149,0xf3bc122e90fb9364fbc131f071cfe06ce0c7c7c0,,plot,155,9,13 Tuttle Blvd,1047,Miami,Miami,0,4,0,0
+5641,5670,MetaMirror, ,193,0xf875c1fa02e51b212d5060061fa75b806349db1f,0xd05a45876524783a8D02b04460B88B2B4fecf439,plot,90,8,3 Pierce St,890,Miami,Miami,0,4,0,0
+5642,5671, , ,94,0x2d891ed45c4c3eab978513df4b92a35cf131d2e2,,plot,120,9,11 Utopia Ct,840,Miami,Miami,0,0,0,0
+5643,5672,South Beach Yacht Club,Ocean drive #29,136,0xfbca8eae2484946e3e1c6956c7f27ce77c727536,,plot,287,8,137 Vittorio Ave,947,Miami,Miami,0,45,0,0
+5644,5673,32X32 Gallery,The 32X32 gallery.,713,0x44e9d011df8741be2493e99297e9ad67bb1aa85b,0xc454e2b4ebb3c74b2caf83e74067a8055b375e4e,plot,167,13,13 Via Abitare Way,1006,Miami,Miami,0,11,0,0
+5645,5674, , ,667,0xe1bdff947510a8e9623cf7f3c6cf6fe5e37c16b8,,plot,131,8,5 Trapp Ave,975,Miami,Miami,0,0,0,0
+5646,5675,Sneaky Vampires HQ 260 sqm x 16 mt height,260 sqm x 16mt height ,462,0xedd1f30d69898e4cb710cfb47c6114d31e6fed06,,plot,259,16,2 Ralph Renick Way,818,Miami,Miami,0,13,0,0
+5647,5676, , ,238,0xe085327c5ad2f77147f10973fed45fb19d734f7e,,plot,134,8,2 Vittorio Ave,942,Miami,Miami,0,1,0,0
+5648,5677,BT Convention Club,Built by ME / Designed by SK,340,0xbc2a21a50d88e0a48b75c0a5516ae51bfa45ce6e,0x06e09B64929d5f9279E2f94cb763d0D76E99f0d8|0x1e820B5d8ec9712Aa493B8460B8A6e89DB88D60A|0xB5bBe9240c621E90a0508B70B68fd41a761D6f8e|0xBC2A21A50d88E0A48B75C0a5516ae51BFa45Ce6E|0x9caFF816232fed741896a4e2eA1899002220065d,plot,314,9,3 Vista Ln,1056,Miami,Miami,0,181,0,0
+5649,5678,The PhotoMode Gallery, ,579,0x2a3cc4885a4c54cf691bda69097aa8557ad3dde4,,plot,89,14,2 Palmetto Ct,833,Miami,Miami,0,84,0,0
+5650,5679, , ,275,0xc842ce7214a14fa98186a010bcb43c7e99e4caf3,,plot,153,11,31 Vista Ct,821,Miami,Miami,0,0,0,0
+5651,5680, , ,494,0xe1bdff947510a8e9623cf7f3c6cf6fe5e37c16b8,,plot,155,9,7 Virginia St,878,Miami,Miami,0,0,0,0
+5652,5681,APENFT Art Museum,Built by ME / Designed by SK,234,0xbc2a21a50d88e0a48b75c0a5516ae51bfa45ce6e,0x06e09B64929d5f9279E2f94cb763d0D76E99f0d8|0x1e820B5d8ec9712Aa493B8460B8A6e89DB88D60A|0x34231a6b9a27dBF7295989952673B34c405bDb13|0xB5bBe9240c621E90a0508B70B68fd41a761D6f8e|0x9caFF816232fed741896a4e2eA1899002220065d,plot,227,8,13 Towerside Terrace,1049,Miami,Miami,0,5,0,0
+5653,5682, ,,463,0xbc2a21a50d88e0a48b75c0a5516ae51bfa45ce6e,,plot,299,16,3 Trapp Ave,951,Miami,Miami,0,0,0,0
+5654,5683, , ,178,0xc842ce7214a14fa98186a010bcb43c7e99e4caf3,,plot,139,9,2 Pennsuco Canal,823,Miami,Miami,0,0,0,0
+5655,5684,Boho Bones, ,883,0x8ce584fe9609fe2f0efd1a8b9b7fc4846c32e679,,plot,215,8,139 Vittorio Ave,968,Miami,Miami,0,59,0,0
+5656,5685, , ,67,0x1afbaf2fdfa201857140f09ef79dd568daa5ed97,,plot,131,8,17 Utopia Ct,842,Miami,Miami,0,0,0,0
+5657,5686, , ,223,0x081e92f8b195999d71b8c88d042da75f8be8ed9f,,plot,179,17,3 Robinson St,847,Miami,Miami,0,0,0,0
+5658,5687, , ,99,0x2fec5d8835b39f314187dc1da933b273f32f18c3,0x2FEC5d8835b39f314187Dc1Da933B273F32f18c3,plot,169,14,3 Vittorio Ave,921,Miami,Miami,0,0,0,0
+5659,5688,TRON  ECO HQ,Built by ME / Designed by SK,147,0xbc2a21a50d88e0a48b75c0a5516ae51bfa45ce6e,0x06e09B64929d5f9279E2f94cb763d0D76E99f0d8|0x1e820B5d8ec9712Aa493B8460B8A6e89DB88D60A|0x34231a6b9a27dBF7295989952673B34c405bDb13|0xB5bBe9240c621E90a0508B70B68fd41a761D6f8e|0x9caFF816232fed741896a4e2eA1899002220065d,plot,179,12,2 Vista Ln,1059,Miami,Miami,0,0,0,0
+5660,5689,BT Convention Club,Built by ME / Designed by SK,276,0xbc2a21a50d88e0a48b75c0a5516ae51bfa45ce6e,0x06e09B64929d5f9279E2f94cb763d0D76E99f0d8|0x1e820B5d8ec9712Aa493B8460B8A6e89DB88D60A|0x34231a6b9a27dBF7295989952673B34c405bDb13|0xB5bBe9240c621E90a0508B70B68fd41a761D6f8e|0x9caFF816232fed741896a4e2eA1899002220065d,plot,119,8,3 Tuttle Blvd,1059,Miami,Miami,0,82,0,0
+5661,5690,Art Gallery,,912,0x5e758f5967c46767253f0320b6a1d78a2d1476cb,0xff7918f8587e5c7289dccc51cbe3bf20057d4e45,plot,89,9,37 Vista Ct,819,Miami,Miami,0,11,0,0
+5662,5691,Boho Bones, ,533,0x8ce584fe9609fe2f0efd1a8b9b7fc4846c32e679,,plot,95,9,19 Trillo Ave,985,Miami,Miami,0,13,0,0
+5663,5692, , ,167,0x222664a5ce6fe351b4b8153495d32fd23e9b38aa,,plot,191,9,43 Viera Ave,1025,Miami,Miami,0,1,0,0
+5664,5693, , ,314,0xb67d58cffae63a95fb380b952e65b1a8eac44d0b,0x3a1dD65d33a01765BF5F87C93FFEe91C895c231E,plot,80,9,2 Tyler St,1050,Miami,Miami,0,3,0,0
+5665,5694, , ,117,0x2d891ed45c4c3eab978513df4b92a35cf131d2e2,,plot,131,16,2 Urbino Ave,853,Miami,Miami,0,0,0,0
+5666,5695, , ,42,0x2d891ed45c4c3eab978513df4b92a35cf131d2e2,,plot,59,8,2 Tigertail Ave,915,Miami,Miami,0,0,0,0
+5667,5696,APENFT Art Museum,Built by ME / Designed by SK,194,0xbc2a21a50d88e0a48b75c0a5516ae51bfa45ce6e,0x06e09B64929d5f9279E2f94cb763d0D76E99f0d8|0x1e820B5d8ec9712Aa493B8460B8A6e89DB88D60A|0x34231a6b9a27dBF7295989952673B34c405bDb13|0xB5bBe9240c621E90a0508B70B68fd41a761D6f8e|0x9caFF816232fed741896a4e2eA1899002220065d,plot,170,8,7 Towerside Terrace,1049,Miami,Miami,0,17,0,0
+5668,5697, , ,244,0x2d891ed45c4c3eab978513df4b92a35cf131d2e2,,plot,127,9,17 Trillo Ave,996,Miami,Miami,0,0,0,0
+5669,5698,Miami Beach, ,412,0xdb08edbcf449de2a2b27448a8040935802c621f1,0x3b97b6CbbfCfFf88Cf4a175e665C5715A3efE4F0|0x0FD73ea2391d2ee5806A15A22e67D583a403409b|0xEcd8BbA75F11406B2c46b021f13A5b451CFc1591,plot,95,8,3 Pennsuco Canal,825,Miami,Miami,0,29,0,0
+5670,5699, , ,72,0x2d891ed45c4c3eab978513df4b92a35cf131d2e2,,plot,109,12,2 Pidgeon Plum Ln,934,Miami,Miami,0,0,0,0
+5671,5700, Metaopus.co, ,126,0x081e92f8b195999d71b8c88d042da75f8be8ed9f,0x3953E9D7067E49c593609894544D57c887A242eC,plot,153,15,23 Tower Rd,1035,Miami,Miami,0,0,0,0
+5672,5701,MetaCat, ,1483,0x38bbd375d49d6237984cbfa19719c419af9fe514,0xD67c34169b372d5B3932c548a940D4Ea74Fe7aF5|0xA1bcD1C294824AB8a8aDc8D191b90f3CDfDe67f4,plot,129,17,11 Virginia St,861,Miami,Miami,0,61,0,0
+5673,5702,Metaopus.co,BCA Network,323,0x081e92f8b195999d71b8c88d042da75f8be8ed9f,,plot,155,11,5 Via Abitare Way,990,Miami,Miami,0,0,0,0
+5674,5703,Goro's Secret House,Goro's secret house,258,0x3185fad637cf50bae9ad59329abe9060ce2776e5,0x0513D5738e0D436C54Ac9f006edEf193f14bA337,plot,179,12,41 Village Green Dr,883,Miami,Miami,0,3,0,0
+5675,5704, , ,116,0x2fec5d8835b39f314187dc1da933b273f32f18c3,0x2FEC5d8835b39f314187Dc1Da933B273F32f18c3,plot,149,10,5 Tuttle Blvd,1060,Miami,Miami,0,0,0,0
+5676,5705, , ,153,0x1ff2875cd548eeae6d22f26bae2d72a50fd143c7,,plot,269,15,2 Rogers Rd,914,Miami,Miami,0,0,0,0
+5677,5706, , ,79,0xe1bdff947510a8e9623cf7f3c6cf6fe5e37c16b8,,plot,89,10,2 Rock Garden Ln,870,Miami,Miami,0,0,0,0
+5678,5707,SPRAYPAIN Gallery,"Official Gallery for SPRAYPAIN Collection.  [View Collection on OpenSea](https://opensea.io/collection/spraypain ""View Collection on OpenSea"")  All artworks are created by [Deadynsyde](https://opensea.io/deadynsyde)  SPRAYPAIN Gallery is sponsored by [Digissues.co](https://digissues.co)",442,0x2717a5086b3b4c91f4761f9d5f8eaca3594f4ca0,0x89a20764dcf6e707f5c599c520d43d861cded173|0xf2b04350bc5e2fcf29e011652a559f735c6d4a04,plot,109,8,7 Tyler St,1040,Miami,Miami,0,44,0,0
+5679,5708,MiamiX2,some WizardX stuff in the works,140,0x44e9d011df8741be2493e99297e9ad67bb1aa85b,0xc454e2b4ebb3c74b2caf83e74067a8055b375e4e,plot,131,14,13 Tower Rd,1020,Miami,Miami,0,1,0,0
+5680,5709, , ,76,0x1afbaf2fdfa201857140f09ef79dd568daa5ed97,,plot,120,8,17 Tigertail Ct,832,Miami,Miami,0,0,0,0
+5681,5710,Metaopus.co,BCA Network,205,0x081e92f8b195999d71b8c88d042da75f8be8ed9f,0x3953E9D7067E49c593609894544D57c887A242eC,plot,168,16,3 Towerside Terrace,1048,Miami,Miami,0,0,0,0
+5682,5711, , ,57,0x13ddf16f41f9a634eaca69be176773fe5c629c1e,0xFedeA86Ebec8DDE40a2ddD1d156350C62C6697E4,plot,79,11,3 Tigertail Ave,901,Miami,Miami,0,2,0,0
+5683,5712, , ,375,0x2d891ed45c4c3eab978513df4b92a35cf131d2e2,,plot,71,8,5 Tyler St,1052,Miami,Miami,0,0,0,0
+5684,5713, , ,106,0xe1bdff947510a8e9623cf7f3c6cf6fe5e37c16b8,,plot,98,10,2 Trapp Ave,975,Miami,Miami,0,0,0,0
+5685,5714, , ,101,0x2d891ed45c4c3eab978513df4b92a35cf131d2e2,,plot,95,9,3 Van Buren St,816,Miami,Miami,0,0,0,0
+5686,5715, ,,326,0xbc2a21a50d88e0a48b75c0a5516ae51bfa45ce6e,,plot,351,17,53 Viera Ave,1004,Miami,Miami,0,0,0,0
+5687,5716, ,Agent by ME,184,0xbc2a21a50d88e0a48b75c0a5516ae51bfa45ce6e,,plot,98,8,2 Richard Rd,827,Miami,Miami,0,0,0,0
+5688,5717,The Exhibit, ,116,0xeac4824eecc66901ef40309cb3a4939cff57ffb9,,plot,269,11,2 Van Buren St,815,Miami,Miami,0,19,0,0
+5689,5718, , ,123,0x21551f5166feaf8932526e4280c5b78e1ffeb4f7,0x5FC9bb884495fcCC780b840367560E8815D09C08|0x5E86f18d50597a0c75dE91972Fc8261b46749FAD|0x411e07616e24Fed46C647Ef3A6325D4c7d0645eb,plot,254,12,11 Tuttle Blvd,1062,Miami,Miami,0,8,0,0
+5690,5719, , ,135,0x2fec5d8835b39f314187dc1da933b273f32f18c3,0x2FEC5d8835b39f314187Dc1Da933B273F32f18c3,plot,179,9,47 Village Green Dr,904,Miami,Miami,0,0,0,0
+5691,5720,Mel's place , ,456,0xd1978e0339cae8074a99038827bb8d8e83411f47,,plot,129,10,2 Pierce St,884,Miami,Miami,0,136,0,0
+5692,5721,Digissues Gallery,Digissues Co. Gallery,966,0x2717a5086b3b4c91f4761f9d5f8eaca3594f4ca0,0x89a20764dcf6e707f5c599c520d43d861cded173|0xb496bd272aa83527fe15e0576ce96ab649882855|0xf2b04350bc5e2fcf29e011652a559f735c6d4a04|0x97c0ed90f5f93cf2252d45aaf11f2d0ebc38d4ea,plot,164,13,7 Via Abitare Way,1006,Miami,Miami,0,173,0,0
+5693,5722, , ,187,0x11faff50b9713177a5f95328cf43ed0144a15cfa,,plot,139,12,2 Robinson St,847,Miami,Miami,0,12,0,0
+5694,5723, , ,134,0xe1bdff947510a8e9623cf7f3c6cf6fe5e37c16b8,,plot,209,10,7 Urbino Ave,856,Miami,Miami,0,0,0,0
+5695,5724,Miami Multiplex, ,581,0xc14482897ac3c8c2b80cf64b9cda9e84415c0069,,plot,109,12,13 Tyler St,1042,Miami,Miami,0,53,0,0
+5696,5725, ,Agent by ME,60,0xbc2a21a50d88e0a48b75c0a5516ae51bfa45ce6e,,plot,107,8,2 Venetian Way N,829,Miami,Miami,0,0,0,0
+5697,5726, ,Agent by ME,66,0xbc2a21a50d88e0a48b75c0a5516ae51bfa45ce6e,,plot,95,9,3 Via Abitare Way,990,Miami,Miami,0,0,0,0
+5698,5727, , ,82,0x38567482053831601c81e0f710cfbd75ca89a1d6,,plot,89,17,17 Tower Rd,1035,Miami,Miami,0,0,0,0
+5699,5728,EtherealStudios.io,Ethereal Studios is a passionate cryptomedia company committed to providing value to our clients and their communities. We create professional products and deliver world class services  while instilling confidence and trust.  We see these as the cornerstones to what we do and how we deliver.     https://etherealstudios.io  https://twitter.com/ethstdio,398,0x5967a88a60a17d1baf0082a26be55caf07031eb1,0xf875c1FA02e51B212d5060061fA75B806349db1F|0xd05a45876524783a8D02b04460B88B2B4fecf439,plot,59,10,2 Virginia St,878,Miami,Miami,0,107,0,0
+5700,5730, , ,1066,0x564ee0b9acb7ec7847930551b7c8ce1962255ab1,0x51F16AC6345d21DfD9d54ee9d36D5aCC66225cfE|0xe1E63895091AE9061646C6ea22A3fd686b2f68A5,plot,143,8,5 Virginia St,862,Miami,Miami,0,330,0,0
+5701,5731, ,Agent by ME,104,0xbc2a21a50d88e0a48b75c0a5516ae51bfa45ce6e,,plot,203,8,3 Venetian Way S,1063,Miami,Miami,0,0,0,0
+5702,5733, , ,43,0x2d891ed45c4c3eab978513df4b92a35cf131d2e2,,plot,53,8,3 Talbot Rd,871,Miami,Miami,0,0,0,0
+5703,5734, , ,225,0x8c11232bac3ec5b17d89e3416c39abd567c84bd6,,plot,134,10,53 Village Green Dr,892,Miami,Miami,0,11,0,0
+5704,5735, , ,76,0x2d891ed45c4c3eab978513df4b92a35cf131d2e2,,plot,99,14,2 Venetia Terrace,818,Miami,Miami,0,0,0,0
+5705,5736, , ,88,0x40a628d16be2ba6956f60402b17f52e8bfe32497,,plot,296,8,11 Tigertail Ct,832,Miami,Miami,0,0,0,0
+5706,5737, , ,127,0x2d891ed45c4c3eab978513df4b92a35cf131d2e2,,plot,129,17,7 Tower Rd,1021,Miami,Miami,0,0,0,0
+5707,5738,., ,157,0x1166eb4a91641367914501d2cddb168701130dfe,,plot,254,15,3 Urbino Ave,832,Miami,Miami,0,1,0,0
+5708,5739, , ,264,0x2d891ed45c4c3eab978513df4b92a35cf131d2e2,,plot,169,9,11 Tyler St,1054,Miami,Miami,0,0,0,0
+5709,5740, , ,1894,0xa25243821277b10dff17a3276a51a772fd68c9de,0x8D32DB8010a9495a53abA404c632e9c761295497,plot,269,8,59 Viera Ave,1029,Miami,Miami,0,206,0,0
+5710,5741, ,Agent by ME,158,0xbc2a21a50d88e0a48b75c0a5516ae51bfa45ce6e,,plot,98,8,2 Via Abitare Way,1006,Miami,Miami,0,0,0,0
+5711,5742, , ,94,0x53c63edca1e7229a04b6f348a4e18dabd2edff93,,plot,224,9,11 Tower Rd,1035,Miami,Miami,0,0,0,0
+5712,5743, , ,691,0x564ee0b9acb7ec7847930551b7c8ce1962255ab1,0x51F16AC6345d21DfD9d54ee9d36D5aCC66225cfE|0xe1E63895091AE9061646C6ea22A3fd686b2f68A5,plot,47,15,3 Virginia St,862,Miami,Miami,0,148,0,0
+5713,5744, , ,154,0x2d891ed45c4c3eab978513df4b92a35cf131d2e2,,plot,179,8,2 Talbot Rd,881,Miami,Miami,0,0,0,0
+5714,5745,WEST MIAMI BEACH, ,176,0x07986c37dc04c8ad47c8ea570dd79a821539cd90,0x0FD73ea2391d2ee5806A15A22e67D583a403409b|0xDb08eDbCF449De2A2B27448a8040935802c621F1|0x3EC01bC8Ab8610BE6F66F55ba2d5B4fa813Bc082,plot,39,8,3 Venetia Terrace,814,Miami,Miami,0,96,0,0
+5715,5746, , ,67,0x2d891ed45c4c3eab978513df4b92a35cf131d2e2,,plot,65,8,13 Urbino Ave,861,Miami,Miami,0,0,0,0
+5716,5747, ,Agent by ME,52,0xbc2a21a50d88e0a48b75c0a5516ae51bfa45ce6e,,plot,84,8,2 Venetian Way S,1075,Miami,Miami,0,0,0,0
+5717,5748, ,Agent by ME,68,0xbc2a21a50d88e0a48b75c0a5516ae51bfa45ce6e,,plot,101,8,5 Urbino Ave,836,Miami,Miami,0,0,0,0
+5718,5749, , ,352,0x4a93b39979a65bd5aa983a73bc97af3153a31453,,plot,59,15,17 Tyler St,1057,Miami,Miami,0,3,0,0
+5719,5750, , ,113,0x2d891ed45c4c3eab978513df4b92a35cf131d2e2,,plot,111,8,2 Pamona Ln,851,Miami,Miami,0,0,0,0
+5720,5751, , ,301,0xa25243821277b10dff17a3276a51a772fd68c9de,,plot,119,9,19 Tyler St,1047,Miami,Miami,0,0,0,0
+5721,5752, , ,75,0x40a628d16be2ba6956f60402b17f52e8bfe32497,,plot,167,15,13 Tigertail Ct,814,Miami,Miami,0,0,0,0
+5722,5753, , ,92,0x2d891ed45c4c3eab978513df4b92a35cf131d2e2,,plot,109,11,2 Tower Rd,1021,Miami,Miami,0,0,0,0
+5723,5754, , ,66,0x46efb973305dc9c0d4301c6fcde5e83a61df549c,,plot,83,11,3 Palmetto Rd,1054,Miami,Miami,0,1,0,0
+5724,5755,The Oriental  , ,196,0x5cbd390539caaa24152d62003de2522565470152,,plot,129,11,2 Rolling Rd Dr,1071,Miami,Miami,0,0,0,0
+5725,5756,Weirdos, ,576,0x61987699055394c65355f2797d3e4e589f7fabf4,0x4Ae392c271f0935a7C1f75bE87d08A168536Ff84|0x9F2917A54E9a1430a23ca7Ee24E4Cd79d0371E92|0x61987699055394c65355F2797D3e4e589f7FaBf4|0xaB3627317c43D394eb171170f818153B976D28A3|0x9eec0b5bd8a48047f0dcc61e98b4b92951480f98|0xdc546f477f273bcf327297bf4adcb671b5f20be1|0x20da165deb81dbb042fe4a9d4808399ef2477c5d|0x9ddae9b61b790e16d4fe92a6ede1339da0f9e7bd|0x2f0D1767A1de48f7328985C9915B85341418e901|0xa992afc09846a822c749d775735e7abe9383801a|0x4b4bfa4CAc2DB875BfA1e1bf0172eDD8465E32cA|0x5793656Ab7F81bCa61D42C32B9e128Abcc30684C|0x069dC7CC190D574D0D09b8cc8a28F7404B77c094|0xa8e376248fb85dd9680fdbeecc3ec72e20c37cac,plot,111,9,19 Urbino Ave,863,Miami,Miami,0,197,0,0
+5726,5757, ,Agent by ME,32,0xbc2a21a50d88e0a48b75c0a5516ae51bfa45ce6e,,plot,90,8,5 Tower Rd,1035,Miami,Miami,0,0,0,0
+5727,5758,AIMS Art Gallery_Miami, ,321,0x345cfcf080bdf46c5f6c453a5fec484fbe046cfe,0xA002ef30512cb2C8454Ae930b48bc93D6e3D072d|0xCD4b33D0054aae32e69639fF11Bd0B4Ec4426BaD|0x7f67D06f3b2CeC3519B4A0ccF117aC5D80f06B76,plot,186,8,11 Urbino Ave,838,Miami,Miami,0,40,0,0
+5728,5759, , ,170,0x2d891ed45c4c3eab978513df4b92a35cf131d2e2,,plot,179,8,3 Quail Roost Dr,1062,Miami,Miami,0,0,0,0
+5729,5760, , ,93,0x40a628d16be2ba6956f60402b17f52e8bfe32497,,plot,303,13,3 Tigertail Ct,832,Miami,Miami,0,0,0,0
+5730,5761, , ,58,0x40a628d16be2ba6956f60402b17f52e8bfe32497,,plot,125,13,7 Tigertail Ct,814,Miami,Miami,0,0,0,0
+5731,5762, , ,55,0x46efb973305dc9c0d4301c6fcde5e83a61df549c,,plot,167,8,2 Palmetto Rd,1054,Miami,Miami,0,0,0,0
+5732,5763,Creeps, ,706,0x61987699055394c65355f2797d3e4e589f7fabf4,0x4Ae392c271f0935a7C1f75bE87d08A168536Ff84|0x9F2917A54E9a1430a23ca7Ee24E4Cd79d0371E92|0x61987699055394c65355F2797D3e4e589f7FaBf4|0xaB3627317c43D394eb171170f818153B976D28A3|0x9eec0b5bd8a48047f0dcc61e98b4b92951480f98|0xdc546f477f273bcf327297bf4adcb671b5f20be1|0x20da165deb81dbb042fe4a9d4808399ef2477c5d|0x9ddae9b61b790e16d4fe92a6ede1339da0f9e7bd|0x2f0D1767A1de48f7328985C9915B85341418e901|0xa992afc09846a822c749d775735e7abe9383801a|0x4b4bfa4CAc2DB875BfA1e1bf0172eDD8465E32cA|0x5793656Ab7F81bCa61D42C32B9e128Abcc30684C|0x069dC7CC190D574D0D09b8cc8a28F7404B77c094|0xa8e376248fb85dd9680fdbeecc3ec72e20c37cac,plot,97,14,29 Urbino Ave,865,Miami,Miami,0,131,0,0
+5733,5764, ,Agent by ME,60,0xbc2a21a50d88e0a48b75c0a5516ae51bfa45ce6e,,plot,129,8,3 Tower Rd,1035,Miami,Miami,0,0,0,0
+5734,5765,, ,398,0xf942ce6643bc80d0bcc1bea4fd4657e600a1de88,0xB605eD642b5D897d845c84b97ac804Ac764A977E|0xa2193Ee5868bCE89Cfd7150C7694D0F3b6eFb080|0xF942CE6643bC80D0Bcc1BEA4FD4657e600A1De88|0xEAA0FBCCC3328e896b58dDe26cDB67639C4904ac|0x9fC004C5B4781f07C54C85366a00D4cd96e3bDfd,plot,125,17,23 Tyler St,1060,Miami,Miami,0,29,0,0
+5735,5766,DOGESOUNDCLUB, ,526,0x21a76a6fcfa9c526693e34b9d5c7b44676b9968a,0xB605eD642b5D897d845c84b97ac804Ac764A977E|0x6177943A4E4Cf0a77e2A3D716DA18D0d9e115eE4|0xa2193Ee5868bCE89Cfd7150C7694D0F3b6eFb080,plot,220,12,17 Urbino Ave,841,Miami,Miami,0,76,0,0
+5736,5767, , ,96,0x40a628d16be2ba6956f60402b17f52e8bfe32497,,plot,139,10,5 Tigertail Ct,814,Miami,Miami,0,0,0,0
+5737,5768, , ,95,0xedd1f30d69898e4cb710cfb47c6114d31e6fed06,,plot,111,15,3 Old Tamiami Trail,1052,Miami,Miami,0,0,0,0
+5738,5769,BITALIENS, ,244,0x4fae31dcf3775d1cab577c755c742dcec0d8b9fc,,plot,95,8,2 Quail Roost Dr,1080,Miami,Miami,0,0,0,0
+5739,5770, , ,232,0x9c4d96683af2329edd49c257d5411defff4b8d5c,0x2FEC5d8835b39f314187Dc1Da933B273F32f18c3,plot,53,11,2 Peachy St,1074,Miami,Miami,0,60,0,0
+5740,5771,CLONESNEVERDIE, ,216,0x21a76a6fcfa9c526693e34b9d5c7b44676b9968a,,plot,69,9,23 Urbino Ave,852,Miami,Miami,0,13,0,0
+5741,5772, , ,119,0x40a628d16be2ba6956f60402b17f52e8bfe32497,,plot,125,17,2 Tigertail Ct,814,Miami,Miami,0,0,0,0
+5742,5773, , ,103,0xedd1f30d69898e4cb710cfb47c6114d31e6fed06,,plot,125,13,2 Old Tamiami Trail,1052,Miami,Miami,0,3,0,0
+5743,5774,Cape of Good Hope,Matrix 2014,262,0xb4795a7ae424121b1005f31ea9eb97e2645592e8,0x7C67Dd8A28207950A0C091D70708319671AD972e|0x23024DAB906650D6AD14e3C17cd643d89Bc96D8E|0xc7214f1D42E9BcAedF476B140608779E8Fc83C09|0xF7cA5a146cAAf14A7e9a5497BCA58121953b2653,plot,53,8,3 Peachy St,1084,Miami,Miami,0,5,0,0
+5744,5775, , ,175,0x2d891ed45c4c3eab978513df4b92a35cf131d2e2,,plot,48,8,2 Palmarito Ct,845,Miami,Miami,0,0,0,0
+5745,5776, , ,208,0x32ab4262df2c10ccc199f5f8e7332ed507ef3ea5,,plot,53,8,19 Prinzregentenstrasse,958,München,München,0,12,0,0
+5746,5777, , ,240,0xcb7e9e305fa4afa4cf5b414120c560ad3ed75a53,0xDb08eDbCF449De2A2B27448a8040935802c621F1|0x3EC01bC8Ab8610BE6F66F55ba2d5B4fa813Bc082,plot,54,17,17 Prinzregentenstrasse,965,München,München,0,1,0,0
+5747,5778, , ,304,0x2d891ed45c4c3eab978513df4b92a35cf131d2e2,,plot,83,12,23 Prinzregentenstrasse,973,München,München,0,0,0,0
+5748,5779, , ,433,0x73b4437a4b3e43de673836107437e4f092a363e0,0xd7d16bcc1a30cf92e594ce7531e84c7e0ce97658|0x4f3d8fe6eecbf30b9987da8def9e45a67e45147b|0x3e401d84ceb24fbdb1aef5d96bc22828fd229933,plot,134,8,29 Prinzregentenstrasse,962,München,München,0,76,0,0
+5749,5780, , ,317,0x6280aeb92c12ef44e04a053d3d23e563b4217382,,plot,83,13,13 Prinzregentenstrasse,951,München,München,0,0,0,0
+5750,5781, , ,129,0x4e3e96d60d331c7a803982f067001dcb951b63cc,,plot,119,16,19 Trappentreustrasse,975,München,München,0,8,0,0
+5751,5782,NFT GALLERY MUNICH,CHANGING EXHIBITIONS. MEETING AREA ON THE ROOFTOP. ARTISTS AND BUYERS WELCOME. DM TO BECOME A FEATURED ARTIST.,610,0x7ed9df05917f74b50a7b1893cec0cd293a7293b5,0x5f75962e9682b57CE10d275aeB4c1Dd2e753aAd4,plot,64,8,11 Prinzregentenstrasse,959,München,München,0,196,0,0
+5752,5783,BrinkMuseum,The work of Bryan Brinkman @bryanbrinkman,1303,0x1e8e749b2b578e181ca01962e9448006772b24a2,0xa06B284b3D0CC4cbaa753D1359Ad976060Fd5daC|0xa06b284b3d0cc4cbaa753d1359ad976060fd5dac|0xd9DE0b1FfB03FC2c2874a56CBB20806001a0E0d7|0xc2F82A1F287B5b5AEBff7C19e83e0a16Cf3bD041,plot,224,12,3 Turkenstrasse,949,München,München,0,344,0,0
+5753,5784, , ,562,0xbc2a21a50d88e0a48b75c0a5516ae51bfa45ce6e,,plot,223,8,17 Ungererstrasse,939,München,München,0,0,0,0
+5754,5785, , ,239,0x2d891ed45c4c3eab978513df4b92a35cf131d2e2,,plot,59,9,31 Prinzregentenstrasse,980,München,München,0,0,0,0
+5755,5786, , ,1119,0x0d504013ce4a7ac56622686bcca0da3653ceb11d,0xDBC1457a83559d072653Da076a7519ad7a998fD3|0xa9998d10c484694A6862937D908667C4fdD36712,plot,251,8,3 Tulbeckstrasse,982,München,München,0,103,0,0
+5756,5787, , ,287,0x5eb71caeadf22107a578bc5261ec9a1e16fad5f8,,plot,239,11,13 Trappentreustrasse,967,München,München,0,0,0,0
+5757,5788,Gods and Titans, ,301,0x511977f87387149ca9d2a34f3a1b943094a8a65d,0x721D5B09Cbf9f6192cc1Bab5A239FF6D70BBbDB9,plot,95,8,37 Prinzregentenstrasse,973,München,München,0,15,0,0
+5758,5789, , ,137,0xbc2a21a50d88e0a48b75c0a5516ae51bfa45ce6e,,plot,97,8,11 Ungererstrasse,935,München,München,0,0,0,0
+5759,5790, , ,67,0x2d891ed45c4c3eab978513df4b92a35cf131d2e2,,plot,83,9,7 Tulbeckstrasse,991,München,München,0,0,0,0
+5760,5791,Teknè, ,632,0x4cce267317a3614b2f1f309338fb33296014534f,0x6F3ffAc9365B3164CAe7DB938542510904ad5488|0xc2d9e788980f9183356e5dcad1f7a457eaf8068e|0x9d3F36be8462ff2468b9fbb2B44e52d49F1eC792|0xA8Dd50AF85d9433bf629D9538fCb0AaCFF4A7008,plot,191,9,7 Turkenstrasse,959,München,München,0,0,0,0
+5761,5792, , ,115,0x2d891ed45c4c3eab978513df4b92a35cf131d2e2,,plot,99,8,7 Prinzregentenstrasse,940,München,München,0,0,0,0
+5762,5793, , ,61,0x6ca51eff669996603a89da54e78fa449ff4eec1a,,plot,71,8,41 Prinzregentenstrasse,988,München,München,0,0,0,0
+5763,5794, , ,225,0x2d891ed45c4c3eab978513df4b92a35cf131d2e2,,plot,134,10,2 Tulbeckstrasse,997,München,München,0,0,0,0
+5764,5795, , ,207,0x2d891ed45c4c3eab978513df4b92a35cf131d2e2,,plot,90,8,5 Prinzregentenstrasse,951,München,München,0,0,0,0
+5765,5796, , ,952,0xf1c40e8c7c7770e5bd8d8638feebc80f9d3ba40d,,plot,116,10,2 Turkenstrasse,935,München,München,0,93,0,0
+5766,5797, , ,58,0x3644c67ba7738046994b7134fd10ab9895504170,,plot,155,8,17 Trappentreustrasse,989,München,München,0,0,0,0
+5767,5798, , ,66,0x4e3e96d60d331c7a803982f067001dcb951b63cc,,plot,143,13,11 Tulbeckstrasse,994,München,München,0,0,0,0
+5768,5799,kaIiaK's Private, ,273,0x511977f87387149ca9d2a34f3a1b943094a8a65d,0x0FD73ea2391d2ee5806A15A22e67D583a403409b|0xEcd8BbA75F11406B2c46b021f13A5b451CFc1591|0xDb08eDbCF449De2A2B27448a8040935802c621F1,plot,139,13,5 Ungererstrasse,928,München,München,0,13,0,0
+5769,5800, , ,733,0xbc2a21a50d88e0a48b75c0a5516ae51bfa45ce6e,,plot,284,16,13 Ungererstrasse,921,München,München,0,0,0,0
+5770,5801, , ,248,0x2d891ed45c4c3eab978513df4b92a35cf131d2e2,,plot,220,15,7 Trappentreustrasse,957,München,München,0,0,0,0
+5771,5802,KittyLifeArt Gallery and Bar,KittyLifeArt Gallery and Bar,166,0xabb9216e5e28deba84d3154ea73942860457ecd1,0x5e7da01b81644f9ad8f7760eb13188a7b6bdb9ff|0xEFF897120BE67D86869DbA6482cDedef5713bFB8|0xAbb9216e5e28deBA84D3154Ea73942860457ecd1,plot,80,8,5 Tulbeckstrasse,1005,München,München,0,42,0,0
+5772,5803, , ,653,0xa0ab8eddf14a5174688e2eb1bdb69cdf377142c3,0xA0ab8Eddf14a5174688E2eb1bdb69CDF377142C3,plot,194,9,5 Turkenstrasse,940,München,München,0,3,0,0
+5773,5804, , ,208,0x9f664ecb834812c17e0d605476eed213ba463350,0xd6de61309De3484D79299967e62960F4ec6a7Cd1,plot,155,12,11 Trappentreustrasse,983,München,München,0,0,0,0
+5774,5805, , ,55,0xbc2a21a50d88e0a48b75c0a5516ae51bfa45ce6e,,plot,118,8,43 Prinzregentenstrasse,982,München,München,0,0,0,0
+5775,5806, , ,107,0x2d891ed45c4c3eab978513df4b92a35cf131d2e2,,plot,103,8,7 Ungererstrasse,916,München,München,0,0,0,0
+5776,5807,Cyber Sapiens, ,1180,0x6f3ffac9365b3164cae7db938542510904ad5488,0x404c5B810E2cf04B82115BF93fA9Cce8DAc09C96|0x9d3F36be8462ff2468b9fbb2B44e52d49F1eC792,plot,65,12,11 Turkenstrasse,956,München,München,0,300,0,0
+5777,5808, , ,237,0xbc2a21a50d88e0a48b75c0a5516ae51bfa45ce6e,,plot,288,8,13 Turkenstrasse,968,München,München,0,0,0,0
+5778,5809,ETH Wharf, ,170,0xf942ce6643bc80d0bcc1bea4fd4657e600a1de88,0xB605eD642b5D897d845c84b97ac804Ac764A977E|0xa2193Ee5868bCE89Cfd7150C7694D0F3b6eFb080|0xF942CE6643bC80D0Bcc1BEA4FD4657e600A1De88|0xEAA0FBCCC3328e896b58dDe26cDB67639C4904ac|0x9fC004C5B4781f07C54C85366a00D4cd96e3bDfd,plot,98,16,3 Winzererstrasse,1008,München,München,0,42,0,0
+5779,5810, , ,33,0x2d891ed45c4c3eab978513df4b92a35cf131d2e2,,plot,109,10,47 Prinzregentenstrasse,995,München,München,0,0,0,0
+5780,5811, , ,62,0x4b4df3b4c0a893c7beefe72e1b8dae7654ae6f47,,plot,109,9,3 Prinzregentenstrasse,933,München,München,0,0,0,0
+5781,5812, , ,118,0x9654d5d36ee8349b23cf835b23c7aeec595140fe,,plot,48,9,2 Winzererstrasse,1006,München,München,0,36,0,0
+5782,5813, , ,62,0xbc2a21a50d88e0a48b75c0a5516ae51bfa45ce6e,,plot,170,8,2 Widenmayerstrasse,913,München,München,0,0,0,0
+5783,5814,Pawn Shop kaIiaK, ,218,0x511977f87387149ca9d2a34f3a1b943094a8a65d,,plot,127,8,5 Trappentreustrasse,974,München,München,0,72,0,0
+5784,5815, , ,199,0x99538284dc950bc568f784716bacf7c8ab299004,,plot,90,9,2 Prinzregentenstrasse,945,München,München,0,73,0,0
+5785,5816, , ,106,0x7ca6b4645b71f874a35bec18f0e997e51d8d815c,0xc6b6d06cb653362388Fb381475707eA3A6F9bbf2,plot,155,11,13 Tulbeckstrasse,1011,München,München,0,1,0,0
+5786,5817, , ,130,0x88657848f59f90c8481869d836b05dff3fd722a0,0x3b97b6cbbfcfff88cf4a175e665c5715a3efe4f0,plot,118,12,3 Widenmayerstrasse,925,München,München,0,11,0,0
+5787,5818, , ,127,0x2d891ed45c4c3eab978513df4b92a35cf131d2e2,,plot,164,13,2 Wolfratshauser Strasse,1013,München,München,0,0,0,0
+5788,5819, , ,44,0x2d891ed45c4c3eab978513df4b92a35cf131d2e2,,plot,153,13,19 Tulbeckstrasse,1003,München,München,0,0,0,0
+5789,5820,Teleport  München,Teleport to ME HQ and the whole CV Metaverse,204,0xbc2a21a50d88e0a48b75c0a5516ae51bfa45ce6e,,plot,153,8,2 Ungererstrasse,921,München,München,0,1,0,0
+5790,5821, , ,134,0xdbc1457a83559d072653da076a7519ad7a998fd3,0xDBC1457a83559d072653Da076a7519ad7a998fD3|0xa9998d10c484694A6862937D908667C4fdD36712,plot,118,8,2 Nordumgehung Pasing,998,München,München,0,4,0,0
+5791,5822, , ,58,0x9f0574a5f28779a1a682cfe4bbd090ee058d07aa,,plot,76,8,3 Trappentreustrasse,957,München,München,0,0,0,0
+5792,5823, , ,156,0xf7abbae5eb4ac10ff29996261446ccfddc8b2df9,0xDb08eDbCF449De2A2B27448a8040935802c621F1|0x3EC01bC8Ab8610BE6F66F55ba2d5B4fa813Bc082,plot,48,10,2 Rindermarkt,935,München,München,0,6,0,0
+5793,5824, , ,37,0x4e3e96d60d331c7a803982f067001dcb951b63cc,,plot,87,15,2 Schenkendorfstrasse,907,München,München,0,0,0,0
+5794,5825, , ,99,0xbc2a21a50d88e0a48b75c0a5516ae51bfa45ce6e,,plot,169,8,3 Ungererstrasse,908,München,München,0,0,0,0
+5795,5826,CryptoRastas.Space,Dis is the official CryptoRastas place inna di CryptoVoxels. Place for a community about love and I-nity. All Tribes Welcome.  More info: http://cryptorastas.com,397,0xa0ac4799ae4dfd4b90c3bd124115c2c0e6a55aca,0x144e1547ad7be53ed5f751406a661540b860d522|0xb61c4CAf28C49Cfb7E272b4c6d0F9fbb588f7Fc5|0x9d3F36be8462ff2468b9fbb2B44e52d49F1eC792,plot,77,8,17 Turkenstrasse,962,München,München,0,23,0,0
+5796,5827, , ,468,0xbc2a21a50d88e0a48b75c0a5516ae51bfa45ce6e,,plot,195,16,2 Richard Wagner Strasse,941,München,München,0,0,0,0
+5797,5828,Munich Gallery of Fine Arts, ,715,0x37c7c4a393e801432d04f89b8a78f2b709c3b087,,plot,143,10,3 Nockherstrasse,986,München,München,0,60,0,0
+5798,5829, , ,48,0x2d891ed45c4c3eab978513df4b92a35cf131d2e2,,plot,155,9,17 Tulbeckstrasse,1018,München,München,0,0,0,0
+5799,5830,Personal Evolution, ,94,0xfb02fc7d107fabd4832613cf7cecb9a6ef61b759,,plot,63,9,2 Trappentreustrasse,970,München,München,0,22,0,0
+5800,5831, , ,33,0x2d891ed45c4c3eab978513df4b92a35cf131d2e2,,plot,90,8,2 Rembrandtstrasse,1026,München,München,0,0,0,0
+5801,5832, , ,66,0xbc2a21a50d88e0a48b75c0a5516ae51bfa45ce6e,,plot,237,13,2 Schleissheimer Strasse,896,München,München,0,0,0,0
+5802,5833,Munich Gallery of Fine Arts, ,594,0x37c7c4a393e801432d04f89b8a78f2b709c3b087,,plot,143,14,2 Nockherstrasse,981,München,München,0,44,0,0
+5803,5834, , ,103,0xbc2a21a50d88e0a48b75c0a5516ae51bfa45ce6e,,plot,139,8,3 Richard Wagner Strasse,949,München,München,0,0,0,0
+5804,5835, , ,33,0x2d891ed45c4c3eab978513df4b92a35cf131d2e2,,plot,76,8,3 Rembrandtstrasse,1033,München,München,0,0,0,0
+5805,5836, , ,107,0x2d891ed45c4c3eab978513df4b92a35cf131d2e2,,plot,79,10,29 四谷三栄町,1133,新宿区,新宿区,0,0,0,0
+5806,5837, , ,133,0xa934f1210de462c7ee2b5b78fd97b7cb7c38e95d,0x994b2B32530c95Cd4BDaC0Ec0E0B41B187385B94|0xb83ebbfdc7c1efd73baad726107bfd487baa1474,plot,129,11,23 四谷三栄町,1141,新宿区,新宿区,0,1,0,0
+5807,5838,11 歌舞伎町, ,162,0x09be9ab0eb61327d26904bae69efdc6633d5eec8,,plot,305,12,19 四谷三栄町,1113,新宿区,新宿区,0,0,0,0
+5808,5839, , ,121,0xeb4e76550fff21148d771de2c61e529ab4a08e4a,,plot,299,17,17 四谷三栄町,1133,新宿区,新宿区,0,0,0,0
+5809,5840,69 SHINJUKU GYOEN, ,226,0x94aaf5ceb457057ac4d1588257988d487272984f,,plot,29,10,37 四谷三栄町,1139,新宿区,新宿区,0,33,0,0
+5810,5841, , ,334,0xa934f1210de462c7ee2b5b78fd97b7cb7c38e95d,0x161b7f60aa3181697a78f642a9ebf1559cf03fb5|0x994b2B32530c95Cd4BDaC0Ec0E0B41B187385B94|0xb83ebbfdc7c1efd73baad726107bfd487baa1474,plot,251,8,3 若葉,1113,新宿区,新宿区,0,5,0,0
+5811,5842, , ,266,0x2d891ed45c4c3eab978513df4b92a35cf131d2e2,,plot,220,11,31 四谷三栄町,1145,新宿区,新宿区,0,0,0,0
+5812,5843, , ,35,0x2d891ed45c4c3eab978513df4b92a35cf131d2e2,,plot,69,9,2 須賀町,1157,新宿区,新宿区,0,0,0,0
+5813,5844, , ,170,0x2d891ed45c4c3eab978513df4b92a35cf131d2e2,,plot,152,11,17 四谷,1105,新宿区,新宿区,0,0,0,0
+5814,5845, , ,28,0xeb4e76550fff21148d771de2c61e529ab4a08e4a,,plot,104,9,13 四谷三栄町,1131,新宿区,新宿区,0,0,0,0
+5815,5846, , ,39,0x09be9ab0eb61327d26904bae69efdc6633d5eec8,,plot,143,8,17 新宿,1152,新宿区,新宿区,0,0,0,0
+5816,5847, , ,370,0xa934f1210de462c7ee2b5b78fd97b7cb7c38e95d,0x161b7f60aa3181697a78f642a9ebf1559cf03fb5|0x994b2B32530c95Cd4BDaC0Ec0E0B41B187385B94|0xb83ebbfdc7c1efd73baad726107bfd487baa1474,plot,143,8,7 若葉,1118,新宿区,新宿区,0,1,0,0
+5817,5848,MVB, ,150,0x32ab4262df2c10ccc199f5f8e7332ed507ef3ea5,,plot,97,11,11 四谷三栄町,1118,新宿区,新宿区,0,4,0,0
+5818,5849, , ,44,0x09be9ab0eb61327d26904bae69efdc6633d5eec8,,plot,199,8,5 須賀町,1160,新宿区,新宿区,0,0,0,0
+5819,5850, , ,20,0x2d891ed45c4c3eab978513df4b92a35cf131d2e2,,plot,71,8,11 新宿,1149,新宿区,新宿区,0,0,0,0
+5820,5851,Goro House,Secret Goro House,495,0x06d4244762288d5d82518abfe7fbe9a20b0f98ec,0x265357fca161eba660e4fe63d83165e6cdda6b88,plot,279,10,11 四谷,1099,新宿区,新宿区,0,69,0,0
+5821,5852, , ,434,0xa934f1210de462c7ee2b5b78fd97b7cb7c38e95d,0x161b7f60aa3181697a78f642a9ebf1559cf03fb5|0x994b2B32530c95Cd4BDaC0Ec0E0B41B187385B94|0xb83ebbfdc7c1efd73baad726107bfd487baa1474,plot,195,8,41 四谷三栄町,1134,新宿区,新宿区,0,81,0,0
+5822,5853, , ,32,0xeb4e76550fff21148d771de2c61e529ab4a08e4a,,plot,127,8,7 四谷三栄町,1127,新宿区,新宿区,0,0,0,0
+5823,5854, , ,115,0xbc2a21a50d88e0a48b75c0a5516ae51bfa45ce6e,,plot,125,8,19 四谷,1094,新宿区,新宿区,0,0,0,0
+5824,5855, , ,26,0xeb4e76550fff21148d771de2c61e529ab4a08e4a,,plot,131,11,19 新宿,1165,新宿区,新宿区,0,0,0,0
+5825,5856, , ,50,0xeb4e76550fff21148d771de2c61e529ab4a08e4a,,plot,181,13,3 須賀町,1170,新宿区,新宿区,0,0,0,0
+5826,5857, , ,151,0x09be9ab0eb61327d26904bae69efdc6633d5eec8,,plot,149,13,43 四谷三栄町,1153,新宿区,新宿区,0,0,0,0
+5827,5858, , ,178,0xfd5f6f62b0e3731266c136fd8ee84e3feb2d30fe,,plot,111,8,2 若葉,1094,新宿区,新宿区,0,11,0,0
+5828,5859, , ,183,0xa934f1210de462c7ee2b5b78fd97b7cb7c38e95d,0x161b7f60aa3181697a78f642a9ebf1559cf03fb5|0x994b2B32530c95Cd4BDaC0Ec0E0B41B187385B94|0xb83ebbfdc7c1efd73baad726107bfd487baa1474,plot,181,12,11 若葉,1122,新宿区,新宿区,0,15,0,0
+5829,5860, , ,39,0xeb4e76550fff21148d771de2c61e529ab4a08e4a,,plot,191,12,13 新宿,1160,新宿区,新宿区,0,0,0,0
+5830,5861, , ,319,0xdd6fbd99c9dac16dfb991b6bfae68d6f83a290df,0xd228d0CE3f908e7CFb97D245e6032175D7Ee5C40,plot,319,14,5 若葉,1097,新宿区,新宿区,0,44,0,0
+5831,5862, ,0x9d24417a3fa1acf01983784ae5efd68212452fd1 0x1E3C06381A11375AAeE09c0A368c81E950211EA7,348,0x7b01429e5ade22c5b4002f0da287717e8ad05375,0x9d24417a3fa1acf01983784ae5efd68212452fd1,plot,71,10,13 四谷,1088,新宿区,新宿区,0,0,0,0
+5832,5863, , ,42,0xeb4e76550fff21148d771de2c61e529ab4a08e4a,,plot,168,8,7 須賀町,1175,新宿区,新宿区,0,0,0,0
+5833,5864, , ,217,0x2d891ed45c4c3eab978513df4b92a35cf131d2e2,,plot,152,17,5 四谷三栄町,1104,新宿区,新宿区,0,0,0,0
+5834,5865, , ,59,0xa62d7ad2fddbad38a0aba25e40cdfe2edfa4d183,,plot,207,10,11 須賀町,1166,新宿区,新宿区,0,0,0,0
+5835,5866, , ,44,0x2d891ed45c4c3eab978513df4b92a35cf131d2e2,,plot,132,8,5 新宿,1142,新宿区,新宿区,0,0,0,0
+5836,5867,Tie Dye Ninjas Pagoda, ,1172,0x7b01429e5ade22c5b4002f0da287717e8ad05375,0x9d24417a3fa1acf01983784ae5efd68212452fd1|0x1E3C06381A11375AAeE09c0A368c81E950211EA7,plot,155,15,7 四谷,1083,新宿区,新宿区,0,11,0,0
+5837,5868, , ,54,0x09be9ab0eb61327d26904bae69efdc6633d5eec8,,plot,303,8,3 四谷三栄町,1121,新宿区,新宿区,0,0,0,0
+5838,5869, , ,117,0xbc2a21a50d88e0a48b75c0a5516ae51bfa45ce6e,,plot,251,8,2 四谷本塩町,1077,新宿区,新宿区,0,0,0,0
+5839,5870, , ,46,0x2d891ed45c4c3eab978513df4b92a35cf131d2e2,,plot,97,8,47 四谷三栄町,1148,新宿区,新宿区,0,0,0,0
+5840,5871, , ,24,0x2d891ed45c4c3eab978513df4b92a35cf131d2e2,,plot,95,12,13 若葉,1113,新宿区,新宿区,0,0,0,0
+5841,5872, , ,25,0xeb4e76550fff21148d771de2c61e529ab4a08e4a,,plot,119,8,53 四谷三栄町,1159,新宿区,新宿区,0,0,0,0
+5842,5873, , ,708,0x7b01429e5ade22c5b4002f0da287717e8ad05375,0x9d24417a3fa1acf01983784ae5efd68212452fd1|0x1E3C06381A11375AAeE09c0A368c81E950211EA7,plot,83,8,3 四谷,1093,新宿区,新宿区,0,1,0,0
+5843,5874, , ,37,0x09be9ab0eb61327d26904bae69efdc6633d5eec8,,plot,155,8,7 新宿,1155,新宿区,新宿区,0,0,0,0
+5844,5875, , ,30,0xeb4e76550fff21148d771de2c61e529ab4a08e4a,,plot,208,8,3 四谷坂町,1178,新宿区,新宿区,0,0,0,0
+5845,5876, , ,28,0x09be9ab0eb61327d26904bae69efdc6633d5eec8,,plot,169,10,2 四谷坂町,1186,新宿区,新宿区,0,0,0,0
+5846,5877, , ,79,0xbc2a21a50d88e0a48b75c0a5516ae51bfa45ce6e,,plot,169,12,2 四谷三栄町,1101,新宿区,新宿区,0,0,0,0
+5847,5878, , ,54,0x09be9ab0eb61327d26904bae69efdc6633d5eec8,,plot,279,9,19 若葉,1130,新宿区,新宿区,0,0,0,0
+5848,5879, , ,49,0xd3b52a5cf36434edc77bb2bc0a4478ac8e61617a,,plot,97,8,3 四谷本塩町,1084,新宿区,新宿区,0,0,0,0
+5849,5880, , ,120,0x05d9c12258bdf51346727dc57ed730f70863f807,,plot,284,13,13 須賀町,1182,新宿区,新宿区,0,2,0,0
+5850,5881, , ,53,0x2d891ed45c4c3eab978513df4b92a35cf131d2e2,,plot,142,10,17 須賀町,1172,新宿区,新宿区,0,0,0,0
+5851,5882, , ,22,0xeb4e76550fff21148d771de2c61e529ab4a08e4a,,plot,87,12,2 西落合,1175,新宿区,新宿区,0,0,0,0
+5852,5883, , ,36,0x2d891ed45c4c3eab978513df4b92a35cf131d2e2,,plot,99,10,2 富山,1192,新宿区,新宿区,0,0,0,0
+5853,5884, , ,33,0xd3b52a5cf36434edc77bb2bc0a4478ac8e61617a,,plot,90,12,2 四谷エリア,1089,新宿区,新宿区,0,0,0,0
+5854,5885,Teleport 新宿区, ,258,0xbc2a21a50d88e0a48b75c0a5516ae51bfa45ce6e,,plot,153,12,2 大京町,1071,新宿区,新宿区,0,1,0,0
+5855,5886, , ,29,0xa62d7ad2fddbad38a0aba25e40cdfe2edfa4d183,,plot,55,11,2 新宿,1140,新宿区,新宿区,0,0,0,0
+5856,5887, , ,343,0x7b01429e5ade22c5b4002f0da287717e8ad05375,0x9d24417a3fa1acf01983784ae5efd68212452fd1|0x1E3C06381A11375AAeE09c0A368c81E950211EA7,plot,29,8,2 四谷,1091,新宿区,新宿区,0,54,0,0
+5857,5888, , ,16,0x38472b3af744a8b866e77b94fc2adfff94c22a07,,plot,119,9,17 若葉,1118,新宿区,新宿区,0,0,0,0
+5858,5889, , ,286,0x7b01429e5ade22c5b4002f0da287717e8ad05375,0x9d24417a3fa1acf01983784ae5efd68212452fd1,plot,54,10,2 船町,1069,新宿区,新宿区,0,1,0,0
+5859,5890, , ,41,0x09be9ab0eb61327d26904bae69efdc6633d5eec8,,plot,194,9,3 新宿,1150,新宿区,新宿区,0,0,0,0
+5860,5891, , ,60,0xbc2a21a50d88e0a48b75c0a5516ae51bfa45ce6e,,plot,224,11,2 よちょうちょ,1096,新宿区,新宿区,0,0,0,0
+5861,5892,Tie Dye Ninja Dojo Garden, ,1963,0x7b01429e5ade22c5b4002f0da287717e8ad05375,0x1E3C06381A11375AAeE09c0A368c81E950211EA7|0x9d24417a3fa1acf01983784ae5efd68212452fd1|0xDEc096F829AAc7bF4b9D927903eF08F51De34a21|0x1E3C06381A11375AAeE09c0A368c81E950211EA7,plot,305,8,5 四谷,1070,新宿区,新宿区,0,95,0,0
+5862,5893, , ,40,0xeb4e76550fff21148d771de2c61e529ab4a08e4a,,plot,99,15,3 戸塚町,1171,新宿区,新宿区,0,0,0,0
+5863,5894, , ,45,0xa62d7ad2fddbad38a0aba25e40cdfe2edfa4d183,,plot,79,13,2 西早稲田,1199,新宿区,新宿区,0,0,0,0
+5864,5895, , ,62,0x2d891ed45c4c3eab978513df4b92a35cf131d2e2,,plot,119,14,19 須賀町,1189,新宿区,新宿区,0,0,0,0
+5865,5896, , ,31,0xbc2a21a50d88e0a48b75c0a5516ae51bfa45ce6e,,plot,179,10,3 よちょうちょ,1102,新宿区,新宿区,0,0,0,0
+5866,5897, , ,51,0xbc2a21a50d88e0a48b75c0a5516ae51bfa45ce6e,,plot,169,13,2 戸塚町,1166,新宿区,新宿区,0,0,0,0
+5867,5898,Tie Dye Ninjas Dojo, ,873,0x7b01429e5ade22c5b4002f0da287717e8ad05375,0x1E3C06381A11375AAeE09c0A368c81E950211EA7|0x9d24417a3fa1acf01983784ae5efd68212452fd1|0x1E3C06381A11375AAeE09c0A368c81E950211EA7,plot,152,16,3 船町,1062,新宿区,新宿区,0,23,0,0
+5868,5899, , ,61,0xa62d7ad2fddbad38a0aba25e40cdfe2edfa4d183,,plot,135,8,3 西早稲田,1203,新宿区,新宿区,0,0,0,0
+5869,5900, , ,15,0x2d891ed45c4c3eab978513df4b92a35cf131d2e2,,plot,83,10,43 이문로,759,서울,서울,0,0,0,0
+5870,5901, , ,14,0x2d891ed45c4c3eab978513df4b92a35cf131d2e2,,plot,109,8,41 이문로,756,서울,서울,0,0,0,0
+5871,5902, , ,8,0x2d891ed45c4c3eab978513df4b92a35cf131d2e2,,plot,209,11,47 이문로,770,서울,서울,0,0,0,0
+5872,5903, , ,23,0x2d891ed45c4c3eab978513df4b92a35cf131d2e2,,plot,199,16,37 이문로,771,서울,서울,0,0,0,0
+5873,5904, , ,39,0x3644c67ba7738046994b7134fd10ab9895504170,,plot,119,8,23 외대역동로,749,서울,서울,0,0,0,0
+5874,5905, , ,14,0x2d891ed45c4c3eab978513df4b92a35cf131d2e2,,plot,142,11,31 이문로,757,서울,서울,0,0,0,0
+5875,5906, , ,18,0x2d891ed45c4c3eab978513df4b92a35cf131d2e2,,plot,199,10,2 왕산로,781,서울,서울,0,0,0,0
+5876,5907, , ,5,0x2d891ed45c4c3eab978513df4b92a35cf131d2e2,,plot,167,8,53 이문로,770,서울,서울,0,0,0,0
+5877,5908, , ,4,0x2d891ed45c4c3eab978513df4b92a35cf131d2e2,,plot,90,9,59 이문로,759,서울,서울,0,0,0,0
+5878,5909, , ,139,0x7ca6b4645b71f874a35bec18f0e997e51d8d815c,0xc6b6d06cb653362388Fb381475707eA3A6F9bbf2,plot,153,11,19 외대역동로,738,서울,서울,0,0,0,0
+5879,5910, , ,11,0x2d891ed45c4c3eab978513df4b92a35cf131d2e2,,plot,129,9,2 헌릉로,749,서울,서울,0,0,0,0
+5880,5911, , ,6,0x2d891ed45c4c3eab978513df4b92a35cf131d2e2,,plot,181,9,3 왕산로,788,서울,서울,0,0,0,0
+5881,5912,Allister Growley, ,217,0xe57c7c27681c6578e85604ca0fe88c95e67e8541,0xDb08eDbCF449De2A2B27448a8040935802c621F1,plot,119,11,17 외대역동로,739,서울,서울,0,89,0,0
+5882,5913, , ,154,0xe9b4c1e5883a34db52807197ad391fc23f5c6d0f,,plot,167,9,5 테헤란로,739,서울,서울,0,2,0,0
+5883,5914, , ,12,0x3644c67ba7738046994b7134fd10ab9895504170,,plot,95,10,5 왕산로,795,서울,서울,0,2,0,0
+5884,5915, , ,7,0x2d891ed45c4c3eab978513df4b92a35cf131d2e2,,plot,77,8,29 이문로,773,서울,서울,0,0,0,0
+5885,5916, , ,1,0x2d891ed45c4c3eab978513df4b92a35cf131d2e2,,plot,195,8,3 보문로,788,서울,서울,0,0,0,0
+5886,5917, , ,13,0x2d891ed45c4c3eab978513df4b92a35cf131d2e2,,plot,143,11,23 이문로,754,서울,서울,0,0,0,0
+5887,5918, , ,3,0x2d891ed45c4c3eab978513df4b92a35cf131d2e2,,plot,181,10,2 언주로,779,서울,서울,0,0,0,0
+5888,5919, , ,160,0xa5ff0d30460e7790cc4c7e37aad1ce86efc50e2b,,plot,54,8,13 외대역동로,730,서울,서울,0,0,0,0
+5889,5920, , ,5,0x2d891ed45c4c3eab978513df4b92a35cf131d2e2,,plot,153,14,61 이문로,770,서울,서울,0,0,0,0
+5890,5921, , ,79,0x2d891ed45c4c3eab978513df4b92a35cf131d2e2,,plot,48,10,3 헌릉로,738,서울,서울,0,0,0,0
+5891,5922, , ,191,0xf942ce6643bc80d0bcc1bea4fd4657e600a1de88,0xB605eD642b5D897d845c84b97ac804Ac764A977E|0xa2193Ee5868bCE89Cfd7150C7694D0F3b6eFb080|0xF942CE6643bC80D0Bcc1BEA4FD4657e600A1De88|0xEAA0FBCCC3328e896b58dDe26cDB67639C4904ac|0x9fC004C5B4781f07C54C85366a00D4cd96e3bDfd,plot,359,11,3 약령서길,721,서울,서울,0,0,0,0
+5892,5923, , ,6,0x2d891ed45c4c3eab978513df4b92a35cf131d2e2,,plot,239,13,31 약령중앙로,801,서울,서울,0,0,0,0
+5893,5924, , ,3,0x2d891ed45c4c3eab978513df4b92a35cf131d2e2,,plot,59,11,67 이문로,761,서울,서울,0,0,0,0
+5894,5925, , ,1,0x2d891ed45c4c3eab978513df4b92a35cf131d2e2,,plot,71,13,2 약령시로,807,서울,서울,0,0,0,0
+5895,5926, , ,5,0x2d891ed45c4c3eab978513df4b92a35cf131d2e2,,plot,143,9,5 헌릉로,749,서울,서울,0,0,0,0
+5896,5927, , ,17,0x3644c67ba7738046994b7134fd10ab9895504170,,plot,143,9,19 이문로,755,서울,서울,0,0,0,0
+5897,5928, , ,85,0xca027fe02ff3aea8db89aeb8ab2a5d08cee3ddb8,0xe9b4C1e5883A34dB52807197AD391Fc23f5C6d0f,plot,107,8,3 테헤란로,741,서울,서울,0,2,0,0
+5898,5929, , ,161,0x2d891ed45c4c3eab978513df4b92a35cf131d2e2,,plot,76,8,37 약령서,723,서울,서울,0,0,0,0
+5899,5930, , ,5,0x2d891ed45c4c3eab978513df4b92a35cf131d2e2,,plot,220,10,3 언주로,797,서울,서울,0,0,0,0
+5900,5931, , ,2,0x2d891ed45c4c3eab978513df4b92a35cf131d2e2,,plot,142,8,2 보문로,784,서울,서울,0,0,0,0
+5901,5932, , ,1,0x2d891ed45c4c3eab978513df4b92a35cf131d2e2,,plot,170,10,5 약령시로,806,서울,서울,0,0,0,0
+5902,5933, , ,295,0x081e92f8b195999d71b8c88d042da75f8be8ed9f,0xA8093c09098452727492968dDfE4A0E033ab76BD,plot,203,13,29 약령서,724,서울,서울,0,341,0,0
+5903,5934, , ,87,0x3644c67ba7738046994b7134fd10ab9895504170,,plot,118,12,5 약령서길,721,서울,서울,0,0,0,0
+5904,5935, , ,38,0x3644c67ba7738046994b7134fd10ab9895504170,,plot,89,14,7 헌릉로,736,서울,서울,0,0,0,0
+5905,5936, , ,22,0xca027fe02ff3aea8db89aeb8ab2a5d08cee3ddb8,,plot,53,12,2 테헤란로,742,서울,서울,0,0,0,0
+5906,5937, , ,17,0x2d891ed45c4c3eab978513df4b92a35cf131d2e2,,plot,269,13,17 이문로,775,서울,서울,0,0,0,0
+5907,5938, , ,8,0x2d891ed45c4c3eab978513df4b92a35cf131d2e2,,plot,135,17,23 약령중앙로,810,서울,서울,0,0,0,0
+5908,5939, , ,6,0x2d891ed45c4c3eab978513df4b92a35cf131d2e2,,plot,89,9,71 이문로,769,서울,서울,0,0,0,0
+5909,5940, , ,0,0x2d891ed45c4c3eab978513df4b92a35cf131d2e2,,plot,69,8,11 약령시로,801,서울,서울,0,0,0,0
+5910,5941, , ,74,0x272dbbeea4bd4f6a72a18832f47b7e2623b7a370,,plot,89,8,31 약령서,714,서울,서울,0,8,0,0
+5911,5942, , ,2,0x2d891ed45c4c3eab978513df4b92a35cf131d2e2,,plot,83,8,37 약령중앙로,820,서울,서울,0,0,0,0
+5912,5943, , ,2,0x2d891ed45c4c3eab978513df4b92a35cf131d2e2,,plot,111,8,3 약령시로,819,서울,서울,0,0,0,0
+5913,5944, , ,6,0x3b97b6cbbfcfff88cf4a175e665c5715a3efe4f0,,plot,77,17,2 양재천로,784,서울,서울,0,0,0,0
+5914,5945, , ,10,0x2d891ed45c4c3eab978513df4b92a35cf131d2e2,,plot,134,8,2 창덕궁,793,서울,서울,0,0,0,0
+5915,5946, , ,54,0x2d891ed45c4c3eab978513df4b92a35cf131d2e2,,plot,139,9,2 약령서길,707,서울,서울,0,0,0,0
+5916,5947, , ,21,0x2d891ed45c4c3eab978513df4b92a35cf131d2e2,,plot,189,13,13 이문로,754,서울,서울,0,0,0,0
+5917,5948, , ,11,0x2d891ed45c4c3eab978513df4b92a35cf131d2e2,,plot,41,14,29 약령중앙로,821,서울,서울,0,0,0,0
+5918,5949, , ,41,0x3644c67ba7738046994b7134fd10ab9895504170,,plot,155,10,19 약령서,726,서울,서울,0,0,0,0
+5919,5950,MVB, ,125,0x32ab4262df2c10ccc199f5f8e7332ed507ef3ea5,,plot,149,14,11 약령서길,721,서울,서울,0,4,0,0
+5920,5951, , ,57,0x7ca6b4645b71f874a35bec18f0e997e51d8d815c,0xc6b6d06cb653362388Fb381475707eA3A6F9bbf2,plot,194,14,73 이문로,751,서울,서울,0,0,0,0
+5921,5952, , ,7,0x2d891ed45c4c3eab978513df4b92a35cf131d2e2,,plot,167,8,17 약령시로,801,서울,서울,0,0,0,0
+5922,5953, , ,36,0x06d4244762288d5d82518abfe7fbe9a20b0f98ec,,plot,139,12,17 약령중앙로,806,서울,서울,0,0,0,0
+5923,5954, , ,41,0x3b97b6cbbfcfff88cf4a175e665c5715a3efe4f0,0xDb08eDbCF449De2A2B27448a8040935802c621F1,plot,111,12,7 왕산로,827,서울,서울,0,0,0,0
+5924,5955, , ,41,0x3b97b6cbbfcfff88cf4a175e665c5715a3efe4f0,,plot,129,10,79 이문로,770,서울,서울,0,20,0,0
+5925,5956, , ,178,0x60b1f8ba747c75aacb66f6c2bb7683211523219e,,plot,309,8,7 약령서길,707,서울,서울,0,0,0,0
+5926,5957, , ,79,0x60b1f8ba747c75aacb66f6c2bb7683211523219e,,plot,287,10,11 외대역동로,698,서울,서울,0,0,0,0
+5927,5958, , ,29,0x13816f65ba8195768e6825eb774fd3c6a05a0ac8,,plot,153,8,5 자곡로,739,서울,서울,0,0,0,0
+5928,5959, , ,29,0x60b1f8ba747c75aacb66f6c2bb7683211523219e,,plot,143,13,19 약령중앙로,822,서울,서울,0,0,0,0
+5929,5960, , ,53,0x60b1f8ba747c75aacb66f6c2bb7683211523219e,,plot,207,10,2 답십리로,784,서울,서울,0,0,0,0
+5930,5961, , ,70,0x60b1f8ba747c75aacb66f6c2bb7683211523219e,,plot,303,8,7 약령시로,819,서울,서울,0,0,0,0
+5931,5962, , ,82,0x2d891ed45c4c3eab978513df4b92a35cf131d2e2,,plot,288,12,2 학동로,730,서울,서울,0,0,0,0
+5932,5963, , ,84,0x60b1f8ba747c75aacb66f6c2bb7683211523219e,,plot,189,13,11 이문로,755,서울,서울,0,0,0,0
+5933,5964, , ,74,0xabb9216e5e28deba84d3154ea73942860457ecd1,,plot,99,8,7 이문로,778,서울,서울,0,0,0,0
+5934,5965, , ,41,0x3b97b6cbbfcfff88cf4a175e665c5715a3efe4f0,,plot,69,12,13 약령중앙로,807,서울,서울,0,0,0,0
+5935,5966, , ,141,0x2d891ed45c4c3eab978513df4b92a35cf131d2e2,,plot,272,13,23 약령서,700,서울,서울,0,0,0,0
+5936,5967, , ,23,0x2d891ed45c4c3eab978513df4b92a35cf131d2e2,,plot,134,8,83 이문로,751,서울,서울,0,0,0,0
+5937,5968, , ,75,0x714362fa571f1af2cea8289ee3f6cab052b5fb3a,0x8115AfD8DFfCE5579381AD27524b6Feeae917BEF,plot,109,15,7 양재대로,788,서울,서울,0,0,0,0
+5938,5969, ,Travala.com,184,0x0726f2ae54dcd68d09813c9951725b8e50d0ffc2,,plot,153,8,13 약령서,728,서울,서울,0,24,0,0
+5939,5970, , ,65,0x60b1f8ba747c75aacb66f6c2bb7683211523219e,,plot,219,14,11 왕산로,830,서울,서울,0,0,0,0
+5940,5971, , ,34,0x06d4244762288d5d82518abfe7fbe9a20b0f98ec,,plot,153,12,23 약령시로,801,서울,서울,0,0,0,0
+5941,5972, , ,20,0x06d4244762288d5d82518abfe7fbe9a20b0f98ec,,plot,127,8,13 약령시로,819,서울,서울,0,0,0,0
+5942,5973, , ,45,0x641cf19cbd83666d8e21652981db09088568528b,,plot,152,8,13 약령서길,721,서울,서울,0,0,0,0
+5943,5974, , ,37,0x60b1f8ba747c75aacb66f6c2bb7683211523219e,,plot,199,12,5 역삼로,831,서울,서울,0,0,0,0
+5944,5975, , ,21,0x60b1f8ba747c75aacb66f6c2bb7683211523219e,,plot,197,9,2 와룡공원길,830,서울,서울,0,0,0,0
+5945,5976, , ,38,0x06d4244762288d5d82518abfe7fbe9a20b0f98ec,,plot,179,13,7 외대역동로,686,서울,서울,0,0,0,0
+5946,5977,Alien Honey Gallery 2.0, ,117,0x1a1136a351fb653df6af838442c9fdf44f2f42d8,,plot,209,8,17 약령서,701,서울,서울,0,3,0,0
+5947,5978, , ,38,0x06d4244762288d5d82518abfe7fbe9a20b0f98ec,,plot,167,13,2 겸재로,689,서울,서울,0,0,0,0
+5948,5979, , ,70,0x3b97b6cbbfcfff88cf4a175e665c5715a3efe4f0,,plot,53,13,3 자곡로,743,서울,서울,0,1,0,0
+5949,5980, , ,28,0x2d891ed45c4c3eab978513df4b92a35cf131d2e2,,plot,83,8,3 겸재로,689,서울,서울,0,0,0,0
+5950,5981, , ,37,0x3b97b6cbbfcfff88cf4a175e665c5715a3efe4f0,,plot,69,8,29 약령시로,801,서울,서울,0,0,0,0
+5951,5982, , ,69,0x7ca6b4645b71f874a35bec18f0e997e51d8d815c,0xc6b6d06cb653362388Fb381475707eA3A6F9bbf2,plot,119,9,89 이문로,770,서울,서울,0,0,0,0
+5952,5983, , ,23,0x2d891ed45c4c3eab978513df4b92a35cf131d2e2,,plot,34,8,3 학동로,742,서울,서울,0,0,0,0
+5953,5984, , ,91,0x60b1f8ba747c75aacb66f6c2bb7683211523219e,,plot,265,10,5 양재대로,803,서울,서울,0,0,0,0
+5954,5985, , ,211,0x3b97b6cbbfcfff88cf4a175e665c5715a3efe4f0,,plot,74,10,2 고미술로,839,서울,서울,0,20,0,0
+5955,5986, , ,28,0x2d891ed45c4c3eab978513df4b92a35cf131d2e2,,plot,76,8,5 외대역동로,687,서울,서울,0,0,0,0
+5956,5987, , ,42,0x60b1f8ba747c75aacb66f6c2bb7683211523219e,,plot,167,9,11 약령중앙로,825,서울,서울,0,0,0,0
+5957,5988, , ,146,0x60b1f8ba747c75aacb66f6c2bb7683211523219e,,plot,170,15,5 이문로,757,서울,서울,0,0,0,0
+5958,5989, , ,181,0x2d891ed45c4c3eab978513df4b92a35cf131d2e2,,plot,305,9,13 왕산로,839,서울,서울,0,0,0,0
+5959,5990, , ,161,0x2d891ed45c4c3eab978513df4b92a35cf131d2e2,,plot,169,10,11 약령서,714,서울,서울,0,0,0,0
+5960,5991, , ,35,0x3b97b6cbbfcfff88cf4a175e665c5715a3efe4f0,,plot,62,10,3 답십리로,789,서울,서울,0,0,0,0
+5961,5992, , ,131,0xfcad3475520fb54fc95305a6549a79170da8b7c0,,plot,77,8,7 약령서,731,서울,서울,0,0,0,0
+5962,5993, , ,24,0x60b1f8ba747c75aacb66f6c2bb7683211523219e,,plot,255,8,19 약령시로,819,서울,서울,0,0,0,0
+5963,5994, , ,16,0x2d891ed45c4c3eab978513df4b92a35cf131d2e2,,plot,55,8,3 역삼로,845,서울,서울,0,0,0,0
+5964,5995, , ,120,0x60b1f8ba747c75aacb66f6c2bb7683211523219e,,plot,219,12,17 약령서길,706,서울,서울,0,0,0,0
+5965,5996, , ,44,0x06d4244762288d5d82518abfe7fbe9a20b0f98ec,,plot,113,11,5 약령중앙로,817,서울,서울,0,0,0,0
+5966,5997, , ,48,0x60b1f8ba747c75aacb66f6c2bb7683211523219e,,plot,194,9,97 이문로,751,서울,서울,0,0,0,0
+5967,5998, , ,34,0x2d891ed45c4c3eab978513df4b92a35cf131d2e2,,plot,142,8,3 일원로,684,서울,서울,0,0,0,0
+5968,5999, , ,44,0x2d891ed45c4c3eab978513df4b92a35cf131d2e2,,plot,44,11,3 고미술로,839,서울,서울,0,0,0,0
+5969,6000, , ,31,0x2d891ed45c4c3eab978513df4b92a35cf131d2e2,,plot,170,9,5 겸재로,684,서울,서울,0,0,0,0
+5970,6001,Seoul Art Museum_A, ,1031,0x5e758f5967c46767253f0320b6a1d78a2d1476cb,,plot,299,14,3 이문로,780,서울,서울,0,97,0,0
+5971,6002, , ,29,0x2d891ed45c4c3eab978513df4b92a35cf131d2e2,,plot,69,17,2 역삼로,846,서울,서울,0,0,0,0
+5972,6003, , ,81,0x9f0574a5f28779a1a682cfe4bbd090ee058d07aa,,plot,119,10,3 양재대로,795,서울,서울,0,0,0,0
+5973,6004, , ,47,0x60b1f8ba747c75aacb66f6c2bb7683211523219e,,plot,179,10,37 약령시로,800,서울,서울,0,0,0,0
+5974,6005, , ,49,0x2d891ed45c4c3eab978513df4b92a35cf131d2e2,,plot,90,15,2 일원로,690,서울,서울,0,0,0,0
+5975,6006, , ,137,0x71649d768128dfc64734cb58713e972e045421dc,0x68a247A67d38D10306bBa06DE8f3bc154b3bb51b,plot,288,8,19 약령서길,721,서울,서울,0,11,0,0
+5976,6007, , ,90,0x2d891ed45c4c3eab978513df4b92a35cf131d2e2,,plot,186,16,11 영동대로,703,서울,서울,0,0,0,0
+5977,6008, , ,87,0xe773382a7574de1c82b1f67099e680c043048708,,plot,209,9,101 이문로,770,서울,서울,0,0,0,0
+5978,6009, , ,39,0x3644c67ba7738046994b7134fd10ab9895504170,,plot,129,8,2 외대역동로,673,서울,서울,0,0,0,0
+5979,6010, , ,47,0x1963203759f5c5eb5c5c916b3509c9f26dd0381a,,plot,142,8,3 외대역동로,674,서울,서울,0,0,0,0
+5980,6011, , ,65,0x2d891ed45c4c3eab978513df4b92a35cf131d2e2,,plot,84,10,5 학동로,742,서울,서울,0,0,0,0
+5981,6012,Seoul Art Museum_B, ,995,0x5e758f5967c46767253f0320b6a1d78a2d1476cb,0x8d13548e4171068374e8d0e47ab5948449bc6cae,plot,227,17,2 이문로,759,서울,서울,0,83,0,0
+5982,6013, , ,32,0x2d891ed45c4c3eab978513df4b92a35cf131d2e2,,plot,186,8,17 왕산로,854,서울,서울,0,0,0,0
+5983,6014, , ,3,0x2d891ed45c4c3eab978513df4b92a35cf131d2e2,,plot,135,8,3 삼성로,841,서울,서울,0,0,0,0
+5984,6015, , ,28,0x06d4244762288d5d82518abfe7fbe9a20b0f98ec,,plot,203,8,7 약령중앙로,827,서울,서울,0,0,0,0
+5985,6016, , ,23,0x2d891ed45c4c3eab978513df4b92a35cf131d2e2,,plot,103,8,2 강남대로,672,서울,서울,0,0,0,0
+5986,6017, , ,239,0x1963203759f5c5eb5c5c916b3509c9f26dd0381a,,plot,175,8,2 남부순환로,848,서울,서울,0,73,0,0
+5987,6018, , ,50,0x2d891ed45c4c3eab978513df4b92a35cf131d2e2,,plot,90,12,2 윤보선길,789,서울,서울,0,0,0,0
+5988,6019, , ,54,0x2d891ed45c4c3eab978513df4b92a35cf131d2e2,,plot,118,8,19 왕산로,857,서울,서울,0,0,0,0
+5989,6020, , ,214,0x2fec5d8835b39f314187dc1da933b273f32f18c3,0x2FEC5d8835b39f314187Dc1Da933B273F32f18c3,plot,237,12,2 자곡로,740,서울,서울,0,0,0,0
+5990,6021, , ,41,0x3b97b6cbbfcfff88cf4a175e665c5715a3efe4f0,,plot,89,11,103 이문로,751,서울,서울,0,0,0,0
+5991,6022, , ,52,0x2d891ed45c4c3eab978513df4b92a35cf131d2e2,,plot,233,12,2 경동시장로,685,서울,서울,0,0,0,0
+5992,6023, , ,21,0x2d891ed45c4c3eab978513df4b92a35cf131d2e2,,plot,191,8,3 경희대로,835,서울,서울,0,0,0,0
+5993,6024, , ,70,0x3644c67ba7738046994b7134fd10ab9895504170,,plot,129,16,2 압구정로,672,서울,서울,0,0,0,0
+5994,6026, , ,86,0x2d891ed45c4c3eab978513df4b92a35cf131d2e2,,plot,97,12,5 약령서,713,서울,서울,0,0,0,0
+5995,6027, , ,79,0x3b97b6cbbfcfff88cf4a175e665c5715a3efe4f0,0x0FD73ea2391d2ee5806A15A22e67D583a403409b|0xEcd8BbA75F11406B2c46b021f13A5b451CFc1591|0xDb08eDbCF449De2A2B27448a8040935802c621F1|0x3EC01bC8Ab8610BE6F66F55ba2d5B4fa813Bc082,plot,285,17,2 망우로,855,서울,서울,0,1,0,0
+5996,6028, , ,39,0x2d891ed45c4c3eab978513df4b92a35cf131d2e2,,plot,153,9,2 양재대로,806,서울,서울,0,0,0,0
+5997,6029, , ,16,0x2d891ed45c4c3eab978513df4b92a35cf131d2e2,,plot,181,8,31 약령시로,819,서울,서울,0,0,0,0
+5998,6030, , ,59,0x2d891ed45c4c3eab978513df4b92a35cf131d2e2,,plot,207,8,2 사가정로,848,서울,서울,0,0,0,0
+5999,6031,CTAC, ,403,0x872455e133f00c80a01e891e36707ea1c99147c6,0xB0eef6392Da5b4a31310F1237092f8950d34df8b,plot,135,13,3 약령서,732,서울,서울,0,38,0,0
+6000,6032, , ,33,0x2d891ed45c4c3eab978513df4b92a35cf131d2e2,,plot,83,8,13 영동대로,692,서울,서울,0,0,0,0
+6001,6034, , ,31,0x2d891ed45c4c3eab978513df4b92a35cf131d2e2,,plot,169,8,2 송월,849,서울,서울,0,0,0,0
+6002,6035, , ,28,0x2d891ed45c4c3eab978513df4b92a35cf131d2e2,,plot,149,8,43 약령시로,800,서울,서울,0,0,0,0
+6003,6036, , ,35,0x2d891ed45c4c3eab978513df4b92a35cf131d2e2,,plot,107,12,2 서울시립대로,672,서울,서울,0,0,0,0
+6004,6037, , ,118,0x71649d768128dfc64734cb58713e972e045421dc,0x68a247A67d38D10306bBa06DE8f3bc154b3bb51b,plot,118,14,29 약령서길,721,서울,서울,0,9,0,0
+6005,6038, , ,32,0x2d891ed45c4c3eab978513df4b92a35cf131d2e2,,plot,143,10,3 경동시장로,685,서울,서울,0,0,0,0
+6006,6039, , ,16,0x2d891ed45c4c3eab978513df4b92a35cf131d2e2,,plot,65,9,2 약령중앙로,820,서울,서울,0,0,0,0
+6007,6040, , ,97,0x2d891ed45c4c3eab978513df4b92a35cf131d2e2,,plot,229,16,23 약령서길,707,서울,서울,0,0,0,0
+6008,6041, , ,17,0x2d891ed45c4c3eab978513df4b92a35cf131d2e2,,plot,48,11,5 영동대로,706,서울,서울,0,0,0,0
+6009,6042, , ,27,0x517dcd3ed115f0139fb2d89dffd0593641722390,,plot,103,13,2 경희대로,851,서울,서울,0,0,0,0
+6010,6043, , ,316,0x2d891ed45c4c3eab978513df4b92a35cf131d2e2,,plot,116,12,2 약령서,720,서울,서울,0,0,0,0
+6011,6044, , ,36,0x2d891ed45c4c3eab978513df4b92a35cf131d2e2,,plot,95,17,3 약령중앙로,830,서울,서울,0,0,0,0
+6012,6046, , ,23,0x2d891ed45c4c3eab978513df4b92a35cf131d2e2,,plot,167,14,41 약령시로,819,서울,서울,0,0,0,0
+6013,6047, , ,11,0x2d891ed45c4c3eab978513df4b92a35cf131d2e2,,plot,76,9,3 망우로,862,서울,서울,0,0,0,0
+6014,6048, , ,34,0x2d891ed45c4c3eab978513df4b92a35cf131d2e2,,plot,107,8,3 서울시립대로,672,서울,서울,0,0,0,0
+6015,6049, , ,36,0x2d891ed45c4c3eab978513df4b92a35cf131d2e2,,plot,119,15,5 경동시장로,693,서울,서울,0,0,0,0
+6016,6050, , ,45,0x2d891ed45c4c3eab978513df4b92a35cf131d2e2,,plot,209,15,2 삼성로,843,서울,서울,0,0,0,0
+6017,6051, , ,15,0x2d891ed45c4c3eab978513df4b92a35cf131d2e2,,plot,179,8,11 경희대로,837,서울,서울,0,0,0,0
+6018,6052, , ,21,0x2d891ed45c4c3eab978513df4b92a35cf131d2e2,,plot,103,14,5 경희대로,851,서울,서울,0,0,0,0
+6019,6053, , ,49,0x2d891ed45c4c3eab978513df4b92a35cf131d2e2,,plot,167,11,7 영동대로,690,서울,서울,0,0,0,0
+6020,6054, , ,34,0x2d891ed45c4c3eab978513df4b92a35cf131d2e2,,plot,143,13,3 옥인,838,서울,서울,0,0,0,0
+6021,6055, , ,104,0x2d891ed45c4c3eab978513df4b92a35cf131d2e2,,plot,155,10,3 영동대로,708,서울,서울,0,0,0,0
+6022,6056, , ,7,0x2d891ed45c4c3eab978513df4b92a35cf131d2e2,,plot,41,8,2 평창길,864,서울,서울,0,0,0,0
+6023,6057, , ,30,0x2d891ed45c4c3eab978513df4b92a35cf131d2e2,,plot,80,10,2 선릉로,672,서울,서울,0,0,0,0
+6024,6058, , ,37,0x2d891ed45c4c3eab978513df4b92a35cf131d2e2,,plot,79,14,7 경동시장로,693,서울,서울,0,0,0,0
+6025,6059, , ,20,0x2d891ed45c4c3eab978513df4b92a35cf131d2e2,,plot,116,13,7 경희대로,851,서울,서울,0,0,0,0
+6026,6061, , ,10,0x2d891ed45c4c3eab978513df4b92a35cf131d2e2,,plot,69,17,17 경희대로,837,서울,서울,0,0,0,0
+6027,6062, , ,23,0x2d891ed45c4c3eab978513df4b92a35cf131d2e2,,plot,79,15,3 고산자로,864,서울,서울,0,0,0,0
+6028,6063, , ,50,0x2d891ed45c4c3eab978513df4b92a35cf131d2e2,,plot,203,9,3 선릉로,672,서울,서울,0,0,0,0
+6029,6064, , ,24,0x2d891ed45c4c3eab978513df4b92a35cf131d2e2,,plot,131,8,2 옥인,853,서울,서울,0,0,0,0
+6030,6065, , ,63,0x2d891ed45c4c3eab978513df4b92a35cf131d2e2,,plot,120,9,2 영동대로,694,서울,서울,0,0,0,0
+6031,6066, , ,19,0x2d891ed45c4c3eab978513df4b92a35cf131d2e2,,plot,207,8,13 경희대로,851,서울,서울,0,0,0,0
+6032,6067, , ,71,0x2d891ed45c4c3eab978513df4b92a35cf131d2e2,,plot,135,14,2 자하문로,672,서울,서울,0,0,0,0
+6033,6068, , ,64,0x2d891ed45c4c3eab978513df4b92a35cf131d2e2,,plot,119,14,2 고산자로,864,서울,서울,0,0,0,0
+</div>
+    </body>
+</html>
