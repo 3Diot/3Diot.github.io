@@ -1,4 +1,4 @@
-# 3Diot.com
+# CVMiniGames.com
 Where 3D and the Internet of (meta) Things meet. 
 
 Site still being built.
