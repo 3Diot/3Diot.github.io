@@ -1,10 +1,20 @@
-# CVMiniGames.com
-Where 3D and the Internet of (meta) Things meet. 
+## Welcome! 
 
-Site still being built.
-Please come back after Jan 5th for working links to view a web compatible rendering of the following articles:
+Gaming is being brought to CV and you are invited to choose the direction of developments. 
 
-## Articles:
+This site is still being built. It is to be accompanyed with a token and dao.
+
+Please come back after Jan 10th (ish) for working links to view a web compatible rendering of the following articles:
+
+## About
+This site will be home to:
+- DAO voting information
+- A compendium of articles covering all things CV
+- Interactive data reports
+- Alpha, presale, ticketing and more.
+- Tools and services that enhance your CV playing experience
+
+## Articles (Comming soon!):
 - <a src='./blog/docs/002_CV.html'>Intro</a>
 - <a src='./blog/docs/002_CV.html'>Guestbook Locations</a>
 - <a src='./blog/docs/002_CV.html'>CV_Misc Notes</a>
