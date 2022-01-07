@@ -1,0 +1,14 @@
+{
+  "persistentCheckout": true,
+  "icon": "https://pbs.twimg.com/profile_images/1479305970069159936/3jvoRpvc_400x400.jpg",
+  "callToAction": {
+    "default": "Sometimes the smallest things mean the most",
+    "pending": "CVMiniGames thanks you for your donation! ",
+    "confirmed": "CVMiniGames thanks you for your donation! "
+  },
+  "locks": {
+    "0x1aE62c0B803fD85Ff2a774961C022abFFc834214": {
+      "name": "CVMiniGames"
+    }
+  }
+}
