@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Parcels</title>
+  <script type="module" src="https://cdn.jsdelivr.net/npm/@ionic/core/dist/ionic/ionic.esm.js"></script>
+  <script nomodule src="https://cdn.jsdelivr.net/npm/@ionic/core/dist/ionic/ionic.js"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@ionic/core/css/ionic.bundle.css" />
+</head>
+<body>
+  <ion-app>
+    <ion-header translucent > <!-- class="ion-no-border" -->
+      <ion-toolbar>
+        <ion-title>Parcels</ion-title>
+      </ion-toolbar> 
+    </ion-header>,
+    <ion-content fullscreen class="ion-padding"> 
+      <!-- 
+        # https://github.com/ionic-team/ionic-docs/blob/legacy/src/demos/api/content/index.html 
+        # https://github.com/ionic-team/ionic-docs/blob/legacy/src/demos/api/infinite-scroll/index.html
+        # https://github.com/ionic-team/ionic-docs/blob/legacy/src/demos/api/back-button/index.html
+      -->
+
+      <style>
+        /*
+        :root {
+          --ion-safe-area-top: 2px;
+          --ion-safe-area-bottom: 22px;
+        }
+        details{padding-bottom:8px}
+        summary>*{ display:inline-block }
+        h2, h3 {text-align: center; }
+        details > summary > h3 {display: inline;}
+        summary::marker { content: "🧡 "; }
+        */
+        h2, h3 { display: inline-block; }
+        body { text-align: center; } 
+        ion-content > div { margin-left: 25%; padding-top: 40px;  padding-bottom: 40px; }
+      </style> 
+      <p>Viewcount: <img src="https://visitor-badge.laobi.icu/badge?page_id=CVMiniGames.CVMiniGames.github.io" alt="Visitors" /></p>
+<h2>Get Parcels</h2>
+<p>&quot;&quot;&quot;
+#hide
+import sys
+sys.path.append('/workspaces/CVMiniGames.github.io/blog/')
+sys.path.append('/workspaces/CVMiniGames.github.io/docs/datasets/')
+&quot;&quot;&quot;</p>
+<p>Grab all parcels</p>
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>id</th>
+      <th>height</th>
+      <th>address</th>
+      <th>suburb</th>
+      <th>island</th>
+      <th>name</th>
+      <th>area</th>
+      <th>distance</th>
+      <th>owner</th>
+      <th>owner_name</th>
+      <th>...</th>
+      <th>x2</th>
+      <th>y1</th>
+      <th>label</th>
+      <th>y2</th>
+      <th>z1</th>
+      <th>z2</th>
+      <th>geometry.type</th>
+      <th>geometry.crs.type</th>
+      <th>geometry.crs.properties.name</th>
+      <th>geometry.coordinates</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>6748</td>
+      <td>6</td>
+      <td>31b Fault Line</td>
+      <td>Bronze</td>
+      <td>Scarcity</td>
+      <td>None</td>
+      <td>96</td>
+      <td>1849.130877</td>
+      <td>0x09d06dcef22051477cde12cfbfc674f60a53c66c</td>
+      <td>None</td>
+      <td>...</td>
+      <td>-1466</td>
+      <td>8</td>
+      <td>None</td>
+      <td>6</td>
+      <td>-1139</td>
+      <td>-1127</td>
+      <td>Polygon</td>
+      <td>name</td>
+      <td>EPSG:3857</td>
+      <td>[[[-14.74, -11.389899995], [-14.74, -11.27], [...</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>6747</td>
+      <td>9</td>
+      <td>37b Ruby Street</td>
+      <td>Silver</td>
+      <td>Scarcity</td>
+      <td>RUBY LOFT</td>
+      <td>120</td>
+      <td>1763.588144</td>
+      <td>0x3b97b6cbbfcfff88cf4a175e665c5715a3efe4f0</td>
+      <td>sexman.eth</td>
+      <td>...</td>
+      <td>-1257</td>
+      <td>8</td>
+      <td>None</td>
+      <td>9</td>
+      <td>-1245</td>
+      <td>-1237</td>
+      <td>Polygon</td>
+      <td>name</td>
+      <td>EPSG:3857</td>
+      <td>[[[-12.72, -12.45], [-12.72, -12.37], [-12.570...</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>6746</td>
+      <td>9</td>
+      <td>23b Antarcticite Road</td>
+      <td>Gold</td>
+      <td>Scarcity</td>
+      <td>None</td>
+      <td>104</td>
+      <td>1627.018697</td>
+      <td>0xc6786a54882ca1591745d748a2a92813e35c1a5d</td>
+      <td>Artolli</td>
+      <td>...</td>
+      <td>-1242</td>
+      <td>8</td>
+      <td>None</td>
+      <td>9</td>
+      <td>-1059</td>
+      <td>-1051</td>
+      <td>Polygon</td>
+      <td>name</td>
+      <td>EPSG:3857</td>
+      <td>[[[-12.55, -10.51], [-12.420100005, -10.51], [...</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>6745</td>
+      <td>7</td>
+      <td>11b Arsenopyrite Ave</td>
+      <td>Bronze</td>
+      <td>Scarcity</td>
+      <td>None</td>
+      <td>153</td>
+      <td>1945.814879</td>
+      <td>0x13816f65ba8195768e6825eb774fd3c6a05a0ac8</td>
+      <td>None</td>
+      <td>...</td>
+      <td>-1527</td>
+      <td>8</td>
+      <td>None</td>
+      <td>7</td>
+      <td>-1223</td>
+      <td>-1206</td>
+      <td>Polygon</td>
+      <td>name</td>
+      <td>EPSG:3857</td>
+      <td>[[[-15.270100005, -12.23], [-15.36, -12.23], [...</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>6744</td>
+      <td>8</td>
+      <td>7b Analcime Street</td>
+      <td>Silver</td>
+      <td>Scarcity</td>
+      <td>None</td>
+      <td>165</td>
+      <td>1778.345861</td>
+      <td>0xc6786a54882ca1591745d748a2a92813e35c1a5d</td>
+      <td>Artolli</td>
+      <td>...</td>
+      <td>-1317</td>
+      <td>8</td>
+      <td>None</td>
+      <td>8</td>
+      <td>-1206</td>
+      <td>-1195</td>
+      <td>Polygon</td>
+      <td>name</td>
+      <td>EPSG:3857</td>
+      <td>[[[-13.17, -11.95], [-13.17, -12.06], [-13.319...</td>
+    </tr>
+  </tbody>
+</table>
+<p>5 rows × 21 columns</p>
+</div><h2>Save Parcels</h2>
+cd ../data/workspaces/3Diot.github.io/blog/data
+df[:13].head(3)<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>id</th>
+      <th>height</th>
+      <th>address</th>
+      <th>suburb</th>
+      <th>island</th>
+      <th>name</th>
+      <th>area</th>
+      <th>distance</th>
+      <th>owner</th>
+      <th>owner_name</th>
+      <th>...</th>
+      <th>x2</th>
+      <th>y1</th>
+      <th>label</th>
+      <th>y2</th>
+      <th>z1</th>
+      <th>z2</th>
+      <th>geometry.type</th>
+      <th>geometry.crs.type</th>
+      <th>geometry.crs.properties.name</th>
+      <th>geometry.coordinates</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>6748</td>
+      <td>6</td>
+      <td>31b Fault Line</td>
+      <td>Bronze</td>
+      <td>Scarcity</td>
+      <td>None</td>
+      <td>96</td>
+      <td>1849.130877</td>
+      <td>0x09d06dcef22051477cde12cfbfc674f60a53c66c</td>
+      <td>None</td>
+      <td>...</td>
+      <td>-1466</td>
+      <td>8</td>
+      <td>None</td>
+      <td>6</td>
+      <td>-1139</td>
+      <td>-1127</td>
+      <td>Polygon</td>
+      <td>name</td>
+      <td>EPSG:3857</td>
+      <td>[[[-14.74, -11.389899995], [-14.74, -11.27], [...</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>6747</td>
+      <td>9</td>
+      <td>37b Ruby Street</td>
+      <td>Silver</td>
+      <td>Scarcity</td>
+      <td>RUBY LOFT</td>
+      <td>120</td>
+      <td>1763.588144</td>
+      <td>0x3b97b6cbbfcfff88cf4a175e665c5715a3efe4f0</td>
+      <td>sexman.eth</td>
+      <td>...</td>
+      <td>-1257</td>
+      <td>8</td>
+      <td>None</td>
+      <td>9</td>
+      <td>-1245</td>
+      <td>-1237</td>
+      <td>Polygon</td>
+      <td>name</td>
+      <td>EPSG:3857</td>
+      <td>[[[-12.72, -12.45], [-12.72, -12.37], [-12.570...</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>6746</td>
+      <td>9</td>
+      <td>23b Antarcticite Road</td>
+      <td>Gold</td>
+      <td>Scarcity</td>
+      <td>None</td>
+      <td>104</td>
+      <td>1627.018697</td>
+      <td>0xc6786a54882ca1591745d748a2a92813e35c1a5d</td>
+      <td>Artolli</td>
+      <td>...</td>
+      <td>-1242</td>
+      <td>8</td>
+      <td>None</td>
+      <td>9</td>
+      <td>-1059</td>
+      <td>-1051</td>
+      <td>Polygon</td>
+      <td>name</td>
+      <td>EPSG:3857</td>
+      <td>[[[-12.55, -10.51], [-12.420100005, -10.51], [...</td>
+    </tr>
+  </tbody>
+</table>
+<p>3 rows × 21 columns</p>
+</div>import requests
+import json
+
+deets = []
+for index, row in df.tail(200).iterrows():
+  url = 'https://www.cryptovoxels.com/api/parcels/'+str(row['id'])+'.json' 
+  r = requests.get(url)
+  data = json.loads(r.text) 
+  with open('./parcels/'+str(row['id'])+'.json', 'w') as file:
+    json.dump(data, file)
+  print(row['id'])<h2>Filtering Parcels</h2>
+import json
+deets = []
+for index, row in df[1:2].iterrows():
+  url = './parcels/'+str(row['id'])+'.json'
+  data = ''
+  with open(url, 'r') as j: 
+    data = json.loads(j.read()) 
+    data = data['parcel'] 
+  #coords = data.geometry.coordinates
+  #data['coords'] = coords
+  #del data.geometry.coordinates
+  #//content = data.content.features
+  #del data.content.features
+  deets.append( data )
+
+      <p><a href="https://mybinder.org/v2/gh/CVMiniGames/CVMiniGames.github.io/main"><img src="https://mybinder.org/badge_logo.svg" alt="Binder" /></a>
+        <a href="https://colab.research.google.com/github/CVMiniGames/CVMiniGames.github.io/blob/main/blog/notebooks/002_Parcels.ipynb><img src="https://pete88b.github.io/fastpages/assets/badges/colab.svg" alt="Binder" /></a>
+        <a href="https://github.com/CVMiniGames/CVMiniGames.github.io/blob/main/blog/notebooks/002_Parcels.ipynb"><img src="https://pete88b.github.io/fastpages/assets/badges/github.svg" alt="Binder" /></a>
+        <a href=""><img src="https://img.shields.io/github/last-commit/CVMiniGames/CVMiniGames.github.io.svg?style=flat" alt="GitHub last commit" /></a>  </p>
+        <p><a href="https://github.com/CVMiniGames/CVMiniGames.github.io"><img src="https://img.shields.io/github/stars/CVMiniGames/CVMiniGames.github.io.svg?style=social&amp;label=Star" alt="GitHub stars" /></a>
+        <a href="https://github.com/CVMiniGames/CVMiniGames.github.io"><img src="https://img.shields.io/github/watchers/CVMiniGames/CVMiniGames.github.io.svg?style=social&amp;label=Watch" alt="GitHub watchers" /></a>
+        <a href="https://github.com/CVMiniGames/CVMiniGames.github.io"><img src="https://img.shields.io/github/forks/CVMiniGames/CVMiniGames.github.io.svg?style=social&amp;label=Fork" alt="GitHub forks" /></a>
+        <a href="https://github.com/CVMiniGames/CVMiniGames.github.io"><img src="https://img.shields.io/github/followers/CVMiniGames.svg?style=social&amp;label=Follow" alt="GitHub followers" /></a> </p>
+        <p><a href="https://twitter.com/intent/tweet?text=Check%20out%20these%20%E2%9C%A8%20colab%20by%20@CVMiniGames%20https://github.com/CVMiniGames/CVMiniGames.github.io"><img src="https://img.shields.io/twitter/url/https/github.com/CVMiniGames/CVMiniGames.github.io.svg?style=social" alt="Tweet" /></a>
+        <a href="https://twitter.com/CVMiniGames"><img src="https://img.shields.io/twitter/follow/CVMiniGames.svg?style=social" alt="Twitter Follow" /></a>
+      </p>
+
+</ion-content>
+</ion-app>
+</body>
+</html>

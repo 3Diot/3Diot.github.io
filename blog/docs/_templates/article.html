@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{{title}}</title>
+  <script type="module" src="https://cdn.jsdelivr.net/npm/@ionic/core/dist/ionic/ionic.esm.js"></script>
+  <script nomodule src="https://cdn.jsdelivr.net/npm/@ionic/core/dist/ionic/ionic.js"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@ionic/core/css/ionic.bundle.css" />
+</head>
+<body>
+  <ion-app>
+    <ion-header translucent > <!-- class="ion-no-border" -->
+      <ion-toolbar>
+        <ion-title>{{title}}</ion-title>
+      </ion-toolbar> 
+    </ion-header>,
+    <ion-content fullscreen class="ion-padding"> 
+      <!-- 
+        # https://github.com/ionic-team/ionic-docs/blob/legacy/src/demos/api/content/index.html 
+        # https://github.com/ionic-team/ionic-docs/blob/legacy/src/demos/api/infinite-scroll/index.html
+        # https://github.com/ionic-team/ionic-docs/blob/legacy/src/demos/api/back-button/index.html
+      -->
+
+      <style>
+        /*
+        :root {
+          --ion-safe-area-top: 2px;
+          --ion-safe-area-bottom: 22px;
+        }
+        details{padding-bottom:8px}
+        summary>*{ display:inline-block }
+        h2, h3 {text-align: center; }
+        details > summary > h3 {display: inline;}
+        summary::marker { content: "🧡 "; }
+        */
+        h2, h3 { display: inline-block; }
+        body { text-align: center; } 
+        ion-content > div { margin-left: 25%; padding-top: 40px;  padding-bottom: 40px; }
+      </style> 
+      {{content}}
+
+      <p>
+        <a href="https://mybinder.org/v2/gh/CVMiniGames/CVMiniGames.github.io/main">
+          <img src="https://mybinder.org/badge_logo.svg" alt="Binder" /> </a>
+
+        <a href="https://colab.research.google.com/github/CVMiniGames/CVMiniGames.github.io/blob/main/blog/notebooks/{{filename}}>
+          <img src="https://pete88b.github.io/fastpages/assets/badges/colab.svg" alt="Binder" /></a>
+
+        <a href="https://github.com/CVMiniGames/CVMiniGames.github.io/blob/main/blog/notebooks/{{filename}}">
+          <img src="https://pete88b.github.io/fastpages/assets/badges/github.svg" alt="Binder" /></a>
+
+        <a href=""><img src="https://img.shields.io/github/last-commit/CVMiniGames/CVMiniGames.github.io.svg?style=flat" alt="GitHub last commit" /></a>
+      </p>
+        
+      <p>
+        <a href="https://github.com/CVMiniGames/CVMiniGames.github.io"><img src="https://img.shields.io/github/stars/CVMiniGames/CVMiniGames.github.io.svg?style=social&amp;label=Star" alt="GitHub stars" /></a>
+        <a href="https://github.com/CVMiniGames/CVMiniGames.github.io"><img src="https://img.shields.io/github/watchers/CVMiniGames/CVMiniGames.github.io.svg?style=social&amp;label=Watch" alt="GitHub watchers" /></a>
+        <a href="https://github.com/CVMiniGames/CVMiniGames.github.io"><img src="https://img.shields.io/github/forks/CVMiniGames/CVMiniGames.github.io.svg?style=social&amp;label=Fork" alt="GitHub forks" /></a>
+        <a href="https://github.com/CVMiniGames/CVMiniGames.github.io"><img src="https://img.shields.io/github/followers/CVMiniGames.svg?style=social&amp;label=Follow" alt="GitHub followers" /></a> </p>
+        
+      <p>
+        <a href="https://twitter.com/intent/tweet?text=Check%20out%20these%20%E2%9C%A8%20colab%20by%20@CVMiniGames%20https://github.com/CVMiniGames/CVMiniGames.github.io"><img src="https://img.shields.io/twitter/url/https/github.com/CVMiniGames/CVMiniGames.github.io.svg?style=social" alt="Tweet" /></a>
+        <a href="https://twitter.com/CVMiniGames"><img src="https://img.shields.io/twitter/follow/CVMiniGames.svg?style=social" alt="Twitter Follow" /></a>
+      </p>
+
+      <p>Viewcount: <img src="https://visitor-badge.laobi.icu/badge?page_id=CVMiniGames.CVMiniGames.github.io" alt="Visitors"></p>
+      
+</ion-content>
+</ion-app>
+</body>
+</html>
