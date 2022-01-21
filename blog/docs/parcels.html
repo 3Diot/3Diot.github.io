@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Parcels</title>
+  <title>CVMinigames | Parcels</title>
   <script type="module" src="https://cdn.jsdelivr.net/npm/@ionic/core/dist/ionic/ionic.esm.js"></script>
   <script nomodule src="https://cdn.jsdelivr.net/npm/@ionic/core/dist/ionic/ionic.js"></script>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@ionic/core/css/ionic.bundle.css" />
@@ -12,7 +12,7 @@
   <ion-app>
     <ion-header translucent > <!-- class="ion-no-border" -->
       <ion-toolbar>
-        <ion-title>Parcels</ion-title>
+        <ion-title>CVMinigames</ion-title>
       </ion-toolbar> 
     </ion-header>,
     <ion-content fullscreen class="ion-padding"> 
@@ -66,323 +66,43 @@
 
 
 
-      <h2>Get Parcels</h2>
-<p>&quot;&quot;&quot;
-#hide
-import sys
-sys.path.append('/workspaces/CVMiniGames.github.io/blog/')
-sys.path.append('/workspaces/CVMiniGames.github.io/docs/datasets/')
-&quot;&quot;&quot;</p>
-<p>Grab all parcels</p>
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
+      <p>I love freebies. In my opinion, guestbooks are the ticket to a bunch of em!</p>
+<p>So what's the best way to find em all?</p>
+<p>Perhaps the same way to find out a lot of really cool information... 🤔</p>
+<h2>Parcel Data</h2>
+<p>For starters CV provides generic data on ALL their <a href="https://www.cryptovoxels.com/api/parcels/search.json">parcels</a></p>
+<p>The data contains geocoordinates and a bit of meta data which can let us do fun stuff like this <a href="https://cvminigames.com/blog/docs/maps/cv_vol_map.html"> map </a>.</p>
+<p>Where: </p>
+<ul>
+<li>
+<p>Color depicts volume broke out by quartile.</p>
+</li>
+<li>
+<p>And the top largest 2% and 1% of parcels painted orange and red, respectively.</p>
+</li>
+</ul>
+<iframe height='500px' width='1000px' src="https://cvminigames.com/blog/docs/maps/cv_vol_map.html"> </iframe>
+<p>We can do other things. </p>
+<p>Here is a frequency plot of Flora Islands Volume (excluding it's outlier)</p>
+<AxesSubplot:ylabel='Frequency'><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAYgAAAD4CAYAAAD2FnFTAAAAOXRFWHRTb2Z0d2FyZQBNYXRwbG90bGliIHZlcnNpb24zLjUuMSwgaHR0cHM6Ly9tYXRwbG90bGliLm9yZy/YYfK9AAAACXBIWXMAAAsTAAALEwEAmpwYAAAUdklEQVR4nO3df/BddX3n8edL5Icis4CkiEAMWAaXWqTZr6BTdFErQrCiHbeFaVdq2ca6OFNnu7MG7Sjbne7Q7Si7Lq40aopYi9S2WHYCSrRuqTMqBhogiJSIcU2gJIryQxlp8L1/3PNdrl8+N7lJvveeb/g+HzN37jmf87n3vL8n3+SV8znnfm6qCkmS5npG3wVIkhYmA0KS1GRASJKaDAhJUpMBIUlqembfBcynI444opYtW9Z3GZK0z7jlllu+W1VLWtueVgGxbNky1q9f33cZkrTPSPLtUdscYpIkNRkQkqQmA0KS1GRASJKaDAhJUpMBIUlqMiAkSU0GhCSpyYCQJDU9rT5Jrd2zbNXaPX7t5kvPmcdKJC1EnkFIkpoMCElSkwEhSWoyICRJTQaEJKnJgJAkNRkQkqQmA0KS1GRASJKaDAhJUpMBIUlqMiAkSU0Tm6wvyRrg9cC2qnpx13YNcGLX5VDgB1V1SuO1m4FHgCeAHVU1M6k6JUltk5zN9UrgcuCq2Yaq+rXZ5STvBx7ayetfVVXfnVh1kqSdmlhAVNVNSZa1tiUJ8KvAqye1f0nS3unrGsQrgAeq6p4R2wu4McktSVbu7I2SrEyyPsn67du3z3uhkrRY9RUQ5wNX72T76VW1HDgbuCjJK0d1rKrVVTVTVTNLliyZ7zoladGaekAkeSbwK8A1o/pU1dbueRtwLXDqdKqTJM3q4wzil4BvVNWW1sYkByc5ZHYZOBPYOMX6JElMMCCSXA18GTgxyZYkF3abzmPO8FKS5ye5vls9EvhSktuAm4G1VfXZSdUpSWqb5F1M549o/81G233Aim75XuAlk6pLkjQeP0ktSWoyICRJTQaEJKnJgJAkNRkQkqQmA0KS1GRASJKaDAhJUpMBIUlqMiAkSU2T/Ea5RWPZqrV7/NrNl54zj5VI0vzxDEKS1GRASJKaDAhJUpMBIUlqMiAkSU0GhCSpyYCQJDVN8jup1yTZlmTjUNslSbYm2dA9Vox47VlJ7k6yKcmqSdUoSRptkmcQVwJnNdovq6pTusf1czcm2Q/4EHA2cBJwfpKTJlinJKlhYgFRVTcBD+7BS08FNlXVvVX1OPAp4Nx5LU6StEt9TLXxjiRvAdYDv1dV35+z/WjgO0PrW4DTRr1ZkpXASoClS5fOc6nS/HA6Fu2Lpn2R+sPAC4FTgPuB9+/tG1bV6qqaqaqZJUuW7O3bSZI6Uw2Iqnqgqp6oqp8AH2EwnDTXVuDYofVjujZJ0hRNNSCSHDW0+iZgY6Pb14ATkhyX5ADgPOC6adQnSXrSxK5BJLkaOAM4IskW4H3AGUlOAQrYDLyt6/t84KNVtaKqdiR5B/A5YD9gTVXdOak6JUltEwuIqjq/0fyxEX3vA1YMrV8PPOUWWEnS9PhJaklSkwEhSWoyICRJTQaEJKnJgJAkNRkQkqQmA0KS1GRASJKaDAhJUpMBIUlqMiAkSU0GhCSpyYCQJDUZEJKkJgNCktRkQEiSmib2hUGavGWr1vZdgqSnMc8gJElNEwuIJGuSbEuycajtj5N8I8ntSa5NcuiI125OckeSDUnWT6pGSdJokzyDuBI4a07bOuDFVXUy8I/AxTt5/auq6pSqmplQfZKknZhYQFTVTcCDc9purKod3epXgGMmtX9J0t7p8xrEbwE3jNhWwI1Jbkmycoo1SZI6vdzFlOQ9wA7gkyO6nF5VW5P8DLAuyTe6M5LWe60EVgIsXbp0IvVK0mI09TOIJL8JvB749aqqVp+q2to9bwOuBU4d9X5VtbqqZqpqZsmSJROoWJIWp6kGRJKzgP8EvKGqfjSiz8FJDpldBs4ENrb6SpImZ5K3uV4NfBk4McmWJBcClwOHMBg22pDkiq7v85Nc3730SOBLSW4DbgbWVtVnJ1WnJKltrGsQSX6+qu7YnTeuqvMbzR8b0fc+YEW3fC/wkt3ZlyRp/o17kfp/JTmQwWcbPllVD02uJGm0vZ1eZPOl58xTJdLT31hDTFX1CuDXgWOBW5L8eZLXTrQySVKvxr4GUVX3AL8PvAv418AHu2kzfmVSxUmS+jNWQCQ5OcllwF3Aq4Ffrqp/2S1fNsH6JEk9GfcaxP8EPgq8u6oem22sqvuS/P5EKpMk9WrcgDgHeKyqngBI8gzgoKr6UVV9YmLVSZJ6M+41iM8Dzxpaf3bXJkl6mho3IA6qqkdnV7rlZ0+mJEnSQjBuQPwwyfLZlST/CnhsJ/0lSfu4ca9BvBP4dJL7gADPA35tUkVJkvo3VkBU1deSvAg4sWu6u6r+eXJlSZL6tjvfB/FSYFn3muVJqKqrJlKVJKl3407W9wnghcAG4ImuuQADQpKepsY9g5gBThr1BT+SpKefce9i2sjgwrQkaZEY9wziCODrSW4GfjzbWFVvmEhVkqTejRsQl0yyCEnSwjPuba5/l+QFwAlV9fkkzwb2m2xpkqQ+jTvd928Dfwn8Sdd0NPCZCdUkSVoAxr1IfRHwi8DD8P+/POhndvWiJGuSbEuycajt8CTrktzTPR824rUXdH3uSXLBmHVKkubJuAHx46p6fHYlyTMZfA5iV64EzprTtgr4QlWdAHyhW/8pSQ4H3gecBpwKvG9UkEiSJmPcgPi7JO8GntV9F/Wngf+9qxdV1U3Ag3OazwU+3i1/HHhj46WvA9ZV1YNV9X1gHU8NGknSBI0bEKuA7cAdwNuA6xl8P/WeOLKq7u+W/wk4stHnaOA7Q+tburanSLIyyfok67dv376HJUmS5hr3LqafAB/pHvOmqirJXn06u6pWA6sBZmZm/KS3JM2Tcedi+haNaw5Vdfwe7POBJEdV1f1JjgK2NfpsBc4YWj8G+D97sC9J0h7anbmYZh0E/Bvg8D3c53XABcCl3fPfNPp8DvivQxemzwQu3sP9SZL2wFjXIKrqe0OPrVX134FzdvW6JFcDXwZOTLIlyYUMguG1Se4BfqlbJ8lMko92+3sQ+C/A17rHH3RtkqQpGXeIafnQ6jMYnFHs8rVVdf6ITa9p9F0P/Luh9TXAmnHqkyTNv3GHmN4/tLwD2Az86rxXI0laMMa9i+lVky5EkrSwjDvE9B92tr2qPjA/5UiSForduYvppQzuQAL4ZeBm4J5JFCVJ6t+4AXEMsLyqHgFIcgmwtqp+Y1KFSZL6NW5AHAk8PrT+OO0pMrRILFu1tu8SJE3YuAFxFXBzkmu79Tfy5IR7kqSnoXHvYvrDJDcAr+ia3lpV/zC5siRJfRt3NleAZwMPV9X/ALYkOW5CNUmSFoBxv3L0fcC7eHI+pP2BP5tUUZKk/o17BvEm4A3ADwGq6j7gkEkVJUnq37gB8XhVFd2U30kOnlxJkqSFYNyA+IskfwIcmuS3gc8zz18eJElaWHZ5F1OSANcALwIeBk4E3ltV6yZcmySpR+NM2V1Jrq+qnwcMBUlaJMYdYro1yUsnWokkaUEZ95PUpwG/kWQzgzuZwuDk4uRJFbZYOGWFpIVqpwGRZGlV/V/gdVOqR5K0QOxqiOkzAFX1beADVfXt4cee7DDJiUk2DD0eTvLOOX3OSPLQUJ/37sm+JEl7bldDTBlaPn4+dlhVdwOnACTZD9gKXNvo+vdV9fr52Kckafft6gyiRizPl9cA39zTsxFJ0uTsKiBe0g0BPQKc3C0/nOSRJA/Pw/7PA64ese3lSW5LckOSnxv1BklWJlmfZP327dvnoSRJEuxiiKmq9pvUjpMcwGB+p4sbm28FXlBVjyZZweBayAkjalwNrAaYmZmZxFmOJC1KuzPd93w7G7i1qh6Yu6GqHq6qR7vl64H9kxwx7QIlaTHrMyDOZ8TwUpLndVN8kORUBnV+b4q1SdKiN+4H5eZVNxvsa4G3DbX9DkBVXQG8GXh7kh3AY8B53WyykqQp6SUgquqHwHPntF0xtHw5cPm065IkPanPISZJ0gJmQEiSmgwISVKTASFJajIgJElNBoQkqcmAkCQ1GRCSpCYDQpLUZEBIkpp6mWpjIVq2am3fJWgK/HOWxucZhCSpyYCQJDUZEJKkJgNCktRkQEiSmgwISVKTASFJauotIJJsTnJHkg1J1je2J8kHk2xKcnuS5X3UKUmLVd8flHtVVX13xLazgRO6x2nAh7tnSdIULOQhpnOBq2rgK8ChSY7quyhJWiz6DIgCbkxyS5KVje1HA98ZWt/Stf2UJCuTrE+yfvv27RMqVZIWnz4D4vSqWs5gKOmiJK/ckzepqtVVNVNVM0uWLJnfCiVpEestIKpqa/e8DbgWOHVOl63AsUPrx3RtkqQp6CUgkhyc5JDZZeBMYOOcbtcBb+nuZnoZ8FBV3T/lUiVp0errLqYjgWuTzNbw51X12SS/A1BVVwDXAyuATcCPgLf2VKskLUq9BERV3Qu8pNF+xdByARdNsy5J0pMW8m2ukqQeGRCSpCYDQpLUZEBIkpoMCElSU9+T9UnahWWr1va2782XntPbvtU/zyAkSU0GhCSpyYCQJDUZEJKkJgNCktRkQEiSmgwISVKTASFJajIgJElNBoQkqcmAkCQ1GRCSpKapB0SSY5N8McnXk9yZ5Hcbfc5I8lCSDd3jvdOuU5IWuz5mc90B/F5V3ZrkEOCWJOuq6utz+v19Vb2+h/okSfRwBlFV91fVrd3yI8BdwNHTrkOStHO9XoNIsgz4BeCrjc0vT3JbkhuS/Nx0K5Mk9faFQUmeA/wV8M6qenjO5luBF1TVo0lWAJ8BThjxPiuBlQBLly6dXMGStMj0cgaRZH8G4fDJqvrrudur6uGqerRbvh7YP8kRrfeqqtVVNVNVM0uWLJlo3ZK0mPRxF1OAjwF3VdUHRvR5XtePJKcyqPN706tSktTHENMvAv8WuCPJhq7t3cBSgKq6Angz8PYkO4DHgPOqqnqoVZIWrakHRFV9Ccgu+lwOXD6diiRJLb1dpJb09LZs1dpe9rv50nN62e/e2pvjNamf2ak2JElNBoQkqcmAkCQ1GRCSpCYDQpLUZEBIkpoMCElSkwEhSWoyICRJTQaEJKnJqTYkjdTXdBl7Y1+seaHyDEKS1GRASJKaDAhJUpMBIUlqMiAkSU0GhCSpyYCQJDX1EhBJzkpyd5JNSVY1th+Y5Jpu+1eTLOuhTEla1KYeEEn2Az4EnA2cBJyf5KQ53S4Evl9VPwtcBvzRdKuUJPVxBnEqsKmq7q2qx4FPAefO6XMu8PFu+S+B1yTJFGuUpEWvj6k2jga+M7S+BThtVJ+q2pHkIeC5wHfnvlmSlcDKbvXRJHfPU51HtPa3D9gX67bm6bDm6Zh6zdm7MZYXjNqwz8/FVFWrgdXz/b5J1lfVzHy/76Tti3Vb83RY83TsizWP0scQ01bg2KH1Y7q2Zp8kzwT+BfC9qVQnSQL6CYivASckOS7JAcB5wHVz+lwHXNAtvxn426qqKdYoSYve1IeYumsK7wA+B+wHrKmqO5P8AbC+qq4DPgZ8Iskm4EEGITJt8z5sNSX7Yt3WPB3WPB37Ys1N8T/mkqQWP0ktSWoyICRJTYs6IJJsTnJHkg1J1ndthydZl+Se7vmwrj1JPthN/3F7kuVTqnFNkm1JNg617XaNSS7o+t+T5ILWviZc8yVJtnbHekOSFUPbLu5qvjvJ64badzolyzzXfGySLyb5epI7k/xu175gj/VOal6wxzrJQUluTnJbV/N/7tqP66bV2dRNs3NA1z5y2p1RP8sUa74yybeGjvMpXXvvvxvzpqoW7QPYDBwxp+2/Aau65VXAH3XLK4AbgAAvA746pRpfCSwHNu5pjcDhwL3d82Hd8mFTrvkS4D82+p4E3AYcCBwHfJPBzQv7dcvHAwd0fU6aYM1HAcu75UOAf+xqW7DHeic1L9hj3R2v53TL+wNf7Y7fXwDnde1XAG/vlv89cEW3fB5wzc5+linXfCXw5kb/3n835uuxqM8gRhie5uPjwBuH2q+qga8AhyY5atLFVNVNDO7k2psaXwesq6oHq+r7wDrgrCnXPMq5wKeq6sdV9S1gE4PpWMaZkmXeVNX9VXVrt/wIcBeDT/Qv2GO9k5pH6f1Yd8fr0W51/+5RwKsZTKsDTz3OrWl3Rv0s06x5lN5/N+bLYg+IAm5McksGU3YAHFlV93fL/wQc2S23pgjZ2V/GSdrdGhdK7e/oTrnXzA7VsABr7oYxfoHB/xT3iWM9p2ZYwMc6yX5JNgDbGPwj+U3gB1W1o7H/n5p2B5iddqfXmqtq9jj/YXecL0ty4Nya59S2UP4ejm2xB8TpVbWcwcyyFyV55fDGGpwXLuj7gPeFGjsfBl4InALcD7y/12pGSPIc4K+Ad1bVw8PbFuqxbtS8oI91VT1RVacwmEXhVOBF/Va0a3NrTvJi4GIGtb+UwbDRu/qrcDIWdUBU1dbueRtwLYNf1gdmh466521d93GmCJmW3a2x99qr6oHuL9lPgI/w5HDAgqk5yf4M/qH9ZFX9dde8oI91q+Z94Vh3df4A+CLwcgbDMLMf3B3e/6hpd/qu+axuiK+q6sfAn7JAj/PeWLQBkeTgJIfMLgNnAhv56Wk+LgD+plu+DnhLd4fCy4CHhoYepm13a/wccGaSw7rhhjO7tqmZc73mTQyO9WzN53V3qxwHnADczHhTssxnfWHwCf67quoDQ5sW7LEeVfNCPtZJliQ5tFt+FvBaBtdOvshgWh146nFuTbsz6meZVs3fGPqPQxhcMxk+zgvy7+Fu6+PK+EJ4MLhj47bucSfwnq79ucAXgHuAzwOH15N3MnyIwXjpHcDMlOq8msEwwT8zGLO8cE9qBH6LwYW8TcBbe6j5E11NtzP4C3TUUP/3dDXfDZw91L6CwZ0535z985lgzaczGD66HdjQPVYs5GO9k5oX7LEGTgb+oattI/Derv14Bv/AbwI+DRzYtR/UrW/qth+/q59lijX/bXecNwJ/xpN3OvX+uzFfD6fakCQ1LdohJknSzhkQkqQmA0KS1GRASJKaDAhJUpMBIUlqMiAkSU3/D6NuNrVyZg1ZAAAAAElFTkSuQmCC" alt='Image Alt Text'><p>Ok. So thats nice...</p>
+<p>I'll do more exploration on this end some time later...</p>
+<p>What else can we do?</p>
+<h2>Filtering Parcels</h2>
+<p>Information about a specific parcel is available by adding it's parcel # to the end of the following url: https://www.cryptovoxels.com/api/parcels/  </p>
+<p>This data can then be filtered en-mass to search for certain properties, or inspected individually.</p>
+This can be used to great effect.
 
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
+For example, there are <p>For example, here is a <a href="https://cvminigames.com/blog/docs/maps/cv_book_map.html">map</a> of all the guestbooks!</p>
+<iframe height='500px' width='1000px' src="https://cvminigames.com/blog/docs/maps/cv_book_map.html" > </iframe>
+<p>There is an abundance of directions you can go with this information.</p>
+<p>One nifty trick is to combine it with even more data!</p>
+<p>This next <a href="https://cvminigames.com/blog/docs/maps/cv_visitor_map.html">map</a> color codes using a parcels visitor data. </p>
+<p>This info was provided by our friends over at the <a href="https://www.metacat.world/topic/108">Metacat</a> team.</p>
+<iframe height='500px' width='1000px' src="https://cvminigames.com/blog/docs/maps/cv_visitor_map.html"> </iframe>
+<p>In the end, all this freely available data allows for some pretty cool inspection.</p>
+<p>Here is a look at the data we have gathered along the way: </p>
+<p>The final geojson dataset will live <a href="https://cvminigames.com/blog/data/cv.geojson">here</a>.</p>
 
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>id</th>
-      <th>height</th>
-      <th>address</th>
-      <th>suburb</th>
-      <th>island</th>
-      <th>name</th>
-      <th>area</th>
-      <th>distance</th>
-      <th>owner</th>
-      <th>owner_name</th>
-      <th>...</th>
-      <th>x2</th>
-      <th>y1</th>
-      <th>label</th>
-      <th>y2</th>
-      <th>z1</th>
-      <th>z2</th>
-      <th>geometry.type</th>
-      <th>geometry.crs.type</th>
-      <th>geometry.crs.properties.name</th>
-      <th>geometry.coordinates</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>6748</td>
-      <td>6</td>
-      <td>31b Fault Line</td>
-      <td>Bronze</td>
-      <td>Scarcity</td>
-      <td>None</td>
-      <td>96</td>
-      <td>1849.130877</td>
-      <td>0x09d06dcef22051477cde12cfbfc674f60a53c66c</td>
-      <td>None</td>
-      <td>...</td>
-      <td>-1466</td>
-      <td>8</td>
-      <td>None</td>
-      <td>6</td>
-      <td>-1139</td>
-      <td>-1127</td>
-      <td>Polygon</td>
-      <td>name</td>
-      <td>EPSG:3857</td>
-      <td>[[[-14.74, -11.389899995], [-14.74, -11.27], [...</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>6747</td>
-      <td>9</td>
-      <td>37b Ruby Street</td>
-      <td>Silver</td>
-      <td>Scarcity</td>
-      <td>RUBY LOFT</td>
-      <td>120</td>
-      <td>1763.588144</td>
-      <td>0x3b97b6cbbfcfff88cf4a175e665c5715a3efe4f0</td>
-      <td>sexman.eth</td>
-      <td>...</td>
-      <td>-1257</td>
-      <td>8</td>
-      <td>None</td>
-      <td>9</td>
-      <td>-1245</td>
-      <td>-1237</td>
-      <td>Polygon</td>
-      <td>name</td>
-      <td>EPSG:3857</td>
-      <td>[[[-12.72, -12.45], [-12.72, -12.37], [-12.570...</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>6746</td>
-      <td>9</td>
-      <td>23b Antarcticite Road</td>
-      <td>Gold</td>
-      <td>Scarcity</td>
-      <td>None</td>
-      <td>104</td>
-      <td>1627.018697</td>
-      <td>0xc6786a54882ca1591745d748a2a92813e35c1a5d</td>
-      <td>Artolli</td>
-      <td>...</td>
-      <td>-1242</td>
-      <td>8</td>
-      <td>None</td>
-      <td>9</td>
-      <td>-1059</td>
-      <td>-1051</td>
-      <td>Polygon</td>
-      <td>name</td>
-      <td>EPSG:3857</td>
-      <td>[[[-12.55, -10.51], [-12.420100005, -10.51], [...</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>6745</td>
-      <td>7</td>
-      <td>11b Arsenopyrite Ave</td>
-      <td>Bronze</td>
-      <td>Scarcity</td>
-      <td>None</td>
-      <td>153</td>
-      <td>1945.814879</td>
-      <td>0x13816f65ba8195768e6825eb774fd3c6a05a0ac8</td>
-      <td>None</td>
-      <td>...</td>
-      <td>-1527</td>
-      <td>8</td>
-      <td>None</td>
-      <td>7</td>
-      <td>-1223</td>
-      <td>-1206</td>
-      <td>Polygon</td>
-      <td>name</td>
-      <td>EPSG:3857</td>
-      <td>[[[-15.270100005, -12.23], [-15.36, -12.23], [...</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>6744</td>
-      <td>8</td>
-      <td>7b Analcime Street</td>
-      <td>Silver</td>
-      <td>Scarcity</td>
-      <td>None</td>
-      <td>165</td>
-      <td>1778.345861</td>
-      <td>0xc6786a54882ca1591745d748a2a92813e35c1a5d</td>
-      <td>Artolli</td>
-      <td>...</td>
-      <td>-1317</td>
-      <td>8</td>
-      <td>None</td>
-      <td>8</td>
-      <td>-1206</td>
-      <td>-1195</td>
-      <td>Polygon</td>
-      <td>name</td>
-      <td>EPSG:3857</td>
-      <td>[[[-13.17, -11.95], [-13.17, -12.06], [-13.319...</td>
-    </tr>
-  </tbody>
-</table>
-<p>5 rows × 21 columns</p>
-</div><h2>Save Parcels</h2>
-cd ../data/workspaces/3Diot.github.io/blog/data
-df[:13].head(3)<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>id</th>
-      <th>height</th>
-      <th>address</th>
-      <th>suburb</th>
-      <th>island</th>
-      <th>name</th>
-      <th>area</th>
-      <th>distance</th>
-      <th>owner</th>
-      <th>owner_name</th>
-      <th>...</th>
-      <th>x2</th>
-      <th>y1</th>
-      <th>label</th>
-      <th>y2</th>
-      <th>z1</th>
-      <th>z2</th>
-      <th>geometry.type</th>
-      <th>geometry.crs.type</th>
-      <th>geometry.crs.properties.name</th>
-      <th>geometry.coordinates</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>6748</td>
-      <td>6</td>
-      <td>31b Fault Line</td>
-      <td>Bronze</td>
-      <td>Scarcity</td>
-      <td>None</td>
-      <td>96</td>
-      <td>1849.130877</td>
-      <td>0x09d06dcef22051477cde12cfbfc674f60a53c66c</td>
-      <td>None</td>
-      <td>...</td>
-      <td>-1466</td>
-      <td>8</td>
-      <td>None</td>
-      <td>6</td>
-      <td>-1139</td>
-      <td>-1127</td>
-      <td>Polygon</td>
-      <td>name</td>
-      <td>EPSG:3857</td>
-      <td>[[[-14.74, -11.389899995], [-14.74, -11.27], [...</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>6747</td>
-      <td>9</td>
-      <td>37b Ruby Street</td>
-      <td>Silver</td>
-      <td>Scarcity</td>
-      <td>RUBY LOFT</td>
-      <td>120</td>
-      <td>1763.588144</td>
-      <td>0x3b97b6cbbfcfff88cf4a175e665c5715a3efe4f0</td>
-      <td>sexman.eth</td>
-      <td>...</td>
-      <td>-1257</td>
-      <td>8</td>
-      <td>None</td>
-      <td>9</td>
-      <td>-1245</td>
-      <td>-1237</td>
-      <td>Polygon</td>
-      <td>name</td>
-      <td>EPSG:3857</td>
-      <td>[[[-12.72, -12.45], [-12.72, -12.37], [-12.570...</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>6746</td>
-      <td>9</td>
-      <td>23b Antarcticite Road</td>
-      <td>Gold</td>
-      <td>Scarcity</td>
-      <td>None</td>
-      <td>104</td>
-      <td>1627.018697</td>
-      <td>0xc6786a54882ca1591745d748a2a92813e35c1a5d</td>
-      <td>Artolli</td>
-      <td>...</td>
-      <td>-1242</td>
-      <td>8</td>
-      <td>None</td>
-      <td>9</td>
-      <td>-1059</td>
-      <td>-1051</td>
-      <td>Polygon</td>
-      <td>name</td>
-      <td>EPSG:3857</td>
-      <td>[[[-12.55, -10.51], [-12.420100005, -10.51], [...</td>
-    </tr>
-  </tbody>
-</table>
-<p>3 rows × 21 columns</p>
-</div>import requests
-import json
-
-deets = []
-for index, row in df.tail(200).iterrows():
-  url = 'https://www.cryptovoxels.com/api/parcels/'+str(row['id'])+'.json' 
-  r = requests.get(url)
-  data = json.loads(r.text) 
-  with open('./parcels/'+str(row['id'])+'.json', 'w') as file:
-    json.dump(data, file)
-  print(row['id'])<h2>Filtering Parcels</h2>
-import json
-deets = []
-for index, row in df[1:2].iterrows():
-  url = './parcels/'+str(row['id'])+'.json'
-  data = ''
-  with open(url, 'r') as j: 
-    data = json.loads(j.read()) 
-    data = data['parcel'] 
-  #coords = data.geometry.coordinates
-  #data['coords'] = coords
-  #del data.geometry.coordinates
-  #//content = data.content.features
-  #del data.content.features
-  deets.append( data )
 
 </ion-content>
 </ion-app>
