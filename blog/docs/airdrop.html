@@ -9,6 +9,9 @@
 <p>Next, enter the contract address and token Id information of the nft you want to send. </p>
 <p>This info can be found on the NFT's Opensea page.</p><br>
 
+<h1>Guestbook Airdrop</h1>
+
+<h2>The form</h2>
 <div style='background:#efefef;'><br>
 <label>Recipient Addresses: </label><input type='text' placeholder="0x.." id='recipients'/> <br>
 <label>Contract Address:</label><input type='text' placeholder="0x.." id='contractAddress'/> <br>
@@ -16,6 +19,7 @@
 <button onclick="runcode()"> Send NFT </button> <br><br>
 </div>
 
+<h2>Reference Images</h2>
 <div style='background:black'>
 <img src='../data/article_images/guestbooks_copywalletsaddrs.JPG'>
 <img style='height:400px' src='../data/article_images/OpenSea_Token_URI.JPG'><br><br>
@@ -30,8 +34,8 @@
     for (let wallet of addrs){
     const isMetaMaskInstalled= await Moralis.isMetaMaskInstalled();
     Moralis.transfer( {type: "erc721", 
-        receiver:  document.getElementById('recipients'), 
-        contractAddress: wallet, 
+        receiver:  wallet, 
+        contractAddress: document.getElementById('contractAddress'), 
         tokenId: document.getElementById('tokenId') 
     }
     ) 
