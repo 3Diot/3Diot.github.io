@@ -17,7 +17,17 @@
   <!-- Additional Meta's -->
   <meta property="og:description" content="Join the community and get the $1 token that unlocks access to a meta-world of fun!" />
   <meta property="og:image" content="http://graphics8.nytimes.com/images/2011/12/08/technology/bits-newtwitter/bits-newtwitter-tmagArticle.jpg" />
-
+  
+  <!-- Style -->
+  <style> 
+    ion-content > div { margin-left: 25%; padding-top: 40px;  padding-bottom: 40px; }
+    h2, h3 {text-align: center;  display: inline-block; }
+    details{padding-bottom:12px; max-width: 800px}
+    ion-row{max-width: 800px}
+    summary>*{ display:inline-block }
+    details > summary > h3 {display: inline;}
+    summary::marker { content: "🧡 "; } 
+  </style> 
 </head>
 <body>
   <ion-app>
@@ -29,47 +39,6 @@
         </ion-title>
       </ion-toolbar> 
     </ion-header>
-    <!-- 
-      # https://github.com/ionic-team/ionic-docs/blob/legacy/src/demos/api/content/index.html 
-      # https://github.com/ionic-team/ionic-docs/blob/legacy/src/demos/api/infinite-scroll/index.html
-      # https://github.com/ionic-team/ionic-docs/blob/legacy/src/demos/api/back-button/index.html
-
-      https://ionicframework.com/docs/components
-      https://ionicframework.com/docs/api/card
-      https://ionicframework.com/docs/api/popover
-      https://ionicframework.com/docs/api/modal
-      https://ionicframework.com/docs/api/menu
-      https://ionicframework.com/docs/api/grid
-      https://ionicframework.com/docs/api/action-sheet
-      https://ionicframework.com/docs/api/toolbar
-      https://ionicframework.com/docs/api/content
-
-      <ion-row class="md hydrated">
-      <ion-list class="md list-md hydrated">
-        <ion-item class="item md item-fill-none in-list hydrated item-label">
-          <ion-label class="sc-ion-label-md-h sc-ion-label-md-s md hydrated">Item 0</ion-label>
-        </ion-item>
-        <ion-item class="item md item-fill-none in-list hydrated item-label">
-          <ion-label class="sc-ion-label-md-h sc-ion-label-md-s md hydrated">Item 14</ion-label>
-        </ion-item>
-      </ion-list>
-      </ion-row>
-    -->
-    <style> 
-      /*
-      :root {
-        --ion-safe-area-top: 2px;
-        --ion-safe-area-bottom: 22px;
-      }
-      body { text-align: center; } 
-      */
-      ion-content > div { margin-left: 25%; padding-top: 40px;  padding-bottom: 40px; }
-      h2, h3 {text-align: center;  display: inline-block; }
-      details{padding-bottom:12px; max-width: 800px}
-      summary>*{ display:inline-block }
-      details > summary > h3 {display: inline;}
-      summary::marker { content: "🧡 "; } 
-    </style> 
     <ion-content fullscreen class="ion-padding"> 
       <ion-grid class="md hydrated">
         <ion-row style="display: flex; justify-content: center;  align-items: center;">
@@ -317,6 +286,50 @@ async function logOut() {
 <li><a href='https://cvminigames.com/blog/docs/maps/cv_visitor_map.html'>Visitors over 90 days</a></li>
 </ul>
 </details>
+<details>
+<summary><h2>Bulk-Send Airdrops</h2>
+</summary><script src="https://cdn.jsdelivr.net/npm/web3@latest/dist/web3.min.js"></script>
+<script src="https://npmcdn.com/moralis/dist/moralis.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/siema@1.5.1/dist/siema.min.js"></script>
+
+<body>
+<p>Do you have a lot of gifts to give out to people in your guestbook?</p>
+<p>Simply "copy [the guestbook signers] to clipboard" and paste into the "Recipient Addresses" field below.</p>
+<p>Next, enter the contract address and token Id information of the nft you want to send. </p>
+<p>This info can be found on the NFT's Opensea page.</p><br>
+
+<div style='background:#efefef;'><br>
+<label>Recipient Addresses: </label><input type='text' placeholder="0x.." id='recipients'/> <br>
+<label>Contract Address:</label><input type='text' placeholder="0x.." id='contractAddress'/> <br>
+<label>Token Id:</label><input type='text' placeholder='1' id='tokenId'/><br>
+<button onclick="runcode()"> Send NFT </button> <br><br>
+</div>
+
+<div style='background:black'>
+<img src='../data/article_images/guestbooks_copywalletsaddrs.JPG'>
+<img style='height:400px' src='../data/article_images/OpenSea_Token_URI.JPG'><br><br>
+</div>
+
+
+<br><br>
+<script>
+    async function runcode(){
+    const web3 = await Moralis.enableWeb3();
+    let addrs = document.getElementById('recipients').value.split(',') 
+    for (let wallet of addrs){
+    const isMetaMaskInstalled= await Moralis.isMetaMaskInstalled();
+    Moralis.transfer( {type: "erc721", 
+        receiver:  document.getElementById('recipients'), 
+        contractAddress: wallet, 
+        tokenId: document.getElementById('tokenId') 
+    }
+    ) 
+
+    }
+
+    }
+</script>
+</details>
         </ion-row>
         <ion-row style="display: flex; justify-content: center;">
           <div style="text-align: center; background-color: rgba(240, 248, 255, 0.75);">
@@ -340,3 +353,31 @@ async function logOut() {
   </ion-app>
 </body>
 </html>
+
+
+  <!-- 
+    # https://github.com/ionic-team/ionic-docs/blob/legacy/src/demos/api/content/index.html 
+    # https://github.com/ionic-team/ionic-docs/blob/legacy/src/demos/api/infinite-scroll/index.html
+    # https://github.com/ionic-team/ionic-docs/blob/legacy/src/demos/api/back-button/index.html
+
+    https://ionicframework.com/docs/components
+    https://ionicframework.com/docs/api/card
+    https://ionicframework.com/docs/api/popover
+    https://ionicframework.com/docs/api/modal
+    https://ionicframework.com/docs/api/menu
+    https://ionicframework.com/docs/api/grid
+    https://ionicframework.com/docs/api/action-sheet
+    https://ionicframework.com/docs/api/toolbar
+    https://ionicframework.com/docs/api/content
+
+    <ion-row class="md hydrated">
+    <ion-list class="md list-md hydrated">
+      <ion-item class="item md item-fill-none in-list hydrated item-label">
+        <ion-label class="sc-ion-label-md-h sc-ion-label-md-s md hydrated">Item 0</ion-label>
+      </ion-item>
+      <ion-item class="item md item-fill-none in-list hydrated item-label">
+        <ion-label class="sc-ion-label-md-h sc-ion-label-md-s md hydrated">Item 14</ion-label>
+      </ion-item>
+    </ion-list>
+    </ion-row>
+  -->
