@@ -36,8 +36,8 @@
     const isMetaMaskInstalled= await Moralis.isMetaMaskInstalled();
     Moralis.transfer( {type: "erc721", 
         receiver:  wallet, 
-        contractAddress: document.getElementById('contractAddress'), 
-        tokenId: document.getElementById('tokenId') 
+        contractAddress: document.getElementById('contractAddress').value, 
+        tokenId: document.getElementById('tokenId').value
     }
     ) 
 
