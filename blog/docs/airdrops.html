@@ -7,6 +7,13 @@
 <body>
 <h1>Guestbook Airdrop</h1>
 
+<!-- for testing 
+0x7b19b42564ad1c03625e8306cf20deea2f923a67,0x1ae62c0b803fd85ff2a774961c022abffc834214,0x7927134b972c0609221b435f84eaa6ff7993f0d2 <br>
+0xc930d370c971f4679e03106d3714eef4100d8fbe <br>
+4
+-->
+
+
 <p>Do you have a lot of gifts to give out to people in your guestbook?</p>
 <p>Simply "copy [the guestbook signers] to clipboard" and paste into the "Recipient Addresses" field below.</p>
 <p>Next, enter the contract address and token Id information of the nft you want to send. </p>
@@ -30,19 +37,23 @@
 <br><br>
 <script>
     async function runcode(){
-    const web3 = await Moralis.enableWeb3();
-    let addrs = document.getElementById('recipients').value.split(',') 
-    for (let wallet of addrs){
-    const isMetaMaskInstalled= await Moralis.isMetaMaskInstalled();
-    Moralis.transfer( {type: "erc721", 
-        receiver:  wallet, 
-        contractAddress: document.getElementById('contractAddress').value, 
-        tokenId: document.getElementById('tokenId').value
-    }
-    ) 
+        const web3 = await Moralis.enableWeb3();
+        let addrs = document.getElementById('recipients').value.split(',') 
+        for (let wallet of addrs){
+            wallet = wallet.trim()
+            let contractAddress = document.getElementById('contractAddress').value
+            let tokenId = document.getElementById('tokenId').value
+            console.log(wallet, contractAddress, tokenId)
 
-    }
-
+            const isMetaMaskInstalled= await Moralis.isMetaMaskInstalled();
+            let result = await Moralis.transfer( {type: "erc1155", 
+                receiver:  wallet, 
+                contractAddress: contractAddress,
+                tokenId: tokenId,
+                amount: 1
+            } ) 
+            console.log(await result.wait())
+        }
     }
 </script>
 </body>
