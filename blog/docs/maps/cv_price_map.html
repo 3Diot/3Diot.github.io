@@ -42,7 +42,7 @@
 </body>
 <script async> (async function() {
 
-    let parcels = (await d3.json(`https://www.cryptovoxels.com/api/map/parcels.json`) )['parcels']
+    let parcels = (await d3.json(`https://www.cryptovoxels.com/api/parcels/search.json`) )['parcels']
     let sales = (await d3.csv(`https://raw.githubusercontent.com/predictcrypto/pins/master/cryptovoxels_all_orders/data.csv`)).reverse();
     var map = L.map( "map", { center: [0.0, 0.0], crs: L.CRS.EPSG3857, zoom: 10, zoomControl: true, preferCanvas: false } );
     L.control.scale().addTo(map);

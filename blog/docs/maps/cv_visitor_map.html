@@ -43,7 +43,7 @@
 <script async> (async function() {
 
     // https://www.k1ic.com/traffic_archive/cv_all_parcel_90day_traffic.csv 
-    let parcels = (await d3.json(`https://www.cryptovoxels.com/api/map/parcels.json`) )['parcels']
+    let parcels = (await d3.json(`https://www.cryptovoxels.com/api/parcels/search.json`) )['parcels']
     let traffic = await d3.csv(`https://www.k1ic.com/traffic_archive/cv_all_parcel_90day_traffic.csv`);
     var map = L.map( "map", { center: [0.0, 0.0], crs: L.CRS.EPSG3857, zoom: 10, zoomControl: true, preferCanvas: false } );
     L.control.scale().addTo(map);
