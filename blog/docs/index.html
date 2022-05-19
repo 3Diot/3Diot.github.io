@@ -54,241 +54,30 @@
         </ion-row>
         <ion-row style="display: flex; flex-direction: column; align-content: center;">
           <style> h2, h3{display: inline;}</style><h2>Welcome!</h2>
-<p>Use this page to navigate about the CVMiniGames ecosystem. </p>
-<p>Here you will find information about my CVMinigame token and all that it provides.</p>
-
-<p class="unlock-content locked">
-  Token purchases are currently locked 🔒 <br>
-  You must log-in in order to purchase the token. <br>
-  By logging in you agree to the privacy policy and all terms, conditions, etc enumerated [here](https://cvminigames.com/blog/docs/legal.html). <br>
-  By purchasing the token (if through any other means), by de-facto, you agree to the privacy policy and all terms, conditions. 
-</p>
-
-<p class="unlock-content unlocked">
-  Congrats! Token purchase has been unlocked 🎉 <br>
-  Now go out and <a href='https://snapshot.org/#/cvminigames.eth/'>vote</a>!
-</p>
-
-<p class="unlock-content locked" onclick="window.unlockProtocol && window.unlockProtocol.loadCheckoutModal()"><button class="button">Unlock!</button></p>
-
-<script>
-  (function(d, s) {
-    var js = d.createElement(s),
-      sc = d.getElementsByTagName(s)[0];
-    js.src = "https://paywall.unlock-protocol.com/static/unlock.latest.min.js";
-    sc.parentNode.insertBefore(js, sc);
-  }(document, "script"));
- 
-var unlockProtocolConfig = {
-  "locks": { 
-    "0x3a03842776f13F622699A2da8AB2d022A606CC03": {
-      "network": 137,
-      "name": "CVMiniGames"
-    }
-  },
-  "icon": "https://pbs.twimg.com/profile_images/1479305970069159936/3jvoRpvc_400x400.jpg",
-  "callToAction": {
-    "default": "Mint now for (4 days of) access to games, voting, and exclusives galore (before needing to reactivate)!",
-	"metadata": "We'd ask that you please provide the following information before joining!",
-	"expired": "Reactivation needed! Token access expires every four days for most content (This will not mint a new nft but add 'credit' to your existing one)"
-  },
-  "metadataInputs": [
-	{
-		"name": "Name (for knowing) *optional",
-		"type": "text",
-		"required": false
-	},
-	{
-		"name": "Twitter Handle (for following) *optional",
-		"type": "text",
-		"required": false
-	},
-	{
-		"name": "Email (for newslettering) *optional",
-		"type": "email",
-		"required": false
-	}
-  ],
-  "persistentCheckout": false,
-  "messageToSign": "CVMiniGames Access Unlock",
-  "pessimistic": false
-}
- 
- 
-window.addEventListener("unlockProtocol.status", function (event) {
-  console.log("status", event.detail.state)
-  // We hide all .unlock-content elements 
-  document.querySelectorAll('.unlock-content').forEach(function(el) { el.style.display = 'none'; });
-  // We show only the relevant element
-  document
-    .querySelectorAll(`.unlock-content.${event.detail.state}`)
-    .forEach((element) => {
-      element.style.display = "block";
-    });
-});
-
-window.addEventListener("unlockProtocol.authenticated", function (event) {
-  console.log('authenticated')
-  // event.detail.addresss includes the address of the current user, when known
-});
-
-window.addEventListener("unlockProtocol.transactionSent", function (event) {
-  console.log('transactionSent')
-  // event.detail.hash includes the hash of the transaction sent
-}); 
-</script>
-<!--
-<script src="https://cdn.jsdelivr.net/npm/web3@latest/dist/web3.min.js"></script>
-<script src="https://npmcdn.com/moralis/dist/moralis.js"></script>
-
-    <div class='locked'>
-      <h3> Login: </h3>
-      <button onclick="logInMetaMask()"> Metamask </button>
-      <button onclick="logInWalletConnect()"> walletconnect </button>
-    </div>
-    <div class='unlocked' style="display:none">
-      <button onclick="logOut()"> logOut </button>
-    </div>
-	<br><br>
-  <script>
-Moralis.initialize("otzI79ahR5VKTm7xiVo3hdRYPchqm57QjV8u5nz2")
-Moralis.serverURL = "https://nhwzgag7gbdb.usemoralis.com:2053/server"
-async function init() {
-    try{
-        window.web3 = await Moralis.Web3.enable();
-        const user = await Moralis.User.current();
-        if(user){  
-            console.log("User:", user.get('ethAddress'));
-            document.querySelectorAll(".locked").forEach(e => e.style.display='none');
-            document.querySelectorAll(".unlocked").forEach(e => e.style.display='block');
-        }else{
-            console.log(user);
-        }
-    }catch (err) {
-        console.log("Error Occured: " + err);
-    }
-}
-
-
-async function logInMetaMask() {
-    try{ await Moralis.Web3.authenticate(); console.log("logged"); init(); }
-    catch (err){ console.log("Error occured: " + err); }
-}
-
-
-async function logInWalletConnect() {
-    try{ await Moralis.Web3.authenticate({ provider: "walletconnect" }); init(); }
-    catch (err){ console.log(err); }
-}
-
-
-async function logOut() {
-    try{ 
-      await Moralis.User.logOut(); console.log("user logged out"); init(); 
-      document.querySelectorAll(".unlocked").forEach(e => e.style.display='none');
-      document.querySelectorAll(".locked").forEach(e => e.style.display='block');
-    }
-    catch(err){ console.log("Error occured: " + err); }
-}
-
-	</script>
-    -->
-<details>
-<summary><h2>The Token</h2>
-</summary><p>Warren Buffet once said &quot;Price is what you pay. Value is what you get&quot;. </p>
-<p>So exactly how much value can you get from a $1 token?</p>
-<p>In the future, token holders <em>may</em> be given access to or redeemed for: </p>
-<ul>
-<li>Personalized Experience</li>
-<li>Exclusive Merch (physical/digial) </li>
-<li>Discounts </li>
-<li>Early access </li>
-<li>Vouchers </li>
-<li>Special services </li>
-<li>Preferential treatment </li>
-<li>Means of payment </li>
-<li>Newletter </li>
-<li>P2P Token Escrows </li>
-<li>Ticketing/ Events (Physical/ Digital) + (qrcode checkin) </li>
-<li>Restricted access to a subset of features (Game, Unlock, <a href="www.Collab.land">discord</a>)</li>
-<li>govtoken access (Snapshot)</li>
-<li>tokenized time, offering consulting services for tokens: consulting services, etc</li>
-<li>Airdrops: Digital goods( POAPS, NFTs ), Physical Goods (3D Print an Island) </li>
-<li>Tasks: retweets for tokens, etc</li>
-</ul>
-<p>I'd like for this to be a community driven token but need to kick it off as a personal one till it gains traction.</p>
-<p>Tokens may be distributed in the future by: Purchase, Membership, NewletterSub, ContestWinner, Giveaways</p>
-<details>
-<summary><h3>Intrinsic Value</h3>
-</summary><p>You may also find these tacit properties worth consideration as well.</p>
-<ul>
-<li>Community</li>
-<li>Can’t be taken back &amp; are - Contract Ownership (unlock)</li>
-<li>Platformless (unlock-&gt;Opensea)</li>
-<li>Upgradeable (unlock)</li>
-<li>Contract Ownership (unlock)</li>
-<li>Can aquire a market value themselves (if liquid)</li>
-<li>For decision-making -&gt; i.e. control over valuable resources </li>
-<li>status signaling</li>
-<li>Social coordination</li>
-<li>There are many possible ways for engagement may be rewarded</li>
-<li>If there is a finite supply of them and demand goes up then the value of the token may go up.</li>
-<li>May offer more than whats listed: suchas alpha, relationships, connections, and access to other members. </li>
-<li>Shared ownership creates commradery</li>
-<li>May evolve from individual to community token</li>
-</ul>
-</details>  <!-- Intrinsic Value-->
-<details style="max-width:800px">
-<summary><h3>Limitations</h3>
-</summary><p><span style='color:red'>This CVMinigames Utility token has an infinite supply </span> and should not be considered a security and should not be used for debt (e.g., banknote, bond, and debenture) nor equity (e.g., common stock) related purposed.</p>
-<p>To reiterate:</p>
-<p>The CVMinigames token is not a financial asset. It's creator has no intention of engaging in any 'Security Related' activites through it.</p>
-<p>This means token hodlers will also have (a non-exhaustive list): </p>
-<ul>
-<li><strong>NO Rights</strong>: Everything provided is a priviledge and not a promise.</li>
-<li><strong>No Governance, power, or say</strong>:  voting is purely symbolic.</li>
-<li><strong>No Financial incentive</strong>: As token holders agree not to take Loans, Debts, Staking, or otherwise using or enabled through holding this currency.  </li>
-<li><strong>No Hope</strong>: of financial reward nor promise of it (by the issuer) through the purchase of this token.</li>
-<li><strong>Access Revoked</strong>: without need for cause nor explanation  </li>
-</ul>
-<p>Couldn't make it more clear. Just enjoy the $1 token and all the potentially awesome stuff it <em>may</em> land you.</p>
-</details><!-- Limitations --></details> <!-- The Token -->
-<details>
-<summary><h2>Non-Token Services</h2>
-</summary><p>It's always worth shooting me an ask for small questions; I like to help.</p>
-<p>If I deem your project requiring a non-insignificant amount of work on my end I will charge a minimum $500 retainer.</p>
-<p>Because frankly, I deserve it.</p>
-<p>So what else can I do?</p>
-<ul>
-<li>Property Development: Managing, architecting, designing, and developing and scripting.</li>
-<li>Consulting: To help make decisions in my knowledge of CV, programming, and the blockchain industry.</li>
-<li>Marketing: Increase exposure with game tie-ins, site advertising, and tweets or product reviews.</li>
-</ul>
-</details>
-<details>
-<summary><h2>Articles:</h2>
+<p>Use this page to navigate about the CVMiniGames ecosystem.</p>
+<h2>Articles:</h2>
 </summary><ul>
 <li><a href='https://cvminigames.com/'>Home</a></li>
 <li><a href='https://cvminigames.com/blog/docs/parcels.html'>Parcel</a> Information</li>
-<li><a href='https://cvminigames.com/blog/docs/progress.html'>Progress</a> Report ⚠️👷🚧</li>
-<li><a href='https://cvminigames.com/blog/docs/scarcity.html'>Scarcity Island</a> Lore and Updates ⚠️👷🚧</li>
-<li><a href='https://cvminigames.com/blog/docs/technology.html'>Technical</a> Details ⚠️👷🚧</li>
-<li><a href='https://cvminigames.com/blog/docs/tutorials.html'>Tutorials</a> for Builders ⚠️👷🚧</li>
+<li><a href='https://cvminigames.com/blog/docs/tokengating.html'>Token Gating</a></li>
+<li><a href='https://cvminigames.com/blog/docs/monetize.html'>Monetizing</a></li>
+<li><a href='https://cvminigames.com/blog/docs/monetize.html'>Build Tips</a></li>
 </ul>
-<p>⚠️👷🚧 = WIP</p>
 </details>
 <details>
-<summary><h2>Standalone Maps:</h2>
+<summary><h1>Interactive Data</h1>
 </summary><ul>
-<li><a href='https://cvminigames.com/blog/docs/maps/cv_vol_map.html'>Parcel Volume</a></li>
-<li><a href='https://cvminigames.com/blog/docs/maps/cv_book_map.html'>Guestbook Locations</a></li>
-<li><a href='https://cvminigames.com/blog/docs/maps/cv_visitor_map.html'>Visitors over 90 days</a></li>
+<li><a href='https://cvminigames.com/blog/docs/tables/parcelsPivotTable.html'>Parcels</a> Table</li>
+<li><a href='https://cvminigames.com/blog/docs/maps/cv_book_map.html'>Guestbooks</a> Map</li>
+<li><a href='https://cvminigames.com/blog/docs/maps/cv_price_map.html'>Sale Prices</a> Map</li>
+<li><a href='https://cvminigames.com/blog/docs/maps/cv_visitor_map.html'>Visitors</a> Map</li>
 </ul>
 </details>
 <details>
 <summary><h2>Tools</h2>
 </summary><ul>
-<li><a href="https://cvminigames.com/blog/docs/airdrops.html">Guestbook Airdrops</a></li>
+<li><a href="https://cvminigames.com/blog/docs/airdrops.html">Airdrops</a></li>
+<li><a href="https://cvminigames.com/blog/docs/airdropsasync.html">Async Airdrops</a></li>
 </ul>
 </details>
         </ion-row>
