@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CVMinigames | Tokengating</title>
+  <script type="module" src="https://cdn.jsdelivr.net/npm/@ionic/core/dist/ionic/ionic.esm.js"></script>
+  <script nomodule src="https://cdn.jsdelivr.net/npm/@ionic/core/dist/ionic/ionic.js"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@ionic/core/css/ionic.bundle.css" />
+
+  <meta name="twitter:card" content="A community led effort for the metaverse." />
+  <meta name="twitter:site" content="@CVMiniGames" />
+  <meta name="twitter:creator" content="@CVMiniGames" />
+  <meta property="og:url" content="http://www.cvminigames.com" />
+  <meta property="og:title" content="CVMiniGames Homepage" />
+  
+  <!-- Additional Meta's -->
+  <meta property="og:description" content="Join the community and get the $1 token that unlocks access to a meta-world of fun!" />
+  <meta property="og:image" content="http://graphics8.nytimes.com/images/2011/12/08/technology/bits-newtwitter/bits-newtwitter-tmagArticle.jpg" />
+  
+  <!-- Style -->
+  <style> 
+    ion-content > div { margin-left: 25%; padding-top: 40px;  padding-bottom: 40px; }
+    h2, h3 {text-align: center;  display: inline-block; }
+    details{padding-bottom:12px; max-width: 800px} 
+    summary>*{ display:inline-block }
+    details > summary > h3 {display: inline;}
+    summary::marker { content: "ðŸ§¡ "; } 
+  </style> 
+</head>
+<body>
+  <ion-app>
+    <ion-header translucent > <!-- class="ion-no-border" -->
+      <ion-toolbar>
+        <ion-title onclick="location.href='https://www.CVMiniGames.com'" style="cursor: pointer;">
+          <img src='https://raw.githubusercontent.com/CVMiniGames/CVminiGames.github.io/main/blog/docs/_img/logo1_300x300.jpg' style="width:50px"></img>
+          CVMinigames
+        </ion-title>
+      </ion-toolbar> 
+    </ion-header>
+    <ion-content fullscreen class="ion-padding"> 
+      <ion-grid class="md hydrated">
+        <ion-row style="display: flex; justify-content: center;  align-items: center;">
+          <div style="text-align: center; position:absolute; z-index:9999; background-color: rgba(240, 248, 255, 0.75); padding: 12px; >
+            <h1>CVMinigames | Tokengating</h1>
+            <p class="ion-padding-start ion-padding-end"><ion-button onclick="location.href='https://www.cryptovoxels.com/play?coords=N@1447E,1128S'" expand="block" fill="outline" class="md button button-block button-outline ion-activatable ion-focusable hydrated">PLAY NOW</ion-button></p>
+            <p>
+              <a href="https://twitter.com/intent/tweet?text=If%20you%20are%20a%20%20%40cryptovoxels%20CVilian%2C%20go%20and%20check%20out%20%40CVMiniGames%20website%20CVMiniGames.com%20as%20I%20found%20the%20content%20interesting%20enough%20to%20share%20%3C3%20Thanks!">
+                <img src="https://img.shields.io/twitter/url/https/github.com/CVMiniGames/CVMiniGames.github.io.svg?style=social" alt="Tweet" /></a>
+              <a href="https://twitter.com/CVMiniGames"><img src="https://img.shields.io/twitter/follow/CVMiniGames.svg?style=social" alt="Twitter Follow" /></a>
+            </p>
+          </div>
+          <iframe src="https://www.cryptovoxels.com/play?coords=N@1447E,1128S,&mode=orbit" width="100%" height="500" scrolling="yes" class="iframe-class" frameborder="0"></iframe>
+        </ion-row>
+        <ion-row style="display: flex; flex-direction: column; align-content: center;">
+          <h2>Token gating?</h2>
+<p>The act of token gating permits a parcel owner to restrict access to their space, a part of their space, or set of resources based on token ownership.</p>
+<p>We will explore how you can get this set up in your parcel!</p>
+<h2>Requirements</h2>
+<p>In order to successfully token gate:</p>
+<ul>
+<li>Visitors must be signed on in-world with a wallet </li>
+<li>We'll check if the user is in a token-gated area or triggered a token-gated event </li>
+<li>We'll also check the contents of the visitors wallet for the desired token(s) </li>
+<li>We will do all of this using code via the in-world scripting engine </li>
+</ul>
+<h2>Don't panic!</h2>
+<p>Most everything has already been done for you. I made a youtube video to help walk you through these steps as well.</p>
+<p>What remains:</p>
+<ol>
+<li>Drop the script into your parcel.</li>
+<li>Create a Moralis account and acquire a key that will allow the script to work. </li>
+<li>Specify valid contracts and possibly specific tokens with them using code-appropriate notation.</li>
+<li>Specify what you want to token-gate, weather it be a feature or space, or both.</li>
+</ol>
+<h2>1. Embed script</h2>
+<p>Open the feature editor pane for a single feature in your parcel and drop the following bold text into it's <code>script</code> textbox.</p>
+<p><strong><code>app_id = &#x27;&#x27;;</code></strong></p>
+<p><strong><code>tokens = [];</code></strong></p>
+<p><strong><code>gates = [];</code></strong></p>
+<p><strong><code>parcel.on(&#x27;playerenter&#x27;, (e)=&gt; { (async(e) =&gt; eval( ( await (await fetch( &#x27;https://charleskarpati.com/cv/scripts/token_gate.js&#x27; )).text() ) ) )(e) })</code></strong></p>
+<p>The first three lines are placeholders that we will fill out shortly. The last line will will load a pre-written script to do what you need.</p>
+<h2>2. Get Key</h2>
+<p>Great!
+So now, in order for out script to actually work, a free service called Moralis is used. Behind the scenes, the script you embedded will request even more code, Moralis code. This will allow us to indirectly query the blockchain and see if the our visitors hold any required token. </p>
+<p>In order for this to work, Moralis asks that any query made be accompanied with a key they provide. They do this primarily to ensure no one person is spamming their free service.</p>
+<p>Go ahead and create a <a href="https://admin.moralis.io/register">Moralis</a> account and then promptly:</p>
+<ol>
+<li>Access the services <a href="https://admin.moralis.io/servers">admin</a> panel.  </li>
+<li><code>Create a new server</code> selecting the networks you want to support. </li>
+<li><code>View Details</code> on the newly created service</li>
+<li>Copy the services <code>Application ID</code></li>
+<li>Paste it in between the the quotes of your scripts <code>app_id</code>. </li>
+</ol>
+<p>exe: <strong><code>app_id = &#x27;1kj30usd02j3ofijs0dfy7546yuhf1&#x27;;</code></strong></p>
+<h2>3. Specify Tokens</h2>
+<p>You're making really good progress! These next two parts can be a bit daunting because it requires acquiring information and encoding it into a machine-readable format called <a href="https://en.wikipedia.org/wiki/JSON#Syntax">json</a>. </p>
+<p>The first thing you are going to want to do is list out all the tokens you want to use for gating, the network/ contract they are from. If you want any token within a contract no need to list em all, just use an asterisk. TokenId and ContractId's can be found by looking at the url of an nft when viewing it on opensea.</p>
+<p>For example, https://opensea.io/assets/0xa58b5224e2fd94020cb2837231b2b0e4247301a6/2 links to an nft with a token ID of 2 and a contract Address of 0xa58b5224e2fd94020cb2837231b2b0e4247301a6.</p>
+<p>It is possible to list out multiple nft's from a contract and only require a threshold quantity to be held. As well, it is also possible to gate multiple areas/ things using different requirements. Lastly, the code is written so as to require multiple NFT's be held and/or to permit multiple possible NFT's/ NFT combos.</p>
+<p>Arrange your information into JSON format using the structure shown in the examples. All possible situations are demonstrated.</p>
+<details closed>
+<summary><h3 style="display:inline"> Examples </h3> </summary>
+<ol>
+<li>Visitors hold <strong>any NFT</strong> in the specified contract</li>
+</ol>
+<pre><code>tokens = [ [ [ { &quot;chain&quot;:&quot;polygon&quot;, &quot;contract&quot;: &quot;0xaab9da2cbab0036fa83ce797109009431d033d35&quot;, &quot;tokens&quot;: [&#x27;*&#x27;] } ] ] ]
+</code></pre>
+<ol start="2">
+<li>Visitors hold  <strong>at least two NFTs <em>listed</em></strong> within the specified contract</li>
+</ol>
+<pre><code>tokens = [ [ [ { &quot;chain&quot;:&quot;polygon&quot;, &quot;contract&quot;: &quot;0xaab9da2cbab0036fa83ce797109009431d033d35&quot;, &quot;tokens&quot;: [12,130,559,2310], minimum:2 } ] ] ]
+</code></pre>
+<ol start="3">
+<li>Visitors hold <strong>all NFTs</strong> listed within the specified contract</li>
+</ol>
+<pre><code>tokens = [ [ [ { &quot;chain&quot;:&quot;polygon&quot;, &quot;contract&quot;: &quot;0xaab9da2cbab0036fa83ce797109009431d033d35&quot;, &quot;tokens&quot;: [12,130,559,2310] } ] ] ]
+</code></pre>
+<ol start="4">
+<li>Visitors hold <strong>any NFT</strong> from <strong>EACH  contract</strong></li>
+</ol>
+<pre><code>tokens = [ [ [
+  { &quot;chain&quot;:&quot;eth&quot;, &quot;contract&quot;: &quot;0x4b1e130ae84c97b931ffbe91ead6b1da16993d45&quot;, &quot;tokens&quot;: [&#x27;*&#x27;] },
+  { &quot;chain&quot;:&quot;polygon&quot;, &quot;contract&quot;: &quot;0xaab9da2cbab0036fa83ce797109009431d033d35&quot;, &quot;tokens&quot;: [&#x27;*&#x27;] }
+] ] ]
+</code></pre>
+<ol start="5">
+<li>Visitors hold <strong>any nfts</strong> from <strong>EITHER contract</strong> </li>
+</ol>
+<pre><code>tokens = [ [
+  [ { &quot;chain&quot;:&quot;eth&quot;, &quot;contract&quot;: &quot;0x4b1e130ae84c97b931ffbe91ead6b1da16993d45&quot;, &quot;tokens&quot;: [&#x27;*&#x27;] } ],
+  [ { &quot;chain&quot;:&quot;polygon&quot;, &quot;contract&quot;: &quot;0xaab9da2cbab0036fa83ce797109009431d033d35&quot;, &quot;tokens&quot;: [&#x27;*&#x27;] } ]
+] ]
+</code></pre>
+<ol start="6">
+<li>Visitors hold any NFT from the specified ethereum contract and also <strong>EITHER</strong> (token 25 and [26 or 27]) <strong>OR</strong> (token 3 and 145) from the polygon contract.</li>
+</ol>
+<pre><code>tokens = [ [
+  [ 
+    { &quot;chain&quot;:&quot;polygon&quot;, &quot;contract&quot;: &quot;0xaab9da2cbab0036fa83ce797109009431d033d35&quot;, &quot;tokens&quot;: [3, 145] },
+    { &quot;chain&quot;:&quot;eth&quot;, &quot;contract&quot;: &quot;0x4b1e130ae84c97b931ffbe91ead6b1da16993d45&quot;, &quot;tokens&quot;: [&#x27;*&#x27;] }
+  ],
+  [ 
+    { &quot;chain&quot;:&quot;polygon&quot;, &quot;contract&quot;: &quot;0xaab9da2cbab0036fa83ce797109009431d033d35&quot;, &quot;tokens&quot;: [25] },
+    { &quot;chain&quot;:&quot;polygon&quot;, &quot;contract&quot;: &quot;0xaab9da2cbab0036fa83ce797109009431d033d35&quot;, &quot;tokens&quot;: [26, 27], minimum: 1 },
+    { &quot;chain&quot;:&quot;eth&quot;, &quot;contract&quot;: &quot;0x4b1e130ae84c97b931ffbe91ead6b1da16993d45&quot;, &quot;tokens&quot;: [&#x27;*&#x27;] }
+  ]
+] ]
+</code></pre>
+<ol start="7">
+<li>This example depicts allowing a visitor access to two <strong>different rooms/features</strong> each with <strong>different requirements</strong>.</li>
+</ol>
+<pre><code>tokens = [ 
+  [ [ { &quot;chain&quot;:&quot;polygon&quot;, &quot;contract&quot;: &quot;0xaab9da2cbab0036fa83ce797109009431d033d35&quot;, &quot;tokens&quot;: [&#x27;*&#x27;] } ] ], 
+  [ [ { &quot;chain&quot;:&quot;eth&quot;, &quot;contract&quot;: &quot;0x4b1e130ae84c97b931ffbe91ead6b1da16993d45&quot;, &quot;tokens&quot;: [&#x27;*&#x27;] } ] ]
+]
+</code></pre>
+<ol start="8">
+<li>This is an example of all possible settings put together</li>
+</ol>
+<pre><code>tokens = [ 
+  [ 
+    [ 
+      { &quot;chain&quot;:&quot;polygon&quot;, &quot;contract&quot;: &quot;0xaab9da2cbab0036fa83ce797109009431d033d35&quot;, &quot;tokens&quot;: [3, 145] },
+      { &quot;chain&quot;:&quot;eth&quot;, &quot;contract&quot;: &quot;0x4b1e130ae84c97b931ffbe91ead6b1da16993d45&quot;, &quot;tokens&quot;: [&#x27;*&#x27;] }
+    ],
+    [ 
+      { &quot;chain&quot;:&quot;polygon&quot;, &quot;contract&quot;: &quot;0xaab9da2cbab0036fa83ce797109009431d033d35&quot;, &quot;tokens&quot;: [25] },
+      { &quot;chain&quot;:&quot;polygon&quot;, &quot;contract&quot;: &quot;0xaab9da2cbab0036fa83ce797109009431d033d35&quot;, &quot;tokens&quot;: [26, 27], minimum: 1 },
+      { &quot;chain&quot;:&quot;eth&quot;, &quot;contract&quot;: &quot;0x4b1e130ae84c97b931ffbe91ead6b1da16993d45&quot;, &quot;tokens&quot;: [&#x27;*&#x27;] }
+    ]
+  ],
+  [ [ { &quot;chain&quot;:&quot;eth&quot;, &quot;contract&quot;: &quot;0x4b1e130ae84c97b931ffbe91ead6b1da16993d45&quot;, &quot;tokens&quot;: [&#x27;*&#x27;] } ] ] 
+]
+</code></pre>
+</details><h2>4. Specify Gates</h2>
+<p>If you got past that, then I'm so proud of you and we are almost done!</p>
+<p>All that's left to do is specify the Space/ Features you want gated. Gated features permit their properties to altered when access is granted. This allows you to hide/reveal items, or change youtube video urls. Persons who teleport into a gated room will be promptly kicked out to the Origin City Center. Alternate teleport locations may be configured (refer to the example).</p>
+<h3>Features</h3>
+<p>Simply give all the features you want to gate an ID within their respective editor panels in-game and then list em out in the corresponding section of our code using a similar JSON notation as above. </p>
+<p>If you want to hide your items: </p>
+<ol>
+<li>Copy the Y coordinate of the feature you want hidden</li>
+<li>Paste it's Y coordinate to your json list (as shown below)</li>
+<li>Set the features Y coordinate in-game to be -100. </li>
+</ol>
+<p>When all token requirements are met, the features will instantly teleport to the y location you set. Refer to the CV <a href="https://wiki.cryptovoxels.com/en/Scripting/all-features-scripting-properties">Wiki</a> page to find out more updatable settings.</p>
+<details closed>
+<summary><h3 style="display:inline"> Examples </h3> </summary>
+<p>This example will hide the first and third listed item until access is granted and update the 2nd item's (a youtube video) video url and preview image.</p>
+<pre><code>gates = [ [
+  {&#x27;id&#x27;: &#x27;featureId1&#x27;, &#x27;y&#x27;: 5 },
+  {&#x27;id&#x27;: &#x27;youtubeVideoId2&#x27;, &#x27;url&#x27;: &#x27;https://www.youtube.com/watch?v=dQw4w9WgXcQ&#x27;, &#x27;previewUrl&#x27;:&quot;https://...&quot;},
+  {&#x27;id&#x27;: &#x27;voxModel3&#x27;, &#x27;y&#x27;: 0 }
+] ]
+</code></pre>
+<p>This example is similar but the logic is split across two different set of token requirements (examples 7 &amp; 8)</p>
+<pre><code>gates = [ 
+  [
+    {&#x27;id&#x27;: &#x27;featureId1&#x27;, &#x27;y&#x27;: 5 },
+    {&#x27;id&#x27;: &#x27;youtubeVideoId2&#x27;, &#x27;url&#x27;: &#x27;https://www.youtube.com/watch?v=dQw4w9WgXcQ&#x27;, &#x27;previewUrl&#x27;:&quot;https://...&quot;}
+  ], 
+  [
+    {&#x27;id&#x27;: &#x27;voxModel3&#x27;, &#x27;y&#x27;: 0 }
+  ]
+]
+</code></pre>
+</details><h3>Spaces</h3>
+<p>Gating a subset of your parcel necessitates retrieving the coordinates of two diametrically opposite corners of the room you want gated. </p>
+<p>In the image below, that would be corner A and B.</p>
+<img src='https://study.com/cimages/multimages/16/physics3754380571394895698.jpg' />
+<p>You can get these coordinates by dragging a feature element into each of the corners and then taking note of their position (from the feature editor panel). It is possible to gate multiple rooms in such a manner. Encode these coordinates in JSON form using the following examples as you guide.</p>
+<details closed>
+<summary><h3 style="display:inline"> Examples </h3> </summary>
+<p>Gate a single room and teleport cheaters to the specified location (as shown in your url when in-game)</p>
+<pre><code>gates = [ [ { &#x27;x&#x27;: -4, &#x27;y&#x27;: 0, &#x27;z&#x27;: -4 }, { &#x27;x&#x27;: 0, &#x27;y&#x27;: 4, &#x27;z&#x27;: 0 }, &#x27;teleport&#x27;: &#x27;E@1W,1N&#x27; ] ]
+</code></pre>
+<p>Gate two rooms at two different heights and locations</p>
+<pre><code>gates = [ 
+    [ { &#x27;x&#x27;: -4, &#x27;y&#x27;: 0, &#x27;z&#x27;: -4 }, { &#x27;x&#x27;: 0, &#x27;y&#x27;: 4, &#x27;z&#x27;: 0 }  ], 
+    [ { &#x27;x&#x27;: 2, &#x27;y&#x27;: 6, &#x27;z&#x27;: 2 }, { &#x27;x&#x27;: 8, &#x27;y&#x27;: 9, &#x27;z&#x27;: 8 }  ] 
+]
+</code></pre>
+<p>Gate Three rooms split across two different set of token requirements (examples 7 &amp; 8)</p>
+<pre><code>gates = [ 
+  [
+    [ { &#x27;x&#x27;: -4, &#x27;y&#x27;: 0, &#x27;z&#x27;: -4 }, { &#x27;x&#x27;: 0, &#x27;y&#x27;: 4, &#x27;z&#x27;: 0 }  ], 
+    [ { &#x27;x&#x27;: 2, &#x27;y&#x27;: 6, &#x27;z&#x27;: 2 }, { &#x27;x&#x27;: 8, &#x27;y&#x27;: 9, &#x27;z&#x27;: 8 }  ] 
+  ],
+  [
+    [ { &#x27;x&#x27;: -8, &#x27;y&#x27;: 10, &#x27;z&#x27;: -8 }, { &#x27;x&#x27;: 8, &#x27;y&#x27;: 15, &#x27;z&#x27;: 8 }  ] 
+  ]
+]
+</code></pre>
+</details><h2>Example</h2>
+<p>In the end you could have something that looks like this:</p>
+<details closed>
+<summary><h3 style="display:inline"> Easy Example </h3> </summary>
+<p>This gates a single room using any token held from a specific polygon token</p>
+<p><code>app_id = &#x27;1kj30usd02j3ofijs0dfy7546yuhf1&#x27;;</code></p>
+<pre><code>tokens = [ [ [ { &quot;chain&quot;:&quot;polygon&quot;, &quot;contract&quot;: &quot;0xaab9da2cbab0036fa83ce797109009431d033d35&quot;, &quot;tokens&quot;: [&#x27;*&#x27;] } ] ] ];
+</code></pre>
+<pre><code>gates = [ [ { &#x27;x&#x27;: -4, &#x27;y&#x27;: 0, &#x27;z&#x27;: -4 }, { &#x27;x&#x27;: 0, &#x27;y&#x27;: 4, &#x27;z&#x27;: 0 }  ] ];
+</code></pre>
+<p><code>parcel.on(&#x27;playerenter&#x27;, (e)=&gt; { (async(e) =&gt; eval( ( await (await fetch( &#x27;https://charleskarpati.com/cv/scripts/token_gate.js&#x27; )).text() ) ) )(e) })</code></p>
+</details><p>Or like this:</p>
+<details closed>
+<summary><h3 style="display:inline"> Complex Example </h3> </summary>
+<p>This gates using two different set of requirements. The first set permits users to have either ( token 3&amp;145 from a polygon contract and any from an eth contract) or ( token 25 as well as token (26 or 27) from a polyon contract along with any from the eth contract ). This first set of requirements will unlock two rooms, 1 youtube video, and a single hidden feature. The second requirements simply grants access to any token holder of the eth contract which will then unlock a single room and vox model.</p>
+<p><code>app_id = &#x27;1kj30usd02j3ofijs0dfy7546yuhf1&#x27;;</code></p>
+<pre><code>tokens = [ 
+  [ 
+    [ 
+      { &quot;chain&quot;:&quot;polygon&quot;, &quot;contract&quot;: &quot;0xaab9da2cbab0036fa83ce797109009431d033d35&quot;, &quot;tokens&quot;: [3, 145] },
+      { &quot;chain&quot;:&quot;eth&quot;, &quot;contract&quot;: &quot;0x4b1e130ae84c97b931ffbe91ead6b1da16993d45&quot;, &quot;tokens&quot;: [&#x27;*&#x27;] }
+    ],
+    [ 
+      { &quot;chain&quot;:&quot;polygon&quot;, &quot;contract&quot;: &quot;0xaab9da2cbab0036fa83ce797109009431d033d35&quot;, &quot;tokens&quot;: [25] },
+      { &quot;chain&quot;:&quot;polygon&quot;, &quot;contract&quot;: &quot;0xaab9da2cbab0036fa83ce797109009431d033d35&quot;, &quot;tokens&quot;: [26, 27], minimum: 1 },
+      { &quot;chain&quot;:&quot;eth&quot;, &quot;contract&quot;: &quot;0x4b1e130ae84c97b931ffbe91ead6b1da16993d45&quot;, &quot;tokens&quot;: [&#x27;*&#x27;] }
+    ]
+  ],
+  [ [ { &quot;chain&quot;:&quot;eth&quot;, &quot;contract&quot;: &quot;0x4b1e130ae84c97b931ffbe91ead6b1da16993d45&quot;, &quot;tokens&quot;: [&#x27;*&#x27;] } ] ] 
+];
+</code></pre>
+<pre><code>gates = [ 
+  [
+    [ { &#x27;x&#x27;: -4, &#x27;y&#x27;: 0, &#x27;z&#x27;: -4 }, { &#x27;x&#x27;: 0, &#x27;y&#x27;: 4, &#x27;z&#x27;: 0 }  ], 
+    [ { &#x27;x&#x27;: 2, &#x27;y&#x27;: 6, &#x27;z&#x27;: 2 }, { &#x27;x&#x27;: 8, &#x27;y&#x27;: 9, &#x27;z&#x27;: 8 }  ], 
+    {&#x27;id&#x27;: &#x27;featureId1&#x27;, &#x27;y&#x27;: 5 },
+    {&#x27;id&#x27;: &#x27;youtubeVideoId2&#x27;, &#x27;url&#x27;: &#x27;https://www.youtube.com/watch?v=dQw4w9WgXcQ&#x27;, &#x27;previewUrl&#x27;:&quot;https://...&quot;}
+  ],
+  [
+    [ { &#x27;x&#x27;: -8, &#x27;y&#x27;: 10, &#x27;z&#x27;: -8 }, { &#x27;x&#x27;: 8, &#x27;y&#x27;: 15, &#x27;z&#x27;: 8 }  ],
+    {&#x27;id&#x27;: &#x27;voxModel3&#x27;, &#x27;y&#x27;: 0 }
+  ]
+];
+</code></pre>
+<p><code>parcel.on(&#x27;playerenter&#x27;, (e)=&gt; { (async(e) =&gt; eval( ( await (await fetch( &#x27;https://charleskarpati.com/cv/scripts/token_gate.js&#x27; )).text() ) ) )(e) })</code></p>
+</details>
+        </ion-row>
+        <ion-row style="display: flex; justify-content: center;">
+          <div style="text-align: center; background-color: rgba(240, 248, 255, 0.75);">
+            <p>
+              <a href="https://mybinder.org/v2/gh/CVMiniGames/CVMiniGames.github.io/main"> <img src="https://mybinder.org/badge_logo.svg" alt="Binder" /> </a>
+              <a href="https://colab.research.google.com/github/CVMiniGames/CVMiniGames.github.io/blob/main/blog/notebooks/003_TokenGating.ipynb"> <img src="https://pete88b.github.io/fastpages/assets/badges/colab.svg" alt="Binder" /></a>
+              <a href="https://github.com/CVMiniGames/CVMiniGames.github.io/blob/main/blog/notebooks/003_TokenGating.ipynb"> <img src="https://pete88b.github.io/fastpages/assets/badges/github.svg" alt="Binder" /></a>
+              <a href=""><img src="https://img.shields.io/github/last-commit/CVMiniGames/CVMiniGames.github.io.svg?style=flat" alt="GitHub last commit" /></a>
+            </p>
+            <p>
+              <a href="https://github.com/CVMiniGames/CVMiniGames.github.io"><img src="https://img.shields.io/github/stars/CVMiniGames/CVMiniGames.github.io.svg?style=social&amp;label=Star" alt="GitHub stars" /></a>
+              <a href="https://github.com/CVMiniGames/CVMiniGames.github.io"><img src="https://img.shields.io/github/watchers/CVMiniGames/CVMiniGames.github.io.svg?style=social&amp;label=Watch" alt="GitHub watchers" /></a>
+              <a href="https://github.com/CVMiniGames/CVMiniGames.github.io"><img src="https://img.shields.io/github/forks/CVMiniGames/CVMiniGames.github.io.svg?style=social&amp;label=Fork" alt="GitHub forks" /></a>
+              <a href="https://github.com/CVMiniGames/CVMiniGames.github.io"><img src="https://img.shields.io/github/followers/CVMiniGames.svg?style=social&amp;label=Follow" alt="GitHub followers" /></a> 
+            </p>
+            <p>Viewcount: <img src="https://visitor-badge.laobi.icu/badge?page_id=CVMiniGames.CVMiniGames.github.io" alt="Visitors">
+          </div>
+        </ion-row>
+      </ion-grid> 
+    </ion-content>
+  </ion-app>
+</body>
+</html>
+
+
+  <!-- 
+    # https://github.com/ionic-team/ionic-docs/blob/legacy/src/demos/api/content/index.html 
+    # https://github.com/ionic-team/ionic-docs/blob/legacy/src/demos/api/infinite-scroll/index.html
+    # https://github.com/ionic-team/ionic-docs/blob/legacy/src/demos/api/back-button/index.html
+
+    https://ionicframework.com/docs/components
+    https://ionicframework.com/docs/api/card
+    https://ionicframework.com/docs/api/popover
+    https://ionicframework.com/docs/api/modal
+    https://ionicframework.com/docs/api/menu
+    https://ionicframework.com/docs/api/grid
+    https://ionicframework.com/docs/api/action-sheet
+    https://ionicframework.com/docs/api/toolbar
+    https://ionicframework.com/docs/api/content
+
+    <ion-row class="md hydrated">
+    <ion-list class="md list-md hydrated">
+      <ion-item class="item md item-fill-none in-list hydrated item-label">
+        <ion-label class="sc-ion-label-md-h sc-ion-label-md-s md hydrated">Item 0</ion-label>
+      </ion-item>
+      <ion-item class="item md item-fill-none in-list hydrated item-label">
+        <ion-label class="sc-ion-label-md-h sc-ion-label-md-s md hydrated">Item 14</ion-label>
+      </ion-item>
+    </ion-list>
+    </ion-row>
+  -->
