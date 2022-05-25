@@ -39,6 +39,7 @@
       --ion-padding: 0px;
       --ion-grid-padding-xs: 0px;
     }
+    *{ user-select: text; }
     #articleContent { display: flex; flex-direction: column; max-width: var(--max-width); margin: auto; }
     #articleContent > p {padding: 0px 12px 0px 12px;} 
     h2, h3, h4 {text-align: center; } 
@@ -88,18 +89,18 @@
         <ion-row id='articleContent' style="">
           <style> h2, h3{display: inline;}</style><h2>Welcome!</h2>
 <p>Use this page to navigate about the CVMiniGames ecosystem.</p>
-<h2>Articles:</h2>
+<details open style="background:#eee">
+<summary><h2>Articles:</h2>
 </summary><ul>
-<li><a href='./parcels.html'>Parcel</a> Information</li>
+<li><a href='./lore'>Lore</a>: A review of what's out there</li>
+<li><a href='./tutorials'>Build Tips</a>: Secret Secrets to make you a better builder! </li>
+<li><a href='./parcels'>Parcel</a> Information</li>
 <li><a href='./tokengating'>Token Gating</a>: HOWTO: Limit access to a subset of your parcel or features.</li>
-<li><a href='./lore.html'>Lore</a>: A review of what's out there</li>
-<li><a href='./tutorials.html'>Build Tips</a>: Secret Secrets to make you a better builder! </li>
-<li><a href='./monetize.html'>Monetizing</a>: A review of how people are making money</li>
-<li><a href='https://charleskarpati.com/cv/'>Admin</a>: Scripts you can use to collect analytics and create immersive content</li>
+<li><a href='./monetize'>Monetizing</a>: A review of how people are making money</li>
 </ul>
 </details>
 <details>
-<summary><h1>Interactive Data</h1>
+<summary><h2>Interactive Data</h2>
 </summary><ul>
 <li><a href='https://cvminigames.com/blog/docs/tables/parcelsPivotTable.html'>Parcels</a> Table</li>
 <li><a href='https://cvminigames.com/blog/docs/maps/cv_book_map.html'>Guestbooks</a> Map</li>
@@ -107,19 +108,46 @@
 <li><a href='https://cvminigames.com/blog/docs/maps/cv_visitor_map.html'>Visitors</a> Map</li>
 </ul>
 </details>
-<details>
+<details style="background:#eee">
 <summary><h2>Tools</h2>
 </summary><ul>
 <li><a href="https://cvminigames.com/blog/docs/airdrops.html">Airdrops</a></li>
-<li><a href="https://cvminigames.com/blog/docs/airdropsasync.html">Async Airdrops</a></li>
+<li><a href='https://charleskarpati.com/cv/'>Admin</a>: Scripts you can use to collect analytics and create immersive content</li>
 </ul>
 </details>
 <details>
-<summary><h3>External Resources</h3>
+<summary><h2>External Resources</h2>
 </summary><ul>
 <li><a href="https://nonfungible.com/market/history/cryptovoxels">Analytics</a></li>
 </ul>
-</details></summary></details>
+http://blog.cryptovoxels.com/scripting-bundle/
+
+https://peakd.com/cryptovoxels/@cluny.the.rat/scarcity-artifact-wearable-fitting-guide-i-two-outfits
+
+https://thegraph.com/hosted-service/subgraph/benjythebee/cryptovoxels-parcels?version=current
+
+Github: https://github.com/cryptovoxels/parcel-market-subgraph
+ID: QmVSoQsUbbKyk2z4Qw6hzUcbcQVsAnoe27iPzfJF9popt2
+Queries (HTTP): https://api.thegraph.com/subgraphs/name/benjythebee/cryptovoxels-parcels
+
+
+create quadratic strategy that recognizes the suburb variable in cv erc721 metadata
+https://github.com/snapshot-labs/snapshot-strategies#checklist-for-adding-a-new-strategy
+use existing quadratic strategies for reference, here
+https://github.com/snapshot-labs/snapshot-strategies/tree/master/src/strategies
+each suburb will need an ENS name to register their snapshot page
+& that's it. gasless voting per suburb using existing NFTs
+
+
+
+Suburbs should have their own DAO contracts on the chain and suburb parcel owners should automatically be eligible to vote on suburb-wide parameters. The voting system should be based on preferences, i.e. something similar to “I strongly agree, I am a little bit supportive, I am a little bit against, I am strongly against” and one parcel gives you 4 votes.
+Vote count not higher than a certain threshold should lead to inconclusive results.
+The parameters people could vote on are not fully decided at the moment; e.g. Street colors are island based (not suburb based)
+A whole suburb could potentially decide on banning a certain parcel though; Say one parcel is being a parasite (neglecting the theme, being noisy or annoying) then maybe the suburb could vote on nerfing the parcel down or banning the owner for 7 days
+
+gnosis wallets 
+bitrees rentals
+john bittrees = high contract building</details></summary></details>
         </ion-row>
         <ion-row style="display: flex; justify-content: center;">
           <div style="text-align: center; background-color: rgba(240, 248, 255, 0.75);">
