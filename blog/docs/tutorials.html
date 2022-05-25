@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
+<head> 
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>CVMinigames | Tutorials</title>
   <script type="module" src="https://cdn.jsdelivr.net/npm/@ionic/core/dist/ionic/ionic.esm.js"></script>
@@ -13,30 +12,64 @@
   <meta name="twitter:creator" content="@CVMiniGames" />
   <meta property="og:url" content="http://www.cvminigames.com" />
   <meta property="og:title" content="CVMiniGames Homepage" />
+  <!-- <meta name="theme-color" media="(prefers-color-scheme: light)" content="#3880ff" /> -->
   
   <!-- Additional Meta's -->
   <meta property="og:description" content="Join the community and get the $1 token that unlocks access to a meta-world of fun!" />
   <meta property="og:image" content="http://graphics8.nytimes.com/images/2011/12/08/technology/bits-newtwitter/bits-newtwitter-tmagArticle.jpg" />
   
   <!-- Style -->
-  <style> 
-    ion-content > div { margin-left: 25%; padding-top: 40px;  padding-bottom: 40px; }
-    h2, h3 {text-align: center;  display: inline-block; }
-    details{padding-bottom:12px; max-width: 800px} 
+  <!-- 
+    ion-content > div { margin-left: 25%; padding-top: 40px;  padding-bottom: 40px; }  
+    :root {
+      --main-bg-color: coral;
+    }
+    pre{ width: 800px; 
+  -->
+  <style>  
+    ion-title {
+        line-height: 40px;
+        margin-left:20px;
+        padding-left: 70px;
+        background: url('https://raw.githubusercontent.com/CVMiniGames/CVminiGames.github.io/main/blog/docs/_img/logo1_300x300.jpg') no-repeat left center;
+      	background-size: 50px 50px;
+    }
+    :root {
+      --max-width: min(800px, 100vw); 
+      --ion-padding: 0px;
+      --ion-grid-padding-xs: 0px;
+    }
+    #articleContent { display: flex; flex-direction: column; max-width: var(--max-width); margin: auto; }
+    #articleContent > p {padding: 0px 12px 0px 12px;} 
+    h2, h3, h4 {text-align: center; } 
+    summary{ text-align: center; cursor: pointer;}
     summary>*{ display:inline-block }
-    details > summary > h3 {display: inline;}
-    summary::marker { content: "🧡 "; } 
+    summary::marker { content: "🧡"; } 
+    details[open] summary::marker { content: "💖"; }
+    details{padding: 12px;} 
+    details > img {display:block; margin:auto;}
+    p { word-break: break-word; }
+    pre{ max-width: calc( var(--max-width) - 70px); background: #333; padding: 12px; }
+    pre > code { color: white; } 
+    blockquote{ 
+      font-style:italic; background-color: #333; 
+      color: #eee; border-left:8px solid deeppink ; 
+      position: relative; padding: 12px 5px 1px 5px; 
+    }
+    blockquote::before{ content: "\201C"; color: hotpink; padding-top: 6px; font-size:4em; position: absolute; left: 10px; top:-10px; }
+    .twitter-tweet{ margin:auto; }
+    blockquote span{ color:hotpink; font-style: normal; font-weight: bold; display: block; text-align: center; }
   </style> 
+  
 </head>
 <body>
   <ion-app>
     <ion-header translucent > <!-- class="ion-no-border" -->
-      <ion-toolbar>
-        <ion-title onclick="location.href='https://www.CVMiniGames.com'" style="cursor: pointer;">
-          <img src='https://raw.githubusercontent.com/CVMiniGames/CVminiGames.github.io/main/blog/docs/_img/logo1_300x300.jpg' style="width:50px"></img>
-          CVMinigames
-        </ion-title>
-      </ion-toolbar> 
+    	<ion-toolbar>
+    		<ion-title onclick="location.href='https://www.CVMiniGames.com'" style="cursor: pointer;">
+    			CVMinigames
+    		</ion-title>
+    	</ion-toolbar> 
     </ion-header>
     <ion-content fullscreen class="ion-padding"> 
       <ion-grid class="md hydrated">
@@ -52,8 +85,8 @@
           </div>
           <iframe src="https://www.cryptovoxels.com/play?coords=N@1447E,1128S,&mode=orbit" width="100%" height="500" scrolling="yes" class="iframe-class" frameborder="0"></iframe>
         </ion-row>
-        <ion-row style="display: flex; flex-direction: column; align-content: center;">
-          <details>
+        <ion-row id='articleContent' style="">
+          <details style='background:#eee'>
 <summary><h1>One Off Notes</h1>
 </summary><ul>
 <li>Objects can be solid up to 5m above your parcel and 2.5m around the sides (unless bordered by a neighbor)</li>
@@ -68,29 +101,42 @@
 </ul>
 </li>
 <li>Parcels look even bigger if you put a gif of fog right along the top</li>
-<li>Create 3d images by placing the same image perpendicular and on top of each other</li>
+<li>Create 3D images by placing the same image perpendicular and on top of each other</li>
 <li>Hollowing out voxels will help load them faster</li>
 <li>Quick swap your parcels interior by building out your designs in free spaces</li>
+</ul>
+<ul>
+<li>Check the &quot;stretch&quot; box and then you will have to scale the image to the correct aspect ratio and the image will display correctly - Cluny</li>
+<li>if you save an image of text with black text on white background, you don't even have to make it a transparent image.  Black text on white background with &quot;multiply&quot; blend mode (the default blend mode) works like a transparency.  Actually works better than a transparency because it doesn't have the weird blending artifacts that happens with transparencies when one transparent image is in front of another image from the perspective of the viewer. - Cluny</li>
 </ul>
 </details>
 <details>
 <summary><h1>Scripting Examples</h1>
 </summary><ul>
-<li>Voxels.com/s/remotecontrol</li>
-<li>Voxels.com/s/playlist</li>
-<li>Voxels.com/s/leaderandfollower</li>
-<li>Voxels.com/s/svganimations</li>
-<li>Voxels.com/s/displaycollections</li>
-<li>Voxels.com/s/invisiblewalls</li>
-<li>Voxels.com/s/maticgating</li>
-<li>Voxels.com/s/thegraph</li>
-<li>Voxels.com/s/chatbox</li>
-<li>Voxels.com/s/animate</li>
-<li>Voxels.com/s/thegraph</li>
+<li><a href="Voxels.com/s/remotecontrol">Remote</a> Control</li>
+<li>Leader &amp; <a href="Voxels.com/s/leaderandfollower">Following</a> features</li>
+<li>Animations a Feature along an <a href="Voxels.com/s/svganimations">SVG's Path</a></li>
+<li>Display <a href="Voxels.com/s/displaycollections">Collections</a></li>
+<li><a href="Voxels.com/s/invisiblewalls">Invisible Walls</a></li>
+<li>Token <a href="Voxels.com/s/maticgating">Gating</a></li>
+<li>The <a href="Voxels.com/s/thegraph">Graph</a></li>
+<li><a href="Voxels.com/s/chatbox">Chatbox</a></li>
+<li><a href="Voxels.com/s/animate">Animate</a> Vox Models</li>
+<li><a href="Voxels.com/s/syncAnimation">Sync</a> Animations</li>
+<li><a href="Voxels.com/s/playlistcontroller">YT Playlist</a> W Controls</li>
+<li>Reloading a parcel using <a href="https://support.cryptovoxels.com/t/access-parcel-snapshots-with-scripting/193/2">Snapshots</a></li>
+</ul>
+</details>
+<details style='background:#eee'>
+<summary><h1>Build Resources</h1>
+</summary><ul>
+<li><a href="https://free3d.com/3d-models/obj?page=3">3D Assets</a></li>
+<li>Magica Voxels <a href="http://ephtracy.github.io/index.html?page=mv_resource">Download</a></li>
+<li>Magica Voxels <a href="https://www.megavoxels.com/p/magicavoxel-tutorials.html">Tutorial</a></li>
 </ul>
 </details>
 <details>
-<summary><h1>Possible Games</h1>
+<summary><h1>Games Ideas</h1>
 </summary><ul>
 <li>Capture the Flag</li>
 <li>Tag</li>
@@ -127,7 +173,6 @@
   </ion-app>
 </body>
 </html>
-
 
   <!-- 
     # https://github.com/ionic-team/ionic-docs/blob/legacy/src/demos/api/content/index.html 

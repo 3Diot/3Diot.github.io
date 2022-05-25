@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
+<head> 
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>CVMinigames | Monetize</title>
   <script type="module" src="https://cdn.jsdelivr.net/npm/@ionic/core/dist/ionic/ionic.esm.js"></script>
@@ -13,30 +12,64 @@
   <meta name="twitter:creator" content="@CVMiniGames" />
   <meta property="og:url" content="http://www.cvminigames.com" />
   <meta property="og:title" content="CVMiniGames Homepage" />
+  <!-- <meta name="theme-color" media="(prefers-color-scheme: light)" content="#3880ff" /> -->
   
   <!-- Additional Meta's -->
   <meta property="og:description" content="Join the community and get the $1 token that unlocks access to a meta-world of fun!" />
   <meta property="og:image" content="http://graphics8.nytimes.com/images/2011/12/08/technology/bits-newtwitter/bits-newtwitter-tmagArticle.jpg" />
   
   <!-- Style -->
-  <style> 
-    ion-content > div { margin-left: 25%; padding-top: 40px;  padding-bottom: 40px; }
-    h2, h3 {text-align: center;  display: inline-block; }
-    details{padding-bottom:12px; max-width: 800px} 
+  <!-- 
+    ion-content > div { margin-left: 25%; padding-top: 40px;  padding-bottom: 40px; }  
+    :root {
+      --main-bg-color: coral;
+    }
+    pre{ width: 800px; 
+  -->
+  <style>  
+    ion-title {
+        line-height: 40px;
+        margin-left:20px;
+        padding-left: 70px;
+        background: url('https://raw.githubusercontent.com/CVMiniGames/CVminiGames.github.io/main/blog/docs/_img/logo1_300x300.jpg') no-repeat left center;
+      	background-size: 50px 50px;
+    }
+    :root {
+      --max-width: min(800px, 100vw); 
+      --ion-padding: 0px;
+      --ion-grid-padding-xs: 0px;
+    }
+    #articleContent { display: flex; flex-direction: column; max-width: var(--max-width); margin: auto; }
+    #articleContent > p {padding: 0px 12px 0px 12px;} 
+    h2, h3, h4 {text-align: center; } 
+    summary{ text-align: center; cursor: pointer;}
     summary>*{ display:inline-block }
-    details > summary > h3 {display: inline;}
-    summary::marker { content: "🧡 "; } 
+    summary::marker { content: "🧡"; } 
+    details[open] summary::marker { content: "💖"; }
+    details{padding: 12px;} 
+    details > img {display:block; margin:auto;}
+    p { word-break: break-word; }
+    pre{ max-width: calc( var(--max-width) - 70px); background: #333; padding: 12px; }
+    pre > code { color: white; } 
+    blockquote{ 
+      font-style:italic; background-color: #333; 
+      color: #eee; border-left:8px solid deeppink ; 
+      position: relative; padding: 12px 5px 1px 5px; 
+    }
+    blockquote::before{ content: "\201C"; color: hotpink; padding-top: 6px; font-size:4em; position: absolute; left: 10px; top:-10px; }
+    .twitter-tweet{ margin:auto; }
+    blockquote span{ color:hotpink; font-style: normal; font-weight: bold; display: block; text-align: center; }
   </style> 
+  
 </head>
 <body>
   <ion-app>
     <ion-header translucent > <!-- class="ion-no-border" -->
-      <ion-toolbar>
-        <ion-title onclick="location.href='https://www.CVMiniGames.com'" style="cursor: pointer;">
-          <img src='https://raw.githubusercontent.com/CVMiniGames/CVminiGames.github.io/main/blog/docs/_img/logo1_300x300.jpg' style="width:50px"></img>
-          CVMinigames
-        </ion-title>
-      </ion-toolbar> 
+    	<ion-toolbar>
+    		<ion-title onclick="location.href='https://www.CVMiniGames.com'" style="cursor: pointer;">
+    			CVMinigames
+    		</ion-title>
+    	</ion-toolbar> 
     </ion-header>
     <ion-content fullscreen class="ion-padding"> 
       <ion-grid class="md hydrated">
@@ -52,10 +85,11 @@
           </div>
           <iframe src="https://www.cryptovoxels.com/play?coords=N@1447E,1128S,&mode=orbit" width="100%" height="500" scrolling="yes" class="iframe-class" frameborder="0"></iframe>
         </ion-row>
-        <ion-row style="display: flex; flex-direction: column; align-content: center;">
+        <ion-row id='articleContent' style="">
           <p>Below are a list of way I've seen to make money in the metaverse :D</p>
-<h2>Development</h2>
-<h3>Building</h3>
+<details style='background:#eee'>
+<summary><h2>Development</h2>
+</summary><h3>Building</h3>
 <p>Many people who buy land may not have the time or talent to develop the nice builds they desire. That's where you come in! Get on the CV discord and to look for commissioned builds, or advertise yourself!</p>
 <h4>Pre-made Parcels</h4>
 <p>Did you know that it's possible to sell an entire build without needing to own a parcel?</p>
@@ -91,8 +125,10 @@
 </ul>
 <h3>Games</h3>
 <p>This is the path I took. After listening to countless Bankless podcasts where they told me to get a job in crypto and advising the best way to get started is by engaging with the community. I finally took the leap! People saw what I could do from the website I made, in-world builds, or through my participation on discord. Subsequently, I've found no shortage of work!</p>
-<h2>Promoting</h2>
-<script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script> 
+</details>
+<details>
+<summary><h2>Promoting</h2>
+</summary><script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script> 
 <blockquote class="twitter-tweet" style="display=inline">
   <a href="https://twitter.com/bitpixi/status/1496218372316532736"></a> 
 </blockquote><p>Have a project of your own with a ravenous fan base? </p>
@@ -106,8 +142,10 @@
 <p><a href="https://linktr.ee/DAOrecords">DaoRecords</a> - Is a Web3 Record Label Launchpad &amp; DAO with a homebase in CV</p>
 </li>
 </ul>
-<h2>Art</h2>
-<script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script> 
+</details>
+<details style='background:#eee'>
+<summary><h2>Art</h2>
+</summary><script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script> 
 <blockquote class="twitter-tweet" style="display=inline">
   <a href="https://twitter.com/k1ic234/status/1485554182778077184"></a> 
 </blockquote><p>This could fall into several other sections but I gave it it's own...</p>
@@ -117,8 +155,10 @@
 <li><a href="https://www.amazingdevya.com/">Amazing Devya</a> - NFT Art &amp; Book collection of our 10 y/o daughter Devya with Autism &amp; SLD. All your proceeds go towards her therapy &amp; art</li>
 <li><a href="https://alottamoney.com/">Alotta Money</a> - A longstanding community participant, beloved creator, and a CV fan favorite. R.I.P.</li>
 </ul>
-<h2>Music</h2>
-<p>One of my favorite aspects of the Cryptoverse is it's ability to expose you to new music. </p>
+</details>
+<details>
+<summary><h2>Music</h2>
+</summary><p>One of my favorite aspects of the Cryptoverse is it's ability to expose you to new music. </p>
 <p>Here are just some of the unique ways I've been introduced something new:</p>
 <ul>
 <li>
@@ -137,20 +177,26 @@
 <p><a href="https://www.cryptovoxels.com/parcels/1162">B.20</a> - This $2.7M estate is infused with original soundscape by 3LAU. Three WOWs.. (WOW WOW)</p>
 </li>
 </ul>
-<h2>Events</h2>
-<p>Money abound! Get paid to host, to perform or create!</p>
+</details>
+<details style='background:#eee'>
+<summary><h2>Events</h2>
+</summary><p>Money abound! Get paid to host, to perform or create!</p>
 <p>Possibilities include (but not limited to):</p>
 <p>Galleries, Movies, Clubs, Open-Mic Nights, Speed-dating, <a href="https://twitter.com/TheComedyVerse">Comedy Clubs</a>, AA Meetings</p>
-<h2>Premium Content</h2>
-<p>Got something fire and you know it?</p>
+</details>
+<details>
+<summary><h2>Premium Content</h2>
+</summary><p>Got something fire and you know it?</p>
 <p>Put that sucker behind a paywall and let the people come (at a price)!</p>
 <ul>
 <li><a href="grantingwishesstudios.xyz">GrantingWishes</a> Studios - allows people to rent out their cinema for private and public showings, and much <a href="https://www.grantingwishesstudios.xyz/">more</a>! With custom (nft) tickets gating access, users can keep a momento of the experience to boot!</li>
 <li><a href="https://cryptoxob.space">Ancient Encounters</a> - Listed above, this story telling had a final room that requried purchase of cheap (~$5) matic items in order to reach and conclude it's story.</li>
 <li>EulerBeats Genesis &amp; Enigma - is an ultra scarce digital art + beat NFT collection generated on-chain. Their project caught the attention of <a href="https://twitter.com/BanklessHQ/status/1364255520857731072">Marc Cuban</a> and their (token-gated) <a href="https://www.cryptovoxels.com/parcels/5449">parcel</a> has even been featured in a JPMorgan report <img src="https://pbs.twimg.com/media/FLsnJXJXoAAhURU?format=jpg" alt="FLsnJXJXoAAhURU" /></li>
 </ul>
-<h2>Renting/ Loans</h2>
-<p>If you have a parcel put it to use! </p>
+</details>
+<details style='background:#eee'>
+<summary><h2>Renting/ Loans</h2>
+</summary><p>If you have a parcel put it to use! </p>
 <ul>
 <li>
 <p>Put a 'For Rent' sign with a way to reach you in your parcel and wait for fish to bite!</p>
@@ -165,20 +211,33 @@
 <p><a href="https://twitter.com/adsharesNet">AdsharesNet</a> - pays you for advertisement space!</p>
 </li>
 </ul>
-<h2>Competitions</h2>
-<p>These can come in all shapes and sizes. </p>
+
+<script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+<blockquote class="twitter-tweet" style="display=inline">
+  <a href="https://twitter.com/landworksxyz/status/1527171975076282368"></a> 
+</blockquote>
+</details>
+<details>
+<summary><h2>Competitions</h2>
+</summary><p>These can come in all shapes and sizes. </p>
 <p>Some can provide large monetary value like the 2021 Holiday Build Contest and at others, everybody's a winner! </p>
-<h2>Guestbooks</h2>
-<p>This isn't a really good way to make money. But signing guestbooks can yield access to all sorts of wonderful surprises!</p>
-<h2>Grants</h2>
-<p>Do you have a big idea? Every so and often you can find organizations willing to fund it! </p>
+</details>
+<details style='background:#eee'>
+<summary><h2>Guestbooks</h2>
+</summary><p>This isn't a really good way to make money. But signing guestbooks can yield access to all sorts of wonderful surprises!</p>
+</details>
+<details>
+<summary><h2>Grants</h2>
+</summary><p>Do you have a big idea? Every so and often you can find organizations willing to fund it! </p>
 <p>Apply for grants from organizations big and small. Some examples include, </p>
 <ul>
 <li>the <a href="https://gov.near.org/t/approved-metaverse-dao-funding-for-february-2022/14551">NEAR</a> protocol - my friend actually applied for this (and was approved)! </li>
 <li><a href="https://neondao.xyz/">NEON</a> DAO - A serious org looking to support serious-ly awesome projects</li>
 </ul>
-<h2>Misc</h2>
-<p>Networking, Consulting, Working for a Crypto Team ( Code, Design, Develop ). There are countless other ways to make money in the metaverse not listed.</p>
+</details>
+<details style='background:#eee'>
+<summary><h2>Misc</h2>
+</summary><p>Networking, Consulting, Working for a Crypto Team ( Code, Design, Develop ). There are countless other ways to make money in the metaverse not listed.</p>
 <p>Here are some ways that may not have fit to well in other categories:</p>
 <ul>
 <li>
@@ -191,18 +250,24 @@
 <p><a href="https://www.youtube.com/watch?v=eDs5JXIfxxA">Metaverse Cribs</a> - Markets his video-production skills by making videos of CV Builders! -&gt; Attached is a video he made of my 2021 Holiday Build Contest Entry! </p>
 </li>
 </ul>
-<h2>Speculating</h2>
-<script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script> 
+</details>
+<details>
+<summary><h2>Speculating</h2>
+</summary><script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script> 
 <blockquote class="twitter-tweet" style="display=inline">
   <a href="https://twitter.com/cryptovoxels/status/1495626562942771202"></a> 
 </blockquote><p>There are more ways than one to speculate on the metaverse. </p>
 <p>The most common speculative activity is to buy a parcel for the long-haul and also USING IT (as intendid).</p>
 <p>Here are some other ways people have tried:</p>
 <ul>
-<li>The Bronx <a href="https://zootoken.club/">Zoo</a> - Was an interesting project where a zoo-token was created with the intention to fractionalize a parcel. More information in the link </li>
-<li><a href="https://opensea.io/METAArchs">METAArchs</a> - The foremost land speculators. You can often find them buying on discount and selling parcels for a profit </li>
+<li>
+<p>The Bronx <a href="https://zootoken.club/">Zoo</a> - Was an interesting project where a zoo-token was created with the intention to fractionalize a parcel. More information in the link </p>
+</li>
+<li>
+<p><a href="https://opensea.io/METAArchs">METAArchs</a> - The foremost land speculators. You can often find them buying on discount and selling parcels for a profit </p>
+</li>
 </ul>
-
+</details>
         </ion-row>
         <ion-row style="display: flex; justify-content: center;">
           <div style="text-align: center; background-color: rgba(240, 248, 255, 0.75);">
@@ -226,7 +291,6 @@
   </ion-app>
 </body>
 </html>
-
 
   <!-- 
     # https://github.com/ionic-team/ionic-docs/blob/legacy/src/demos/api/content/index.html 

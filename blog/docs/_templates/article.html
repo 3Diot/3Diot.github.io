@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
+<head> 
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>{{tab}}</title>
   <script type="module" src="https://cdn.jsdelivr.net/npm/@ionic/core/dist/ionic/ionic.esm.js"></script>
@@ -13,30 +12,64 @@
   <meta name="twitter:creator" content="@CVMiniGames" />
   <meta property="og:url" content="http://www.cvminigames.com" />
   <meta property="og:title" content="CVMiniGames Homepage" />
+  <!-- <meta name="theme-color" media="(prefers-color-scheme: light)" content="#3880ff" /> -->
   
   <!-- Additional Meta's -->
   <meta property="og:description" content="Join the community and get the $1 token that unlocks access to a meta-world of fun!" />
   <meta property="og:image" content="http://graphics8.nytimes.com/images/2011/12/08/technology/bits-newtwitter/bits-newtwitter-tmagArticle.jpg" />
   
   <!-- Style -->
-  <style> 
-    ion-content > div { margin-left: 25%; padding-top: 40px;  padding-bottom: 40px; }
-    h2, h3 {text-align: center;  display: inline-block; }
-    details{padding-bottom:12px; max-width: 800px} 
+  <!-- 
+    ion-content > div { margin-left: 25%; padding-top: 40px;  padding-bottom: 40px; }  
+    :root {
+      --main-bg-color: coral;
+    }
+    pre{ width: 800px; 
+  -->
+  <style>  
+    ion-title {
+        line-height: 40px;
+        margin-left:20px;
+        padding-left: 70px;
+        background: url('https://raw.githubusercontent.com/CVMiniGames/CVminiGames.github.io/main/blog/docs/_img/logo1_300x300.jpg') no-repeat left center;
+      	background-size: 50px 50px;
+    }
+    :root {
+      --max-width: min(800px, 100vw); 
+      --ion-padding: 0px;
+      --ion-grid-padding-xs: 0px;
+    }
+    #articleContent { display: flex; flex-direction: column; max-width: var(--max-width); margin: auto; }
+    #articleContent > p {padding: 0px 12px 0px 12px;} 
+    h2, h3, h4 {text-align: center; } 
+    summary{ text-align: center; cursor: pointer;}
     summary>*{ display:inline-block }
-    details > summary > h3 {display: inline;}
-    summary::marker { content: "🧡 "; } 
+    summary::marker { content: "🧡"; } 
+    details[open] summary::marker { content: "💖"; }
+    details{padding: 12px;} 
+    details > img {display:block; margin:auto;}
+    p { word-break: break-word; }
+    pre{ max-width: calc( var(--max-width) - 70px); background: #333; padding: 12px; }
+    pre > code { color: white; } 
+    blockquote{ 
+      font-style:italic; background-color: #333; 
+      color: #eee; border-left:8px solid deeppink ; 
+      position: relative; padding: 12px 5px 1px 5px; 
+    }
+    blockquote::before{ content: "\201C"; color: hotpink; padding-top: 6px; font-size:4em; position: absolute; left: 10px; top:-10px; }
+    .twitter-tweet{ margin:auto; }
+    blockquote span{ color:hotpink; font-style: normal; font-weight: bold; display: block; text-align: center; }
   </style> 
+  
 </head>
 <body>
   <ion-app>
     <ion-header translucent > <!-- class="ion-no-border" -->
-      <ion-toolbar>
-        <ion-title onclick="location.href='https://www.CVMiniGames.com'" style="cursor: pointer;">
-          <img src='https://raw.githubusercontent.com/CVMiniGames/CVminiGames.github.io/main/blog/docs/_img/logo1_300x300.jpg' style="width:50px"></img>
-          {{title}}
-        </ion-title>
-      </ion-toolbar> 
+    	<ion-toolbar>
+    		<ion-title onclick="location.href='https://www.CVMiniGames.com'" style="cursor: pointer;">
+    			{{title}}
+    		</ion-title>
+    	</ion-toolbar> 
     </ion-header>
     <ion-content fullscreen class="ion-padding"> 
       <ion-grid class="md hydrated">
@@ -52,7 +85,7 @@
           </div>
           <iframe src="https://www.cryptovoxels.com/play?coords=N@1447E,1128S,&mode=orbit" width="100%" height="500" scrolling="yes" class="iframe-class" frameborder="0"></iframe>
         </ion-row>
-        <ion-row style="display: flex; flex-direction: column; align-content: center;">
+        <ion-row id='articleContent' style="">
           {{content}}
         </ion-row>
         <ion-row style="display: flex; justify-content: center;">
@@ -77,7 +110,6 @@
   </ion-app>
 </body>
 </html>
-
 
   <!-- 
     # https://github.com/ionic-team/ionic-docs/blob/legacy/src/demos/api/content/index.html 

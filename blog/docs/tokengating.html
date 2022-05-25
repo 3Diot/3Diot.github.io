@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
+<head> 
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>CVMinigames | Tokengating</title>
   <script type="module" src="https://cdn.jsdelivr.net/npm/@ionic/core/dist/ionic/ionic.esm.js"></script>
@@ -13,30 +12,64 @@
   <meta name="twitter:creator" content="@CVMiniGames" />
   <meta property="og:url" content="http://www.cvminigames.com" />
   <meta property="og:title" content="CVMiniGames Homepage" />
+  <!-- <meta name="theme-color" media="(prefers-color-scheme: light)" content="#3880ff" /> -->
   
   <!-- Additional Meta's -->
   <meta property="og:description" content="Join the community and get the $1 token that unlocks access to a meta-world of fun!" />
   <meta property="og:image" content="http://graphics8.nytimes.com/images/2011/12/08/technology/bits-newtwitter/bits-newtwitter-tmagArticle.jpg" />
   
   <!-- Style -->
-  <style> 
-    ion-content > div { margin-left: 25%; padding-top: 40px;  padding-bottom: 40px; }
-    h2, h3 {text-align: center;  display: inline-block; }
-    details{padding-bottom:12px; max-width: 800px} 
+  <!-- 
+    ion-content > div { margin-left: 25%; padding-top: 40px;  padding-bottom: 40px; }  
+    :root {
+      --main-bg-color: coral;
+    }
+    pre{ width: 800px; 
+  -->
+  <style>  
+    ion-title {
+        line-height: 40px;
+        margin-left:20px;
+        padding-left: 70px;
+        background: url('https://raw.githubusercontent.com/CVMiniGames/CVminiGames.github.io/main/blog/docs/_img/logo1_300x300.jpg') no-repeat left center;
+      	background-size: 50px 50px;
+    }
+    :root {
+      --max-width: min(800px, 100vw); 
+      --ion-padding: 0px;
+      --ion-grid-padding-xs: 0px;
+    }
+    #articleContent { display: flex; flex-direction: column; max-width: var(--max-width); margin: auto; }
+    #articleContent > p {padding: 0px 12px 0px 12px;} 
+    h2, h3, h4 {text-align: center; } 
+    summary{ text-align: center; cursor: pointer;}
     summary>*{ display:inline-block }
-    details > summary > h3 {display: inline;}
-    summary::marker { content: "ðŸ§¡ "; } 
+    summary::marker { content: "🧡"; } 
+    details[open] summary::marker { content: "💖"; }
+    details{padding: 12px;} 
+    details > img {display:block; margin:auto;}
+    p { word-break: break-word; }
+    pre{ max-width: calc( var(--max-width) - 70px); background: #333; padding: 12px; }
+    pre > code { color: white; } 
+    blockquote{ 
+      font-style:italic; background-color: #333; 
+      color: #eee; border-left:8px solid deeppink ; 
+      position: relative; padding: 12px 5px 1px 5px; 
+    }
+    blockquote::before{ content: "\201C"; color: hotpink; padding-top: 6px; font-size:4em; position: absolute; left: 10px; top:-10px; }
+    .twitter-tweet{ margin:auto; }
+    blockquote span{ color:hotpink; font-style: normal; font-weight: bold; display: block; text-align: center; }
   </style> 
+  
 </head>
 <body>
   <ion-app>
     <ion-header translucent > <!-- class="ion-no-border" -->
-      <ion-toolbar>
-        <ion-title onclick="location.href='https://www.CVMiniGames.com'" style="cursor: pointer;">
-          <img src='https://raw.githubusercontent.com/CVMiniGames/CVminiGames.github.io/main/blog/docs/_img/logo1_300x300.jpg' style="width:50px"></img>
-          CVMinigames
-        </ion-title>
-      </ion-toolbar> 
+    	<ion-toolbar>
+    		<ion-title onclick="location.href='https://www.CVMiniGames.com'" style="cursor: pointer;">
+    			CVMinigames
+    		</ion-title>
+    	</ion-toolbar> 
     </ion-header>
     <ion-content fullscreen class="ion-padding"> 
       <ion-grid class="md hydrated">
@@ -52,20 +85,21 @@
           </div>
           <iframe src="https://www.cryptovoxels.com/play?coords=N@1447E,1128S,&mode=orbit" width="100%" height="500" scrolling="yes" class="iframe-class" frameborder="0"></iframe>
         </ion-row>
-        <ion-row style="display: flex; flex-direction: column; align-content: center;">
+        <ion-row id='articleContent' style="">
           <h2>Token gating?</h2>
-<p>The act of token gating permits a parcel owner to restrict access to their space, a part of their space, or set of resources based on token ownership.</p>
+<p>&#8195 The act of token gating permits a parcel owner to restrict access to their space, a part of their space, or set of resources based on token ownership.</p>
 <p>We will explore how you can get this set up in your parcel!</p>
-<h2>Requirements</h2>
-<p>In order to successfully token gate:</p>
+<details open style='background:#eee'>
+<summary><h2>Requirements</h2>
+</summary><p>In order to successfully token gate:</p>
 <ul>
 <li>Visitors must be signed on in-world with a wallet </li>
 <li>We'll check if the user is in a token-gated area or triggered a token-gated event </li>
 <li>We'll also check the contents of the visitors wallet for the desired token(s) </li>
 <li>We will do all of this using code via the in-world scripting engine </li>
 </ul>
-<h2>Don't panic!</h2>
-<p>Most everything has already been done for you. I made a youtube video to help walk you through these steps as well.</p>
+<h3>Don't panic!</h3>
+<p>&#8195 Most everything has already been done for you. I made a youtube video to help walk you through these steps as well.</p>
 <p>What remains:</p>
 <ol>
 <li>Drop the script into your parcel.</li>
@@ -73,16 +107,23 @@
 <li>Specify valid contracts and possibly specific tokens with them using code-appropriate notation.</li>
 <li>Specify what you want to token-gate, weather it be a feature or space, or both.</li>
 </ol>
-<h2>1. Embed script</h2>
-<p>Open the feature editor pane for a single feature in your parcel and drop the following bold text into it's <code>script</code> textbox.</p>
-<p><strong><code>app_id = &#x27;&#x27;;</code></strong></p>
-<p><strong><code>tokens = [];</code></strong></p>
-<p><strong><code>gates = [];</code></strong></p>
-<p><strong><code>parcel.on(&#x27;playerenter&#x27;, (e)=&gt; { (async(e) =&gt; eval( ( await (await fetch( &#x27;https://charleskarpati.com/cv/scripts/token_gate.js&#x27; )).text() ) ) )(e) })</code></strong></p>
+</details>
+<details>
+<summary><h2>1. Embed script</h2>
+</summary><p>&#8195 Open the feature editor pane for a single feature in your parcel and drop the following bold text into it's <code>script</code> textbox.</p>
+<pre><code>app_id = &#x27;&#x27;;
+
+tokens = [];
+
+gates = [];
+
+parcel.on(&#x27;playerenter&#x27;, (e)=&gt; { (async(e) =&gt; eval( ( await (await fetch( &#x27;https://charleskarpati.com/cv/scripts/token_gate.js&#x27; )).text() ) ) )(e) })
+</code></pre>
 <p>The first three lines are placeholders that we will fill out shortly. The last line will will load a pre-written script to do what you need.</p>
-<h2>2. Get Key</h2>
-<p>Great!
-So now, in order for out script to actually work, a free service called Moralis is used. Behind the scenes, the script you embedded will request even more code, Moralis code. This will allow us to indirectly query the blockchain and see if the our visitors hold any required token. </p>
+</details>
+<details style='background:#eee'>
+<summary><h2>2. Get Key</h2>
+</summary><p>&#8195 Great! So now, in order for out script to actually work, a free service called Moralis is used. Behind the scenes, the script you embedded will request even more code, Moralis code. This will allow us to indirectly query the blockchain and see if the our visitors hold any required token. </p>
 <p>In order for this to work, Moralis asks that any query made be accompanied with a key they provide. They do this primarily to ensure no one person is spamming their free service.</p>
 <p>Go ahead and create a <a href="https://admin.moralis.io/register">Moralis</a> account and then promptly:</p>
 <ol>
@@ -92,14 +133,18 @@ So now, in order for out script to actually work, a free service called Moralis 
 <li>Copy the services <code>Application ID</code></li>
 <li>Paste it in between the the quotes of your scripts <code>app_id</code>. </li>
 </ol>
-<p>exe: <strong><code>app_id = &#x27;1kj30usd02j3ofijs0dfy7546yuhf1&#x27;;</code></strong></p>
-<h2>3. Specify Tokens</h2>
-<p>You're making really good progress! These next two parts can be a bit daunting because it requires acquiring information and encoding it into a machine-readable format called <a href="https://en.wikipedia.org/wiki/JSON#Syntax">json</a>. </p>
+<p>exe: </p>
+<pre><code>app_id = &#x27;1kj30usd02j3ofijs0dfy7546yuhf1&#x27;;
+</code></pre>
+</details>
+<details>
+<summary><h2>3. Specify Tokens</h2>
+</summary><p>&#8195 You're making really good progress! These next two parts can be a bit daunting because it requires acquiring information and encoding it into a machine-readable format called <a href="https://en.wikipedia.org/wiki/JSON#Syntax">json</a>. </p>
 <p>The first thing you are going to want to do is list out all the tokens you want to use for gating, the network/ contract they are from. If you want any token within a contract no need to list em all, just use an asterisk. TokenId and ContractId's can be found by looking at the url of an nft when viewing it on opensea.</p>
 <p>For example, https://opensea.io/assets/0xa58b5224e2fd94020cb2837231b2b0e4247301a6/2 links to an nft with a token ID of 2 and a contract Address of 0xa58b5224e2fd94020cb2837231b2b0e4247301a6.</p>
 <p>It is possible to list out multiple nft's from a contract and only require a threshold quantity to be held. As well, it is also possible to gate multiple areas/ things using different requirements. Lastly, the code is written so as to require multiple NFT's be held and/or to permit multiple possible NFT's/ NFT combos.</p>
 <p>Arrange your information into JSON format using the structure shown in the examples. All possible situations are demonstrated.</p>
-<details closed>
+<details closed style='border: 1px dashed #000000;'>
 <summary><h3 style="display:inline"> Examples </h3> </summary>
 <ol>
 <li>Visitors hold <strong>any NFT</strong> in the specified contract</li>
@@ -173,11 +218,13 @@ So now, in order for out script to actually work, a free service called Moralis 
   [ [ { &quot;chain&quot;:&quot;eth&quot;, &quot;contract&quot;: &quot;0x4b1e130ae84c97b931ffbe91ead6b1da16993d45&quot;, &quot;tokens&quot;: [&#x27;*&#x27;] } ] ] 
 ]
 </code></pre>
-</details><h2>4. Specify Gates</h2>
-<p>If you got past that, then I'm so proud of you and we are almost done!</p>
+</details></details>
+<details style='background:#eee'>
+<summary><h2>4. Specify Gates</h2>
+</summary><p>&#8195 If you got past that, then I'm so proud of you and we are almost done!</p>
 <p>All that's left to do is specify the Space/ Features you want gated. Gated features permit their properties to altered when access is granted. This allows you to hide/reveal items, or change youtube video urls. Persons who teleport into a gated room will be promptly kicked out to the Origin City Center. Alternate teleport locations may be configured (refer to the example).</p>
 <h3>Features</h3>
-<p>Simply give all the features you want to gate an ID within their respective editor panels in-game and then list em out in the corresponding section of our code using a similar JSON notation as above. </p>
+<p>&#8195 Simply give all the features you want to gate an ID within their respective editor panels in-game and then list em out in the corresponding section of our code using a similar JSON notation as above. </p>
 <p>If you want to hide your items: </p>
 <ol>
 <li>Copy the Y coordinate of the feature you want hidden</li>
@@ -185,7 +232,7 @@ So now, in order for out script to actually work, a free service called Moralis 
 <li>Set the features Y coordinate in-game to be -100. </li>
 </ol>
 <p>When all token requirements are met, the features will instantly teleport to the y location you set. Refer to the CV <a href="https://wiki.cryptovoxels.com/en/Scripting/all-features-scripting-properties">Wiki</a> page to find out more updatable settings.</p>
-<details closed>
+<details closed style='border: 1px dashed #000000;'>
 <summary><h3 style="display:inline"> Examples </h3> </summary>
 <p>This example will hide the first and third listed item until access is granted and update the 2nd item's (a youtube video) video url and preview image.</p>
 <pre><code>gates = [ [
@@ -206,11 +253,11 @@ So now, in order for out script to actually work, a free service called Moralis 
 ]
 </code></pre>
 </details><h3>Spaces</h3>
-<p>Gating a subset of your parcel necessitates retrieving the coordinates of two diametrically opposite corners of the room you want gated. </p>
+<p>&#8195 Gating a subset of your parcel necessitates retrieving the coordinates of two diametrically opposite corners of the room you want gated. </p>
 <p>In the image below, that would be corner A and B.</p>
 <img src='https://study.com/cimages/multimages/16/physics3754380571394895698.jpg' />
-<p>You can get these coordinates by dragging a feature element into each of the corners and then taking note of their position (from the feature editor panel). It is possible to gate multiple rooms in such a manner. Encode these coordinates in JSON form using the following examples as you guide.</p>
-<details closed>
+<p>&#8195 You can get these coordinates by dragging a feature element into each of the corners and then taking note of their position (from the feature editor panel). It is possible to gate multiple rooms in such a manner. Encode these coordinates in JSON form using the following examples as you guide.</p>
+<details closed style='border: 1px dashed #000000;'>
 <summary><h3 style="display:inline"> Examples </h3> </summary>
 <p>Gate a single room and teleport cheaters to the specified location (as shown in your url when in-game)</p>
 <pre><code>gates = [ [ { &#x27;x&#x27;: -4, &#x27;y&#x27;: 0, &#x27;z&#x27;: -4 }, { &#x27;x&#x27;: 0, &#x27;y&#x27;: 4, &#x27;z&#x27;: 0 }, &#x27;teleport&#x27;: &#x27;E@1W,1N&#x27; ] ]
@@ -232,23 +279,28 @@ So now, in order for out script to actually work, a free service called Moralis 
   ]
 ]
 </code></pre>
-</details><h2>Example</h2>
-<p>In the end you could have something that looks like this:</p>
-<details closed>
+</details></details>
+<details>
+<summary><h2>Complete Examples</h2>
+</summary><p>&#8195 In the end you could have something that looks like this:</p>
+<details closed style='border: 1px dashed #000000;'>
 <summary><h3 style="display:inline"> Easy Example </h3> </summary>
-<p>This gates a single room using any token held from a specific polygon token</p>
-<p><code>app_id = &#x27;1kj30usd02j3ofijs0dfy7546yuhf1&#x27;;</code></p>
-<pre><code>tokens = [ [ [ { &quot;chain&quot;:&quot;polygon&quot;, &quot;contract&quot;: &quot;0xaab9da2cbab0036fa83ce797109009431d033d35&quot;, &quot;tokens&quot;: [&#x27;*&#x27;] } ] ] ];
+<p>&#8195 This gates a single room using any token held from a specific polygon token</p>
+<pre><code>app_id = &#x27;1kj30usd02j3ofijs0dfy7546yuhf1&#x27;;
+
+tokens = [ [ [ { &quot;chain&quot;:&quot;polygon&quot;, &quot;contract&quot;: &quot;0xaab9da2cbab0036fa83ce797109009431d033d35&quot;, &quot;tokens&quot;: [&#x27;*&#x27;] } ] ] ];
+
+gates = [ [ { &#x27;x&#x27;: -4, &#x27;y&#x27;: 0, &#x27;z&#x27;: -4 }, { &#x27;x&#x27;: 0, &#x27;y&#x27;: 4, &#x27;z&#x27;: 0 }  ] ];
+
+parcel.on(&#x27;playerenter&#x27;, (e)=&gt; { (async(e) =&gt; eval( ( await (await fetch( &#x27;https://charleskarpati.com/cv/scripts/token_gate.js&#x27; )).text() ) ) )(e) })
 </code></pre>
-<pre><code>gates = [ [ { &#x27;x&#x27;: -4, &#x27;y&#x27;: 0, &#x27;z&#x27;: -4 }, { &#x27;x&#x27;: 0, &#x27;y&#x27;: 4, &#x27;z&#x27;: 0 }  ] ];
-</code></pre>
-<p><code>parcel.on(&#x27;playerenter&#x27;, (e)=&gt; { (async(e) =&gt; eval( ( await (await fetch( &#x27;https://charleskarpati.com/cv/scripts/token_gate.js&#x27; )).text() ) ) )(e) })</code></p>
 </details><p>Or like this:</p>
-<details closed>
+<details closed style='border: 1px dashed #000000;'>
 <summary><h3 style="display:inline"> Complex Example </h3> </summary>
-<p>This gates using two different set of requirements. The first set permits users to have either ( token 3&amp;145 from a polygon contract and any from an eth contract) or ( token 25 as well as token (26 or 27) from a polyon contract along with any from the eth contract ). This first set of requirements will unlock two rooms, 1 youtube video, and a single hidden feature. The second requirements simply grants access to any token holder of the eth contract which will then unlock a single room and vox model.</p>
-<p><code>app_id = &#x27;1kj30usd02j3ofijs0dfy7546yuhf1&#x27;;</code></p>
-<pre><code>tokens = [ 
+<p>&#8195 This gates using two different set of requirements. The first set permits users to have either ( token 3&amp;145 from a polygon contract and any from an eth contract) or ( token 25 as well as token (26 or 27) from a polyon contract along with any from the eth contract ). This first set of requirements will unlock two rooms, 1 youtube video, and a single hidden feature. The second requirements simply grants access to any token holder of the eth contract which will then unlock a single room and vox model.</p>
+<pre><code>app_id = &#x27;1kj30usd02j3ofijs0dfy7546yuhf1&#x27;;
+
+tokens = [ 
   [ 
     [ 
       { &quot;chain&quot;:&quot;polygon&quot;, &quot;contract&quot;: &quot;0xaab9da2cbab0036fa83ce797109009431d033d35&quot;, &quot;tokens&quot;: [3, 145] },
@@ -262,8 +314,8 @@ So now, in order for out script to actually work, a free service called Moralis 
   ],
   [ [ { &quot;chain&quot;:&quot;eth&quot;, &quot;contract&quot;: &quot;0x4b1e130ae84c97b931ffbe91ead6b1da16993d45&quot;, &quot;tokens&quot;: [&#x27;*&#x27;] } ] ] 
 ];
-</code></pre>
-<pre><code>gates = [ 
+
+gates = [ 
   [
     [ { &#x27;x&#x27;: -4, &#x27;y&#x27;: 0, &#x27;z&#x27;: -4 }, { &#x27;x&#x27;: 0, &#x27;y&#x27;: 4, &#x27;z&#x27;: 0 }  ], 
     [ { &#x27;x&#x27;: 2, &#x27;y&#x27;: 6, &#x27;z&#x27;: 2 }, { &#x27;x&#x27;: 8, &#x27;y&#x27;: 9, &#x27;z&#x27;: 8 }  ], 
@@ -275,8 +327,9 @@ So now, in order for out script to actually work, a free service called Moralis 
     {&#x27;id&#x27;: &#x27;voxModel3&#x27;, &#x27;y&#x27;: 0 }
   ]
 ];
+
+parcel.on(&#x27;playerenter&#x27;, (e)=&gt; { (async(e) =&gt; eval( ( await (await fetch( &#x27;https://charleskarpati.com/cv/scripts/token_gate.js&#x27; )).text() ) ) )(e) })
 </code></pre>
-<p><code>parcel.on(&#x27;playerenter&#x27;, (e)=&gt; { (async(e) =&gt; eval( ( await (await fetch( &#x27;https://charleskarpati.com/cv/scripts/token_gate.js&#x27; )).text() ) ) )(e) })</code></p>
 </details>
         </ion-row>
         <ion-row style="display: flex; justify-content: center;">
@@ -301,7 +354,6 @@ So now, in order for out script to actually work, a free service called Moralis 
   </ion-app>
 </body>
 </html>
-
 
   <!-- 
     # https://github.com/ionic-team/ionic-docs/blob/legacy/src/demos/api/content/index.html 
