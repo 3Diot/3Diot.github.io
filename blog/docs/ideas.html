@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head> 
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CVMinigames | Ideas</title>
+  <script type="module" src="https://cdn.jsdelivr.net/npm/@ionic/core/dist/ionic/ionic.esm.js"></script>
+  <script nomodule src="https://cdn.jsdelivr.net/npm/@ionic/core/dist/ionic/ionic.js"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@ionic/core/css/ionic.bundle.css" />
+
+  <meta name="twitter:card" content="A community led effort for the metaverse." />
+  <meta name="twitter:site" content="@CVMiniGames" />
+  <meta name="twitter:creator" content="@CVMiniGames" />
+  <meta property="og:url" content="http://www.cvminigames.com" />
+  <meta property="og:title" content="CVMiniGames Homepage" />
+  <!-- <meta name="theme-color" media="(prefers-color-scheme: light)" content="#3880ff" /> -->
+  
+  <!-- Additional Meta's -->
+  <meta property="og:description" content="Join the community and get the $1 token that unlocks access to a meta-world of fun!" />
+  <meta property="og:image" content="http://graphics8.nytimes.com/images/2011/12/08/technology/bits-newtwitter/bits-newtwitter-tmagArticle.jpg" />
+  
+  <!-- Style -->
+  <!-- 
+    ion-content > div { margin-left: 25%; padding-top: 40px;  padding-bottom: 40px; }  
+    :root {
+      --main-bg-color: coral;
+    }
+    pre{ width: 800px; 
+  -->
+  <style>  
+    ion-title {
+        line-height: 40px;
+        margin-left:20px;
+        padding-left: 70px;
+        background: url('https://raw.githubusercontent.com/CVMiniGames/CVminiGames.github.io/main/blog/docs/_img/logo1_300x300.jpg') no-repeat left center;
+      	background-size: 50px 50px;
+    }
+    :root {
+      --max-width: min(800px, 100vw); 
+      --ion-padding: 0px;
+      --ion-grid-padding-xs: 0px;
+    }
+    *{ user-select: text; }
+    #articleContent { display: flex; flex-direction: column; max-width: var(--max-width); margin: auto; }
+    #articleContent > p {padding: 0px 12px 0px 12px;} 
+    h2, h3, h4 {text-align: center; } 
+    summary{ text-align: center; cursor: pointer;}
+    summary>*{ display:inline-block }
+    summary::marker { content: "🧡"; } 
+    details[open] summary::marker { content: "💖"; }
+    details{padding: 12px;} 
+    details > img {display:block; margin:auto;}
+    p { word-break: break-word; }
+    pre{ max-width: calc( var(--max-width) - 70px); background: #333; padding: 12px; }
+    pre > code { color: white; } 
+    blockquote{ 
+      font-style:italic; background-color: #333; 
+      color: #eee; border-left:8px solid deeppink ; 
+      position: relative; padding: 12px 5px 1px 5px; 
+    }
+    blockquote::before{ content: "\201C"; color: hotpink; padding-top: 6px; font-size:4em; position: absolute; left: 10px; top:-10px; }
+    .twitter-tweet{ margin:auto; }
+    blockquote span{ color:hotpink; font-style: normal; font-weight: bold; display: block; text-align: center; }
+  </style> 
+  
+</head>
+<body>
+  <ion-app>
+    <ion-header translucent > <!-- class="ion-no-border" -->
+    	<ion-toolbar>
+    		<ion-title onclick="location.href='https://www.CVMiniGames.com'" style="cursor: pointer;">
+    			CVMinigames
+    		</ion-title>
+    	</ion-toolbar> 
+    </ion-header>
+    <ion-content fullscreen class="ion-padding"> 
+      <ion-grid class="md hydrated">
+        <ion-row style="display: flex; justify-content: center;  align-items: center;">
+          <div style="text-align: center; position:absolute; z-index:9999; background-color: rgba(240, 248, 255, 0.75); padding: 12px; >
+            <h1>CVMinigames | Ideas</h1>
+            <p class="ion-padding-start ion-padding-end"><ion-button onclick="location.href='https://www.cryptovoxels.com/play?coords=N@1447E,1128S'" expand="block" fill="outline" class="md button button-block button-outline ion-activatable ion-focusable hydrated">PLAY NOW</ion-button></p>
+            <p>
+              <a href="https://twitter.com/intent/tweet?text=If%20you%20are%20a%20%20%40cryptovoxels%20CVilian%2C%20go%20and%20check%20out%20%40CVMiniGames%20website%20CVMiniGames.com%20as%20I%20found%20the%20content%20interesting%20enough%20to%20share%20%3C3%20Thanks!">
+                <img src="https://img.shields.io/twitter/url/https/github.com/CVMiniGames/CVMiniGames.github.io.svg?style=social" alt="Tweet" /></a>
+              <a href="https://twitter.com/CVMiniGames"><img src="https://img.shields.io/twitter/follow/CVMiniGames.svg?style=social" alt="Twitter Follow" /></a>
+            </p>
+          </div>
+          <iframe src="https://www.cryptovoxels.com/play?coords=N@1447E,1128S,&mode=orbit" width="100%" height="500" scrolling="yes" class="iframe-class" frameborder="0"></iframe>
+        </ion-row>
+        <ion-row id='articleContent' style="">
+          <p>Below are a list of user-suggestions</p>
+<p>Here are a list of community suggestions provided for logging, tracking progress, advancing conversations, and inspiring new ideas. What's listed here is not guaranteed to come so be sure to check out our official <a href="https://trello.com/b/0eMw7Y5p/cryptovoxels-roadmap-2022">RoadMap</a>.</p>
+<details style='background:#eee'>
+<summary><h2>OnBoarding</h2>
+</summary><p>VRM - Marcus performing ongoing research &amp; development. Able to upload but still needs work.</p>
+<style>
+    details{ background: #eee; display: inline}
+    summary{ color: gray; background: #fff }
+</style>
+<li> Introductory/ onboarding 'welcome' page & flow <details><summary style="color:orange">(More+)</summary>Maybe create an 'official sandbox' space where people can build, test and play. Thinking about dropping this experience near voxcon. Need to draw distinction between new builder and users. We could build off the intro popup to new users where we offer them options to further be introduced (build | costumes | user basics). Or a tutorial 'space' that is entirely dedicated for new users</details> </li> 
+<li> &noob=true <details ><summary style="color:red">(More+)</summary>How would we go about doing this? Possibly recycle the 'welcome' page. or provide an even more aggressive tooltip-esque something that can be dismissible or just improve the tooltips? Are the current tooltips not seen? Need more information.</details> </li>
+<li> Better wearables Support & editor UI <details><summary style="color:orange">(More+)</summary>Existing Improvements -> Body part selection, increased limits, download & uploading. <br> Needed Improvements -> Design overhaul. Skin & wearable labels -> body part may be confusing. <br> Challenges -> Not breaking existing costumes. Picking up objects in-world "IsPickable" <br> Ideal -> In-world costumer </details> </li> 
+<li> Scripts: syntax highlighting & error reporting <details><summary style='color:orange'>(More+)</summary>We do now report the errors in the console log! Thinking about using an external IDE instead of recreating it.</details> </li> 
+<li> Not Logged In: dress<details><summary style="color:orange">(More+)</summary>Anons can talk but are censored (bug w/ the censor mechanism currently exists). Unsure about voice chat but if we scrap boomboxes we'll try and set up permissioning. Default dresses? Dress: Off chain wearables for logged-in new users.</details> </li> 
+<li> &#1F477 <span  style='background:lightgreen'> Not Logged In: talking (w /mute btn) </span><details><summary style="color:orange">(More+)</summary> Click to "Mute" user. </details> </li> 
+<li> &#1F477 <span  style='background:lightgreen'> Not Logged Names </span> & voxels.com/ ens subdomains <details><summary style="color:orange">(More+)</summary> Welcome window for temporary names <- &#1F477. Permit username.voxels.eth </details> </li> 
+<li> Auto-generated building started showing off their possessions <details><summary style="color:orange">(More+)</summary> A simple iteration of this is very do-able. Will be exploring this more. </details> </li> 
+<li> Gnosis wallets <details><summary style='color:green'>(More+)</summary>Support Added!</details> </li> 
+<li> Multi-Sig wallets <details><summary style='color:orange'>(More+)</summary>Wallets outside of gnosis are not supported!</details> </li> </details>
+<details>
+<summary><h2>Interactivity</h2>
+</summary><style>
+    details{ background: #eee; display: inline}
+    summary{ color: gray; background: #fff }
+</style>
+<li> &#1F477 <span  style='background:lightgreen'> Defining character behaviors and interactions </span> <details ><summary style='color:orange'>(More+)</summary> We unsure where to place it but are working on it and how best to create the feature. Stig is working on something and so is CVMinigames</details> </li> 
+<li> Ability for items/players within your parcel to be damaged. <details><summary style='color:red'>(More+)</summary>This will come in time. We'd like to make dialogs work </details> </li> 
+<li> Ability to attack items/players <details><summary style='color:orange'>(More+)</summary>Scripting bundle supports click on players. We could expand on this; Possibly best developed in game-engine/ scripting environment<details> </li> 
+<li> Picking up objects in-world "IsPickable" <details><summary style='color:orange'>(More+)</summary>Want to see object in first person. May be possible in Babylon 5. Marcus will look into being able to pick up items without the arm moving left and right</details> </li> 
+<li> Friendslist & chat features <details><summary style='color:orange'>(More+)</summary>ADRESS BOOK IS A GOOD IDEA. | Long term on our roadmap: Challenges = 1) Decentraland chat feature attempted but was a no go (required too much authorization & barriers). Ben dropped 'matrix' chat but we have the desire to use it. </details> </li> 
+<li> &#1F477 <span  style='background:lightgreen'> vidscreen support for binding any key </details> <details><summary style='color:orange'>(More+)</summary>We can certainly expand this but it may be nuked in the future. </details> </li>
+<li> NFT ticketing (restrict access) <details><summary style='color:green'>(NA)</summary>Works. People are happy. But not 100% done. Evidently it can be 'hacked' past by 'destroying' the parcel bouncer. Ugly BOX! => We'd like to change the color of the parcel. Transparency settings? </details> </li>
+<li> &#1F477 <span  style='background:lightgreen'> Import/Export </span> builds to Spaces <details><summary style='color:green'>(More+)</summary>Could be made easier. User experience issue w/ max space size and orientation. Can import into spaces from in-world a size bigger than normally permitted.</details> </li>
+<li> ORTMP server support -> BS direct stream support <details><summary style='color:red'>(More+)</summary> HLS Direct stream support, not necessarily OBS </details> </li>
+<li> In-world Opensea Payments <details><summary style='color:red'>(More+)</summary>Only works for Eth NFT's at the moment. Polygon not supported for opensea yet.</details> </li>
+<li> &#1F477 <span  style='background:lightgreen'> Left-Right Wearable Prompt </span> <details><summary style='color:orange'>(More+)</summary> This is a great idea. We'd just need to edit the wearables editor a bit to hardcode the parts of body that can do this.</details> </li></details style='background:#eee'>
+<details>
+<summary><h2>Social</h2>
+</summary><style>
+    details{ background: #eee; display: inline}
+    summary{ color: gray; background: #fff }
+</style>
+<li> Featured content <details><summary>(NA)</summary>No information available at this time</details> </li>
+<li> regular content: podcast, music, gaming, building livestreams <details><summary>(NA)</summary>No information available at this time</details> </li> 
+<li> Advanced (agenda) Invite links <details><summary>(NA)</summary>No information available at this time</details> </li> 
+<li> Community management of wireframe parcels <details><summary>(NA)</summary>No information available at this time</details> </li> 
+<li> Community DAOs. <details><summary style="color: orange">(More+)</summary>Someone suggested creating quadratic strategies on snapshot that recognizes the suburb variable in cv erc721 metadata
+https://github.com/snapshot-labs/snapshot-strategies#checklist-for-adding-a-new-strategy
+use existing quadratic strategies for reference, here
+https://github.com/snapshot-labs/snapshot-strategies/tree/master/src/strategies
+each suburb will need an ENS name to register their snapshot page
+& that's it. gasless voting per suburb using existing NFTs</details> </li>
+<li> Afer 2 months community editable wireframe plots. <details><summary>(NA)</summary>No information available at this time</details> </li>
+<li> Districts Official Hubs <details><summary>(NA)</summary>No information available at this time</details> </li> 
+<li> metaverse Live DJ / Musician service register <details><summary>(More+)</summary>Asking price per minute, availability and lead notice time.</details> </li>
+<li> daisy chains portals from OC spawn point. "official CV tour" <details><summary>(NA)</summary>No information available at this time</details> </li>
+<li> Have global themes and events. <details><summary>(NA)</summary>No information available at this time</details> </li>
+<li> Share assets to Public library (done) <details><summary>(NA)</summary>No information available at this time</details> </li>
+<li> Mobile voice chat support <details><summary>(NA)</summary>No information available at this time</details> </li>
+<li> Zoom/videoconferencing <details><summary>(NA)</summary>No information available at this time</details> </li>
+<li> Audius integration <details><summary>(NA)</summary>No information available at this time</details> </li>
+<li> Clubhouse integration <details><summary>(NA)</summary>No information available at this time</details> </li>
+<li> Mute trolls (text and voice) (Tricky but working on it) <details><summary>(NA)</summary>No information available at this time</details> </li></details>
+<details>
+<summary><h1>Economics</h1>
+</summary><style>
+    details{ background: #eee; display: inline}
+    summary{ color: gray; background: #fff }
+</style>
+<li> Offical source of communication for announcements and updates <details><summary>(NA)</summary>No information available at this time</details> </li> 
+<li> brand affiliations <details><summary>(NA)</summary>No information available at this time</details> </li> 
+<li> community relations mgmt <details><summary>(NA)</summary>No information available at this time</details> </li> 
+<li> clarity/ rules around upcoming island parcel sizes <details><summary>(NA)</summary>No information available at this time</details> </li> 
+<li> More voting for things and stuff <details><summary>(NA)</summary>No information available at this time</details> </li> 
+<li> Mintable builds <details><summary>(NA)</summary>No information available at this time</details> </li> 
+<li> Reinvigorate sales through Whitelist for hyped islands or discount for holders <details><summary>(NA)</summary>No information available at this time</details> </li> 
+<li> Integrated rental smart contract <details><summary>(NA)</summary>No information available at this time</details> </li>
+<li> Pfp token and/or CV coin <details><summary>(NA)</summary>No information available at this time</details> </li> 
+<li> increase the Dutch auction floor price <details><summary>(NA)</summary> No information available at this time</details> </li> </li>
+<li> What if the owner of the space would need to have a land to unlock 5+ people <details><summary>(NA)</summary>No information available at this time</details> </li>
+<li> Parcel basements (mirror sized) (exist but not commonly offered) <details><summary>(NA)</summary>No information available at this time</details> </li>
+<li> Incentivize builders => "CV award winner 2022" NFT. <details><summary>(NA)</summary>No information available at this time</details> </li>
+<li> More assets for larger parcels (considering it) <details><summary>(NA)</summary>No information available at this time</details> </li></details>
+<details style='background:#eee'>
+<summary><h2>Performance/ Ease of Use</h2>
+</summary><style>
+    details{ background: #eee; display: inline}
+    summary{ color: gray; background: #fff }
+</style>
+<li> Server: Uptime & max concurrent users <details><summary>(NA)</summary>No information available at this time</details> </li> 
+<li> Multi-parcel management <details><summary>(NA)</summary>No information available at this time</details> </li> 
+<li> Asset 3D click and drag edit <details><summary style='color:green'>(More+)</summary>Gizmos now provided!</details> </li>
+<li> Asset Grouping <details ><summary style='color:green'>(More+)</summary>Possible</details> </li> </li>
+<li> Permissioned boomboxes <details style='color:black; background:#eee'><summary style='color:green'>(More+)</summary>Parcel owners can now specify if the boombox is for contributors only or everyone. But we may nuke the entire boombox feature now that we voice-chat</details> </li>
+<li> Seamless adjacent parcel editing <details><summary>(NA)</summary>No information available at this time</details> </li>
+<li> Increase tile texture resolution <details><summary>(NA)</summary>No information available at this time</details> </li>
+<li> Debaking only when editing tiles <details><summary>(NA)</summary>No information available at this time</details> </li>
+<li> Undo button <details><summary style='color:green'>(More+)</summary>It is now possible to rollback a build to a prior state</details> </li>
+<li> Access all past uploaded assets <details><summary style='color:green'>(More+)</summary>Access past assets by reviewing your parcel change log off the parcel main-page</details> </li>
+<li> Filter + Sort + Search Assets <details><summary style='color:orange'>(More+)</summary>Sorting & Filter by type have been implemented</details> </li>
+<li> Seamless lightmaps <details><summary>(NA)</summary>No information available at this time</details> </li>
+<li> VOX shaders (light, alpha, etc) <details><summary>(NA)</summary>No information available at this time</details> </li>
+<li> Megavox collision lag fix <details><summary>(NA)</summary>No information available at this time</details> </li>
+<li> Stronger audio spatial rolloff <details><summary>(NA)</summary>No information available at this time</details> </li>
+<li> Lanterns: orientation and focus <details><summary>(NA)</summary>No information available at this time</details> </li>
+<li> Place images 1px away from walls <details><summary>(NA)</summary>No information available at this time</details> </li>
+<li> More wearables for costumes <details><summary style='color:green'>(More+)</summary>Increased from 7 to 9 and we are looking at increasing to 12 so as to match the sandbox.</details> </li>
+<li> Fix Youtube/Twitch crashes <details><summary style='color:green'>(More+)</summary>Fixed. But we'll keep our eyes peeled.</details> </li>
+<li> NFT Packs <details><summary>(More+)</summary>See [polygonpacks](https://polygonpacks.com/#/home) or [thirdweb](https://portal.thirdweb.com/contracts/design/Multiwrap).</details> </li></details>
+<details>
+<summary><h2>Misc</h2>
+</summary><style>
+    details{ background: #eee; display: inline}
+    summary{ color: gray; background: #fff }
+</style>
+<li> More love to old islands <details><summary>(NA)</summary>No information available at this time</details> </li> 
+<li> Road signs <details><summary>(NA)</summary>No information available at this time</details> </li> 
+<li> Day/Night switch modes and/or sunlight cycle <details><summary>(NA)</summary>No information available at this time</details> </li> 
+<li> GIFs encode as full res video <details><summary>(NA)</summary>No information available at this time</details> </li>
+<li> Copy/Paste asset parameters <details><summary>(NA)</summary>No information available at this time</details> </li>
+<li> Video optimisation (reencode) <details><summary>(NA)</summary>No information available at this time</details> </li>
+<li> Moving Assets : reliable preview <details><summary>(NA)</summary>No information available at this time</details> </li></details><style>
+    details { background: #fff; display: inline-block }
+    details > details{ background: #eee; display: inline}
+    summary{ color: gray; background: #fff }
+</style>
+        </ion-row>
+        <ion-row style="display: flex; justify-content: center;">
+          <div style="text-align: center; background-color: rgba(240, 248, 255, 0.75);">
+            <p>
+              <a href="https://mybinder.org/v2/gh/CVMiniGames/CVMiniGames.github.io/main"> <img src="https://mybinder.org/badge_logo.svg" alt="Binder" /> </a>
+              <a href="https://colab.research.google.com/github/CVMiniGames/CVMiniGames.github.io/blob/main/blog/notebooks/009_Ideas.ipynb"> <img src="https://pete88b.github.io/fastpages/assets/badges/colab.svg" alt="Binder" /></a>
+              <a href="https://github.com/CVMiniGames/CVMiniGames.github.io/blob/main/blog/notebooks/009_Ideas.ipynb"> <img src="https://pete88b.github.io/fastpages/assets/badges/github.svg" alt="Binder" /></a>
+              <a href=""><img src="https://img.shields.io/github/last-commit/CVMiniGames/CVMiniGames.github.io.svg?style=flat" alt="GitHub last commit" /></a>
+            </p>
+            <p>
+              <a href="https://github.com/CVMiniGames/CVMiniGames.github.io"><img src="https://img.shields.io/github/stars/CVMiniGames/CVMiniGames.github.io.svg?style=social&amp;label=Star" alt="GitHub stars" /></a>
+              <a href="https://github.com/CVMiniGames/CVMiniGames.github.io"><img src="https://img.shields.io/github/watchers/CVMiniGames/CVMiniGames.github.io.svg?style=social&amp;label=Watch" alt="GitHub watchers" /></a>
+              <a href="https://github.com/CVMiniGames/CVMiniGames.github.io"><img src="https://img.shields.io/github/forks/CVMiniGames/CVMiniGames.github.io.svg?style=social&amp;label=Fork" alt="GitHub forks" /></a>
+              <a href="https://github.com/CVMiniGames/CVMiniGames.github.io"><img src="https://img.shields.io/github/followers/CVMiniGames.svg?style=social&amp;label=Follow" alt="GitHub followers" /></a> 
+            </p>
+            <p>Viewcount: <img src="https://visitor-badge.laobi.icu/badge?page_id=CVMiniGames.CVMiniGames.github.io" alt="Visitors">
+          </div>
+        </ion-row>
+      </ion-grid> 
+    </ion-content>
+  </ion-app>
+</body>
+</html>
+
+  <!-- 
+    # https://github.com/ionic-team/ionic-docs/blob/legacy/src/demos/api/content/index.html 
+    # https://github.com/ionic-team/ionic-docs/blob/legacy/src/demos/api/infinite-scroll/index.html
+    # https://github.com/ionic-team/ionic-docs/blob/legacy/src/demos/api/back-button/index.html
+
+    https://ionicframework.com/docs/components
+    https://ionicframework.com/docs/api/card
+    https://ionicframework.com/docs/api/popover
+    https://ionicframework.com/docs/api/modal
+    https://ionicframework.com/docs/api/menu
+    https://ionicframework.com/docs/api/grid
+    https://ionicframework.com/docs/api/action-sheet
+    https://ionicframework.com/docs/api/toolbar
+    https://ionicframework.com/docs/api/content
+
+    <ion-row class="md hydrated">
+    <ion-list class="md list-md hydrated">
+      <ion-item class="item md item-fill-none in-list hydrated item-label">
+        <ion-label class="sc-ion-label-md-h sc-ion-label-md-s md hydrated">Item 0</ion-label>
+      </ion-item>
+      <ion-item class="item md item-fill-none in-list hydrated item-label">
+        <ion-label class="sc-ion-label-md-h sc-ion-label-md-s md hydrated">Item 14</ion-label>
+      </ion-item>
+    </ion-list>
+    </ion-row>
+  -->
