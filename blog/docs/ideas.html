@@ -131,8 +131,8 @@
 </style>
 <li> Featured content <details><summary style='color:orange'>(More+)</summary>Kasey is working on a redesign of the homepage. We'd need to rearrange area on the homepage for this. </details> </li>
 <li> &#128119 <span  style='background:lightgreen'> Womp "browser" Update </span> <details><summary style='color:orange'>(More+)</summary>Add a Womps by user/ timestamp page/ Dedicated page for womps (and/ or events) </details> </li>
-<li> Regular content: podcast, music, gaming, building livestreams <details><summary  style='color:orange'>(NA)</summary>This can get expensive from what we've seen but we are very interested. It's very broad but that's great for exploration. Professional content being produced may be a no-go for now. But the team has been producing content and been more outward facing recently so this may be a natural progression. twitch streaming.</details> </li> 
-<li> Advanced (agenda) Invite links <details><summary>(More+)</summary>Make events page more clear. A sharaable link. (add to calander) btns. show appropriately on social media.</details> </li> 
+<li> Regular content: podcast, music, gaming, building livestreams <details><summary  style='color:orange'>(More+)</summary>This can get expensive from what we've seen but we are very interested. It's very broad but that's great for exploration. Professional content being produced may be a no-go for now. But the team has been producing content and been more outward facing recently so this may be a natural progression. twitch streaming.</details> </li> 
+<li> Advanced (agenda) Invite links <details><summary style='color:orange'>(More+)</summary>Make events page more clear. A sharaable link. (add to calander) btns. show appropriately on social media.</details> </li> 
 <li> Community DAOs. <details><summary style="color: orange">(More+)</summary>Someone suggested creating quadratic strategies on snapshot that recognizes the suburb variable in cv erc721 metadata
 https://github.com/snapshot-labs/snapshot-strategies#checklist-for-adding-a-new-strategy
 use existing quadratic strategies for reference, here
@@ -217,9 +217,12 @@ each suburb will need an ENS name to register their snapshot page
 <li> Copy/Paste asset parameters <details><summary>(NA)</summary>No information available at this time</details> </li>
 <li> Video optimisation (reencode) <details><summary>(NA)</summary>No information available at this time</details> </li>
 <li> Moving Assets : reliable preview <details><summary>(NA)</summary>No information available at this time</details> </li></details><style>
-    details { background: #fff; display: inline-block }
-    details > details{ background: #eee; display: inline}
-    summary{ color: gray; background: #fff }
+    li> details{ background: #fff3f4 ; display: inline} 
+    li> details > summary{ background: #fff3f4;}  
+    
+    details[open] details summary::marker { content: "&#129505" }
+    details[open] details[open] summary::marker { content: "&#1F496"; } 
+    details[open] details[open] { min-width: 100%; }
 </style>
         </ion-row>
         <ion-row style="display: flex; justify-content: center;">
