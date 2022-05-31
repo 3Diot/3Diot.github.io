@@ -47,6 +47,8 @@
     summary>*{ display:inline-block }
     summary::marker { content: "🧡"; } 
     details[open] summary::marker { content: "💖"; }
+    details[open] details summary::marker { content: "🧡" }
+    details[open] details[open] summary::marker { content: "💖"; } 
     details{padding: 12px;} 
     details > img {display:block; margin:auto;}
     p { word-break: break-word; }

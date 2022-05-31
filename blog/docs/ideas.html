@@ -47,6 +47,8 @@
     summary>*{ display:inline-block }
     summary::marker { content: "🧡"; } 
     details[open] summary::marker { content: "💖"; }
+    details[open] details summary::marker { content: "🧡" }
+    details[open] details[open] summary::marker { content: "💖"; } 
     details{padding: 12px;} 
     details > img {display:block; margin:auto;}
     p { word-break: break-word; }
@@ -219,9 +221,6 @@ each suburb will need an ENS name to register their snapshot page
 <li> Moving Assets : reliable preview <details><summary>(NA)</summary>No information available at this time</details> </li></details><style>
     li> details{ background: #fff3f4 ; display: inline} 
     li> details > summary{ background: #fff3f4;}  
-    
-    details[open] details summary::marker { content: "&#129505" }
-    details[open] details[open] summary::marker { content: "&#128150"; } 
     details[open] details[open] { min-width: 100%; }
 </style>
         </ion-row>
