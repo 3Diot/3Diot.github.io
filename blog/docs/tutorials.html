@@ -91,58 +91,107 @@
         <ion-row id='articleContent' style="">
           <details style='background:#eee'>
 <summary><h1>Quick Tips</h1>
-</summary><p>/vendor/opensea_bundle.js</p>
-<ul>
-<li>Objects can be solid up to 5m above your parcel and 2.5m around the sides (unless bordered by a neighbor)</li>
-<li>Voxels are 0.5 &amp; the default avatar is ~1.75m but use 2.5m ceilings for best experience - Faylure</li>
-<li>Womp portals are spherical - Cluny</li>
-<li>Images can be made to look curved by cropping them accordingly in an image editor. - <a href="https://www.youtube.com/watch?v=jrK3EINyF3Y&amp;t=2589s">source</a></li>
-<li>(near) Invisible Walls can be made by using a 'cube' feature with near .1m width and depth - Bitpixi &amp; Dedcel</li>
-<li>The Polytext feature can be solid even when placed well outside of the parcels range (This is a bug that intentionally isn't being fixed)</li>
+</summary><ul>
+<li>
+<p>Objects can be solid up to 5m above your parcel and 2.5m around the sides (unless bordered by a neighbor)</p>
+</li>
+<li>
+<p>Voxels are 0.5 &amp; the default avatar is ~1.75m but use 2.5m ceilings for best experience - Faylure</p>
+</li>
+<li>
+<p>Womp portals are spherical - Cluny</p>
+</li>
+<li>
+<p>Images can be made to look curved by cropping them accordingly in an image editor. - <a href="https://www.youtube.com/watch?v=jrK3EINyF3Y&amp;t=2589s">source</a></p>
+</li>
+<li>
+<p>(near) Invisible Walls can be made by using a 'cube' feature with near .1m width and depth - Bitpixi &amp; Dedcel</p>
+</li>
+<li>
+<p>The Polytext feature can be solid even when placed well outside of the parcels range (This is a bug that intentionally isn't being fixed)</p>
+</li>
 <li>
 <ul>
 <li>Create a solid pier users can walk on for your waterfront property by placing and scaling an lowercase i on the water.  </li>
 </ul>
 </li>
-<li>Parcels look even bigger if you put a gif of fog right along the top</li>
-<li>Create 3D images by placing the same image perpendicular and on top of each other</li>
-<li>Hollowing out voxels will help load them faster</li>
-<li>Quick swap your parcels interior by building out your designs in free spaces</li>
-</ul>
-<ul>
-<li>Check the &quot;stretch&quot; box and then you will have to scale the image to the correct aspect ratio and the image will display correctly - Cluny</li>
-<li>if you save an image of text with black text on white background, you don't even have to make it a transparent image.  Black text on white background with &quot;multiply&quot; blend mode (the default blend mode) works like a transparency.  Actually works better than a transparency because it doesn't have the weird blending artifacts that happens with transparencies when one transparent image is in front of another image from the perspective of the viewer. - Cluny</li>
-</ul>
-<ul>
-<li>curved photos</li>
-<li>photobooth </li>
-<li>instachair</li>
+<li>
+<p>Parcels look even bigger if you put a gif of fog right along the top</p>
+</li>
+<li>
+<p>Create 3D images by placing the same image perpendicular and on top of each other</p>
+</li>
+<li>
+<p>Hollowing out voxels will help load them faster</p>
+</li>
+<li>
+<p>Quick swap your parcels interior by building out your designs in free spaces</p>
+</li>
+<li>
+<p>Check the &quot;stretch&quot; box and then you will have to scale the image to the correct aspect ratio and the image will display correctly - Cluny</p>
+</li>
+<li>
+<p>if you save an image of text with black text on white background, you don't even have to make it a transparent image.  Black text on white background with &quot;multiply&quot; blend mode (the default blend mode) works like a transparency.  Actually works better than a transparency because it doesn't have the weird blending artifacts that happens with transparencies when one transparent image is in front of another image from the perspective of the viewer. - Cluny</p>
+</li>
+<li>
+<p>purple is &quot;active state&quot; whereas gray in innactive. fog is tuned to reduce data load</p>
+</li>
+<li>
+<p>two boomboxes can be used at the same time</p>
+</li>
+<li>
+<p>is your Hardware Acceleration on in Advanced settings of your browser? here's our uptime status page so you can check on if things are running smooth from our side https://status.crvox.com/</p>
+</li>
+<li>
+<p>playing around some more with placing an image with text of the name of the destination in front of the view and taking a womp - (removing the image from the womp destination area after) - so the womp portal displays the name of the destination inside the womp portal.  Getting better results now that I am centering the text in the view when taking the womp</p>
+</li>
+<li>
+<p>scripts are uploadable on vox models</p>
+</li>
+<li>
+<p>'correct' the rotation center angle using group</p>
+</li>
+<li>
+<p>Save your parcel as a space then reimport once edits are done. </p>
+</li>
+<li>
+<p>curved photos</p>
+</li>
+<li>
+<p>photobooth </p>
+</li>
+<li>
+<p>instachair</p>
+</li>
+<li>
+<p>Richtext uses <a href="https://golem.ph.utexas.edu/~distler/maruku/proposal.html">maruku</a> under the hood</p>
+</li>
+<li>
+<p>Keep an image's original shapeby hitting 'stretch' and setting the size of the image to your desired aspect ratio</p>
+</li>
+<li>
+<p>It is possible to livestream OBS directly to Cryptovoxels using livepeer <a href="https://docs.livepeer.studio/guides/livestreaming/obs">obs</a>
+<a href="https://livepeer.studio/preview/blog/">preview</a>, <a href="stream-into-livepeer-studio-first-time">article</a></p>
+</li>
 </ul>
 </details>
 <details>
 <summary><h1>Scripting Examples</h1>
 </summary><ul>
-<li><a href="https://www.Voxels.com/s/remotecontrol">Remote</a> Control</li>
-<li>Leader &amp; <a href="https://www.Voxels.com/s/leaderandfollower">Following</a> features</li>
-<li>Animations a Feature along an <a href="https://www.Voxels.com/s/svganimations">SVG's Path</a></li>
-<li>Display <a href="https://www.Voxels.com/s/displaycollections">Collections</a></li>
-<li><a href="https://www.Voxels.com/s/invisiblewalls">Invisible Walls</a></li>
-<li>Token <a href="https://www.Voxels.com/s/maticgating">Gating</a> </li>
-<li><a href="https://www.Voxels.com/s/animate">Animate</a> Vox Models</li>
-<li><a href="https://www.Voxels.com/s/syncAnimation">Sync</a> Animations</li>
-<li><a href="https://www.Voxels.com/s/playlistcontroller">YT Playlist</a> W Controls</li>
 <li>Reloading a parcel using <a href="https://support.cryptovoxels.com/t/access-parcel-snapshots-with-scripting/193/2">Snapshots</a></li>
 <li>g-van's <a href="https://twitter.com/__gvan__/status/1531311052645883905">Skybox</a> swapper, <a href="https://twitter.com/__gvan__/status/1533855880336359425">instructions</a> <a href="https://gist.github.com/RasVandoros/f14b5e98b2fff8f960a69f880ab2a1ef">code</a></li>
 <li>g-van's party <a href="https://twitter.com/__gvan__/status/1532769164447948800">button</a></li>
 </ul>
-<p>swap_interior_1.js - https://gist.github.com/karpatic/2f01540408f2843c30fc8bf2f2c762c4
-popout_videos_poster - https://gist.github.com/karpatic/beff0feba3173460fa4a7487c6b74bff
-Opacity_By_timeOfDay - https://gist.github.com/karpatic/5f96a6b3a7202db0f694cdf4a30f3f90
-show_Hide_welcome_sign.js - https://gist.github.com/karpatic/66ea7646b55a1e076db955e11a9b78e6
-withinBounds.js - https://gist.github.com/karpatic/0cb8b66aca12ea1520a32817a74110fb
-snowflakes.js - https://gist.github.com/karpatic/633bc98463ddfd84fd7906a85c95f6f3
-gallery_on_rotation - https://gist.github.com/karpatic/4757485d3690ad32e2974bb4857abc63
-Gvan's Billboard - https://gist.github.com/karpatic/18d71d8f5ee379e7e86e70401ce4a87c</p>
+<ul>
+<li><a href="https://gist.github.com/karpatic/2f01540408f2843c30fc8bf2f2c762c4">swap_interior_1.js</a></li>
+<li><a href="https://gist.github.com/karpatic/beff0feba3173460fa4a7487c6b74bff">popout_videos_poster</a></li>
+<li><a href="https://gist.github.com/karpatic/5f96a6b3a7202db0f694cdf4a30f3f90">Opacity_By_timeOfDay</a></li>
+<li><a href="https://gist.github.com/karpatic/66ea7646b55a1e076db955e11a9b78e6">show_Hide_welcome_sign.js</a></li>
+<li><a href="https://gist.github.com/karpatic/0cb8b66aca12ea1520a32817a74110fb">withinBounds.js</a></li>
+<li><a href="https://gist.github.com/karpatic/633bc98463ddfd84fd7906a85c95f6f3">snowflakes.js</a></li>
+<li><a href="https://gist.github.com/karpatic/4757485d3690ad32e2974bb4857abc63">gallery_on_rotation</a></li>
+<li><a href="https://gist.github.com/karpatic/18d71d8f5ee379e7e86e70401ce4a87c">Gvan's Billboard</a></li>
+</ul>
 </details>
 <details style='background:#eee'>
 <summary><h1>Build Resources</h1>
@@ -150,9 +199,9 @@ Gvan's Billboard - https://gist.github.com/karpatic/18d71d8f5ee379e7e86e70401ce4
 <li>Scripting <a href="http://blog.cryptovoxels.com/scripting-bundle/">Autogenerated</a> Documentation</li>
 <li><a href="https://free3d.com/3d-models/obj?page=3">3D Assets</a></li>
 <li>Magica Voxels <a href="http://ephtracy.github.io/index.html?page=mv_resource">Download</a></li>
-<li>Magica Voxels <a href="https://www.megavoxels.com/p/magicavoxel-tutorials.html">Tutorial</a></li>
+<li><a href="https://github.com/cryptovoxels/parcel-dev-tools">parcel-dev-tools</a></li>
+<li><a href="https://wiki.cryptovoxels.com/en/Scripting/self-hosting">self-hosting</a></li>
 </ul>
-<p>Save your parcel as a space then reimport once edits are done. </p>
 </details>
 <details>
 <summary><h1>Games Ideas</h1>
@@ -180,51 +229,9 @@ Gvan's Billboard - https://gist.github.com/karpatic/18d71d8f5ee379e7e86e70401ce4
 <li>Cluny's Wearable <a href='https://peakd.com/cryptovoxels/@cluny.the.rat/scarcity-artifact-wearable-fitting-guide-i-two-outfits
 '> Fitting Guide </a></li>
 <li>The Voxels Graph link <a href="https://thegraph.com/hosted-service/subgraph/benjythebee/cryptovoxels-parcels?version=current">1</a>, <a href="https://api.thegraph.com/subgraphs/name/benjythebee/cryptovoxels-parcels">2</a> + Ricky's <a href="https://www.youtube.com/watch?v=tVM3F7MUQDw&amp;t=9s">Youtube Tutorial</a>, <a href="https://github.com/cryptovoxels/parcel-market-subgraph">Github</a></li>
-</ul>
-<!-- ID: QmVSoQsUbbKyk2z4Qw6hzUcbcQVsAnoe27iPzfJF9popt2 --><p>https://sorryaboutyourcats.medium.com/create-your-own-cryptovoxels-wearables-to-use-sell-or-trade-874e7f28e8c4
-https://medium.com/@bnolan/generating-a-live-map-view-of-cryptovoxels-b8d1e68a067
-https://medium.com/@bnolan/optimizing-a-voxel-mesher-with-one-weird-hack-5190c673ce84</p>
-<p>https://nftplazas.com/?s=cryptovoxels
-https://nftplazas.com/metaverse-advertising/</p>
-<h4>Tips</h4>
-<ul>
-<li>
-<p>Faylure tutorials - https://www.youtube.com/watch?v=cflhLXRdxbo&amp;t=365s</p>
-</li>
-<li>
-<p>purple is &quot;active state&quot; whereas gray in innactive. fog is tuned to reduce data load</p>
-</li>
-<li>
-<p>two boomboxes can be used at the same time</p>
-</li>
-<li>
-<p>is your Hardware Acceleration on in Advanced settings of your browser? here's our uptime status page so you can check on if things are running smooth from our side https://status.crvox.com/</p>
-</li>
-<li>
-<p>playing around some more with placing an image with text of the name of the destination in front of the view and taking a womp - (removing the image from the womp destination area after) - so the womp portal displays the name of the destination inside the womp portal.  Getting better results now that I am centering the text in the view when taking the womp</p>
-</li>
-<li>
-<p>two boomboxes can be used at the same time</p>
-</li>
-<li>
-<p>scripts are uploadable on vox models</p>
-</li>
-<li>
-<p>'correct' the rotation center angle using group</p>
-</li>
-</ul>
-<p>https://golem.ph.utexas.edu/~distler/maruku/proposal.html</p>
-<p>https://docs.livepeer.studio/guides/livestreaming/obs
-https://livepeer.studio/preview/blog/stream-into-livepeer-studio-first-time</p>
-<ul>
-<li>Keep an image's original shapeby hitting 'stretch' and setting the size of the image to your desired aspect ratio</li>
-</ul>
-<p>https://trello.com/b/0eMw7Y5p/cryptovoxels-roadmap-2022</p>
-<p>https://github.com/cryptovoxels/parcel-dev-tools</p>
-<p>VS </p>
-<p>https://wiki.cryptovoxels.com/en/Scripting/self-hosting</p>
-<ul>
-<li>https://thebitcave.gitbook.io/magicavoxel-resources/tutorials/web-tutorials</li>
+<li>Magica Voxels <a href="https://www.megavoxels.com/p/magicavoxel-tutorials.html">Tutorial</a>, <a href="https://thebitcave.gitbook.io/magicavoxel-resources/tutorials/web-tutorials">Tutorial</a></li>
+<li>Faylure <a href="https://www.youtube.com/watch?v=cflhLXRdxbo&amp;t=365s">tutorials</a></li>
+<li>Wearables <a href="https://sorryaboutyourcats.medium.com/create-your-own-cryptovoxels-wearables-to-use-sell-or-trade-874e7f28e8c4">tutorial</a></li>
 </ul>
 
         </ion-row>
