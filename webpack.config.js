@@ -40,7 +40,7 @@ module.exports = env => {
     splitChunks: { chunks: 'all' }
   },
   output: {
-    path: path.resolve('./dist'),
+    path: path.resolve('./docs'),
     publicPath: '/',
     filename: '[name].[hash].js',
     chunkFilename: '[name].[hash].js',
