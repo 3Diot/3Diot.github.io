@@ -5,14 +5,28 @@ import { Helmet, HelmetProvider } from 'react-helmet-async';
 (async () => {  
 const page = window.location.pathname.replace("/",'').replace('.html','')
 if(page=='404')return
+//let hr = JSON.parse((await import(`../../assets/header.json`) ).default)
 let hr = await (await fetch((await import('../../assets/header.json') ).default)).json() 
-hr.longName = 'Longname'
-hr.shortName = 'Shortname'
 
 let forBlog = !page.includes('admin')
+let csp = `img-src 'self'
+  http://localhost
+  https://unpkg.com/leaflet@1.3.0/dist/images/marker-shadow.png
+  https://unpkg.com/leaflet@1.3.0/dist/images/marker-icon.png
+  https://bniajfi.org/wp-content/uploads/2014/04/bnia_logo_new.png
+  data:;
+`
 if(forBlog){ 
+  //let content = JSON.parse((await import(`../../assets/posts/${page||'index'}.json`) ).default) 
   let content = await (await fetch((await import(`../../assets/posts/${page||'index'}.json`) ).default)).json() 
   hr = {...hr, ...content.meta}
+  csp = `img-src 'self' 
+  https://img.shields.io/ 
+  https://raw.githubusercontent.com/ 
+  https://pete88b.github.io/ 
+  https://visitor-badge.laobi.icu/ 
+  data:;
+`
 }
 
 // let local = window.location.href;
@@ -31,15 +45,7 @@ pre{ width: 800px;
 let header = <HelmetProvider>
       <Helmet>    
         <meta http-equiv="x-ua-compatible" content="ie=edge"/>
-        <meta http-equiv="Content-Security-Policy"
-          content="
-            img-src
-              'self'
-              https://unpkg.com/leaflet@1.3.0/dist/images/marker-shadow.png
-              https://unpkg.com/leaflet@1.3.0/dist/images/marker-icon.png
-              https://bniajfi.org/wp-content/uploads/2014/04/bnia_logo_new.png
-              data:
-        "/>
+        <meta http-equiv="Content-Security-Policy" content={csp}/>
         <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1"/>
         <meta http-equiv="x-dns-prefetch-control" content="off"/>
         <link rel="shortcut icon" type="image/x-icon" href={ hr.icon16 } />
@@ -55,6 +61,7 @@ let header = <HelmetProvider>
 
         <link rel="author"              href={hr.author}/>
         <link rel="license"             href="https://opensource.org/licenses/MIT"/>
+        <link rel="canonical"           href={`https://cvminigames.com/${page}`} /> 
         <link rel="me"                  href={hr.owneremail} type="text/html"/>
         <link rel="me"                  href={hr.ownername}/>
         <link rel="me"                  href={hr.ownerphone}/>

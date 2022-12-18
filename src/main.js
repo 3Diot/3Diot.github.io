@@ -6,10 +6,12 @@
     if(page=='404')return
 
     // Site Nav
+    //let toc = JSON.parse((await import(`../assets/posts/toc.json`) ).default)
     let toc = await (await fetch((await import('../assets/posts/toc.json') ).default)).json()
     toc = toc.map((item) => `<a href="./${item.filename}.html">${item.tab}</a>`).join('<br/>') 
 
     // Page Content 
+    // let content = JSON.parse((await import(`../assets/posts/${page||'index'}.json`) ).default)  
     let content = await (await fetch((await import(`../assets/posts/${page||'index'}.json`) ).default)).json()  
     let meta = content.meta
     content = content.resp
@@ -28,6 +30,7 @@
     if(meta.tab)template = template.replace(/{{tab}}/g, meta.tab) 
     if(meta.template)template = template.replace(/{{template}}/g, meta.template) 
     if(meta.toc)template = template.replace(/{{toc}}/g, meta.toc) 
+    if(meta.toc)template = template.replace(/{{page}}/g, page) 
     document.body.innerHTML = template 
 } )()
 

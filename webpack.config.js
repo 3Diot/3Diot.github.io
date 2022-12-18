@@ -33,7 +33,11 @@ module.exports = env => {
     minimizer: [
       new TerserPlugin({
         sourceMap: true,
-        // terserOptions: { compress:{ pure_funcs: ['console.log'] } }
+        terserOptions: { 
+          // compress:{ pure_funcs: ['console.log'] } 
+          // cache: true,
+          // mangle: !!mangle,
+        }
       }), 
       new OptimizeCssAssetsPlugin({})
     ],
@@ -49,12 +53,6 @@ module.exports = env => {
   },
   module: {
     rules: [
-      {
-        test: /\.html$/i,
-        use: {
-          loader: "html-loader",
-        }
-      },
       {
         test: /\.worker\.js$/,
         use: {
@@ -72,13 +70,6 @@ module.exports = env => {
               "plugins": [ '@babel/transform-runtime' ]
           }
         }
-      },
-      { 
-        test: /\.json$/,         
-        type: 'asset/resource',
-        generator: {
-          filename: '[name].json'
-        } 
       },
       {
         test: /\.css$/i,
@@ -126,34 +117,30 @@ module.exports = env => {
         ],
       },
       {
-        test: /\.svg$/,
-        use: [
-          {
-            loader: 'url-loader',
-            options: {
-              generator: (content) => svgToMiniDataURI(content.toString()),
-            },
-          },
-          {
-            loader: 'svg-inline-loader?classPrefix'
-          }
-        ]
-      },
-      {
-        test: /\.(png|jpg|gif|ico)$/i,
-        use: [
-          {
-            loader: 'url-loader',
-            options: {
-              limit: false,
-            },
-          },
-        ],
-      },
-      {
         test: /\.(csv|tsv)$/,
         use: [ 'csv-loader' ],
       },
+      {
+        test: /\.(png|jpg|gif|ico|svg)$/i,
+        type: 'asset/resource',
+        generator: {
+          filename: 'images/[name][ext]'
+        }
+      },
+      { 
+        test: /\.json$/,         
+        type: 'asset/resource',
+        generator: {
+          filename: '[name].json'
+        } 
+      },
+      {
+        test: /\.html$/,
+        type: "asset/source",
+        generator: {
+          filename: "[name][ext]",
+        },
+      }
     ]
   },
   plugins: [
@@ -232,7 +219,8 @@ module.exports = env => {
       patterns: [
         { from: './robots.txt', to: 'robots.txt', toType: 'file' },
         { from: './assets/maps', to: './maps', toType: 'dir' },
-        { from: './assets/tables', to: './tables', toType: 'dir' }
+        { from: './assets/tables', to: './tables', toType: 'dir' },
+        { from: './assets/images', to: './images', toType: 'dir' }
       ]
     } )
   ],
@@ -250,5 +238,6 @@ module.exports = env => {
         { from: './src/.htaccess', to: '.htaccess', toType: 'file' },
         { from: './src/robots.txt', to: 'robots.txt', toType: 'file' },
         { from: './assets/', to: './assets', toType: 'dir' },
-        { from: "./assets/posts", to: "./assets/posts", toType: 'dir' }
+        { from: "./assets/posts", to: "./assets/posts", toType: 'dir' },
+        { from: './assets/images', to: './images', toType: 'dir' }
 */
