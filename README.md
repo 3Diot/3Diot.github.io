@@ -239,3 +239,5 @@ if (navigator.userAgent === "ReactSnap") {
   <a href="https://github.com/CVMiniGames/CVMiniGames.github.io"><img src="https://img.shields.io/github/followers/CVMiniGames.svg?style=social&amp;label=Follow" alt="GitHub followers" /></a> 
 </p>
 -->
+
+<iframe src="https://www.cryptovoxels.com/play?coords=N@1447E,1128S,&mode=orbit" width="100%" height="500" scrolling="yes" class="iframe-class" frameborder="0"></iframe>
