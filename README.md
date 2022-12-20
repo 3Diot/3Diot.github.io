@@ -165,3 +165,77 @@ The default snapshot delay is 50ms.
   
 Works with routing strategies using the HTML5 history API. No hash(bang) URLs.
 https://github.com/stereobooster/react-snap/blob/master/doc/behind-the-scenes.md
+
+
+
+IONIC JS + CSS
+57 requests
+278 kB transferred
+356 kB resources
+Finish: 624 ms
+DOMContentLoaded: 276 ms
+Load: 582 ms
+
+IONIC CSS NO JS
+36 requests
+201 kB transferred
+223 kB resources
+Finish: 626 ms
+DOMContentLoaded: 192 ms
+Load: 566 ms
+
+IONIC Neither
+35 requests
+212 kB transferred
+202 kB resources
+Finish: 748 ms
+DOMContentLoaded: 275 ms
+Load: 725 ms
+
+
+
+/*
+if (navigator.userAgent === "ReactSnap") {
+    // Strip out all content except the root
+    // while (document.firstChild) document.removeChild(document.firstChild);
+    //let div = document.createElement("div");
+    //div.className = `root`;
+    //div.innerHTML = `This is my content`;
+    // document.appendChild(div); 
+    // log each tag in the array
+    const children = [...document.getElementsByTagName('script')];
+    children.forEach((child) => { console.log('-----------------', child); });
+
+    // let head = document.getElementsByTagName('head')[0].innerHTML
+}
+*/
+
+// https://www.npmjs.com/package/@ionic/core
+// https://github.com/stereobooster/react-snap/blob/master/tests/examples/partial/index.js
+// https://github.com/stereobooster/react-snap/blob/88ef70dd419158c18b9845034513dc84a3e100d9/index.js
+// https://docs.github.com/en/pages/configuring-a-custom-domain-for-your-github-pages-site/about-custom-domains-and-github-pages
+// https://domains.google.com/registrar/cvminigames.com/
+
+// https://stackoverflow.com/questions/67790280/css-loader-generates-urls-with-auto-prefix
+// Option output.publicPath has default value 'auto' and I think the file-loader (in png's rule) can't interpret it right. In this case, one of the following values may be appropriate:
+// '' - for relative URLs, url(logo.<hash>.png)
+// '/' - for absolute URLs, url(/logo.<hash>.png)
+
+// https://webpack.js.org/api/module-methods/
+
+// https://webpack.js.org/guides/asset-modules/
+
+
+<!--
+<p>
+  <a href="https://mybinder.org/v2/gh/CVMiniGames/CVMiniGames.github.io/main"> <img src="./images/launch_binder.svg" alt="Binder" /> </a>
+  <a href="https://colab.research.google.com/github/CVMiniGames/CVMiniGames.github.io/blob/main/ipynb/{{filename}}"> <img src="https://pete88b.github.io/fastpages/assets/badges/colab.svg" alt="Binder" /></a>
+  <a href="https://github.com/CVMiniGames/CVMiniGames.github.io/blob/main/ipynb/{{filename}}"> <img src="https://pete88b.github.io/fastpages/assets/badges/github.svg" alt="Binder" /></a>
+</p>
+<p>
+  <a href="https://github.com/CVMiniGames/CVMiniGames.github.io"><img src="https://img.shields.io/github/stars/CVMiniGames/CVMiniGames.github.io.svg?style=social&amp;label=Star" alt="GitHub stars" /></a>
+  <a href="https://github.com/CVMiniGames/CVMiniGames.github.io"><img src="https://img.shields.io/github/watchers/CVMiniGames/CVMiniGames.github.io.svg?style=social&amp;label=Watch" alt="GitHub watchers" /></a>
+  <a href="https://github.com/CVMiniGames/CVMiniGames.github.io"><img src="https://img.shields.io/github/forks/CVMiniGames/CVMiniGames.github.io.svg?style=social&amp;label=Fork" alt="GitHub forks" /></a>
+  <a href="https://github.com/CVMiniGames/CVMiniGames.github.io"><img src="https://img.shields.io/github/followers/CVMiniGames.svg?style=social&amp;label=Follow" alt="GitHub followers" /></a> 
+</p>
+-->

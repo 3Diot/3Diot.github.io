@@ -7,7 +7,7 @@
   "scripts": {
     "start": "webpack serve --static --open --env local --mode development --devtool eval-source-map --hot --progress",
     "build": "webpack --env production --mode production --profile --progress",
-    "postbuild": "react-snap && mv dist docs"
+    "postbuild": "react-snap"
   },
   "reactSnap": {
     "source": "./docs",
@@ -19,6 +19,7 @@
   },
   "dependencies": {
     "@capacitor/android": "^2.4.2",
+    "@ionic/core": "^6.4.1",
     "chardin.ts": "^1.0.4",
     "preact": "^10.11.3",
     "preact-router": "^4.1.0",

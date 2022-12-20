@@ -1,0 +1,37 @@
+<ion-app>
+  <ion-header translucent > <!-- class="ion-no-border" -->
+    <ion-toolbar>
+      <ion-title onclick="location.href='./'" style="cursor: pointer;">
+        CVMiniGames | {{tab}}
+      </ion-title>
+    </ion-toolbar> 
+  </ion-header>
+  <ion-content fullscreen class="ion-padding"> 
+    <ion-grid class="md hydrated">
+      <ion-row style="display: flex; justify-content: center;  align-items: center;">
+        <div style="text-align: center; position:absolute; z-index:9999; background-color: rgba(240, 248, 255, 0.75); padding: 12px;" >
+          <p class="ion-padding-start ion-padding-end"><ion-button onclick="location.href='https://www.cryptovoxels.com/play?coords=N@1447E,1128S'" expand="block" fill="outline" class="md button button-block button-outline ion-activatable ion-focusable hydrated">PLAY NOW</ion-button></p>
+          <p>
+            <a href="https://twitter.com/intent/tweet?text=If%20you%20are%20a%20%20%40cryptovoxels%20CVilian%2C%20go%20and%20check%20out%20%40CVMiniGames%20website%20CVMiniGames.com%20as%20I%20found%20the%20content%20interesting%20enough%20to%20share%20%3C3%20Thanks!">
+              <img src="https://img.shields.io/twitter/url/https/github.com/CVMiniGames/CVMiniGames.github.io.svg?style=social" alt="Tweet" /></a>
+            <a href="https://twitter.com/CVMiniGames"><img src="https://img.shields.io/twitter/follow/CVMiniGames.svg?style=social" alt="Twitter Follow" /></a>
+          </p>
+        </div>
+        <iframe src="https://www.cryptovoxels.com/play?coords=N@1447E,1128S,&mode=orbit" width="100%" height="500" scrolling="yes" class="iframe-class" frameborder="0"></iframe>
+      </ion-row>
+      <ion-row id='articleContent' style="">
+        <h1>{{title}}</h1>
+        <p>{{summary}}</p>
+        {{content}}
+      </ion-row>
+      <ion-row style="display: flex; justify-content: center;">
+        <div style="text-align: center; background-color: rgba(240, 248, 255, 0.75);">
+          <p>
+            <a href=""><img src="https://img.shields.io/github/last-commit/CVMiniGames/CVMiniGames.github.io.svg?label=Site Updated&style=flat&?labelColor=gray&color=green" alt="GitHub Last commit" /></a>
+            <img src="https://visitor-badge.laobi.icu/badge?page_id=CVMiniGames.CVMiniGames.github.io{{page}}&left_text=Visitor&left_color=green&right_color=gray" alt="Visitor">
+          </p>
+        </div>
+      </ion-row>
+    </ion-grid> 
+  </ion-content>
+</ion-app>

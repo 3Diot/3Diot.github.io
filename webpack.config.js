@@ -10,14 +10,14 @@ const WorkboxPlugin = require('workbox-webpack-plugin');
 const ScriptExtHtmlWebpackPlugin = require('script-ext-html-webpack-plugin');
 const svgToMiniDataURI = require('mini-svg-data-uri');
 const WebpackPwaManifest = require('webpack-pwa-manifest')
-const hr = require('./assets/header.json');
+const hr = require('./src/header.json');
 
 // preload woff n pics
 
 module.exports = env => {
   let template = `
   <!DOCTYPE html>
-  <html lang="en" dir="ltr">
+  <html lang="en" dir="ltr" class="hydrated">
     <div id="head"></div>
     <body>
       <div id="body"></div>
@@ -25,7 +25,7 @@ module.exports = env => {
   </html>`;
   return {
   entry: {
-    head: './src/admin/head.js',
+    head: './src/head.js',
     index: './src/admin/index.js',
     main: './src/main.js',
   },
@@ -33,7 +33,10 @@ module.exports = env => {
     minimizer: [
       new TerserPlugin({
         sourceMap: true,
+        extractComments: true,
         terserOptions: { 
+          cache: false,
+          minimize: true,
           // compress:{ pure_funcs: ['console.log'] } 
           // cache: true,
           // mangle: !!mangle,
@@ -172,7 +175,7 @@ module.exports = env => {
         chunks: 'all'
       },
       prefetch: {
-        test: /\.(js|json|svg|css)$/,
+        test: /\.(json|svg|css)$/,
         chunks: 'all'
       },
       defaultAttribute: 'async',
@@ -189,17 +192,7 @@ module.exports = env => {
       theme_color: 'red',
       dir:"rtl",
       lang:"ar",
-      icons: [ 
-      {  
-        src: path.resolve('./assets/images/icon192.png'),
-        sizes: "192x192",  
-        type: "image/png"  
-      }, 
-      {  
-        src: path.resolve('./assets/images/icon512.png'), 
-        sizes: "512x512",  
-        type: "image/png"  
-      } ]
+      icons: [ ]
     } ),/*
     new WorkboxPlugin.GenerateSW({
       swDest: './sw.js',
@@ -218,9 +211,9 @@ module.exports = env => {
     new CopyWebpackPlugin({
       patterns: [
         { from: './robots.txt', to: 'robots.txt', toType: 'file' },
-        { from: './assets/maps', to: './maps', toType: 'dir' },
-        { from: './assets/tables', to: './tables', toType: 'dir' },
-        { from: './assets/images', to: './images', toType: 'dir' }
+        { from: './src/maps', to: './maps', toType: 'dir' },
+        { from: './src/tables', to: './tables', toType: 'dir' },
+        { from: './src/images', to: './images', toType: 'dir' }
       ]
     } )
   ],
@@ -233,6 +226,20 @@ module.exports = env => {
 }
 
 /*
+      {  
+        src: path.resolve('./images/icon192.png'),
+        sizes: "192x192",  
+        type: "image/png"  
+      }, 
+      {  
+        src: path.resolve('./images/icon512.png'), 
+        sizes: "512x512",  
+        type: "image/png"  
+      } 
+
+      
+https://github.com/stereobooster/react-snap/blob/master/index.js
+https://github.com/terser/terser
         { from: './src/header.json', to: 'header.json', toType: 'file' },
         { from: './src/error', to: 'error' },
         { from: './src/.htaccess', to: '.htaccess', toType: 'file' },

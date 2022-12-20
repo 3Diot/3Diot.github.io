@@ -1,0 +1,35 @@
+ion-title {
+    line-height: 40px;
+    margin-left:20px;
+    padding-left: 70px;
+    background: url('./images/icon16.ico') no-repeat left center;
+    background-size: 50px 50px;
+}
+:root {
+  --max-width: min(800px, 100vw); 
+  --ion-padding: 0px;
+  --ion-grid-padding-xs: 0px;
+}
+*{ user-select: text; }
+#articleContent { display: flex; flex-direction: column; max-width: var(--max-width); margin: auto; }
+#articleContent > p {padding: 0px 12px 0px 12px;} 
+h1, h2, h3, h4 {text-align: center; } 
+summary{ text-align: center; cursor: pointer;}
+summary>*{ display:inline-block }
+summary::marker { content: "🧡"; } 
+details[open] summary::marker { content: "💖"; }
+details[open] details summary::marker { content: "🧡" }
+details[open] details[open] summary::marker { content: "💖"; } 
+details{padding: 12px;} 
+details > img {display:block; margin:auto;}
+p { word-break: break-word; }
+pre{ max-width: calc( var(--max-width) - 70px); background: #333; padding: 12px; }
+pre > code { color: white; } 
+blockquote{ 
+  font-style:italic; background-color: #333; 
+  color: #eee; border-left:8px solid deeppink ; 
+  position: relative; padding: 12px 5px 1px 5px; 
+}
+blockquote::before{ content: "\201C"; color: hotpink; padding-top: 6px; font-size:4em; position: absolute; left: 10px; top:-10px; }
+.twitter-tweet{ margin:auto; }
+blockquote span{ color:hotpink; font-style: normal; font-weight: bold; display: block; text-align: center; }
