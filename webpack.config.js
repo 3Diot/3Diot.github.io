@@ -4,20 +4,22 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const HtmlWebpackInlineSourcePlugin = require('html-webpack-inline-source-plugin-patched');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
+const CssMinimizerPlugin = require("css-minimizer-webpack-plugin");
 const TerserPlugin = require('terser-webpack-plugin');
 const WorkboxPlugin = require('workbox-webpack-plugin');
 const ScriptExtHtmlWebpackPlugin = require('script-ext-html-webpack-plugin');
-const svgToMiniDataURI = require('mini-svg-data-uri');
 const WebpackPwaManifest = require('webpack-pwa-manifest')
 const hr = require('./src/header.json');
+const ImageMinimizerPlugin = require("image-minimizer-webpack-plugin"); 
+const HTMLInlineCSSWebpackPlugin = require("html-inline-css-webpack-plugin").default;
 
-// preload woff n pics
+
+const isDev = process.env.NODE_ENV === 'development'
 
 module.exports = env => {
   let template = `
   <!DOCTYPE html>
-  <html lang="en" dir="ltr" class="hydrated">
+  <html lang="en" dir="ltr">
     <div id="head"></div>
     <body>
       <div id="body"></div>
@@ -30,19 +32,89 @@ module.exports = env => {
     main: './src/main.js',
   },
   optimization: {
+    minimize: true,
     minimizer: [
       new TerserPlugin({
-        sourceMap: true,
-        extractComments: true,
-        terserOptions: { 
-          cache: false,
-          minimize: true,
-          // compress:{ pure_funcs: ['console.log'] } 
-          // cache: true,
-          // mangle: !!mangle,
+        terserOptions: {
+          ecma: undefined,
+          parse: {
+            html5_comments: false,
+          },
+          compress:{ // (default {})
+            pure_funcs: ['console.log'],
+            toplevel: true, 
+          },
+          mangle: { // (default true)
+            toplevel: true,
+          },
+          module: false,
+          // Deprecated
+          output: null,
+          format: null,
+          sourceMap: { // (default false) - Pass true to include source maps in error messages.
+            url: "inline", 
+          },
+          toplevel: true, // (default false) - Pass true to enable top level variable and function name mangling and to drop unused variables and functions.
+          nameCache: null,
+          ie8: false,
+          keep_classnames: undefined,
+          keep_fnames: false,
+          safari10: false,
+        },
+      }),
+      new CssMinimizerPlugin({
+        minimizerOptions: {
+          preset: [
+            "default",
+            {
+              discardComments: { removeAll: true },
+            },
+          ],
         }
-      }), 
-      new OptimizeCssAssetsPlugin({})
+      }),
+      new ImageMinimizerPlugin({
+        minimizer: {
+          implementation: ImageMinimizerPlugin.imageminMinify,
+          options: {
+            plugins: [
+              ["imagemin-gifsicle", { progressive: true }],
+              ["imagemin-mozjpeg", { progressive: true }],
+              ["imagemin-pngquant", { progressive: true }],
+              [
+                "imagemin-svgo",
+                {
+                  plugins: [
+                    {
+                      name: "preset-default",
+                      params: {
+                        overrides: {
+                          removeViewBox: false,
+                          addAttributesToSVGElement: {
+                            params: {
+                              attributes: [
+                                { xmlns: "http://www.w3.org/2000/svg" },
+                              ],
+                            },
+                          },
+                        },
+                      },
+                    },
+                  ],
+                },
+              ],
+            ],
+          },
+        },
+        generator: [
+          {
+            type: "asset", // Apply generator for copied assets
+            implementation: ImageMinimizerPlugin.imageminGenerate,
+            options: {
+              plugins: ["imagemin-webp"],
+            },
+          },
+        ],
+      }),
     ],
     splitChunks: { chunks: 'all' }
   },
@@ -50,7 +122,7 @@ module.exports = env => {
     path: path.resolve('./docs'),
     publicPath: '/',
     filename: '[name].[hash].js',
-    chunkFilename: '[name].[hash].js',
+    chunkFilename: '[name].js',
     globalObject: "this",
     clean: true,
   },
@@ -75,45 +147,24 @@ module.exports = env => {
         }
       },
       {
-        test: /\.css$/i,
+        test: /.s?css$/,
         use: [
           {
             loader: MiniCssExtractPlugin.loader,
             options: {
               hmr: process.env.NODE_ENV === 'development',
               reloadAll: true,
+              sourceMap: true
             },
           },
-          { loader: "css-loader" },
+          {loader:'css-loader', options: {sourceMap: true} },
           { loader: "postcss-loader",
             options: {
               ident: 'postcss',
               postcssOptions: {
-              plugins: [ "postcss-preset-env"],
+              plugins: [ require('postcss-preset-env')() ]
               },
-            }
-          }
-		],
-      },
-      {
-        test: /\.s[ac]ss$/i,
-        use: [
-          {
-            loader: MiniCssExtractPlugin.loader,
-            options: {
-              hmr: process.env.NODE_ENV === 'development',
-              reloadAll: true,
-            },
-          },
-          'css-loader',
-          { loader: "postcss-loader",
-            options: {
-              ident: 'postcss',
-              postcssOptions: {
-              plugins: [
-                require('postcss-preset-env')()
-              ]
-              },
+              sourceMap: true
             }
           },
           'sass-loader',
@@ -160,6 +211,10 @@ module.exports = env => {
       templateContent: template,
       inlineSource: env.NODE_ENV == 'local' ? false : '^(index).*.(css)$', 
       inject: 'head',
+      minify: {
+        collapseWhitespace: !isDev,
+        removeComments: !isDev
+      }
     }),
     new HtmlWebpackPlugin({
       filename: 'index.html',
@@ -169,7 +224,8 @@ module.exports = env => {
       inlineSource: env.NODE_ENV == 'local' ? false : '^(index).*.(css)$', 
       inject: 'head',
     }),
-    new ScriptExtHtmlWebpackPlugin({ // Delete '/head/' e.g [vendors~head] Before deploy.
+    new HTMLInlineCSSWebpackPlugin(),
+    new ScriptExtHtmlWebpackPlugin({
       preload: {
         test: /^(index|imported).*.(js|json|svg|css)$/,
         chunks: 'all'
@@ -179,7 +235,7 @@ module.exports = env => {
         chunks: 'all'
       },
       defaultAttribute: 'async',
-    }),
+    }),    
     new WebpackPwaManifest( {
       fingerprints: false,
       name: hr.longName,
