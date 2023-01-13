@@ -7,7 +7,7 @@
   "scripts": {
     "start": "webpack serve --static --open --env local --mode development --devtool eval-source-map --hot --progress",
     "build": "webpack --env production --mode production --profile --progress",
-    "postbuild": "react-snap"
+    "postbuild": "make toc && react-snap"
   },
   "reactSnap": {
     "inlineCss": false,

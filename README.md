@@ -122,4 +122,12 @@ https://developers.google.com/search/docs/crawling-indexing/sitemaps/build-sitem
 Google: generate sitemap
 Submit your sitemap to Google: https://www.google.com/ping?sitemap=https://cvminigames.com/sitemap.txt
 
+the maps and tables need fixing
+https://www.link-assistant.com/news/structured-data-for-seo.html
+
+admin only: 
+manifest
 https://github.com/icelam/html-inline-script-webpack-plugin
+https://github.com/webpack-contrib/json-minimizer-webpack-plugin/tree/master/test
+
+python packaging uses dist and webpack does not.

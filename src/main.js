@@ -6,9 +6,9 @@ import "./main.css";
     let page = window.location.pathname.replace("/",'').replace('.html','')
     if(page=='404')return
 
-    //let toc = JSON.parse((await import(`./posts/toc.json`) ).default)
-    let toc = await (await fetch((await import(/* webpackChunkName: "toc" */ './posts/toc.json') ).default)).json()
-    toc = toc.map((item) => `<a href="./${item.filename}.html">${item.tab}</a>`).join('<br/>') 
+    // let toc = JSON.parse((await import(`./posts/toc.json`) ).default)
+    // let toc = await (await fetch((await import(/* webpackChunkName: "toc" */ './posts/toc.json') ).default)).json()
+    // toc = toc.map((item) => `<a href="./${item.filename}.html">${item.tab}</a>`).join('<br/>') 
 
     // Page Content 
     // let content = JSON.parse((await import(`./posts/${page||'index'}.json`) ).default)  
@@ -31,4 +31,40 @@ import "./main.css";
         console.log(child) 
         child.href && child.remove() 
     } ); 
+
+
+    // procedurally grab all header tags to create table of contents
+    // [...document.querySelectorAll('h2, h3, h4, h5, h6')].map((x) => { document.getElementById('toc').append(x.innerHTML) }) 
+    
+    // alter the the offsetPath of an HTML element with an ID of 'motion-demo' by replacing any 1's with the view width and any 2's with the view height. 
+    let md = document.getElementById("mframe");
+    md.style.offsetPath = md.style.offsetPath.replace(/1/g, window.innerWidth).replace(/2/g, window.innerHeight)
+    
+    // create svg element
+    const svg1 = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+    svg1.setAttribute ("width", "100vw" ); svg1.setAttribute ("height", "100vh" ); 
+    // random in range
+    function rir(min, max) { return Math.floor(Math.random() * (Math.floor(max) - Math.ceil(min) + 1)) + Math.ceil(min); }
+    Array(rir(5,15)).fill().map( () => {  
+        const x = rir(0,100)+'vh'; const y = rir(0,100)+'vh';
+        const size = rir(40,80)
+        var rect = document.createElementNS("http://www.w3.org/2000/svg", 'rect');
+        rect.setAttribute('x', x); rect.setAttribute('y', y);
+        rect.setAttribute('height', size); rect.setAttribute('width', size);
+        rect.setAttribute('fill', ['red','green','orange', 'blue'][rir(0,3)]);
+        svg1.appendChild(rect);
+    })
+    document.getElementById('svg_bg').appendChild(svg1); 
+    const rectangles = svg1.querySelectorAll('rect');
+    rectangles.forEach(rect => {
+        let y = parseInt(rect.getAttribute('y').slice(0, -2))
+        rect.animate([ 
+            {x: rect.getAttribute('x'), y: (-125+y)+'vh'},
+            {x: rect.getAttribute('x'), y: (125+y)+'vh'},
+        ], {
+            duration: 10000,
+            iterations: Infinity,
+            direction:'alternate', 
+        });
+    });
 } )()

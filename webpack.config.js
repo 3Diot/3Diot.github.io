@@ -248,7 +248,8 @@ module.exports = env => {
       theme_color: 'red',
       dir:"rtl",
       lang:"ar",
-      icons: [ ]
+      icons: [ ],
+      inject: false
     } ),/*
     new WorkboxPlugin.GenerateSW({
       swDest: './sw.js',

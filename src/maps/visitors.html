@@ -41,10 +41,9 @@
         }</style>
 </body>
 <script async> (async function() {
-
-    // https://www.k1ic.com/traffic_archive/cv_all_parcel_90day_traffic.csv 
-    let parcels = (await d3.json(`https://www.cryptovoxels.com/api/parcels/search.json`) )['parcels']
-    let traffic = await d3.csv(`https://www.k1ic.com/traffic_archive/cv_all_parcel_90day_traffic.csv`);
+    const urlbase = 'https://266xag2x98.execute-api.us-east-1.amazonaws.com/default/CoorsBypass?url='
+    let parcels = (await d3.json(urlbase+`https://www.cryptovoxels.com/api/parcels/search.json`) )['parcels']
+    let traffic = await d3.csv(urlbase+`https://www.k1ic.com/traffic_archive/cv_all_parcel_90day_traffic.csv`);
     var map = L.map( "map", { center: [0.0, 0.0], crs: L.CRS.EPSG3857, zoom: 10, zoomControl: true, preferCanvas: false } );
     L.control.scale().addTo(map);
     // delete Object.assign(parcels, {['features']: parcels['parcels'] })['parcels'];
