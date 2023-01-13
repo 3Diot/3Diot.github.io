@@ -20,7 +20,7 @@ module.exports = env => {
   let template = `
   <!DOCTYPE html>
   <html lang="en" dir="ltr">
-    <div id="head"></div>
+    <head id="head"></head>
     <body>
       <div id="body"></div>
     </body>

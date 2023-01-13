@@ -6,10 +6,6 @@ import "./main.css";
     let page = window.location.pathname.replace("/",'').replace('.html','')
     if(page=='404')return
 
-    // let toc = JSON.parse((await import(`./posts/toc.json`) ).default)
-    // let toc = await (await fetch((await import(/* webpackChunkName: "toc" */ './posts/toc.json') ).default)).json()
-    // toc = toc.map((item) => `<a href="./${item.filename}.html">${item.tab}</a>`).join('<br/>') 
-
     // Page Content 
     // let content = JSON.parse((await import(`./posts/${page||'index'}.json`) ).default)  
     let content = await (await fetch((await import(/* webpackChunkName: "[request]" */ `./posts/${page||'index'}.json`) ).default)).json()  
@@ -32,6 +28,9 @@ import "./main.css";
         child.href && child.remove() 
     } ); 
 
+    // let toc = JSON.parse((await import(`./posts/toc.json`) ).default)
+    // let toc = await (await fetch((await import(/* webpackChunkName: "toc" */ './posts/toc.json') ).default)).json()
+    // toc = toc.map((item) => `<a href="./${item.filename}.html">${item.tab}</a>`).join('<br/>') 
 
     // procedurally grab all header tags to create table of contents
     // [...document.querySelectorAll('h2, h3, h4, h5, h6')].map((x) => { document.getElementById('toc').append(x.innerHTML) }) 
@@ -42,8 +41,7 @@ import "./main.css";
     
     // create svg element
     const svg1 = document.createElementNS("http://www.w3.org/2000/svg", "svg");
-    svg1.setAttribute ("width", "100vw" ); svg1.setAttribute ("height", "100vh" ); 
-    // random in range
+    svg1.setAttribute ("width", "100vw" ); svg1.setAttribute ("height", "100vh" );  
     function rir(min, max) { return Math.floor(Math.random() * (Math.floor(max) - Math.ceil(min) + 1)) + Math.ceil(min); }
     Array(rir(5,15)).fill().map( () => {  
         const x = rir(0,100)+'vh'; const y = rir(0,100)+'vh';
