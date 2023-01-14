@@ -10,31 +10,39 @@ import "./main.css";
     // let content = JSON.parse((await import(`./posts/${page||'index'}.json`) ).default)  
     let content = await (await fetch((await import(/* webpackChunkName: "[request]" */ `./posts/${page||'index'}.json`) ).default)).json()  
     let meta = content.meta; meta.content = content.content
-
+    console.log('meta', meta)
+    
     // Page Template 
     let template = (await import(`./template_article.html`) ).default 
     const replaceThese = ['content', 'summary', 'title', 'badges', 'comments', 'filename', 'image', 'tab', 'template', 'toc', 'page'] 
     replaceThese.map((item) => meta[item] && (template = template.replace(new RegExp(`{{${item}}}`, 'g'), meta[item] ) ) ) 
     document.body.innerHTML = template 
+
     const scripts = [...document.scripts]
+    console.log('scripts',scripts)
     scripts.forEach((child) =>{
-        console.log(child)
         child.src && child.remove()
     } );
+    
     const links = [...document.querySelectorAll("link[as='script']")]
-    console.log('link', links) 
+    console.log('links', links) 
     links.forEach((child) =>{ 
-        console.log(child) 
         child.href && child.remove() 
     } ); 
 
     // let toc = JSON.parse((await import(`./posts/toc.json`) ).default)
-    // let toc = await (await fetch((await import(/* webpackChunkName: "toc" */ './posts/toc.json') ).default)).json()
-    // toc = toc.map((item) => `<a href="./${item.filename}.html">${item.tab}</a>`).join('<br/>') 
-
-    // procedurally grab all header tags to create table of contents
-    // [...document.querySelectorAll('h2, h3, h4, h5, h6')].map((x) => { document.getElementById('toc').append(x.innerHTML) }) 
+    let toc = await (await fetch((await import(/* webpackChunkName: "toc" */ './posts/toc.json') ).default)).json() 
+    document.getElementById('toc').innerHTML = toc.map((item) => `<a href="./${item.filename}.html">${item.tab}</a>`).join('<br/>')
+    console.log('toc', toc)
     
+    // procedurally grab all header tags to create table of contents     
+    let show = ()=> { 
+        [...document.querySelectorAll('h2, h3, h4, h5, h6')]
+            .map((x) => { 
+                document.getElementById('outline').append(x.innerHTML) 
+        }) 
+    }; meta.toc == 'false' && show();
+
     // alter the the offsetPath of an HTML element with an ID of 'motion-demo' by replacing any 1's with the view width and any 2's with the view height. 
     let md = document.getElementById("mframe");
     md.style.offsetPath = md.style.offsetPath.replace(/1/g, window.innerWidth).replace(/2/g, window.innerHeight)
