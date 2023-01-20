@@ -268,6 +268,7 @@ module.exports = env => {
     new CopyWebpackPlugin({
       patterns: [
         { from: './robots.txt', to: 'robots.txt', toType: 'file' },
+        { from: './CNAME', to: 'CNAME', toType: 'file' },
         { from: './src/maps', to: './maps', toType: 'dir' },
         { from: './src/tables', to: './tables', toType: 'dir' },
         { from: './src/images', to: './images', toType: 'dir' }
