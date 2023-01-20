@@ -4,7 +4,7 @@ current_dir := $(notdir $(patsubst %/,%,$(dir $(mkfile_path))))
 hello:
 	echo "Hello, World"
 
-toc:
+sitemap:
 	nbs2html ./ipynb/ index,001_Legal,002_Parcels,003_Lore,004_Tutorials,005_Monetize,006_Websites ./src/posts/
 
 maker:
@@ -13,7 +13,7 @@ maker:
 # Bottomed used by top
 
 upd:
-	pip uninstall cvminigames && pip install cvminigames && make toc
+	pip uninstall cvminigames && pip install cvminigames && make sitemap
 
 nb2py:
 	nb2py ./ipynb/_000_core.ipynb ./cvminigames/outp.py

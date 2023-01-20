@@ -27,7 +27,7 @@
     "destination": "./docs"
   },
   "dependencies": {
-    "@capacitor/android": "^2.4.2",
+    "@capacitor/android": "^2.5.0",
     "@ionic/core": "^6.4.1",
     "chardin.ts": "^1.0.4",
     "preact": "^10.11.3",
@@ -42,8 +42,8 @@
     "@babel/plugin-transform-runtime": "^7.11.0",
     "@babel/preset-env": "^7.11.0",
     "@babel/preset-react": "^7.10.4",
-    "@capacitor/cli": "^2.4.2",
-    "@capacitor/core": "^2.4.2",
+    "@capacitor/cli": "^2.5.0",
+    "@capacitor/core": "^2.5.0",
     "babel-loader": "^8.1.0",
     "clean-webpack-plugin": "^3.0.0",
     "copy-webpack-plugin": "^9.0.0",

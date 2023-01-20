@@ -1,6 +1,9 @@
 <!-- 
   svg_bg -> main.js creates ands animate an svg
 -->
+<script type="text/javascript"> 
+</script>
+<div id="scroll_progress_bar"></div>
 <div id="svg_bg"></div>
 <style>
 #svg_bg{
@@ -8,6 +11,38 @@
   z-index: -99; 
 }
 </style>
+<script type="text/javascript"> 
+const createSvgBg = async () => {
+    // Create cubes
+    const svg1 = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+    svg1.setAttribute ("width", "100vw" ); svg1.setAttribute ("height", "100vh" );  
+    let rir = (min, max) => Math.floor(Math.random() * (Math.floor(max) - Math.ceil(min) + 1)) + Math.ceil(min);
+    Array(rir(5,15)).fill().map( () => {  
+        const x = rir(0,100)+'vh'; const y = rir(0,100)+'vh';
+        const size = rir(40,80)
+        var rect = document.createElementNS("http://www.w3.org/2000/svg", 'rect');
+        rect.setAttribute('x', x); rect.setAttribute('y', y);
+        rect.setAttribute('height', size); rect.setAttribute('width', size);
+        rect.setAttribute('fill', ['red','green','orange', 'blue'][rir(0,3)]);
+        svg1.appendChild(rect);
+    }) 
+    // Animate Cubes
+    document.getElementById('svg_bg').appendChild(svg1); 
+    svg1.querySelectorAll('rect').forEach(rect => { 
+        let x = rect.getAttribute('x')
+        let y = parseInt(rect.getAttribute('y').slice(0, -2)); 
+        y = (125+y)+'vh';
+        rect.animate([ 
+            {x: x, y: '-'+y},
+            {x: x, y: y},
+        ], { 
+            duration: 10000,
+            iterations: Infinity,
+            direction:'alternate', 
+        }); 
+    });
+}; createSvgBg();
+</script>
 
 <!-- 
   gradient_bg
@@ -28,10 +63,10 @@
 	50% {	  background-position: 100% 100%;	} 
 	100% {	background-position: 0% 0%;	}  
 }
-</style>
+</style> 
 
 <!-- 
-  gradient_bg -> main.js resizes the path 
+  resize svg path 
 -->
 <div id="mframe" style="offset-path: path('M 0 0 L 0 2 L 0 0')"></div>
 <style>
@@ -49,22 +84,68 @@
     100% { offset-distance: 100%; }
   }
 </style>
+<script type="text/javascript"> 
+// alter the the offsetPath of an HTML element with an ID of 'mframe' 
+// replace any 1's with the view width and any 2's with the view height. 
+const resizeSvg = async () => {
+    let md = document.getElementById("mframe");
+    md.style.offsetPath = md.style.offsetPath.replace(/1/g, window.innerWidth).replace(/2/g, window.innerHeight)
+}; resizeSvg();
+</script>
+
+
+<style type="text/css">
+  #sitemap{
+    position: fixed;
+    width: fit-content;
+    top: 0;
+    right: 0; 
+    background-color: var(--bg1);
+    z-index: 999;
+    overflow: scroll;
+  }
+  </style>
+  <div id="sitemap">Sitemap</div>
+  
+  <script>
+    const dragTarget = document.querySelector("#sitemap"); 
+    let inDrag = false;
+    function downFN(e) { 
+        inDrag = true;
+        objInitLeft = dragTarget.offsetLeft; objInitTop = dragTarget.offsetTop;
+        dragStartX = e.pageX; dragStartY = e.pageY;
+    }
+    function moveFN(e) {
+        if (!inDrag) {return;} 
+        dragTarget.style.left = (objInitLeft + e.pageX-dragStartX) + "px";
+        dragTarget.style.top = (objInitTop + e.pageY-dragStartY) + "px";
+      }
+
+    (function() {
+      var dragStartX, dragStartY; var objInitLeft, objInitTop;
+      dragTarget.addEventListener("mousedown", downFN );
+      document.addEventListener("mousemove", moveFN);
+      document.addEventListener("mouseup", function(e) {inDrag = false;});
+      dragTarget.addEventListener("touchstart", downFN );
+      document.addEventListener("touchmove", moveFN);
+      document.addEventListener("touchend", function(e) {inDrag = false;});
+    }())
+  </script>
 
 <!-- 
   CONTENT
 -->
 <div id="header">
   <div id="header_nav" >
-    <h1><a  style="cursor: pointer;" href="/">CVMiniGames</a> | <a href="./">{{title}}</a></h1>
+    <h1><a  style="cursor: pointer;" href="/">CVMiniGames</a> | <a href="./" id="title"></a></h1>
     <p><a style="cursor: pointer;" target=blank href="https://www.cryptovoxels.com/play?coords=N@1447E,1128S">PLAY NOW</a></p>
-    <p>{{summary}}</p>
+    <p id="summary"></p>
   </div>
   <div id="header_bg"></div> 
 </div>
 </div>
 <div id='articleContent'>
   <div id="outline"></div>
-  {{content}}
+  <div id="content"></div>
 </div>
-
 <div id="toc"></div>

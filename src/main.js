@@ -1,76 +1,111 @@
 import "./main.css";
 
-// Load the URI path's corresponding json file and it's desired template
-// Every page loads this file unless it's it's own template
-(async()=>{
-    let page = window.location.pathname.replace("/",'').replace('.html','')
-    if(page=='404')return
-
-    // Page Content 
-    // let content = JSON.parse((await import(`./posts/${page||'index'}.json`) ).default)  
-    let content = await (await fetch((await import(/* webpackChunkName: "[request]" */ `./posts/${page||'index'}.json`) ).default)).json()  
-    let meta = content.meta; meta.content = content.content
-    console.log('meta', meta)
-    
-    // Page Template 
-    let template = (await import(`./template_article.html`) ).default 
-    const replaceThese = ['content', 'summary', 'title', 'badges', 'comments', 'filename', 'image', 'tab', 'template', 'toc', 'page'] 
-    replaceThese.map((item) => meta[item] && (template = template.replace(new RegExp(`{{${item}}}`, 'g'), meta[item] ) ) ) 
-    document.body.innerHTML = template 
-
+// 1. 
+// Strip initial render logic (head & main js) w/ react-snap before the template loads.
+const removeScripts = async() => { 
     const scripts = [...document.scripts]
-    console.log('scripts',scripts)
     scripts.forEach((child) =>{
+        console.log('scripts',scripts)
         child.src && child.remove()
     } );
     
-    const links = [...document.querySelectorAll("link[as='script']")]
-    console.log('links', links) 
+    const links = [...document.querySelectorAll("link[as='script']")] 
     links.forEach((child) =>{ 
+        console.log('links', links)
         child.href && child.remove() 
     } ); 
+}
 
-    // let toc = JSON.parse((await import(`./posts/toc.json`) ).default)
-    let toc = await (await fetch((await import(/* webpackChunkName: "toc" */ './posts/toc.json') ).default)).json() 
-    document.getElementById('toc').innerHTML = toc.map((item) => `<a href="./${item.filename}.html">${item.tab}</a>`).join('<br/>')
-    console.log('toc', toc)
-    
-    // procedurally grab all header tags to create table of contents     
-    let show = ()=> { 
-        [...document.querySelectorAll('h2, h3, h4, h5, h6')]
-            .map((x) => { 
-                document.getElementById('outline').append(x.innerHTML) 
-        }) 
-    }; meta.toc == 'false' && show();
+// 2. Loads a route using it's meta data.
+const handleRoute = async (route) => { 
+    document.querySelectorAll('a[href^="./"]').forEach(link=>link.removeEventListener('click', redirect));
+    route = route.replace("/",'').replace('.html','') || 'index'
+    const meta = await getMeta( route )
+    document.title = meta.title
+    await loadTemplate(meta)
+    createToc(meta) 
+    createNav() 
+    setTimeout( ()=>{
+        document.querySelectorAll('a[href^="./"]').forEach(link =>link.addEventListener('click', redirect ))
+    }, 100);
+}
 
-    // alter the the offsetPath of an HTML element with an ID of 'motion-demo' by replacing any 1's with the view width and any 2's with the view height. 
-    let md = document.getElementById("mframe");
-    md.style.offsetPath = md.style.offsetPath.replace(/1/g, window.innerWidth).replace(/2/g, window.innerHeight)
-    
-    // create svg element
-    const svg1 = document.createElementNS("http://www.w3.org/2000/svg", "svg");
-    svg1.setAttribute ("width", "100vw" ); svg1.setAttribute ("height", "100vh" );  
-    function rir(min, max) { return Math.floor(Math.random() * (Math.floor(max) - Math.ceil(min) + 1)) + Math.ceil(min); }
-    Array(rir(5,15)).fill().map( () => {  
-        const x = rir(0,100)+'vh'; const y = rir(0,100)+'vh';
-        const size = rir(40,80)
-        var rect = document.createElementNS("http://www.w3.org/2000/svg", 'rect');
-        rect.setAttribute('x', x); rect.setAttribute('y', y);
-        rect.setAttribute('height', size); rect.setAttribute('width', size);
-        rect.setAttribute('fill', ['red','green','orange', 'blue'][rir(0,3)]);
-        svg1.appendChild(rect);
+const redirect = async (event) => {
+    window.history.pushState({}, '', event.target.href);
+    popState(event);
+}
+const popState = async (event) => {
+    event.preventDefault();
+    console.log('popstate', event)
+    var location = event.target.href || event.target.location.href
+    let route = location.replace(window.origin,'') 
+    handleRoute( route );
+}
+window.onpopstate = function (event) { popState(event); };
+
+// 3.
+// Retrieve page content from the JSON file
+const getMeta = async(page) => {
+    // let content = JSON.parse((await import(`./posts/${page||'index'}.json`) ).default)  
+    let content = await (await fetch((await import(/* webpackChunkName: "[request]" */ `./posts/${page}.json`) ).default)).json()  
+    console.log('page', page, content)
+    let meta = content.meta; meta.content = content.content
+    return meta
+}
+
+// 4. 
+// Load the template and replace the {{content}} with the page content
+const loadTemplate = async (meta) => {
+    let template = (await import(`./${meta.template}.html`) ).default
+    if(!window.template || window.template != meta.template){
+        document.body.innerHTML = template
+        Array.from(document.getElementsByTagName("script")).forEach(script => {
+                const newScript = document.createElement("script");
+                newScript.textContent = script.textContent;
+                script.parentNode.replaceChild(newScript, script);
+            }
+        );
+    }
+    const replaceThese = ['content', 'title', 'summary']
+    // replaceThese.map((item) => meta[item] && (template = template.replace(new RegExp(`{{${item}}}`, 'g'), meta[item] ) ) )
+    replaceThese.map((item) => {
+        let d = document.getElementById(item)
+        console.log('item', item, d)
+        document.getElementById(item).innerHTML = meta[item] 
     })
-    document.getElementById('svg_bg').appendChild(svg1); 
-    const rectangles = svg1.querySelectorAll('rect');
-    rectangles.forEach(rect => {
-        let y = parseInt(rect.getAttribute('y').slice(0, -2))
-        rect.animate([ 
-            {x: rect.getAttribute('x'), y: (-125+y)+'vh'},
-            {x: rect.getAttribute('x'), y: (125+y)+'vh'},
-        ], {
-            duration: 10000,
-            iterations: Infinity,
-            direction:'alternate', 
-        });
-    });
-} )()
+    window.template = meta.template
+} 
+
+// 4.
+// procedurally grab all header tags to create table of contents 
+const createToc = async (meta) => { 
+    'toc' in meta && meta.toc == 'true' && ( document.getElementById('outline').innerHTML = '<h2>Table of Contents</h2>' + [document.querySelectorAll('h2, h3, h4, h5, h6')].map((x) => x.innerHTML).join('<br />')  )
+} 
+
+// 5.
+//  
+const createNav = async () => {  
+    // let sitemap = JSON.parse((await import(`./posts/sitemap.json`) ).default) 
+    let sitemap = ( await (await fetch((await import(/* webpackChunkName: "sitenav" */ './posts/sitemap.json') ).default)).json() )
+    document.getElementById('sitemap').innerHTML = sitemap.map((item) => `<a href="./${item.filename}.html">${item.tab}</a>`).join('<br/>')
+    console.log('sitemap', sitemap) 
+} 
+
+// Onstart load the URI path's corresponding json file and it's desired template
+(async()=>{
+    window.history.replaceState(null, "", "");
+    removeScripts() 
+    await handleRoute(window.location.pathname);
+} )()  
+
+
+/*
+- 2 - copy to charleskarpati.com + showcase as cards + list all borked or not.
+- horizontal rulings
+- css :anchor + :target show and hide page content.
+- <a href="#home">John Doe</a>
+- section:target { display: block; }
+- ASCII ART
+*/
+
+// https://www.npmjs.com/package/html-inline-script-webpack-plugin

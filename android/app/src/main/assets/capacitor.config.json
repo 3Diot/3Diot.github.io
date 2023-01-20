@@ -1,0 +1,13 @@
+{
+  "appId": "com.cvminigames.app",
+  "appName": "cvminigames",
+  "bundledWebRuntime": false,
+  "npmClient": "npm",
+  "webDir": "docs",
+  "plugins": {
+    "SplashScreen": {
+      "launchShowDuration": 0
+    }
+  },
+  "cordova": {}
+}

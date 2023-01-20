@@ -72,6 +72,10 @@ file.worker.js - > console.log('workerhelper')
 
 
 
+npm install @capacitor/android
+npx cap init
+npx cap add android
+npx cap open android
 
 
 

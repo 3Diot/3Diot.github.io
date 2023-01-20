@@ -4,7 +4,7 @@
 :root {
   --max-width: min(800px, 100vw);
   --bg1: #f7f7f7;
-  --bg2: #eee;
+  --bg2: rgb(238 238 238 / 91%);
   --bg3: rgba(240, 248, 255, 0.85);
   --base: #004848;
   --hint-of: #ffb7b7;
