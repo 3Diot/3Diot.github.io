@@ -87,11 +87,11 @@ const createToc = async (meta) => {
 const createNav = async () => {  
     // let sitemap = JSON.parse((await import(`./posts/sitemap.json`) ).default) 
     let sitemap = ( await (await fetch((await import(/* webpackChunkName: "sitenav" */ './posts/sitemap.json') ).default)).json() )
-    window.lbl = window.lbl || 
-      `<label for="toggle-sitemap">
-      <span>Hide</span> <span>Show </span>Sitemap
-      </label>
-      <br/>`
+    window.lbl = window.lbl || `
+    <label for="toggle-sitemap">
+        <span>Hide</span> <span>Show </span>Sitemap
+    </label>
+    <br/>`
     document.getElementById('sitemap').innerHTML = lbl + sitemap.map((item) => `<a href="./${item.filename}.html">${item.tab}</a>`).join('<br/>')
     console.log('sitemap', sitemap) 
 } 
