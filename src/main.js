@@ -87,7 +87,12 @@ const createToc = async (meta) => {
 const createNav = async () => {  
     // let sitemap = JSON.parse((await import(`./posts/sitemap.json`) ).default) 
     let sitemap = ( await (await fetch((await import(/* webpackChunkName: "sitenav" */ './posts/sitemap.json') ).default)).json() )
-    document.getElementById('sitemap').innerHTML = sitemap.map((item) => `<a href="./${item.filename}.html">${item.tab}</a>`).join('<br/>')
+    window.lbl = window.lbl || 
+      `<label for="toggle-sitemap">
+      <span>Hide</span> <span>Show </span>Sitemap
+      </label>
+      <br/>`
+    document.getElementById('sitemap').innerHTML = lbl + sitemap.map((item) => `<a href="./${item.filename}.html">${item.tab}</a>`).join('<br/>')
     console.log('sitemap', sitemap) 
 } 
 
@@ -97,15 +102,4 @@ const createNav = async () => {
     removeScripts() 
     await handleRoute(window.location.pathname);
 } )()  
-
-
-/*
-- 2 - copy to charleskarpati.com + showcase as cards + list all borked or not.
-- horizontal rulings
-- css :anchor + :target show and hide page content.
-- <a href="#home">John Doe</a>
-- section:target { display: block; }
-- ASCII ART
-*/
-
 // https://www.npmjs.com/package/html-inline-script-webpack-plugin

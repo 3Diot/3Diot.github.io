@@ -9,7 +9,10 @@
   --base: #004848;
   --hint-of: #ffb7b7;
 }
-html { font-size: 20px; }  
+html { 
+  font-size: 18px; 
+  line-height: 1.3;
+}  
 ::selection {  background: var(--hint-of); }
 h1,h2,h3,h4 {text-align: center; }
 h1,h2,h3,h4,a { color: var(--base); font-weight: 600; font-family: Courier New,Courier,Monaco,monospace;}
@@ -24,6 +27,12 @@ h1>a{
 }
 h1>a:hover { text-decoration: underline; color: var(--base); }
 a{ text-decoration: none; } 
+/* Expanding hover effect */
+/* 
+https://blog.logrocket.com/css-before-after-custom-animations-transitions/#before-pseudo-element 
+https://tympanus.net/codrops/2013/05/22/examples-of-pseudo-elements-animations-and-transitions/
+https://cssanimation.rocks/pseudo-elements/
+*/
 a::before {
   content: '';
   background-color: var(--hint-of);
@@ -43,7 +52,7 @@ span{ font-family: inherit;}
 p { word-break: break-word; font-family: Georgia,TimesNewRoman,Times,Times New Roman,serif; }
 pre{ max-width: calc( var(--max-width) - 70px); background: var(--hint-of); padding: 12px; }
 pre > code { color: white; }
-
+/* Instead of setting a page width use: li { max-width: 80ch; } */
 /* Blockquote */
 blockquote{ 
   font-style:italic; background-color: var(--hint-of); 
@@ -79,6 +88,7 @@ header
   padding: 12px;
   text-align: center;
   z-index: 9;
+  /* text-shadow: 3px 3px 40px #7DBAF0; */
 }
 #header_bg{  
   border-radius: 50px;
@@ -87,15 +97,21 @@ header
   background-color: var(--bg3);
   clip-path: polygon(0 0, 100% 0, 100% 70%, 85% 70%, 85% 85%, 70% 85%, 70% 100%, 30% 100%, 30% 85%, 15% 85%, 15% 70%, 0 70%);
 	animation:spin 2s linear alternate infinite;
-  position: absolute;
-  top:0px;
   transition-duration: 2s;
 } 
-#header:hover > #header_bg{
+#header:hover > #header_bg_wrapper > #header_bg{
   clip-path: polygon(0% 15%, 15% 15%, 15% 0%, 85% 0%, 85% 15%, 100% 15%, 100% 85%, 85% 85%, 85% 100%, 15% 100%, 15% 85%, 0% 85%);
 } 
 @keyframes spin{ from{transform:rotate(-2deg)} to{transform:rotate(2deg)} }
 
+#header_bg_wrapper{
+  position: absolute;
+  top:0px;
+  width:100%;
+  height:100%;   
+  /* https://neumorphism.io/ */
+  filter: drop-shadow(20px 20px 60px #bebebe) drop-shadow(-20px -20px 60px #ffffff);
+}
 /*
 body
 */
@@ -109,56 +125,152 @@ Article Content
 */
 #articleContent { border-left: 1px solid var(--base); max-width: var(--max-width); margin: auto; }
 #articleContent > p {padding: 0px 12px 0px 12px;} 
-
 /*
-templates
-1. > parallax background
-2. > keyframes animate linear gradient background
-3. > keyframes animate background of randomly generated cubes.
--. > Scroll Progress Indicator.
--. > Mobile -> sticky top bar. desktop -> Sticky left panel. both -> logo and title
--. > Optionally - a table of contents is shown before the article or at the side.
-> clip path being a max 15px wiggly line shown sidebar or not.
-> scrollpos animate the position of a cube tumbling down the divider line with a clip path mask 
+  templates
+  1. > parallax background
+  2. > keyframes animate linear gradient background
+  3. > keyframes animate background of randomly generated cubes.
+  -. > Scroll Progress Indicator.
+  -. > Mobile -> sticky top bar? desktop -> Sticky left panel. both -> logo and title
+  -. > Optionally - a table of contents is shown before the article or at the side.
+  > clip path being a max 15px wiggly line shown sidebar or not.
+  > scrollpos animate the position of a cube tumbling down the divider line with a clip path mask 
+  4. > text flows along the side of a clip path. 
 */
 /*
-articles
-4. > text flows along the side of a clip path. 
+  Techniques
+  html-> image or div w/ text to crop w mask
+  css-> animate background-x-position
+  css-> background-image, -attachment: fixed, -size: cover, -position: center
+  css-> -webikit-mask-image:(url) & -repeat: no-repeate; mask-type, -size, -position
+  css-> clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+  svg+css-> clip-path: url(@svg <clipPath id>)
+  mask-image: linear-gradient(to bottom, transaprent 10%, black) -> dampends image 
 */
 /*
-https://www.w3schools.com/howto/tryit.asp?filename=tryhow_css_parallax_percent
-https://css-tricks.com/almanac/properties/m/mask-image/
-https://css-tricks.com/almanac/properties/s/shape-outside/
-https://css-tricks.com/almanac/properties/c/clip-path/
-https://css-tricks.com/animating-with-clip-path/
-https://css-irl.info/experimental-layouts/
+Within the Articles
+- 2 - cards
+- horizontal rulings
+- css :anchor + :target show and hide page content.
+- <a href="#home">John Doe</a>  + section:target { display: block; } -> id matching the URL's fragment
+- ASCII ART
+*/
+/*
+  Useful Articles
+  https://www.w3schools.com/howto/tryit.asp?filename=tryhow_css_parallax_percent
+  https://css-tricks.com/almanac/properties/m/mask-image/
+  https://css-tricks.com/almanac/properties/s/shape-outside/
+  https://css-tricks.com/almanac/properties/c/clip-path/
+  https://css-tricks.com/animating-with-clip-path/
+  https://css-irl.info/experimental-layouts/
+  https://cssanimation.rocks/pseudo-elements/ 
+  https://www.joshwcomeau.com/css/designing-shadows/
+  https://www.joshwcomeau.com/css/make-beautiful-gradients/
+  https://garden.bradwoods.io/notes/css/3d
+  https://github.com/codrops/OnScrollPathAnimations/
+  https://github.com/codrops/CoverPageTransition/
+  https://github.com/codrops/CaptionHoverEffects
+  https://github.com/codrops/ShapeHoverEffectSVG
+  https://blog.logrocket.com/css-before-after-custom-animations-transitions/#before-pseudo-element
+  https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Animations/Using_CSS_animations
+  https://blog.logrocket.com/css-before-after-custom-animations-transitions/#before-pseudo-element
+*/
 
+/*
+    Resources
 https://chromium.googlesource.com/chromium/blink/+/master/Source/core/css/html.css
 https://bennettfeely.com/clippy/
 https://animista.net/play/text/focus-in
 https://svg-path-visualizer.netlify.app/
 https://yqnn.github.io/svg-path-editor/
+https://cssbud.com/css-generator/css-glow-generator/#search-header
+https://getwaves.io/
+https://www.blobmaker.app/
+http://csshero.org/mesher/
+https://shadows.brumm.af/
+https://ui.glass/generator/#
+http://css3generator.com/
+http://www.cssfiltergenerator.com/
 */
 /*
-    html-> image or div w/ text to crop w mask
-    css-> animate background-x-position
-    css-> background-image, -attachment: fixed, -size: cover, -position: center
-    css-> -webikit-mask-image:(url) & -repeat: no-repeate; mask-type, -size, -position
-    css-> clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
-    svg+css-> clip-path: url(@svg <clipPath id>)
-    mask-image: linear-gradient(to bottom, transaprent 10%, black) -> dampends image 
-*/
-
-/*
+Read These
 https://tympanus.net/codrops/2021/06/01/trigonometry-in-css-and-javascript-introduction-to-trigonometry/
 https://tympanus.net/codrops/2021/06/02/trigonometry-in-css-and-javascript-getting-creative-with-trigonometric-functions/
 https://tympanus.net/codrops/2021/06/04/trigonometry-in-css-and-javascript-beyond-triangles/
 https://tympanus.net/codrops/2021/12/07/coloring-with-code-a-programmatic-approach-to-design/
-https://garden.bradwoods.io/notes/css/3d
+*/
+/*
+Implement These
 https://github.com/codrops/codrops-sketches/tree/main/022-svg-path-page-transition-horizontal
 https://github.com/codrops/codrops-sketches/tree/main/021-svg-path-page-transition-vertical
-https://github.com/codrops/OnScrollPathAnimations/
-https://github.com/codrops/CoverPageTransition/
-https://github.com/codrops/CaptionHoverEffects
-https://github.com/codrops/ShapeHoverEffectSVG
+https://codepen.io/lonekorean/pen/JjGYpPx
+https://codepen.io/lonekorean/pen/KKVdQPX
+*/
+/*
+https://cssanimation.rocks/pseudo-elements/
+double colon :: to denote pseudo-elements (as opposed to pseudo-classes like :hover, :first-child).
+When adding pseudo-elements, needs 'content' property before they can be made visible on the page. 
+
+button::after {
+  content: '';
+  position: absolute;
+  top: -50%;
+  right: -50%;
+  bottom: -50%;
+  left: -50%;
+  background: linear-gradient(to bottom, rgba(229, 172, 142, 0), rgba(255,255,255,0.5) 50%, rgba(229, 172, 142, 0));
+  transform: rotateZ(60deg) translate(-5em, 7.5em);
+}
+button:hover::after, button:focus::after {
+  animation: sheen 1s forwards;
+}
+@keyframes sheen {
+  100% {
+    transform: rotateZ(60deg) translate(1em, -9em);
+  }
+}
+*/
+/*
+https://tympanus.net/codrops/2013/05/22/examples-of-pseudo-elements-animations-and-transitions/
+Only supported by modern browsers like Firefox, IE10 and recently Chrome (see this updated support table for more info)
+Does not work in mobile browsers yet
+Pseudo-elements cannot be identified by ID
+Pseudo-elements don’t appear in the DOM.
+Pseudo-elements can’t be animated with JavaScript
+*/
+
+/*
+transition: [property] [duration] [timing-function] [delay];
+transition-property
+The transition-property defines the CSS property where the transition over the element will be applied. 
+We can also apply a transition to a single property (e.g., background-color or transform) or to all the properties in the rule-set.
+
+div {
+      transition-property: all;
+      transition-property: transform;
+    }
+*/
+/*
+https://blog.logrocket.com/understanding-animation-transition-timing-functions-css/#:~:text=There%20are%20two%20ways%20to,changes%20over%20a%20specific%20duration.
+There are two ways to animate web elements in CSS: the animation and transition properties.
+
+The animation property allows you to change the properties of an element over a specific duration, and needs @keyframes. 
+The transition property defines how an element changes over a specific duration.
+animation: <name> <duration> <timing-function>;
+transition: <property> <duration> <timing-function>;
+
+EX1:
+transition: transform 1s ease-in-out;
+transform: translateX(0px);
+hover: transform: translateX(100px);
+
+EX2:
+animation: flight 5s linear infinite;
+@keyframes flight{
+  0%{transform: none;}
+  25%{transform: translateX(125px);}
+  50%{transform: translateX(250px);}
+  75%{transform: translateX(375px);}
+  100%{transform: translateX(500px);}
+}
 */
