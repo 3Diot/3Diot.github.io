@@ -270,6 +270,7 @@ module.exports = env => {
         { from: './robots.txt', to: 'robots.txt', toType: 'file' },
         { from: './CNAME', to: 'CNAME', toType: 'file' },
         { from: './src/maps', to: './maps', toType: 'dir' },
+        { from: './src/404.html', to: '404.html', toType: 'file' },
         { from: './src/tables', to: './tables', toType: 'dir' },
         { from: './src/images', to: './images', toType: 'dir' }
       ]
