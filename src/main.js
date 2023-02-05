@@ -1,19 +1,20 @@
 import "./main.css";
 
 // 1. 
-// Strip initial render logic (head & main js) w/ react-snap before the template loads.
+// Strip initial render logic w/ react-snap (head & main js) before the template loads.
 const removeScripts = async() => { 
+    /*
     const scripts = [...document.scripts]
     scripts.forEach((child) =>{
-        console.log('scripts',scripts)
-        child.src && child.remove()
+        new RegExp("head|helmet", "i").test(child.src) ? child.remove() : console.log('keep', child)
     } );
     
     const links = [...document.querySelectorAll("link[as='script']")] 
     links.forEach((child) =>{ 
-        console.log('links', links)
+        console.log('links', child)
         child.href && child.remove() 
     } ); 
+    */
 }
 
 // 2. Loads a route using it's meta data.
@@ -76,7 +77,7 @@ const loadTemplate = async (meta) => {
     window.template = meta.template
 } 
 
-// 4.
+// 5
 // procedurally grab all header tags to create table of contents 
 const createToc = async (meta) => { 
     'toc' in meta && meta.toc == 'true' && ( document.getElementById('outline').innerHTML = '<h2>Table of Contents</h2>' + [document.querySelectorAll('h2, h3, h4, h5, h6')].map((x) => x.innerHTML).join('<br />')  )

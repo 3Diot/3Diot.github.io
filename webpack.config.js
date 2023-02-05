@@ -32,7 +32,7 @@ module.exports = env => {
     main: './src/main.js',
   },
   optimization: {
-    minimize: true,
+    minimize: !!isDev,
     minimizer: [
       new TerserPlugin({
         terserOptions: {
@@ -209,7 +209,7 @@ module.exports = env => {
       chunks: [ 'head', 'index'],
       excludeChunks: [ 'main' ],
       templateContent: template,
-      inlineSource: env.NODE_ENV == 'local' ? false : '^(index).*.(css)$', 
+      inlineSource: isDev && '^(index).*.(css)$', 
       inject: 'head',
       minify: {
         collapseWhitespace: !isDev,
@@ -221,7 +221,7 @@ module.exports = env => {
       chunks: ['head','main'],
       excludeChunks: [ 'index'],
       templateContent: template,
-      inlineSource: env.NODE_ENV == 'local' ? false : '^(index).*.(css)$', 
+      inlineSource: isDev && '^(index).*.(css)$', 
       inject: 'head',
     }),
     new HTMLInlineCSSWebpackPlugin(),
@@ -236,7 +236,7 @@ module.exports = env => {
       },
       defaultAttribute: 'async',
     }),    
-    new WebpackPwaManifest( {
+    isDev ? '' : new WebpackPwaManifest( {
       fingerprints: false,
       name: hr.longName,
       short_name:  hr.shortName,
@@ -251,7 +251,7 @@ module.exports = env => {
       icons: [ ],
       inject: false
     } ),/*
-    new WorkboxPlugin.GenerateSW({
+    !!isDev && new WorkboxPlugin.GenerateSW({
       swDest: './sw.js',
       clientsClaim: true,
       skipWaiting: true,
@@ -296,7 +296,8 @@ module.exports = env => {
         type: "image/png"  
       } 
 
-      
+https://webpack.js.org/configuration/devtool/
+https://webpack.js.org/configuration/dev-server/#devserverstatic
 https://github.com/stereobooster/react-snap/blob/master/index.js
 https://github.com/terser/terser
         { from: './src/header.json', to: 'header.json', toType: 'file' },

@@ -27,7 +27,7 @@ const createSvgBg = async () => {
         svg1.appendChild(rect);
     }) 
     // Animate Cubes
-    document.getElementById('svg_bg').appendChild(svg1); 
+    r = document.getElementById('svg_bg'); r.innerHTML = ''; r.appendChild(svg1) 
     svg1.querySelectorAll('rect').forEach(rect => { 
         let x = rect.getAttribute('x')
         let y = parseInt(rect.getAttribute('y').slice(0, -2)); 
@@ -40,8 +40,8 @@ const createSvgBg = async () => {
             iterations: Infinity,
             direction:'alternate', 
         }); 
-    });
-}; createSvgBg();
+    }); 
+}; createSvgBg(); 
 </script>
 
 <!-- 
@@ -103,18 +103,22 @@ const resizeSvg = async () => {
     z-index: 999;
     overflow: hidden;   
     border-radius: .7rem;
-    padding: 1rem; 
-    box-shadow: 0 0 20px #fff, -20px 0 80px #f0f, 20px 0 80px #0ff, inset 0 0 50px #fff, inset 50px 0 80px #f0f, inset -50px 0 80px #0ff, inset 50px 0 300px #f0f, inset -50px 0 300px #0ff;
-    animation: pulsate 6s linear infinite;
+    padding: 1rem;
+
+    backdrop-filter: blur(6px) saturate(46%);
+    -webkit-backdrop-filter: blur(6px) saturate(46%);
+    background-color: rgba(255, 255, 255, 0.35);
+    border-radius: 12px;
+    border: 1px solid rgba(209, 213, 219, 0.3);
   }
-  @keyframes pulsate { 50% { box-shadow: 0 0 20px #fff, 20px 0 80px #f0f, -20px 0 80px #0ff, inset 0 0 50px #fff, inset -50px 0 80px #f0f, inset 50px 0 80px #0ff, inset -50px 0 300px #f0f, inset 50px 0 300px #0ff; } }
+  @keyframes pulse { 50% { box-shadow: 20px 0 30px #0ff, -20px 0 30px #f0f, inset 0px 0 20px #f0f; } }
 
   /* hide checkbox, but still expose it to screen readers.*/
   input { position: absolute;  width: 1px; clip: rect(0 0 0 0); overflow: hidden; white-space: nowrap; }
 
   /* Use Labels to trigger CSS Effects on checkbox checked */
-  #toggle-sitemap:not(:checked) ~ #sitemap { animation: collapse 1s forwards; }
-  #toggle-sitemap:checked ~ #sitemap { animation: expand 1s forwards; }
+  #toggle-sitemap:not(:checked) ~ #sitemap { animation: collapse 1s forwards, pulse 6s linear infinite; }
+  #toggle-sitemap:checked ~ #sitemap { animation: expand 1s forwards, pulse 6s linear infinite; }
   @keyframes collapse { from { max-height:75vh} to { max-height:3em; } }
   @keyframes expand { to { max-height:75vh } from { max-height:3em; } }
 
@@ -184,4 +188,3 @@ const resizeSvg = async () => {
   <div id="content"></div>
 </div>
 <div id="toc"></div>
-
