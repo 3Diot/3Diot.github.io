@@ -95,6 +95,12 @@ const resizeSvg = async () => {
 
 
 <style type="text/css">
+  body:has(#sitemap:hover) { 
+    overscroll-behavior-y: contain; /* Prevent drag-refresh */
+  }
+  #sitemap > label {
+    cursor: grab;
+  }
   #sitemap{
     position: fixed;
     width: fit-content;
@@ -111,7 +117,9 @@ const resizeSvg = async () => {
     border-radius: 12px;
     border: 1px solid rgba(209, 213, 219, 0.3);
   }
-  @keyframes pulse { 50% { box-shadow: 20px 0 30px #0ff, -20px 0 30px #f0f, inset 0px 0 20px #f0f; } }
+  @keyframes pulse { 50% { box-shadow: 5px 0 20px #0ff, -5px 0 20px #f0f, inset 0px 0 10px #f0f; } }
+  @keyframes pulse { 50% { box-shadow: 5px 0 20px #f0f, -5px 0 20px #0ff, inset 0px 0 10px #0ff; } }
+  h2:hover {  animation: deets 2s infinite;}
 
   /* hide checkbox, but still expose it to screen readers.*/
   input { position: absolute;  width: 1px; clip: rect(0 0 0 0); overflow: hidden; white-space: nowrap; }
@@ -157,7 +165,6 @@ const resizeSvg = async () => {
         dragToY = e.pageY || e.targetTouches[0].clientY; 
         dragTarget.style.left = (objInitLeft + dragToX-dragStartX) + "px";
         dragTarget.style.top = (objInitTop + dragToY-dragStartY) + "px";
-        console.log('DragEvt', objInitTop, dragStartY, dragToY);
       } 
     (function() {
       // start = mousepos & objInit = topleft of obj
@@ -188,3 +195,19 @@ const resizeSvg = async () => {
   <div id="content"></div>
 </div>
 <div id="toc"></div>
+
+<svg xmlns="http://www.w3.org/2000/svg" style="width: -webkit-fill-available">
+  <path class="path2" fill="#0099ff" fill-opacity="1" 
+  d=""></path>
+</svg>
+<script>
+function generatePath(bars, height) {
+    const addPath = (b, h) => "L"+b*window.innerWidth/bars +","+h;
+    for (let bar = 0; bar <= bars; bar++) {
+        let newH = height - Math.ceil(Math.random() * height)
+        window.path += addPath(bar, newH) + addPath(bar+1, newH);
+    }
+    return ("M0,"+height+window.path+addPath(bars+1, height)+"L0,"+height+"Z").replace('undefined','');
+}
+document.querySelector('.path2').setAttribute('d', generatePath(6, 100));
+</script>

@@ -115,7 +115,6 @@ body
 body { 
   margin: 0px;
   overflow-x: hidden;
-  overscroll-behavior-y: contain; /* Prevent drag-refresh */
 }
 
 /* 
@@ -200,7 +199,37 @@ https://tympanus.net/codrops/2021/12/07/coloring-with-code-a-programmatic-approa
 */
 /*
 */
+
+
+
 /*
+transition: [property] [duration] [timing-function] [delay];
+transition-property
+The transition-property defines the CSS property where the transition over the element will be applied. 
+We can also apply a transition to a single property (e.g., background-color or transform) or to all the properties in the rule-set.
+div {transition-property: all; transition-property: transform; }
+
+*//*
+https://blog.logrocket.com/understanding-animation-transition-timing-functions-css/#:~:text=There%20are%20two%20ways%20to,changes%20over%20a%20specific%20duration.
+There are two ways to animate web elements in CSS: the animation and transition properties.
+
+The animation property allows you to change the properties of an element over a specific duration, and needs @keyframes. 
+The transition property defines how an element changes over a specific duration.
+animation: <name> <duration> <timing-function>;
+transition: <property> <duration> <timing-function>;
+*/
+
+
+/*
+https://tympanus.net/codrops/2013/05/22/examples-of-pseudo-elements-animations-and-transitions/
+Only supported by modern browsers like Firefox, IE10 and recently Chrome (see this updated support table for more info)
+Does not work in mobile browsers yet
+Pseudo-elements cannot be identified by ID
+Pseudo-elements don’t appear in the DOM.
+Pseudo-elements can’t be animated with JavaScript
+
+*//*
+
 https://cssanimation.rocks/pseudo-elements/
 double colon :: to denote pseudo-elements (as opposed to pseudo-classes like :hover, :first-child).
 When adding pseudo-elements, needs 'content' property before they can be made visible on the page. 
@@ -223,48 +252,14 @@ button:hover::after, button:focus::after {
     transform: rotateZ(60deg) translate(1em, -9em);
   }
 }
+
+transform:translate(-50%, -50%); // center the element
+transform:translateX(-50%); // center the element horizontally
 */
 /*
-https://tympanus.net/codrops/2013/05/22/examples-of-pseudo-elements-animations-and-transitions/
-Only supported by modern browsers like Firefox, IE10 and recently Chrome (see this updated support table for more info)
-Does not work in mobile browsers yet
-Pseudo-elements cannot be identified by ID
-Pseudo-elements don’t appear in the DOM.
-Pseudo-elements can’t be animated with JavaScript
-*/
-
-/*
-transition: [property] [duration] [timing-function] [delay];
-transition-property
-The transition-property defines the CSS property where the transition over the element will be applied. 
-We can also apply a transition to a single property (e.g., background-color or transform) or to all the properties in the rule-set.
-
-div {
-      transition-property: all;
-      transition-property: transform;
-    }
-*/
-/*
-https://blog.logrocket.com/understanding-animation-transition-timing-functions-css/#:~:text=There%20are%20two%20ways%20to,changes%20over%20a%20specific%20duration.
-There are two ways to animate web elements in CSS: the animation and transition properties.
-
-The animation property allows you to change the properties of an element over a specific duration, and needs @keyframes. 
-The transition property defines how an element changes over a specific duration.
-animation: <name> <duration> <timing-function>;
-transition: <property> <duration> <timing-function>;
-
-EX1:
-transition: transform 1s ease-in-out;
-transform: translateX(0px);
-hover: transform: translateX(100px);
-
-EX2:
-animation: flight 5s linear infinite;
-@keyframes flight{
-  0%{transform: none;}
-  25%{transform: translateX(125px);}
-  50%{transform: translateX(250px);}
-  75%{transform: translateX(375px);}
-  100%{transform: translateX(500px);}
-}
+  @keyframes deets {
+    0% {     box-shadow: 0 0 0 0 rgba(0,0,0, 0.4); }
+    70% {       box-shadow: 0 0 0 50px rgba(0,0,0, 0); }
+    100% {       box-shadow: 0 0 0 0 rgba(0,0,0, 0); }
+  }
 */
