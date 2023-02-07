@@ -4,9 +4,10 @@
 :root {
   --max-width: min(800px, 100vw);
   --bg1: #f7f7f7;
-  --bg2: rgb(238 238 238 / 91%);
-  --bg3: rgb(240, 248, 255, .8);
+  --bg2: rgb(238 238 238 / 90%);
+  --bg3: rgb(240, 248, 255, .6);
   --bg4: rgba(183,183,255, .8);
+  --bg5: rgb(238 238 238 / 40%);
   --base: #004848;
   --hint-of: rgba(255, 183, 183, .5);
   --hint-of-light: rgba(255, 183, 183, .3);
@@ -34,6 +35,8 @@ a{ text-decoration: none; }
 https://blog.logrocket.com/css-before-after-custom-animations-transitions/#before-pseudo-element 
 https://tympanus.net/codrops/2013/05/22/examples-of-pseudo-elements-animations-and-transitions/
 https://cssanimation.rocks/pseudo-elements/
+https://textfac.es/
+https://anthonyhobday.com/sideprojects/saferules/
 */
 a::before {
   content: '';
@@ -92,7 +95,7 @@ body {
 /* 
 Article Content 
 */
-#articleContent { border-left: 1px solid var(--base); max-width: var(--max-width); margin: auto; }
+#articleContent { max-width: var(--max-width); margin: auto; }
 #articleContent > p {padding: 0px 12px 0px 12px;} 
 /*
   templates
