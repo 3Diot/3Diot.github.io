@@ -912,11 +912,11 @@ var getMeta = /*#__PURE__*/function () {
             return _context5.sent.json();
           case 8:
             content = _context5.sent;
-            console.log('page', page, content);
+            // console.log('page', page, content)
             meta = content.meta;
             meta.content = content.content;
             return _context5.abrupt("return", meta);
-          case 13:
+          case 12:
           case "end":
             return _context5.stop();
         }
@@ -952,7 +952,7 @@ var loadTemplate = /*#__PURE__*/function () {
             replaceThese = ['content', 'title', 'summary']; // replaceThese.map((item) => meta[item] && (template = template.replace(new RegExp(`{{${item}}}`, 'g'), meta[item] ) ) )
             replaceThese.map(function (item) {
               var d = document.getElementById(item);
-              console.log('item', item, d);
+              // console.log('item', item, d)
               document.getElementById(item).innerHTML = meta[item];
             });
             window.template = window.meta.template;
@@ -1013,8 +1013,9 @@ var createNav = /*#__PURE__*/function () {
           case 8:
             sitemap = _context8.sent;
             window.lbl = window.lbl || "\n    <label for=\"toggle-sitemap\">\n    <span>&#x21e8;</span>&nbsp;&nbsp;&nbsp;&nbsp;Sitemap\n    </label>\n    <br/>";
+            // console.log({sitemap})
             document.getElementById('sitemap').innerHTML = lbl + sitemap.map(function (item) {
-              return "<a href=\"./".concat(item.filename, ".html\"> ").concat(item.tab == window.meta.tab && '-' || '', " ").concat(item.tab, "</a>");
+              return "<a href=\"./".concat(item.filename, ".html\" title=\"").concat(item.summary, "\"> ").concat(item.tab == window.meta.tab && '-' || '', " ").concat(item.tab, " </a>");
             }).join('<br/>');
           case 11:
           case "end":

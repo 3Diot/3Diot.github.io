@@ -49,7 +49,7 @@ window.onpopstate = function (event) { popState(event); };
 const getMeta = async(page) => {
     // let content = JSON.parse((await import(`./posts/${page||'index'}.json`) ).default)  
     let content = await (await fetch((await import(/* webpackChunkName: "[request]" */ `./posts/${page}.json`) ).default)).json()  
-    console.log('page', page, content)
+    // console.log('page', page, content)
     let meta = content.meta; meta.content = content.content
     return meta
 }
@@ -71,7 +71,7 @@ const loadTemplate = async () => {
     // replaceThese.map((item) => meta[item] && (template = template.replace(new RegExp(`{{${item}}}`, 'g'), meta[item] ) ) )
     replaceThese.map((item) => {
         let d = document.getElementById(item)
-        console.log('item', item, d)
+        // console.log('item', item, d)
         document.getElementById(item).innerHTML = meta[item] 
     })
     window.template = window.meta.template
@@ -93,7 +93,8 @@ const createNav = async () => {
     <span>&#x21e8;</span>&nbsp;&nbsp;&nbsp;&nbsp;Sitemap
     </label>
     <br/>`
-    document.getElementById('sitemap').innerHTML = lbl + sitemap.map((item) => `<a href="./${item.filename}.html"> ${item.tab==window.meta.tab && '-' || ''} ${item.tab}</a>`).join('<br/>')
+    // console.log({sitemap})
+    document.getElementById('sitemap').innerHTML = lbl + sitemap.map((item) => `<a href="./${item.filename}.html" title="${item.summary}"> ${item.tab==window.meta.tab && '-' || ''} ${item.tab} </a>`).join('<br/>')
 } 
 
 // Onstart load the URI path's corresponding json file and it's desired template
