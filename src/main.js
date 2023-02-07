@@ -21,10 +21,10 @@ const removeScripts = async() => {
 const handleRoute = async (route) => { 
     document.querySelectorAll('a[href^="./"]').forEach(link=>link.removeEventListener('click', redirect));
     route = route.replace("/",'').replace('.html','') || 'index'
-    const meta = await getMeta( route )
-    document.title = meta.title
-    await loadTemplate(meta)
-    createToc(meta) 
+    window.meta = await getMeta( route )
+    document.title = window.meta.title
+    await loadTemplate()
+    createToc() 
     createNav() 
     setTimeout( ()=>{
         document.querySelectorAll('a[href^="./"]').forEach(link =>link.addEventListener('click', redirect ))
@@ -56,9 +56,9 @@ const getMeta = async(page) => {
 
 // 4. 
 // Load the template and replace the {{content}} with the page content
-const loadTemplate = async (meta) => {
-    let template = (await import(`./${meta.template}.html`) ).default
-    if(!window.template || window.template != meta.template){
+const loadTemplate = async () => {
+    let template = (await import(`./${window.meta.template}.html`) ).default
+    if(!window.template || window.template != window.meta.template){
         document.body.innerHTML = template
         Array.from(document.getElementsByTagName("script")).forEach(script => {
                 const newScript = document.createElement("script");
@@ -74,13 +74,13 @@ const loadTemplate = async (meta) => {
         console.log('item', item, d)
         document.getElementById(item).innerHTML = meta[item] 
     })
-    window.template = meta.template
+    window.template = window.meta.template
 } 
 
 // 5
 // procedurally grab all header tags to create table of contents 
-const createToc = async (meta) => { 
-    'toc' in meta && meta.toc == 'true' && ( document.getElementById('outline').innerHTML = '<h2>Table of Contents</h2>' + [document.querySelectorAll('h2, h3, h4, h5, h6')].map((x) => x.innerHTML).join('<br />')  )
+const createToc = async () => { 
+    'toc' in window.meta && window.meta.toc == 'true' && ( document.getElementById('outline').innerHTML = '<h2>Table of Contents</h2>' + [document.querySelectorAll('h2, h3, h4, h5, h6')].map((x) => x.innerHTML).join('<br />')  )
 } 
 
 // 5.
@@ -93,8 +93,7 @@ const createNav = async () => {
     <span>&#x21e8;</span>&nbsp;&nbsp;&nbsp;&nbsp;Sitemap
     </label>
     <br/>`
-    document.getElementById('sitemap').innerHTML = lbl + sitemap.map((item) => `<a href="./${item.filename}.html">${item.tab}</a>`).join('<br/>')
-    console.log('sitemap', sitemap) 
+    document.getElementById('sitemap').innerHTML = lbl + sitemap.map((item) => `<a href="./${item.filename}.html"> ${item.tab==window.meta.tab && '-' || ''} ${item.tab}</a>`).join('<br/>')
 } 
 
 // Onstart load the URI path's corresponding json file and it's desired template

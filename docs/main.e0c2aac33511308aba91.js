@@ -811,7 +811,6 @@ var removeScripts = /*#__PURE__*/function () {
 // 2. Loads a route using it's meta data.
 var handleRoute = /*#__PURE__*/function () {
   var _ref2 = _asyncToGenerator( /*#__PURE__*/regenerator_default().mark(function _callee2(route) {
-    var meta;
     return regenerator_default().wrap(function _callee2$(_context2) {
       while (1) {
         switch (_context2.prev = _context2.next) {
@@ -823,12 +822,12 @@ var handleRoute = /*#__PURE__*/function () {
             _context2.next = 4;
             return getMeta(route);
           case 4:
-            meta = _context2.sent;
-            document.title = meta.title;
+            window.meta = _context2.sent;
+            document.title = window.meta.title;
             _context2.next = 8;
-            return loadTemplate(meta);
+            return loadTemplate();
           case 8:
-            createToc(meta);
+            createToc();
             createNav();
             setTimeout(function () {
               document.querySelectorAll('a[href^="./"]').forEach(function (link) {
@@ -932,17 +931,17 @@ var getMeta = /*#__PURE__*/function () {
 // 4. 
 // Load the template and replace the {{content}} with the page content
 var loadTemplate = /*#__PURE__*/function () {
-  var _ref6 = _asyncToGenerator( /*#__PURE__*/regenerator_default().mark(function _callee6(meta) {
+  var _ref6 = _asyncToGenerator( /*#__PURE__*/regenerator_default().mark(function _callee6() {
     var template, replaceThese;
     return regenerator_default().wrap(function _callee6$(_context6) {
       while (1) {
         switch (_context6.prev = _context6.next) {
           case 0:
             _context6.next = 2;
-            return __webpack_require__(962)("./".concat(meta.template, ".html"));
+            return __webpack_require__(962)("./".concat(window.meta.template, ".html"));
           case 2:
             template = _context6.sent["default"];
-            if (!window.template || window.template != meta.template) {
+            if (!window.template || window.template != window.meta.template) {
               document.body.innerHTML = template;
               Array.from(document.getElementsByTagName("script")).forEach(function (script) {
                 var newScript = document.createElement("script");
@@ -956,7 +955,7 @@ var loadTemplate = /*#__PURE__*/function () {
               console.log('item', item, d);
               document.getElementById(item).innerHTML = meta[item];
             });
-            window.template = meta.template;
+            window.template = window.meta.template;
           case 7:
           case "end":
             return _context6.stop();
@@ -964,7 +963,7 @@ var loadTemplate = /*#__PURE__*/function () {
       }
     }, _callee6);
   }));
-  return function loadTemplate(_x5) {
+  return function loadTemplate() {
     return _ref6.apply(this, arguments);
   };
 }();
@@ -972,12 +971,12 @@ var loadTemplate = /*#__PURE__*/function () {
 // 5
 // procedurally grab all header tags to create table of contents 
 var createToc = /*#__PURE__*/function () {
-  var _ref7 = _asyncToGenerator( /*#__PURE__*/regenerator_default().mark(function _callee7(meta) {
+  var _ref7 = _asyncToGenerator( /*#__PURE__*/regenerator_default().mark(function _callee7() {
     return regenerator_default().wrap(function _callee7$(_context7) {
       while (1) {
         switch (_context7.prev = _context7.next) {
           case 0:
-            'toc' in meta && meta.toc == 'true' && (document.getElementById('outline').innerHTML = '<h2>Table of Contents</h2>' + [document.querySelectorAll('h2, h3, h4, h5, h6')].map(function (x) {
+            'toc' in window.meta && window.meta.toc == 'true' && (document.getElementById('outline').innerHTML = '<h2>Table of Contents</h2>' + [document.querySelectorAll('h2, h3, h4, h5, h6')].map(function (x) {
               return x.innerHTML;
             }).join('<br />'));
           case 1:
@@ -987,7 +986,7 @@ var createToc = /*#__PURE__*/function () {
       }
     }, _callee7);
   }));
-  return function createToc(_x6) {
+  return function createToc() {
     return _ref7.apply(this, arguments);
   };
 }();
@@ -1015,10 +1014,9 @@ var createNav = /*#__PURE__*/function () {
             sitemap = _context8.sent;
             window.lbl = window.lbl || "\n    <label for=\"toggle-sitemap\">\n    <span>&#x21e8;</span>&nbsp;&nbsp;&nbsp;&nbsp;Sitemap\n    </label>\n    <br/>";
             document.getElementById('sitemap').innerHTML = lbl + sitemap.map(function (item) {
-              return "<a href=\"./".concat(item.filename, ".html\">").concat(item.tab, "</a>");
+              return "<a href=\"./".concat(item.filename, ".html\"> ").concat(item.tab == window.meta.tab && '-' || '', " ").concat(item.tab, "</a>");
             }).join('<br/>');
-            console.log('sitemap', sitemap);
-          case 12:
+          case 11:
           case "end":
             return _context8.stop();
         }
