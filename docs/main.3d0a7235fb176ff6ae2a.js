@@ -1013,7 +1013,7 @@ var createNav = /*#__PURE__*/function () {
             return _context8.sent.json();
           case 8:
             sitemap = _context8.sent;
-            window.lbl = window.lbl || "\n    <label for=\"toggle-sitemap\">\n        <span>Hide</span> <span>Show </span>Sitemap\n    </label>\n    <br/>";
+            window.lbl = window.lbl || "\n    <label for=\"toggle-sitemap\">\n    <span>&#x21e8;</span>&nbsp;&nbsp;&nbsp;&nbsp;Sitemap\n    </label>\n    <br/>";
             document.getElementById('sitemap').innerHTML = lbl + sitemap.map(function (item) {
               return "<a href=\"./".concat(item.filename, ".html\">").concat(item.tab, "</a>");
             }).join('<br/>');

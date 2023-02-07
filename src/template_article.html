@@ -13,6 +13,12 @@
 </style>
 <script type="text/javascript"> 
 const createSvgBg = async () => {
+  //
+  // distribute the squares nicer.
+  // Update the footer svg every 5 seconds.
+  // Animate a square along the path
+  // get scroll position and animate the svg acordingly
+  // 
     // Create cubes
     const svg1 = document.createElementNS("http://www.w3.org/2000/svg", "svg");
     svg1.setAttribute ("width", "100vw" ); svg1.setAttribute ("height", "100vh" );  
@@ -65,42 +71,10 @@ const createSvgBg = async () => {
 }
 </style> 
 
-<!-- 
-  resize svg path 
--->
-<div id="mframe" style="offset-path: path('M 0 0 L 0 2 L 0 0')"></div>
-<style>
-  /*Move along path   */
-  #mframe {
-    position:fixed;
-    clip-path: polygon(0% 15%, 15% 15%, 15% 0%, 85% 0%, 85% 15%, 100% 15%, 100% 85%, 85% 85%, 85% 100%, 15% 100%, 15% 85%, 0% 85%);
-    animation: move 5s linear infinite;
-    width: 40px;
-    height: 40px;
-    background: cyan;
-  }
-  @keyframes move {
-    0% { offset-distance: 0%; }
-    100% { offset-distance: 100%; }
-  }
-</style>
-<script type="text/javascript"> 
-// alter the the offsetPath of an HTML element with an ID of 'mframe' 
-// replace any 1's with the view width and any 2's with the view height. 
-const resizeSvg = async () => {
-    let md = document.getElementById("mframe");
-    md.style.offsetPath = md.style.offsetPath.replace(/1/g, window.innerWidth).replace(/2/g, window.innerHeight)
-}; resizeSvg();
-</script>
-
-
 <style type="text/css">
-  body:has(#sitemap:hover) { 
+  body:has(#sitemap:focus-within) { 
     overscroll-behavior-y: contain; /* Prevent drag-refresh */
-  }
-  #sitemap > label {
-    cursor: grab;
-  }
+  } 
   #sitemap{
     position: fixed;
     width: fit-content;
@@ -110,37 +84,36 @@ const resizeSvg = async () => {
     overflow: hidden;   
     border-radius: .7rem;
     padding: 1rem;
+    padding-top: 0px;
 
     backdrop-filter: blur(6px) saturate(46%);
     -webkit-backdrop-filter: blur(6px) saturate(46%);
-    background-color: rgba(255, 255, 255, 0.35);
+    background-color: var(--b3o);
     border-radius: 12px;
     border: 1px solid rgba(209, 213, 219, 0.3);
+    box-shadow: 5px 0 20px var(--bg4), -5px 0 20px var(--hint-of-light), inset 0px 0 10px var(--hint-of-light);
   }
-  @keyframes pulse { 50% { box-shadow: 5px 0 20px #0ff, -5px 0 20px #f0f, inset 0px 0 10px #f0f; } }
-  @keyframes pulse { 50% { box-shadow: 5px 0 20px #f0f, -5px 0 20px #0ff, inset 0px 0 10px #0ff; } }
-  h2:hover {  animation: deets 2s infinite;}
+  @keyframes pulse { 50% { box-shadow: 5px 0 20px var(--hint-of-light), -5px 0 20px var(--bg3), inset 0px 0 10px var(--bg4); } }
 
   /* hide checkbox, but still expose it to screen readers.*/
   input { position: absolute;  width: 1px; clip: rect(0 0 0 0); overflow: hidden; white-space: nowrap; }
 
   /* Use Labels to trigger CSS Effects on checkbox checked */
+  #toggle-sitemap{ visibility: hidden; }
   #toggle-sitemap:not(:checked) ~ #sitemap { animation: collapse 1s forwards, pulse 6s linear infinite; }
   #toggle-sitemap:checked ~ #sitemap { animation: expand 1s forwards, pulse 6s linear infinite; }
   @keyframes collapse { from { max-height:75vh} to { max-height:3em; } }
   @keyframes expand { to { max-height:75vh } from { max-height:3em; } }
 
   /* Use Labels to trigger CSS Effects on checkbox checked */
-  #sitemap > label { height: 3em; display: inline-block; }
-  #sitemap > label > span:nth-child(1){ position:absolute; }
-  #toggle-sitemap:not(:checked) ~ #sitemap > label > span:nth-child(2) { animation: reveal 1s forwards;  }
+  #sitemap > label {line-height: 3em; width: -webkit-fill-available; display: inline-block; cursor: grab; }
+  #sitemap > label > span:nth-child(1){ position:absolute; } 
   #toggle-sitemap:not(:checked) ~ #sitemap > label > span:nth-child(1) { animation: dismiss 1s forwards;  }
-  #toggle-sitemap:not(:checked) ~ #sitemap > *:nth-child() { animation: dismiss 1s forwards;  }
-  #toggle-sitemap:checked ~ #sitemap > label > span:nth-child(2) { animation: dismiss 500ms forwards;  }
+  #toggle-sitemap:not(:checked) ~ #sitemap > *:nth-child() { animation: dismiss 1s forwards;  } 
   #toggle-sitemap:checked ~ #sitemap > label > span:nth-child(1) { animation: reveal 500ms forwards;  }
   #toggle-sitemap:not(:checked) ~ #sitemap > *:nth-child() { animation: reveal 1s forwards;  }
-  @keyframes reveal {  to { opacity: 1; visibility: visible; } }
-  @keyframes dismiss { to { opacity: 0; visibility: hidden; } }
+  @keyframes reveal {  from {transform:rotate(0deg)} to {transform: rotate(90deg); } }
+  @keyframes dismiss { from {transform:rotate(90deg)} to {transform: rotate(0deg); } }
   </style> 
   
   <!-- this checkbox holds state of whether modal is visible or not -->
@@ -161,6 +134,7 @@ const resizeSvg = async () => {
     }
     function moveFN(e) {
         if (!inDrag) {return;} 
+        e.preventDefault();
         dragToX = e.pageX || e.targetTouches[0].clientX; 
         dragToY = e.pageY || e.targetTouches[0].clientY; 
         dragTarget.style.left = (objInitLeft + dragToX-dragStartX) + "px";
@@ -170,10 +144,10 @@ const resizeSvg = async () => {
       // start = mousepos & objInit = topleft of obj
       var dragStartX, dragStartY, objInitLeft, objInitTop = 0;
       dragTarget.addEventListener("mousedown", downFN );
-      document.addEventListener("mousemove", moveFN);
+      document.addEventListener("mousemove", moveFN,{ passive:false });
       document.addEventListener("mouseup", function(e) {inDrag = false}); 
       dragTarget.addEventListener("touchstart", downFN );
-      dragTarget.addEventListener("touchmove", moveFN);
+      dragTarget.addEventListener("touchmove", moveFN,{ passive:false });
       dragTarget.addEventListener("touchend", function(e) {inDrag = false;});
     }())
   </script>
@@ -181,6 +155,7 @@ const resizeSvg = async () => {
 <!-- 
   CONTENT
 -->
+<div style="height:30px"></div>
 <div id="header">
   <div id="header_nav" >
     <h1><a  style="cursor: pointer;" href="/">CVMiniGames</a> | <a href="./" id="title"></a></h1>
@@ -189,6 +164,7 @@ const resizeSvg = async () => {
   </div>
   <span id="header_bg_wrapper"><div id="header_bg"></div></span> 
 </div>
+<div style="height:30px"></div>
 </div>
 <div id='articleContent'>
   <div id="outline"></div>
@@ -196,18 +172,31 @@ const resizeSvg = async () => {
 </div>
 <div id="toc"></div>
 
-<svg xmlns="http://www.w3.org/2000/svg" style="width: -webkit-fill-available">
-  <path class="path2" fill="#0099ff" fill-opacity="1" 
+<svg xmlns="http://www.w3.org/2000/svg" style="    bottom: 0;
+position: fixed; height:200px; width: -webkit-fill-available">
+  <path class="path2" fill="var(--bg3)" fill-opacity="1" 
   d=""></path>
+  <defs>
+    <linearGradient id="gradient" gradientTransform="rotate(80)">
+      <stop offset="0%"   stop-color="rgba(255, 183, 183,.1)"/>
+      <stop offset="40%" stop-color="var(--hint-of-light)"/>
+      <stop offset="100%" stop-color="rgba(240, 248, 255,.4)"/>
+    </linearGradient>
+  </defs>
 </svg>
 <script>
 function generatePath(bars, height) {
     const addPath = (b, h) => "L"+b*window.innerWidth/bars +","+h;
     for (let bar = 0; bar <= bars; bar++) {
         let newH = height - Math.ceil(Math.random() * height)
-        window.path += addPath(bar, newH) + addPath(bar+1, newH);
+        window.path = (bar==0?'':window.path) + (addPath(bar, newH) + addPath(bar+1, newH));
     }
     return ("M0,"+height+window.path+addPath(bars+1, height)+"L0,"+height+"Z").replace('undefined','');
 }
-document.querySelector('.path2').setAttribute('d', generatePath(6, 100));
+document.querySelector('.path2').setAttribute('d', generatePath(6, 200));
 </script>
+<style>
+path{
+  fill : url(#gradient)
+}
+</style>

@@ -90,7 +90,7 @@ const createNav = async () => {
     let sitemap = ( await (await fetch((await import(/* webpackChunkName: "sitenav" */ './posts/sitemap.json') ).default)).json() )
     window.lbl = window.lbl || `
     <label for="toggle-sitemap">
-        <span>Hide</span> <span>Show </span>Sitemap
+    <span>&#x21e8;</span>&nbsp;&nbsp;&nbsp;&nbsp;Sitemap
     </label>
     <br/>`
     document.getElementById('sitemap').innerHTML = lbl + sitemap.map((item) => `<a href="./${item.filename}.html">${item.tab}</a>`).join('<br/>')
