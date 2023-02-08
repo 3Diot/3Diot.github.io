@@ -69,12 +69,35 @@ const loadTemplate = async () => {
     }
     const replaceThese = ['content', 'title', 'summary']
     // replaceThese.map((item) => meta[item] && (template = template.replace(new RegExp(`{{${item}}}`, 'g'), meta[item] ) ) )
-    replaceThese.map((item) => {
-        let d = document.getElementById(item)
-        // console.log('item', item, d)
-        document.getElementById(item).innerHTML = meta[item] 
-    })
+    replaceThese.map((item) => {document.getElementById(item).innerHTML = meta[item] })
     window.template = window.meta.template
+
+    // Give em w/ the ol razzle dazzle! 
+    // Hit em w/ the wiggles.
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {let e=entry.target
+            let txt = "0.5s ease-in-out 0s 3 normal none running wiggle";
+            e.tagName == 'SUMMARY' && (txt = "0.5s ease-in-out 0s 3 normal none running spin");
+            if (entry.isIntersecting){e.style.animation = txt } 
+            else { e.style.animation == txt && (e.style.animation = '') }
+        });
+    }); 
+    const details = [...document.querySelectorAll('summary,button')];
+    details.map((el) => observer.observe(el));
+
+    function addAnchorsToHeaders() {
+        let headers = document.querySelectorAll('h1, h2, h3, h4, h5, h6');
+        headers.forEach(header => {
+            header.id=header.innerHTML.toLowerCase().replace(':','');
+            let anchor = document.createElement('a');
+            anchor.setAttribute('href', '#' + header.id);
+            anchor.innerHTML = '&para;';
+            anchor.style.float = 'right';
+            header.appendChild(anchor);
+        });
+    }
+    addAnchorsToHeaders();
+    
 } 
 
 // 5

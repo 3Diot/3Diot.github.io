@@ -11,6 +11,8 @@
   --base: #004848;
   --hint-of: rgba(255, 183, 183, .5);
   --hint-of-light: rgba(255, 183, 183, .3);
+  --change1: 0%;
+  --change2: 100%;
 }
 html { 
   font-size: 18px; 
@@ -37,6 +39,7 @@ https://tympanus.net/codrops/2013/05/22/examples-of-pseudo-elements-animations-a
 https://cssanimation.rocks/pseudo-elements/
 https://textfac.es/
 https://anthonyhobday.com/sideprojects/saferules/
+https://graphemica.com/%E2%98%B0
 */
 a::before {
   content: '';
@@ -167,6 +170,7 @@ https://ui.glass/generator/#
 http://css3generator.com/
 http://www.cssfiltergenerator.com/
 https://maxbittker.github.io/broider/
+https://www.svgrepo.com/
 
 https://tympanus.net/codrops/2021/06/01/trigonometry-in-css-and-javascript-introduction-to-trigonometry/
 https://tympanus.net/codrops/2021/06/02/trigonometry-in-css-and-javascript-getting-creative-with-trigonometric-functions/
@@ -176,7 +180,12 @@ https://tympanus.net/codrops/2021/12/07/coloring-with-code-a-programmatic-approa
 /*
 */
 
-
+/*  
+  https://css-tricks.com/animating-with-clip-path/
+  clip-path can use, clip-paths(% relative), or a url to a SVG <clipPath> element
+  clip-path CSS property can use the SVG Path attributes for animated transitions.
+  The same number of vertices in the path cannot change but only manipulated when animating.
+*/
 
 /*
 transition: [property] [duration] [timing-function] [delay];

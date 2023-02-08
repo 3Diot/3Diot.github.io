@@ -748,6 +748,45 @@ var __webpack_exports__ = {};
 (() => {
 "use strict";
 
+;// CONCATENATED MODULE: ./node_modules/@babel/runtime/helpers/esm/arrayLikeToArray.js
+function _arrayLikeToArray(arr, len) {
+  if (len == null || len > arr.length) len = arr.length;
+  for (var i = 0, arr2 = new Array(len); i < len; i++) {
+    arr2[i] = arr[i];
+  }
+  return arr2;
+}
+;// CONCATENATED MODULE: ./node_modules/@babel/runtime/helpers/esm/arrayWithoutHoles.js
+
+function _arrayWithoutHoles(arr) {
+  if (Array.isArray(arr)) return _arrayLikeToArray(arr);
+}
+;// CONCATENATED MODULE: ./node_modules/@babel/runtime/helpers/esm/iterableToArray.js
+function _iterableToArray(iter) {
+  if (typeof Symbol !== "undefined" && iter[Symbol.iterator] != null || iter["@@iterator"] != null) return Array.from(iter);
+}
+;// CONCATENATED MODULE: ./node_modules/@babel/runtime/helpers/esm/unsupportedIterableToArray.js
+
+function _unsupportedIterableToArray(o, minLen) {
+  if (!o) return;
+  if (typeof o === "string") return _arrayLikeToArray(o, minLen);
+  var n = Object.prototype.toString.call(o).slice(8, -1);
+  if (n === "Object" && o.constructor) n = o.constructor.name;
+  if (n === "Map" || n === "Set") return Array.from(o);
+  if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen);
+}
+;// CONCATENATED MODULE: ./node_modules/@babel/runtime/helpers/esm/nonIterableSpread.js
+function _nonIterableSpread() {
+  throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");
+}
+;// CONCATENATED MODULE: ./node_modules/@babel/runtime/helpers/esm/toConsumableArray.js
+
+
+
+
+function _toConsumableArray(arr) {
+  return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread();
+}
 ;// CONCATENATED MODULE: ./node_modules/@babel/runtime/helpers/esm/asyncToGenerator.js
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) {
   try {
@@ -785,6 +824,7 @@ var regenerator_default = /*#__PURE__*/__webpack_require__.n(regenerator);
 // EXTERNAL MODULE: ./src/main.css
 var main = __webpack_require__(907);
 ;// CONCATENATED MODULE: ./src/main.js
+
 
 
 
@@ -932,14 +972,25 @@ var getMeta = /*#__PURE__*/function () {
 // Load the template and replace the {{content}} with the page content
 var loadTemplate = /*#__PURE__*/function () {
   var _ref6 = _asyncToGenerator( /*#__PURE__*/regenerator_default().mark(function _callee6() {
-    var template, replaceThese;
+    var template, replaceThese, observer, details, addAnchorsToHeaders;
     return regenerator_default().wrap(function _callee6$(_context6) {
       while (1) {
         switch (_context6.prev = _context6.next) {
           case 0:
-            _context6.next = 2;
+            addAnchorsToHeaders = function _addAnchorsToHeaders() {
+              var headers = document.querySelectorAll('h1, h2, h3, h4, h5, h6');
+              headers.forEach(function (header) {
+                header.id = header.innerHTML.toLowerCase().replace(':', '');
+                var anchor = document.createElement('a');
+                anchor.setAttribute('href', '#' + header.id);
+                anchor.innerHTML = '&para;';
+                anchor.style["float"] = 'right';
+                header.appendChild(anchor);
+              });
+            };
+            _context6.next = 3;
             return __webpack_require__(962)("./".concat(window.meta.template, ".html"));
-          case 2:
+          case 3:
             template = _context6.sent["default"];
             if (!window.template || window.template != window.meta.template) {
               document.body.innerHTML = template;
@@ -951,12 +1002,30 @@ var loadTemplate = /*#__PURE__*/function () {
             }
             replaceThese = ['content', 'title', 'summary']; // replaceThese.map((item) => meta[item] && (template = template.replace(new RegExp(`{{${item}}}`, 'g'), meta[item] ) ) )
             replaceThese.map(function (item) {
-              var d = document.getElementById(item);
-              // console.log('item', item, d)
               document.getElementById(item).innerHTML = meta[item];
             });
             window.template = window.meta.template;
-          case 7:
+
+            // Give em w/ the ol razzle dazzle! 
+            // Hit em w/ the wiggles.
+            observer = new IntersectionObserver(function (entries) {
+              entries.forEach(function (entry) {
+                var e = entry.target;
+                var txt = "0.5s ease-in-out 0s 3 normal none running wiggle";
+                e.tagName == 'SUMMARY' && (txt = "0.5s ease-in-out 0s 3 normal none running spin");
+                if (entry.isIntersecting) {
+                  e.style.animation = txt;
+                } else {
+                  e.style.animation == txt && (e.style.animation = '');
+                }
+              });
+            });
+            details = _toConsumableArray(document.querySelectorAll('summary,button'));
+            details.map(function (el) {
+              return observer.observe(el);
+            });
+            addAnchorsToHeaders();
+          case 12:
           case "end":
             return _context6.stop();
         }

@@ -176,6 +176,11 @@ const createSvgBg = async () => {
     clip-path: polygon(0% 15%, 15% 15%, 15% 0%, 85% 0%, 85% 15%, 100% 15%, 100% 85%, 85% 85%, 85% 100%, 15% 100%, 15% 85%, 0% 85%);
   } 
   @keyframes spin{ from{transform:rotate(-2deg)} to{transform:rotate(2deg)} }
+  @keyframes wiggle { /*used by intersection observer in main.js*/
+    0% {transform: translate(0, 0);}
+    50% {transform: translate(5px, 0);}
+    100% {transform: translate(0, 0);}
+  }
   </style>
 
 <!-- 
@@ -205,72 +210,80 @@ const createSvgBg = async () => {
 }
 </style>
 
-<!-- 
-  resize offset path's svg coords 
-  https://css-tricks.com/animating-with-clip-path/
-  clip-path can use, clip-paths(% relative), or a url to a SVG <clipPath> element
-  clip-path CSS property can use the SVG Path attributes for animated transitions.
-  The same number of vertices in the path cannot change but only manipulated when animating.
--->
-<div id="mframe" style="offset-path: path('M 0 0 L 0 2 L 0 0')"></div>
+<script>
+function generatePath(bars) { 
+  const h = 200; const addPath=(x,y)=>`L${Math.round(x*window.w/bars)},${y}`; 
+  const path=Array.from({length:bars},(y,x)=>{y=h-(rir(2,5)*40); return addPath(x,y)+addPath(x+1,y)});
+  return ("M0,"+h+path.join('')+addPath(bars, h)+"L0," + h + "Z").replace('undefined', '');
+}
+function updatePath(bars) {
+  let d = generatePath(6);
+  document.getElementById("tracer").style.offsetPath = "path('"+d+"')"; 
+  let s = document.getElementById("footer_bg").style; s.clipPath = "path('"+d+"')";
+}
+window.w=Math.min(window.innerWidth, 800);
+// console.log({w}, window.innerWidth, window.screen.width, window.visualViewport)
+updatePath(); setInterval(updatePath,15000);
+document.addEventListener('scroll', function() {
+  let scrollPercent = (document.documentElement.scrollTop + document.body.scrollTop) / (document.documentElement.scrollHeight - document.documentElement.clientHeight) * 100;
+  scrollPercent = (scrollPercent / 100) * 15 + 20 
+  document.documentElement.style.setProperty('--change1', scrollPercent+'%' );
+  document.documentElement.style.setProperty('--change2', scrollPercent+'%' );
+  clearInterval(window.scrollTimer);
+  window.scrollTimer = setInterval(() => {
+    document.documentElement.style.setProperty('--change1', "0%");
+    document.documentElement.style.setProperty('--change2', "100%");
+  }, 1500); 
+});
+</script>
+
+<div style="height:800px"></div>
+<p style="padding:10px; text-align:center">Thank you for reading!</p>
+
 <style>
-  /* Move along path */   
-  #mframe {
-    position:fixed;
-    clip-path: polygon(0% 15%, 15% 15%, 15% 0%, 85% 0%, 85% 15%, 100% 15%, 100% 85%, 85% 85%, 85% 100%, 15% 100%, 15% 85%, 0% 85%);
+  #footer{
+    position:fixed; bottom: 0px; left: 0px; right: 0px; height: 200px;
+    width: min(100vw, 800px); z-index: -1;
+    margin: auto;
+  } 
+  #footer_bg_wrapper{
+    position: absolute;
+    width:100%; height:100%;   
+    filter: drop-shadow(20px 20px 60px #bebebe) drop-shadow(-20px -20px 60px #ffffff);
+  }
+  #footer_bg{
+    width:100%; height:100%;
+    background: linear-gradient(45deg, rgba(255, 183, 183,.1), var(--hint-of-light), rgba(240, 248, 255,.4));
+  } 
+</style>
+<style>
+  /* Move along path 
+    md.style.offsetPath = md.style.offsetPath.replace(/1/g, window.innerWidth).replace(/2/g, window.innerHeight)
+  */   
+  #tracer {
+    offset-path: path('M 0 0 L 0 2 L 0 0'); /* Generated path updates this */
     animation: move 15s linear infinite;
-    width: 40px;
-    height: 40px;
-    bottom: 160px;
-    background: var(--hint-of-light);
-    bottom: 160px;
-    left: 50%;
-    margin-left: -400px;
-    z-index:-1;
+    clip-path: path('M27.822 8.205v-2.862h-2.637V2.484h-6.03v2.859h-2.637v2.862h-2.355v-2.862h-2.64V2.484H5.496v2.859H2.859v2.862H.501v5.718h2.358v2.862h2.259v2.859H7.38v2.859h2.637v2.862h3.015v2.859h4.617v-2.859h3.012v-2.862h2.64v-2.859H25.563v-2.859h2.259v-2.862h2.355V8.205z');
+    position:absolute; bottom: 160px; z-index:-1;
+    width: 30px; height: 50px; 
   }
   @keyframes move {
-    0% { offset-distance: 0%; }
-    100% { offset-distance: 100%; }
+    0% { offset-distance: var(--change1); background: pink}
+    100% { offset-distance: var(--change2); background: green}
   }
 </style>
-<script type="text/javascript"> 
-// alter the the offsetPath of an HTML element with an ID of 'mframe' 
-// replace any 1's with the view width and any 2's with the view height. 
-const resizeSvgCoords = async () => {
-    let md = document.getElementById("mframe");
-    md.style.offsetPath = md.style.offsetPath.replace(/1/g, window.innerWidth).replace(/2/g, window.innerHeight)
-}; resizeSvgCoords();
-</script>
-<script>
-function generatePath(bars, w, height) {
-    const addPath = (i, h) => `L${Math.round(i*w/bars/20)*20},${h}`; 
-    const heights = Array.from({length: bars}, () => height - (rir(2,5) * 40 ));
-    const path = heights.map((h, bar) => addPath(bar, h) + addPath(bar + 1, h)).join('');
-    return ("M0," + height + path + addPath(bars, height) + "L0," + height + "Z").replace('undefined', '');
-}
-function updatePath(bars, height) {
-  let d = generatePath(6, 800, 200)
-  console.log({d})
-  document.getElementById("mframe").style.offsetPath = "path('"+d+"')"; 
-  document.getElementById("fbg").style.clipPath = "path('"+d+"')"; 
-}
-updatePath(); setInterval(updatePath,15000) 
-</script>
+<div id="footer">
+  <span id="footer_bg_wrapper"><div id="tracer"></div><div id="footer_bg"></div></span> 
+</div>
 
-<div style="height:180px"></div>
-<style>#fbg{ z-index:-1; min-height:200px; width:800px; position:fixed; bottom: 0px; left: 50%; margin-left: -400px;
-  background: linear-gradient(45deg, rgba(255, 183, 183,.1), var(--hint-of-light), rgba(240, 248, 255,.4));}</style>
-<div id='fbg'></div>
-<div style="padding:10px; text-align:center">Thank you for reading!</div>
+<style>
+  /* 
+  radial gradients
+  style guide - https://neumorphism.io/, http://csshero.org/mesher/ 
+- anchor h2+h2 details 
+- animate page transitions https://css-tricks.com/animating-with-clip-path/
 
-<!-- 
-  resize svg path 
---
-  on scroll temp set offset-distance to percent complete of scroll
-  <div id="mframe" style="offset-path: path('M 0 0 L 0 2 L 0 0')"></div>
-  #mframe{animation: move 5s linear infinite;}
-  @keyframes move {
-    0% { offset-distance: 0%; }
-    100% { offset-distance: 100%; }
-  }
--->
+- random radial gradients on:hover {  animation: deets 2s infinite;}
+- Jazz up section divides by by slapping atop a transform rotated div
+  */
+</style>
