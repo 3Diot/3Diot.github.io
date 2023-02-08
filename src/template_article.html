@@ -188,9 +188,9 @@ const createSvgBg = async () => {
 -->
 <div style="height:30px"></div>
 <div id="header">
-  <div id="header_nav" >
-    <h1><a  style="cursor: pointer;" href="/">CVMiniGames</a> | <a href="./" id="title"></a></h1>
-    <p><a style="cursor: pointer;" target=blank href="https://www.cryptovoxels.com/play?coords=N@1447E,1128S">PLAY NOW</a></p>
+  <div id="header_nav">
+    <h1><a style="cursor: pointer;" href="./">CVMiniGames</a> | <a href="./" id="title"></a></h1>
+    <p><a style="cursor: pointer;" href="https://www.cryptovoxels.com/play?coords=N@1447E,1128S">PLAY NOW</a></p>
     <p id="summary"></p>
   </div>
   <span id="header_bg_wrapper"><div id="header_bg"></div></span> 
@@ -210,6 +210,10 @@ const createSvgBg = async () => {
 }
 </style>
 
+<div id="footer">
+  <span id="footer_bg_wrapper"><div id="tracer"></div><div id="footer_bg"></div></span> 
+</div>
+
 <script>
 function generatePath(bars) { 
   const h = 200; const addPath=(x,y)=>`L${Math.round(x*window.w/bars)},${y}`; 
@@ -221,6 +225,7 @@ function updatePath(bars) {
   document.getElementById("tracer").style.offsetPath = "path('"+d+"')"; 
   let s = document.getElementById("footer_bg").style; s.clipPath = "path('"+d+"')";
 }
+
 window.w=Math.min(window.innerWidth, 800);
 // console.log({w}, window.innerWidth, window.screen.width, window.visualViewport)
 updatePath(); setInterval(updatePath,15000);
@@ -272,15 +277,16 @@ document.addEventListener('scroll', function() {
     100% { offset-distance: var(--change2); background: green}
   }
 </style>
-<div id="footer">
-  <span id="footer_bg_wrapper"><div id="tracer"></div><div id="footer_bg"></div></span> 
-</div>
 
 <style>
   /* 
+
+  //index.html#<a style="cursor pointer;" href="./">cvminigames</a> | <a href="./" id="title">homepage</a>
+  it looks like pupeteer grabs each ./ from the homepage and sets it's innerHTML as its its href value and then links to that breaking the site.
+  */
+/*
   radial gradients
-  style guide - https://neumorphism.io/, http://csshero.org/mesher/ 
-- animate page transitions https://css-tricks.com/animating-with-clip-path/
+  style guide - https: - https://neumorphism.io/, http://csshero.org/mesher/ e page transitions https://css-tricks.com/animating-with-clip-path/
 - random radial gradients on:hover {  animation: deets 2s infinite;}
 - Jazz up section divides by by slapping atop a transform rotated div
   */
