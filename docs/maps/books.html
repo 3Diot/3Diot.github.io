@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<head>    
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    <style>html, body {width: 100%;height: 100%;margin: 0;padding: 0;}</style>
+    <style>#map {position:absolute;top:0;bottom:0;right:0;left:0;}</style>
+    <script src="https://cdn.jsdelivr.net/npm/leaflet@1.6.0/dist/leaflet.js"></script>
+    <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script> 
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.6.0/dist/leaflet.css"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css"/> 
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <style> #map{ position: relative; width: 100.0%; height: 100.0%; left: 0.0%; top: 0.0%; } </style>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/5.16.0/d3.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/chroma-js/2.4.2/chroma.min.js"></script>
+</head>
+<body> <div id="map" ></div> 
+    <style>#map-esri { height: 100%; } 
+        .legend {
+        line-height: 18px !important;
+        color: #555 !important;
+        }
+        .legend i {
+        width: 18px !important;
+        height: 18px !important;
+        float: left !important;
+        margin-right: 8px !important;
+        }
+        .info {
+        background: white !important;
+        background: rgba(255,255,255,0.8) !important;
+        box-shadow: 0 0 15px rgba(0,0,0,0.2) !important;
+        border-radius: 5px !important;
+        margin: 8px !important;
+        padding: 8px !important;
+        }
+        .info h4 {
+        margin: 0 0 5px !important;
+        color: #777 !important;
+        }</style>
+</body>
+<script async> (async function() {
+    const urlbase = 'https://266xag2x98.execute-api.us-east-1.amazonaws.com/default/CoorsBypass?url='
+    let url = urlbase+"http://www.cryptovoxels.com/api/parcels/search.json"
+    let parcels = (await d3.json(url) )['parcels']
+    url = urlbase+`https://www.k1ic.com/cvf-en.html`
+    let guestbooks = await d3.text(url);
+    var map = L.map( "map", { center: [0.0, 0.0], crs: L.CRS.EPSG3857, zoom: 10, zoomControl: true, preferCanvas: false } );
+    L.control.scale().addTo(map);
+    
+    var gbd = document.createElement( 'html' );
+    gbd.innerHTML = guestbooks 
+    let elems = gbd.querySelectorAll("section")[0].innerHTML.split(/<hr>/) 
+    guestbooks = elems.map(el => {
+        var testel = document.createElement( 'html' );
+        testel.innerHTML = el
+        let id = testel.querySelectorAll("h3")[0]
+        let gb = testel.querySelectorAll("#guestbook-0")[0]
+        return { 'id': id ? id.childNodes[0].href.split('/').pop() :'false', 'guestbook': gb ? '0' : '1' } 
+    })
+    console.log(guestbooks)
+
+    var tile_layer = L.tileLayer( 
+        "https://map.cryptovoxels.com/tile?z={z}\u0026x={x}\u0026y={y}", {
+            "attribution": "Map data \u0026copy; Cryptovoxels", 
+            "detectRetina": false, "maxNativeZoom": 18, 
+            "maxZoom": 18, "minZoom": 0, "noWrap": false, 
+            "opacity": 1, "subdomains": "abc", "tms": false
+    } ).addTo(map);
+    
+    let geojson = parcels.map((o, i) => { 
+        let exists = 0
+        for(var j = 0; j < guestbooks.length; j++) {
+            if(guestbooks[j].id == o.id) {
+                exists = parseInt(guestbooks[j].guestbook)
+                guestbooks.splice(j, 1);
+                break;
+            }
+        }
+        return { 
+        'type': 'Polygon', 
+        'coordinates': o.geometry.coordinates, 
+        'properties': { ...(({ geometry, ...o }) => o)(o), guestbook: exists }
+    } }); 
+    
+    // https://gka.github.io/chroma.js/#scale-classes
+    // ['darkblue', 'blue', 'lightblue','lavender', 'pink', 'red', 'darkred']
+    let getColor = chroma.scale( ['white', 'green'] ).domain([0,1]) //.classes([0,33,65,100])
+    
+    styleESRI = function ( feature ) { 
+        let x = getColor(feature.geometry.properties.guestbook).rgb() 
+        x = "#" + ((1 << 24) + (x[0] << 16) + (x[1] << 8) + x[2]).toString(16).slice(1) 
+        return {"weight":0.5, 'color':'black', 'fillColor': x, 'fillOpacity':0.75 }
+    }
+
+    highlightFeatureESRI = function ( e ) {  
+        var layer = e.target;
+        layer.setStyle({ weight: 5, color: '#666', dashArray: '', fillOpacity: 1 });
+        if (!L.Browser.ie && !L.Browser.opera && !L.Browser.edge) { layer.bringToFront() }
+        info.update(layer.feature.geometry.properties);
+        // layer.bindTooltip( `<div><b> test123 </b></div>`, {"sticky": true} )
+    }
+
+    resetHighlightESRI = function ( e ) {
+        var layer = e.target 
+        layer.setStyle( styleESRI( e.target.feature ) )  
+    }
+
+    zoomToFeatureESRI = function ( feature, layer ) { 
+        // if (screen.width > 800) { // map.fitBounds(e.target.getBounds());
+        // var layer = e.target;
+        let p = layer.feature.geometry.properties
+        var popupContent = `
+            <p>
+                <b>Address:</b> ${p.address} <br>
+                <b>Description:</b> ${p.description} <br>
+                <b>Parcel:</b> ${p.id} <br>
+                <b>Island:</b> ${p.island} <br>
+                <b>Suburb:</b> ${p.suburb} <br>
+                <b>Owner:</b> ${p.owner} <br>
+                <b>OwnerName:</b> ${p.owner_name} <br>
+                <b>guestbook:</b> ${p.guestbook}
+                <button> <a href='https://www.cryptovoxels.com/parcels/${p.id}' target="_blank" rel="noopener noreferrer"> Visit! </button>
+            </p>
+        `;
+        layer.bindPopup(popupContent); 
+    }
+
+    onEachFeatureESRI = function ( feature, layer ) { 
+        // console.log('onEachFeatureESRI', feature, layer);
+        layer.on({
+            mouseover: highlightFeatureESRI,
+            mouseout: resetHighlightESRI,
+            click: zoomToFeatureESRI(feature, layer)
+        });
+    }
+
+    L.geoJSON(geojson, { 
+        style: styleESRI,
+        onEachFeature: onEachFeatureESRI
+    }).addTo(map);
+
+    let info = L.control();
+    info.onAdd = function(map) {
+        this._div = L.DomUtil.create('div', 'info');
+        this.update();
+        return this._div;
+    };
+    info.update = function(props) { this._div.innerHTML = props ? '<b>Guestbook: </b><br />' + props['guestbook'] : '' };
+    info.addTo(map);
+    
+})(); 
+</script>
