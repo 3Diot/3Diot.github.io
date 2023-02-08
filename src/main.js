@@ -30,17 +30,18 @@ const handleRoute = async (route) => {
         document.querySelectorAll('a[href^="./"]').forEach(link =>link.addEventListener('click', redirect ))
     }, 100);
 }
-
+const prevPage = async () => {window.prevPage = window.location.href.replace(window.origin,'');}
+prevPage();
 const redirect = async (event) => {
     window.history.pushState({}, '', event.target.href);
     popState(event);
 }
 const popState = async (event) => {
     event.preventDefault();
-    console.log('popstate', event)
     var location = event.target.href || event.target.location.href
     let route = location.replace(window.origin,'') 
-    handleRoute( route );
+    if (route.split("#")[0] != window.prevPage.split("#")[0]){ prevPage(); handleRoute( route ); }; 
+    route.indexOf('#') == -1 && window.scrollTo(0, 0);
 }
 window.onpopstate = function (event) { popState(event); };
 
@@ -76,7 +77,7 @@ const loadTemplate = async () => {
     // Hit em w/ the wiggles.
     const observer = new IntersectionObserver((entries) => {
         entries.forEach((entry) => {let e=entry.target
-            let txt = "0.5s ease-in-out 0s 3 normal none running wiggle";
+            let txt = "0.5s ease-in-out 0s 2 normal none running wiggle";
             e.tagName == 'SUMMARY' && (txt = "0.5s ease-in-out 0s 3 normal none running spin");
             if (entry.isIntersecting){e.style.animation = txt } 
             else { e.style.animation == txt && (e.style.animation = '') }
@@ -88,12 +89,10 @@ const loadTemplate = async () => {
     function addAnchorsToHeaders() {
         let headers = document.querySelectorAll('h1, h2, h3, h4, h5, h6');
         headers.forEach(header => {
-            header.id=header.innerHTML.toLowerCase().replace(':','');
+            header.id=capFirst(header.innerHTML);
             let anchor = document.createElement('a');
             anchor.setAttribute('href', '#' + header.id);
-            anchor.innerHTML = '&para;';
-            anchor.style.float = 'right';
-            header.appendChild(anchor);
+            header.parentNode.insertBefore(anchor, header.nextSibling);
         });
     }
     addAnchorsToHeaders();
@@ -108,16 +107,23 @@ const createToc = async () => {
 
 // 5.
 //  
+const capFirst = (str) => { return str.charAt(0).toUpperCase() + str.slice(1).toLowerCase().replace(':',''); }
 const createNav = async () => {  
     // let sitemap = JSON.parse((await import(`./posts/sitemap.json`) ).default) 
     let sitemap = ( await (await fetch((await import(/* webpackChunkName: "sitenav" */ './posts/sitemap.json') ).default)).json() )
     window.lbl = window.lbl || `
     <label for="toggle-sitemap">
-    <span>&#x21e8;</span>&nbsp;&nbsp;&nbsp;&nbsp;Sitemap
+    <span>&#x21e8;</span>&emsp;Sitemap
     </label>
-    <br/>`
-    // console.log({sitemap})
-    document.getElementById('sitemap').innerHTML = lbl + sitemap.map((item) => `<a href="./${item.filename}.html" title="${item.summary}"> ${item.tab==window.meta.tab && '-' || ''} ${item.tab} </a>`).join('<br/>')
+    <br/>` 
+
+    // Add in the TOC to the Sitemap for the given page.
+    document.getElementById('sitemap').innerHTML = lbl + sitemap.map((item) => `<a id="${item.tab==window.meta.tab && 'currentPage'}" href="./${item.filename}.html" title="${item.summary}"> ${item.tab==window.meta.tab && '-' || ''} ${item.tab} </a>`).join('<br/>')
+    if (!('toc' in window.meta) || window.meta.toc != 'true') return;
+    let toc = '<br/>&emsp;'+[...document.querySelectorAll('h2, h3, h4, h5, h6')].map((x) =>{const z=capFirst(x.innerHTML); return `<a href='#${z}'>${z}</a>`}).join('<br />&emsp;')
+    let tocNode = document.createElement('div'); tocNode.style.display='inline';tocNode.innerHTML = toc;
+    const cp = document.getElementById('currentPage') 
+    cp.parentNode.insertBefore(tocNode, cp.nextSibling)
 } 
 
 // Onstart load the URI path's corresponding json file and it's desired template
