@@ -3,9 +3,9 @@ import "./main.css";
 // Page Load Logic and Routing
 const prevPage = async () => {window.prevPage = window.location.href.replace(window.origin,'')}; prevPage();
 const redirect = async (event) => { window.history.pushState({}, '', event.target.href); popState(event); }
-const popState = async (event) => {     event.preventDefault();
+const popState = async (event) => { event.preventDefault();
     var location = event.target.href || event.target.location.href
-    let route = location.replace(window.origin,'') 
+    let route = location.replace(window.origin,'');
     if (route.split("#")[0] != window.prevPage.split("#")[0]){ prevPage(); handleRoute( route ); }; 
     route.indexOf('#') == -1 && window.scrollTo({ top: 0, behavior: 'smooth' });
     let t = document.getElementById(route.split('#')[1]); t && t.scrollIntoView({ behavior: 'smooth' });
@@ -55,7 +55,13 @@ const getMeta = async(page) => {
 // 4. 
 // Load the template and replace the {{content}} with the page content
 const loadTemplate = async () => {
+    let replace = (items) => {items.map((item) => {document.getElementById(item).innerHTML = meta[item] }) }
+    const theseItems = ['content', 'title', 'summary']
     let template = (await import(`./${window.meta.template}.html`) ).default
+    const pT = document.getElementById('pageTransitioneer'); 
+    pT && window.template && (pT.style.animation = 'pageTransitioneer 1s alternate 2, gradient 1s alternate 2')
+    setTimeout( ()=>{ replace(theseItems) }, 1100) && 
+    setTimeout( ()=>{ let z=document.getElementById('pageTransitioneer'); !z?'':z.style.animation = 'none' }, 2300);
     if(!window.template || window.template != window.meta.template){
         document.body.innerHTML = template
         Array.from(document.getElementsByTagName("script")).forEach(script => {
@@ -64,11 +70,10 @@ const loadTemplate = async () => {
                 script.parentNode.replaceChild(newScript, script);
             }
         );
-    }
-    const replaceThese = ['content', 'title', 'summary']
-    // replaceThese.map((item) => meta[item] && (template = template.replace(new RegExp(`{{${item}}}`, 'g'), meta[item] ) ) )
-    replaceThese.map((item) => {document.getElementById(item).innerHTML = meta[item] })
-    window.template = window.meta.template    
+        !window.template && replace(theseItems);
+    }  
+    // template.replace(new RegExp(`{{${item}}}`, 'g'), meta[item])
+    window.template = window.meta.template 
 } 
 
 
@@ -81,7 +86,7 @@ const createNav = async () => {
     <label for="toggle-sitemap">
     <span>&#x21e8;</span>&emsp;&ensp;Sitemap
     </label>
-    <br/>` 
+    <hr/>` 
 
     // Add in the TOC to the Sitemap for the given page.
     sitemap = sitemap.map((item) => `<a id="${item.tab==window.meta.tab && 'currentPage'}" href="./${item.filename}.html" title="${item.summary}">${item.tab}</a>`)
@@ -128,7 +133,7 @@ const observer = new IntersectionObserver((entries) => {
             if(pos<300 || pos>300){ /* ' Scrolling', pos>100?'Down: ':'Up */
                 window.activeHeader && (window.activeHeader.style.textDecoration='none')
                 let tocLink = document.getElementById('anchor_'+e.id)
-                tocLink.style.animation = txt; tocLink.style.textDecoration='line-through' 
+                tocLink && ( tocLink.style.animation = txt, tocLink.style.textDecoration='line-through' )
                 window.activeHeader = tocLink
             }
         }

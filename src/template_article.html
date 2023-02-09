@@ -174,18 +174,40 @@ const createSvgBg = async () => {
   #header:hover > #header_bg_wrapper > #header_bg{
     clip-path: polygon(0% 15%, 15% 15%, 15% 0%, 85% 0%, 85% 15%, 100% 15%, 100% 85%, 85% 85%, 85% 100%, 15% 100%, 15% 85%, 0% 85%);
   } 
-  @keyframes spin{ from{transform:rotate(-2deg)} to{transform:rotate(2deg)} }
+  @keyframes spin{ from{transform:rotate(-2deg);-webkit-transform: rotate(-2deg);} to{transform:rotate(2deg); -webkit-transform:rotate(2deg)} }
   @keyframes wiggle { /*used by intersection observer in main.js*/
     0% {transform: translate(0, 0);}
     50% {transform: translate(5px, 0);}
     100% {transform: translate(0, 0);}
   }
   </style>
-
+<div id='pageTransitioneer'><p>Don't Look! I'm changing!</p></div>
+<style>
+  #pageTransitioneer {
+    position: fixed;
+    z-index: 100;
+    top: 50%;
+    left: 50%;
+    height:0%; overflow:hidden;
+    transform: translate(-50%, -50%);
+    border-radius: 50px;
+    background: var(--radial1);
+    background-size: 100% 200%; 
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  @keyframes pageTransitioneer {
+    0% {  height:00px; width:0px; }
+    70% { height:100vh; width:100vw;  }
+    90% { height:100vh; width:100vw;  }
+    100% { height:100vh; width:100vw;  }
+  }
+</style>
 <!-- 
   CONTENT
 -->
-<div style="height:30px"></div>
+<div style="height:30px;"></div>
 <div id="header">
   <div id="header_nav">
     <h1><a style="cursor: pointer;" href="./">CVMiniGames</a> | <a href="./" id="title"></a></h1>
@@ -194,7 +216,7 @@ const createSvgBg = async () => {
   </div>
   <span id="header_bg_wrapper"><div id="header_bg"></div></span> 
 </div>
-<div style="height:30px"></div>
+<div style="height:30px;"></div>
 </div>
 <div class='broider' id='articleContent'>
   <div id="outline"></div>
@@ -220,17 +242,22 @@ function generatePath(bars) {
   return ("M0,"+h+path.join('')+addPath(bars, h)+"L0," + h + "Z").replace('undefined', '');
 }
 function updatePath(bars) {
-  let d = generatePath(6);
+  const d = generatePath(6);
   document.getElementById("tracer").style.offsetPath = "path('"+d+"')"; 
-  let s = document.getElementById("footer_bg").style; s.clipPath = "path('"+d+"')";
+  document.getElementById("footer_bg").style.animation = "none"; //Glitchy animation fix
+  // set css var --path2 to --path1's computed value and update --path1 with new path(d)
+  const p = getComputedStyle(document.documentElement).getPropertyValue('--path1');
+  document.getElementById("footer_bg").style.animation = "clip-path-polygon 15s linear";
+  document.documentElement.style.setProperty('--path2', p || "path('"+d+"')");
+  document.documentElement.style.setProperty('--path1', "path('"+d+"')");
 }
 
 window.w=Math.min(window.innerWidth, 800);
 // console.log({w}, window.innerWidth, window.screen.width, window.visualViewport)
-updatePath(); setInterval(updatePath,15000);
+updatePath(); setInterval(updatePath,14900);
 document.addEventListener('scroll', function() {
   let scrollPercent = (document.documentElement.scrollTop + document.body.scrollTop) / (document.documentElement.scrollHeight - document.documentElement.clientHeight) * 100;
-  scrollPercent = (scrollPercent / 100) * 15 + 20 
+  scrollPercent = (scrollPercent / 100) * 45 + 10;
   document.documentElement.style.setProperty('--change1', scrollPercent+'%' );
   document.documentElement.style.setProperty('--change2', scrollPercent+'%' );
   clearInterval(window.scrollTimer);
@@ -272,7 +299,13 @@ document.addEventListener('scroll', function() {
     width: 30px; height: 50px; 
   }
   @keyframes move {
-    0% { offset-distance: var(--change1); background: pink}
-    100% { offset-distance: var(--change2); background: green}
+    0% { offset-distance: var(--change1); background: var(--hint-of-light)}
+    25% {background: var(--bg4)}; 50% {background: var(--hint-of-light)}
+    75% {background: var(--bg4)} 100% { offset-distance: var(--change2); background: var(--hint-of-light)}
+  } 
+  @keyframes clip-path-polygon {
+    0% { clip-path: var(--path2) }
+    10% { clip-path: var(--path1) }
+    100% { clip-path: var(--path1) }
   }
 </style>

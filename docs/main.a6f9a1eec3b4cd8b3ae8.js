@@ -1008,15 +1008,29 @@ var getMeta = /*#__PURE__*/function () {
 // Load the template and replace the {{content}} with the page content
 var loadTemplate = /*#__PURE__*/function () {
   var _ref7 = _asyncToGenerator( /*#__PURE__*/regenerator_default().mark(function _callee7() {
-    var template, replaceThese;
+    var replace, theseItems, template, pT;
     return regenerator_default().wrap(function _callee7$(_context7) {
       while (1) {
         switch (_context7.prev = _context7.next) {
           case 0:
-            _context7.next = 2;
+            replace = function replace(items) {
+              items.map(function (item) {
+                document.getElementById(item).innerHTML = meta[item];
+              });
+            };
+            theseItems = ['content', 'title', 'summary'];
+            _context7.next = 4;
             return __webpack_require__(962)("./".concat(window.meta.template, ".html"));
-          case 2:
+          case 4:
             template = _context7.sent["default"];
+            pT = document.getElementById('pageTransitioneer');
+            pT && window.template && (pT.style.animation = 'pageTransitioneer 1s alternate 2, gradient 1s alternate 2');
+            setTimeout(function () {
+              replace(theseItems);
+            }, 1100) && setTimeout(function () {
+              var z = document.getElementById('pageTransitioneer');
+              !z ? '' : z.style.animation = 'none';
+            }, 2300);
             if (!window.template || window.template != window.meta.template) {
               document.body.innerHTML = template;
               Array.from(document.getElementsByTagName("script")).forEach(function (script) {
@@ -1024,13 +1038,11 @@ var loadTemplate = /*#__PURE__*/function () {
                 newScript.textContent = script.textContent;
                 script.parentNode.replaceChild(newScript, script);
               });
+              !window.template && replace(theseItems);
             }
-            replaceThese = ['content', 'title', 'summary']; // replaceThese.map((item) => meta[item] && (template = template.replace(new RegExp(`{{${item}}}`, 'g'), meta[item] ) ) )
-            replaceThese.map(function (item) {
-              document.getElementById(item).innerHTML = meta[item];
-            });
+            // template.replace(new RegExp(`{{${item}}}`, 'g'), meta[item])
             window.template = window.meta.template;
-          case 7:
+          case 10:
           case "end":
             return _context7.stop();
         }
@@ -1063,7 +1075,7 @@ var createNav = /*#__PURE__*/function () {
             return _context8.sent.json();
           case 8:
             sitemap = _context8.sent;
-            window.lbl = window.lbl || "\n    <label for=\"toggle-sitemap\">\n    <span>&#x21e8;</span>&emsp;&ensp;Sitemap\n    </label>\n    <br/>";
+            window.lbl = window.lbl || "\n    <label for=\"toggle-sitemap\">\n    <span>&#x21e8;</span>&emsp;&ensp;Sitemap\n    </label>\n    <hr/>";
 
             // Add in the TOC to the Sitemap for the given page.
             sitemap = sitemap.map(function (item) {
@@ -1126,8 +1138,7 @@ var observer = new IntersectionObserver(function (entries) {
         /* ' Scrolling', pos>100?'Down: ':'Up */
         window.activeHeader && (window.activeHeader.style.textDecoration = 'none');
         var tocLink = document.getElementById('anchor_' + e.id);
-        tocLink.style.animation = txt;
-        tocLink.style.textDecoration = 'line-through';
+        tocLink && (tocLink.style.animation = txt, tocLink.style.textDecoration = 'line-through');
         window.activeHeader = tocLink;
       }
     } else {

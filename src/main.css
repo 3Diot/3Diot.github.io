@@ -8,11 +8,20 @@
   --bg3: rgb(240, 248, 255, .6);
   --bg4: rgba(183,183,255, .8);
   --bg5: rgb(238 238 238 / 40%);
-  --base: #004848;
+  --base: rgb(0, 72, 72);
   --hint-of: rgba(255, 183, 183, .5);
   --hint-of-light: rgba(255, 183, 183, .3);
   --change1: 0%;
   --change2: 100%;
+  --path1:path('M 0 0 L 0 2 L 0 0');
+  --path2:0;
+  --radial1:radial-gradient(at 52% 13%, hsla(215,77%,79%,1) 0px, transparent 50%),
+  radial-gradient(at 40% 33%, hsla(173,63%,76%,1) 0px, transparent 50%),
+  radial-gradient(at 15% 92%, hsla(166,97%,69%,1) 0px, transparent 50%),
+  radial-gradient(at 97% 78%, hsla(229,94%,76%,1) 0px, transparent 50%),
+  radial-gradient(at 19% 52%, hsla(27,99%,69%,1) 0px, transparent 50%),
+  radial-gradient(at 68% 16%, hsla(339,76%,78%,1) 0px, transparent 50%),
+  radial-gradient(at 25% 1%, hsla(202,73%,63%,1) 0px, transparent 50%);
 }
 html { 
   font-size: 18px; 
@@ -34,14 +43,6 @@ h1>a{
 h1>a:hover { text-decoration: underline; color: var(--base); }
 a{ text-decoration: none; } 
 /* Expanding hover effect */
-/* 
-https://blog.logrocket.com/css-before-after-custom-animations-transitions/#before-pseudo-element 
-https://tympanus.net/codrops/2013/05/22/examples-of-pseudo-elements-animations-and-transitions/
-https://cssanimation.rocks/pseudo-elements/
-https://textfac.es/
-https://anthonyhobday.com/sideprojects/saferules/
-https://graphemica.com/%E2%98%B0
-*/
 a::before {
   content: '';
   background-color: var(--hint-of);
@@ -78,6 +79,11 @@ summary::marker { content: "🧡"; }
 
 summary{ text-align: center; cursor: pointer; font-size: 20px;}
 details{padding: 12px;} 
+
+hr{
+  margin: 1px 1px 10px 1px;
+  border-top: 1px solid rgba(0, 72, 72, 0.4);
+}
   /*
 details > img {display:block; margin:auto;}
 details[open] > details summary::marker { content: "🧡" }
@@ -94,9 +100,9 @@ html {
   scroll-behavior: smooth;
 }
 @keyframes glow {
-  0% {transform: translate(0, 0);}
-  50% {transform: translate(7px, 0);}
-  100% {transform: translate(0, 0);}
+  0% {transform: translate(0, 0);-webkit-transform: translate(0, 0);}
+  50% {transform: translate(7px, 0);-webkit-transform: translate(7px, 0);}
+  100% {transform: translate(0, 0);-webkit-transform: translate(0, 0);}
 } 
 #currentPage:hover {color: var(--base);}
 #currentPage + div>a:hover{ text-decoration: line-through !important;}
@@ -106,14 +112,7 @@ html {
 #currentPage{ animation:gradient 4s linear alternate infinite;
   background-size: 100% 400%;
   border-radius: 5px;
-  background-image:
-  radial-gradient(at 52% 13%, hsla(215,77%,79%,1) 0px, transparent 50%),
-  radial-gradient(at 40% 33%, hsla(173,63%,76%,1) 0px, transparent 50%),
-  radial-gradient(at 15% 92%, hsla(166,97%,69%,1) 0px, transparent 50%),
-  radial-gradient(at 97% 78%, hsla(229,94%,76%,1) 0px, transparent 50%),
-  radial-gradient(at 19% 52%, hsla(27,99%,69%,1) 0px, transparent 50%),
-  radial-gradient(at 68% 16%, hsla(339,76%,78%,1) 0px, transparent 50%),
-  radial-gradient(at 25% 1%, hsla(202,73%,63%,1) 0px, transparent 50%);
+  background-image: var(--radial1)
 }
 #sitemap > a { display: inherit;  width: fit-content;}
 /* 
@@ -122,8 +121,12 @@ Article Content
 #articleContent { max-width: var(--max-width); margin: auto; }
 #articleContent > p {padding: 0px 12px 0px 12px;} 
 /*
-- webkit support for clip-path
-- Page Transition Animation
+https://blog.logrocket.com/css-before-after-custom-animations-transitions/#before-pseudo-element 
+https://tympanus.net/codrops/2013/05/22/examples-of-pseudo-elements-animations-and-transitions/
+https://cssanimation.rocks/pseudo-elements/
+https://textfac.es/
+https://anthonyhobday.com/sideprojects/saferules/
+https://graphemica.com/%E2%98%B0
 
   templates
   -. > parallax background
