@@ -17,9 +17,10 @@
 html { 
   font-size: 18px; 
   line-height: 1.3;
-}  
+} 
 ::selection {  background: var(--hint-of); }
-h1,h2,h3,h4 {text-align: center; }
+h1,h2,h3,h4 {text-align: center; text-shadow: none; transition: all .3s ease-in-out;}
+h2:hover,h3:hover,h4:hover { text-shadow: 1px 1px 45px var(--base); transition: all .1s ease-in-out;}
 h1,h2,h3,h4,a { color: var(--base); font-weight: 600; font-family: Courier New,Courier,Monaco,monospace;}
 h1>a{
   /* transparent text w animated lin gradient bg */
@@ -82,38 +83,63 @@ details > img {display:block; margin:auto;}
 details[open] > details summary::marker { content: "🧡" }
 details[open] > details[open] summary::marker { content: "💖"; }
  */
-
-/* 
-header - clippath, spin, drop-shadow
-*/ 
-
 /*
 body
 */
 body { 
   margin: 0px;
   overflow-x: hidden;
+} 
+html {
+  scroll-behavior: smooth;
 }
-
+@keyframes glow {
+  0% {transform: translate(0, 0);}
+  50% {transform: translate(7px, 0);}
+  100% {transform: translate(0, 0);}
+} 
+#currentPage:hover {color: var(--base);}
+#currentPage + div>a:hover{ text-decoration: line-through !important;}
+#currentPage + div {display:block;font-size: 16px;}
+#sitemap>a:hover{ animation:glow 1s linear alternate infinite;}
+#currentPage:hover{animation:gradient 4s linear alternate infinite, glow 1s linear alternate infinite;}
+#currentPage{ animation:gradient 4s linear alternate infinite;
+  background-size: 100% 400%;
+  border-radius: 5px;
+  background-image:
+  radial-gradient(at 52% 13%, hsla(215,77%,79%,1) 0px, transparent 50%),
+  radial-gradient(at 40% 33%, hsla(173,63%,76%,1) 0px, transparent 50%),
+  radial-gradient(at 15% 92%, hsla(166,97%,69%,1) 0px, transparent 50%),
+  radial-gradient(at 97% 78%, hsla(229,94%,76%,1) 0px, transparent 50%),
+  radial-gradient(at 19% 52%, hsla(27,99%,69%,1) 0px, transparent 50%),
+  radial-gradient(at 68% 16%, hsla(339,76%,78%,1) 0px, transparent 50%),
+  radial-gradient(at 25% 1%, hsla(202,73%,63%,1) 0px, transparent 50%);
+}
+#sitemap > a { display: inherit;  width: fit-content;}
 /* 
 Article Content 
 */
 #articleContent { max-width: var(--max-width); margin: auto; }
 #articleContent > p {padding: 0px 12px 0px 12px;} 
 /*
+- webkit support for clip-path
+- Page Transition Animation
+
   templates
-  1. > parallax background
-  2. > keyframes animate linear gradient background
-  3. > keyframes animate background of randomly generated cubes.
+  -. > parallax background
+  -. > keyframes animate linear gradient background
+  -. > keyframes animate background of randomly generated cubes.
   -. > Scroll Progress Indicator.
   -. > Mobile -> sticky top bar? desktop -> Sticky left panel. both -> logo and title
   -. > Optionally - a table of contents is shown before the article or at the side.
-  > clip path being a max 15px wiggly line shown sidebar or not.
-  > scrollpos animate the position of a cube tumbling down the divider line with a clip path mask 
-  4. > text flows along the side of a clip path. 
+  -. scrollpos animate an cube tumbling down the divider line with a clip path 
+  -. > svg text flows along the side of a clip path
+  -/ > text-shadow: 3px 3px 40px #7DBAF0; -> animate text shadow on hover?
+  -  style guide - https: - https://neumorphism.io/, http://csshero.org/mesher/ e page transitions https://css-tricks.com/animating-with-clip-path/
 */
 /*
   Techniques
+  Avoid Complexity: Sitemap links to nav pages which link to subject-related articles.
   html-> image or div w/ text to crop w mask
   css-> animate background-x-position
   css-> background-image, -attachment: fixed, -size: cover, -position: center
@@ -122,8 +148,9 @@ Article Content
   svg+css-> clip-path: url(@svg <clipPath id>)
   mask-image: linear-gradient(to bottom, transaprent 10%, black) -> dampends image 
   animate inset box-shadow https://codepen.io/lonekorean/pen/KKVdQPX 
-  text-shadow: 3px 3px 40px #7DBAF0;
   mobile dragdrop - https://codepen.io/deepakkadarivel/pen/LrGEdL
+  Glowing BG for Active-Page Link. Glowing Underline for TOC Anchor Link
+  Jazz up section divides by by slapping atop a transform rotated div
 */
 /*
   Within the Articles

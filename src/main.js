@@ -7,7 +7,8 @@ const popState = async (event) => {     event.preventDefault();
     var location = event.target.href || event.target.location.href
     let route = location.replace(window.origin,'') 
     if (route.split("#")[0] != window.prevPage.split("#")[0]){ prevPage(); handleRoute( route ); }; 
-    route.indexOf('#') == -1 && window.scrollTo(0, 0);
+    route.indexOf('#') == -1 && window.scrollTo({ top: 0, behavior: 'smooth' });
+    let t = document.getElementById(route.split('#')[1]); t && t.scrollIntoView({ behavior: 'smooth' });
 }; window.onpopstate = function (event) { popState(event); };
 
 // 1. 
@@ -35,7 +36,7 @@ const handleRoute = async (route) => {
     await loadTemplate() // 4
     createNav() // 5
     setTimeout( ()=>{
-        let details = document.querySelectorAll('summary,button');
+        let details = document.querySelectorAll('h2,h3,h4,h5,h6');
         details.forEach((el) => observer.observe(el));
         document.querySelectorAll('a[href^="./"]').forEach(link =>link.addEventListener('click', redirect ))
     }, 100);
@@ -78,34 +79,35 @@ const createNav = async () => {
     let sitemap = ( await (await fetch((await import(/* webpackChunkName: "sitenav" */ './posts/sitemap.json') ).default)).json() )
     window.lbl = window.lbl || `
     <label for="toggle-sitemap">
-    <span>&#x21e8;</span>&emsp;Sitemap
+    <span>&#x21e8;</span>&emsp;&ensp;Sitemap
     </label>
     <br/>` 
 
     // Add in the TOC to the Sitemap for the given page.
-    sitemap = sitemap.map((item) => `<a id="${item.tab==window.meta.tab && 'currentPage'}" href="./${item.filename}.html" title="${item.summary}"> ${item.tab==window.meta.tab && '-' || ''} ${item.tab} </a>`)
-    document.getElementById('sitemap').innerHTML = lbl + sitemap.join('<br/>')
+    sitemap = sitemap.map((item) => `<a id="${item.tab==window.meta.tab && 'currentPage'}" href="./${item.filename}.html" title="${item.summary}">${item.tab}</a>`)
+    document.getElementById('sitemap').innerHTML = lbl + sitemap.join('')
     // if (!('toc' in window.meta) || window.meta.toc != 'true') return;
     addTocToSiteMap();
     addAnchorsToHeaders();
 } 
 const capFirst = (str) => {let l=12; return str.charAt(0).toUpperCase() + str.slice(1).toLowerCase().replace(':','').slice(0, l) + (str.length > l+1 ? '...' : '') }
 function addTocToSiteMap() {
-    let toc = '<br/>'+[...document.querySelectorAll('h2, h3, h4, h5, h6')]
-        .map((header) =>{
-            const z=capFirst(header.innerText); 
+    // Find all headers and add them to the sitemap directly under the current page's link.
+    let toc = [...document.querySelectorAll('h2, h3, h4, h5, h6')]
+        .map((header) =>{ 
+            const z=capFirst(header.innerText || header.textContent);
             const spaces = '&emsp;'.repeat(header.tagName.slice(1)-1)
-            return `${spaces}<a href='#${z}'>${z}</a>`
+            return `${spaces}<a id='anchor_${z}'href='#${z}'>${z}</a>`
         })
     .join('<br/>')
-    let tocNode = document.createElement('div'); tocNode.style.display='inline';tocNode.innerHTML = toc;
+    let tocNode = document.createElement('div'); tocNode.innerHTML = toc;
     const cp = document.getElementById('currentPage') 
     cp.parentNode.insertBefore(tocNode, cp.nextSibling)
 }
 function addAnchorsToHeaders() {
     let headers = document.querySelectorAll('h2, h3, h4, h5, h6');
     headers.forEach(header => {
-        header.id=capFirst(header.innerText);
+        header.id=capFirst(header.innerText||header.textContent);
         let anchor = document.createElement('a');
         header.parentNode.insertBefore(anchor, header.nextSibling);
     });
@@ -114,12 +116,25 @@ function addAnchorsToHeaders() {
 // 6 
 // Hit em w/ the ol razzle dazzle; and give em the wiggles~! >:D
 // IntersectionObserver for animations and Highlighting active TOC Anchor link
+// window.reset=()=>{document.querySelectorAll('h2,h3,h4,h5,h6').forEach((el) => observer.unobserve(el));}
+window.activeHeader = null
 const observer = new IntersectionObserver((entries) => {
     entries.forEach((entry) => {let e=entry.target
         let txt = "0.5s ease-in-out 0s 2 normal none running wiggle";
-        e.tagName == 'SUMMARY' && (txt = "0.5s ease-in-out 0s 3 normal none running spin");
-        if (entry.isIntersecting){e.style.animation = txt } 
-        else { e.style.animation == txt && (e.style.animation = '') }
+        // e.tagName == 'SUMMARY' && (txt = "0.5s ease-in-out 0s 3 normal none running spin");
+        let pos = e.getBoundingClientRect().top
+        if (entry.isIntersecting){ 
+            e.style.animation = txt
+            if(pos<300 || pos>300){ /* ' Scrolling', pos>100?'Down: ':'Up */
+                window.activeHeader && (window.activeHeader.style.textDecoration='none')
+                let tocLink = document.getElementById('anchor_'+e.id)
+                tocLink.style.animation = txt; tocLink.style.textDecoration='line-through' 
+                window.activeHeader = tocLink
+            }
+        }
+        else { 
+            e.style.animation == txt && (e.style.animation = '') 
+        }
     });
 }); 
 
