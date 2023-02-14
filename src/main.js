@@ -1,17 +1,9 @@
 import "./main.css";
 
-// Webpack makes this file 10x larger. The original webpack.config template should have this as a script tag so it doesn't get webpacked but loaded all the same.
+// IMPORTS page content from JSON files
+// 
 
-// Page Load Logic and Routing
-const prevPage = async () => {window.prevPage = window.location.href.replace(window.origin,'')}; prevPage();
-const redirect = async (event) => { window.history.pushState({}, '', event.target.href); popState(event); }
-const popState = async (event) => { event.preventDefault();
-    var location = event.target.href || event.target.location.href
-    let route = location.replace(window.origin,'');
-    if (route.split("#")[0] != window.prevPage.split("#")[0]){ prevPage(); handleRoute( route ); }; 
-    route.indexOf('#') == -1 && window.scrollTo({ top: 0, behavior: 'smooth' });
-    let t = document.getElementById(route.split('#')[1]); t && t.scrollIntoView({ behavior: 'smooth' });
-}; window.onpopstate = function (event) { popState(event); };
+// Webpack makes this file 10x larger. The original webpack.config template should have this as a script tag so it doesn't get webpacked but loaded all the same.
 
 // 2. Loads a route using it's meta data.
 const handleRoute = async (route) => { 

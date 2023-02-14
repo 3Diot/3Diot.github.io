@@ -821,95 +821,27 @@ var main = __webpack_require__(907);
 
 
 
-// Webpack makes this file 10x larger. The original webpack.config template should have this as a script tag so it doesn't get webpacked but loaded all the same.
+// IMPORTS page content from JSON files
+// 
 
-// Page Load Logic and Routing
-var prevPage = /*#__PURE__*/function () {
-  var _ref = _asyncToGenerator( /*#__PURE__*/regenerator_default().mark(function _callee() {
-    return regenerator_default().wrap(function _callee$(_context) {
-      while (1) switch (_context.prev = _context.next) {
-        case 0:
-          window.prevPage = window.location.href.replace(window.origin, '');
-        case 1:
-        case "end":
-          return _context.stop();
-      }
-    }, _callee);
-  }));
-  return function prevPage() {
-    return _ref.apply(this, arguments);
-  };
-}();
-prevPage();
-var redirect = /*#__PURE__*/function () {
-  var _ref2 = _asyncToGenerator( /*#__PURE__*/regenerator_default().mark(function _callee2(event) {
-    return regenerator_default().wrap(function _callee2$(_context2) {
-      while (1) switch (_context2.prev = _context2.next) {
-        case 0:
-          window.history.pushState({}, '', event.target.href);
-          popState(event);
-        case 2:
-        case "end":
-          return _context2.stop();
-      }
-    }, _callee2);
-  }));
-  return function redirect(_x) {
-    return _ref2.apply(this, arguments);
-  };
-}();
-var popState = /*#__PURE__*/function () {
-  var _ref3 = _asyncToGenerator( /*#__PURE__*/regenerator_default().mark(function _callee3(event) {
-    var location, route, t;
-    return regenerator_default().wrap(function _callee3$(_context3) {
-      while (1) switch (_context3.prev = _context3.next) {
-        case 0:
-          event.preventDefault();
-          location = event.target.href || event.target.location.href;
-          route = location.replace(window.origin, '');
-          if (route.split("#")[0] != window.prevPage.split("#")[0]) {
-            prevPage();
-            handleRoute(route);
-          }
-          ;
-          route.indexOf('#') == -1 && window.scrollTo({
-            top: 0,
-            behavior: 'smooth'
-          });
-          t = document.getElementById(route.split('#')[1]);
-          t && t.scrollIntoView({
-            behavior: 'smooth'
-          });
-        case 8:
-        case "end":
-          return _context3.stop();
-      }
-    }, _callee3);
-  }));
-  return function popState(_x2) {
-    return _ref3.apply(this, arguments);
-  };
-}();
-window.onpopstate = function (event) {
-  popState(event);
-};
+// Webpack makes this file 10x larger. The original webpack.config template should have this as a script tag so it doesn't get webpacked but loaded all the same.
 
 // 2. Loads a route using it's meta data.
 var handleRoute = /*#__PURE__*/function () {
-  var _ref4 = _asyncToGenerator( /*#__PURE__*/regenerator_default().mark(function _callee4(route) {
-    return regenerator_default().wrap(function _callee4$(_context4) {
-      while (1) switch (_context4.prev = _context4.next) {
+  var _ref = _asyncToGenerator( /*#__PURE__*/regenerator_default().mark(function _callee(route) {
+    return regenerator_default().wrap(function _callee$(_context) {
+      while (1) switch (_context.prev = _context.next) {
         case 0:
           document.querySelectorAll('a[href^="./"]').forEach(function (link) {
             return link.removeEventListener('click', redirect);
           });
           route = route.replace("/", '').replace('.html', '') || 'index';
-          _context4.next = 4;
+          _context.next = 4;
           return getMeta(route);
         case 4:
-          window.meta = _context4.sent;
+          window.meta = _context.sent;
           document.title = window.meta.title; // 3
-          _context4.next = 8;
+          _context.next = 8;
           return loadTemplate();
         case 8:
           // 4
@@ -924,57 +856,57 @@ var handleRoute = /*#__PURE__*/function () {
           }, 100);
         case 9:
         case "end":
-          return _context4.stop();
+          return _context.stop();
       }
-    }, _callee4);
+    }, _callee);
   }));
-  return function handleRoute(_x3) {
-    return _ref4.apply(this, arguments);
+  return function handleRoute(_x) {
+    return _ref.apply(this, arguments);
   };
 }();
 
 // 3.
 // Retrieve page content from the JSON file
 var getMeta = /*#__PURE__*/function () {
-  var _ref5 = _asyncToGenerator( /*#__PURE__*/regenerator_default().mark(function _callee5(page) {
+  var _ref2 = _asyncToGenerator( /*#__PURE__*/regenerator_default().mark(function _callee2(page) {
     var content, meta;
-    return regenerator_default().wrap(function _callee5$(_context5) {
-      while (1) switch (_context5.prev = _context5.next) {
+    return regenerator_default().wrap(function _callee2$(_context2) {
+      while (1) switch (_context2.prev = _context2.next) {
         case 0:
-          _context5.t0 = fetch;
-          _context5.next = 3;
+          _context2.t0 = fetch;
+          _context2.next = 3;
           return __webpack_require__(305)("./".concat(page, ".json"));
         case 3:
-          _context5.t1 = _context5.sent["default"];
-          _context5.next = 6;
-          return (0, _context5.t0)(_context5.t1);
+          _context2.t1 = _context2.sent["default"];
+          _context2.next = 6;
+          return (0, _context2.t0)(_context2.t1);
         case 6:
-          _context5.next = 8;
-          return _context5.sent.json();
+          _context2.next = 8;
+          return _context2.sent.json();
         case 8:
-          content = _context5.sent;
+          content = _context2.sent;
           // console.log('page', page, content)
           meta = content.meta;
           meta.content = content.content;
-          return _context5.abrupt("return", meta);
+          return _context2.abrupt("return", meta);
         case 12:
         case "end":
-          return _context5.stop();
+          return _context2.stop();
       }
-    }, _callee5);
+    }, _callee2);
   }));
-  return function getMeta(_x4) {
-    return _ref5.apply(this, arguments);
+  return function getMeta(_x2) {
+    return _ref2.apply(this, arguments);
   };
 }();
 
 // 4. 
 // Load the template and replace the {{content}} with the page content
 var loadTemplate = /*#__PURE__*/function () {
-  var _ref6 = _asyncToGenerator( /*#__PURE__*/regenerator_default().mark(function _callee8() {
+  var _ref3 = _asyncToGenerator( /*#__PURE__*/regenerator_default().mark(function _callee5() {
     var replace, theseItems, curTemplate, newTemplate, el, serverRendered, needsNewTemplate, doThing, pageT;
-    return regenerator_default().wrap(function _callee8$(_context8) {
-      while (1) switch (_context8.prev = _context8.next) {
+    return regenerator_default().wrap(function _callee5$(_context5) {
+      while (1) switch (_context5.prev = _context5.next) {
         case 0:
           replace = function replace(items) {
             items.map(function (item) {
@@ -989,50 +921,50 @@ var loadTemplate = /*#__PURE__*/function () {
           needsNewTemplate = !serverRendered || curTemplate && curTemplate != newTemplate; // replace inner-content if no template
           // console.log(`-------------------------${meta['filename']}-prerendered=${serverRendered}-needsnewtemplate=${needsNewTemplate}`);
           doThing = /*#__PURE__*/function () {
-            var _ref7 = _asyncToGenerator( /*#__PURE__*/regenerator_default().mark(function _callee6(phase) {
-              return regenerator_default().wrap(function _callee6$(_context6) {
-                while (1) switch (_context6.prev = _context6.next) {
+            var _ref4 = _asyncToGenerator( /*#__PURE__*/regenerator_default().mark(function _callee3(phase) {
+              return regenerator_default().wrap(function _callee3$(_context3) {
+                while (1) switch (_context3.prev = _context3.next) {
                   case 0:
                     replace(theseItems);
                     addTocToSiteMap();
                     addAnchorsToHeaders();
-                    _context6.next = 5;
+                    _context3.next = 5;
                     return loadScripts(phase);
                   case 5:
                   case "end":
-                    return _context6.stop();
+                    return _context3.stop();
                 }
-              }, _callee6);
+              }, _callee3);
             }));
-            return function doThing(_x5) {
-              return _ref7.apply(this, arguments);
+            return function doThing(_x3) {
+              return _ref4.apply(this, arguments);
             };
           }();
           if (!needsNewTemplate) {
-            _context8.next = 15;
+            _context5.next = 15;
             break;
           }
-          _context8.next = 11;
+          _context5.next = 11;
           return __webpack_require__(962)("./".concat(newTemplate, ".html"));
         case 11:
-          document.body.innerHTML = _context8.sent["default"];
-          _context8.next = 14;
+          document.body.innerHTML = _context5.sent["default"];
+          _context5.next = 14;
           return createNav();
         case 14:
           doThing(1);
         case 15:
           pageT = document.getElementById('pageTransitioneer');
           pageT && curTemplate && (pageT.style.animation = 'pageTransitioneer 1s alternate 2, gradient 1s alternate 2');
-          serverRendered && curTemplate && setTimeout( /*#__PURE__*/_asyncToGenerator( /*#__PURE__*/regenerator_default().mark(function _callee7() {
-            return regenerator_default().wrap(function _callee7$(_context7) {
-              while (1) switch (_context7.prev = _context7.next) {
+          serverRendered && curTemplate && setTimeout( /*#__PURE__*/_asyncToGenerator( /*#__PURE__*/regenerator_default().mark(function _callee4() {
+            return regenerator_default().wrap(function _callee4$(_context4) {
+              while (1) switch (_context4.prev = _context4.next) {
                 case 0:
                   doThing(2);
                 case 1:
                 case "end":
-                  return _context7.stop();
+                  return _context4.stop();
               }
-            }, _callee7);
+            }, _callee4);
           })), 1100);
           serverRendered && curTemplate && setTimeout(function () {
             !pageT ? '' : pageT.style.animation = 'none';
@@ -1040,20 +972,20 @@ var loadTemplate = /*#__PURE__*/function () {
           window.curTemplate = newTemplate;
         case 20:
         case "end":
-          return _context8.stop();
+          return _context5.stop();
       }
-    }, _callee8);
+    }, _callee5);
   }));
   return function loadTemplate() {
-    return _ref6.apply(this, arguments);
+    return _ref3.apply(this, arguments);
   };
 }();
 
 // Load scripts from template.
 var loadScripts = /*#__PURE__*/function () {
-  var _ref9 = _asyncToGenerator( /*#__PURE__*/regenerator_default().mark(function _callee9(phase) {
-    return regenerator_default().wrap(function _callee9$(_context9) {
-      while (1) switch (_context9.prev = _context9.next) {
+  var _ref6 = _asyncToGenerator( /*#__PURE__*/regenerator_default().mark(function _callee6(phase) {
+    return regenerator_default().wrap(function _callee6$(_context6) {
+      while (1) switch (_context6.prev = _context6.next) {
         case 0:
           console.log('loadingscripts', phase);
           Array.from(document.getElementsByTagName("script")).forEach(function (script) {
@@ -1074,35 +1006,35 @@ var loadScripts = /*#__PURE__*/function () {
           });
         case 2:
         case "end":
-          return _context9.stop();
+          return _context6.stop();
       }
-    }, _callee9);
+    }, _callee6);
   }));
-  return function loadScripts(_x6) {
-    return _ref9.apply(this, arguments);
+  return function loadScripts(_x4) {
+    return _ref6.apply(this, arguments);
   };
 }();
 
 // 5.
 //  
 var createNav = /*#__PURE__*/function () {
-  var _ref10 = _asyncToGenerator( /*#__PURE__*/regenerator_default().mark(function _callee10() {
+  var _ref7 = _asyncToGenerator( /*#__PURE__*/regenerator_default().mark(function _callee7() {
     var sitemap;
-    return regenerator_default().wrap(function _callee10$(_context10) {
-      while (1) switch (_context10.prev = _context10.next) {
+    return regenerator_default().wrap(function _callee7$(_context7) {
+      while (1) switch (_context7.prev = _context7.next) {
         case 0:
-          _context10.t0 = fetch;
-          _context10.next = 3;
+          _context7.t0 = fetch;
+          _context7.next = 3;
           return __webpack_require__.e(/* import() | sitenav */ 971).then(__webpack_require__.t.bind(__webpack_require__, 532, 17));
         case 3:
-          _context10.t1 = _context10.sent["default"];
-          _context10.next = 6;
-          return (0, _context10.t0)(_context10.t1);
+          _context7.t1 = _context7.sent["default"];
+          _context7.next = 6;
+          return (0, _context7.t0)(_context7.t1);
         case 6:
-          _context10.next = 8;
-          return _context10.sent.json();
+          _context7.next = 8;
+          return _context7.sent.json();
         case 8:
-          sitemap = _context10.sent;
+          sitemap = _context7.sent;
           window.lbl = window.lbl || " <label for=\"toggle-sitemap\"> <span>&#x21e8;</span>&emsp;&ensp;Sitemap </label> <hr/>";
 
           // Add in the TOC to the Sitemap for the given page.
@@ -1112,12 +1044,12 @@ var createNav = /*#__PURE__*/function () {
           document.getElementById('sitemap').innerHTML = lbl + sitemap.join('');
         case 12:
         case "end":
-          return _context10.stop();
+          return _context7.stop();
       }
-    }, _callee10);
+    }, _callee7);
   }));
   return function createNav() {
-    return _ref10.apply(this, arguments);
+    return _ref7.apply(this, arguments);
   };
 }();
 var capFirst = function capFirst(str) {
@@ -1183,18 +1115,18 @@ var observer = new IntersectionObserver(function (entries) {
 });
 
 // Onstart load the URI path's corresponding json file and it's desired template
-_asyncToGenerator( /*#__PURE__*/regenerator_default().mark(function _callee11() {
-  return regenerator_default().wrap(function _callee11$(_context11) {
-    while (1) switch (_context11.prev = _context11.next) {
+_asyncToGenerator( /*#__PURE__*/regenerator_default().mark(function _callee8() {
+  return regenerator_default().wrap(function _callee8$(_context8) {
+    while (1) switch (_context8.prev = _context8.next) {
       case 0:
         window.history.replaceState(null, "", "");
-        _context11.next = 3;
+        _context8.next = 3;
         return handleRoute(window.location.pathname);
       case 3:
       case "end":
-        return _context11.stop();
+        return _context8.stop();
     }
-  }, _callee11);
+  }, _callee8);
 }))();
 // https://www.npmjs.com/package/html-inline-script-webpack-plugin
 })();
