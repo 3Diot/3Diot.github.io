@@ -221,13 +221,13 @@ module.exports = env => {
       chunks: ['head','main'],
       excludeChunks: [ 'index'],
       templateContent: template,
-      inlineSource: isDev && '^(index).*.(css)$', 
-      inject: 'head',
+      // inlineSource: 'main.*.js$', 
+      inject: 'head'
     }),
     new HTMLInlineCSSWebpackPlugin(),
     new ScriptExtHtmlWebpackPlugin({
       preload: {
-        test: /^(index|imported).*.(js|json|svg|css)$/,
+        test: /^(test|imported).*.(js|json|svg|css)$/,
         chunks: 'all'
       },
       prefetch: {

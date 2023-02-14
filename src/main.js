@@ -1,5 +1,7 @@
 import "./main.css";
 
+// Webpack makes this file 10x larger. The original webpack.config template should have this as a script tag so it doesn't get webpacked but loaded all the same.
+
 // Page Load Logic and Routing
 const prevPage = async () => {window.prevPage = window.location.href.replace(window.origin,'')}; prevPage();
 const redirect = async (event) => { window.history.pushState({}, '', event.target.href); popState(event); }
@@ -11,30 +13,12 @@ const popState = async (event) => { event.preventDefault();
     let t = document.getElementById(route.split('#')[1]); t && t.scrollIntoView({ behavior: 'smooth' });
 }; window.onpopstate = function (event) { popState(event); };
 
-// 1. 
-// Strip initial render logic w/ react-snap (head & main js) before the template loads.
-const removeScripts = async() => { 
-    /*
-    const scripts = [...document.scripts]
-    scripts.forEach((child) =>{
-        new RegExp("head|helmet", "i").test(child.src) ? child.remove() : console.log('keep', child)
-    } );
-    
-    const links = [...document.querySelectorAll("link[as='script']")] 
-    links.forEach((child) =>{ 
-        console.log('links', child)
-        child.href && child.remove() 
-    } ); 
-    */
-}
-
 // 2. Loads a route using it's meta data.
 const handleRoute = async (route) => { 
     document.querySelectorAll('a[href^="./"]').forEach(link=>link.removeEventListener('click', redirect));
     route = route.replace("/",'').replace('.html','') || 'index'
     window.meta = await getMeta( route ); document.title = window.meta.title; // 3
     await loadTemplate() // 4
-    createNav() // 5
     setTimeout( ()=>{
         let details = document.querySelectorAll('h2,h3,h4,h5,h6');
         details.forEach((el) => observer.observe(el));
@@ -56,47 +40,72 @@ const getMeta = async(page) => {
 // Load the template and replace the {{content}} with the page content
 const loadTemplate = async () => {
     let replace = (items) => {items.map((item) => {document.getElementById(item).innerHTML = meta[item] }) }
-    const theseItems = ['content', 'title', 'summary']
-    let template = (await import(`./${window.meta.template}.html`) ).default
-    const pT = document.getElementById('pageTransitioneer'); 
-    pT && window.template && (pT.style.animation = 'pageTransitioneer 1s alternate 2, gradient 1s alternate 2')
-    setTimeout( ()=>{ replace(theseItems) }, 1100) && 
-    setTimeout( ()=>{ let z=document.getElementById('pageTransitioneer'); !z?'':z.style.animation = 'none' }, 2300);
-    if(!window.template || window.template != window.meta.template){
-        document.body.innerHTML = template
-        Array.from(document.getElementsByTagName("script")).forEach(script => {
-                const newScript = document.createElement("script");
-                newScript.textContent = script.textContent;
-                script.parentNode.replaceChild(newScript, script);
-            }
-        );
-        !window.template && replace(theseItems);
-    }  
-    // template.replace(new RegExp(`{{${item}}}`, 'g'), meta[item])
-    window.template = window.meta.template 
+    const theseItems = ['content', 'title', 'summary'] 
+    const curTemplate = window.curTemplate || false
+    const newTemplate = window.meta.template 
+    const el = document.getElementById('content'); const serverRendered = !!(el && el.innerHTML.trim());
+    const needsNewTemplate = !serverRendered || (curTemplate && curTemplate != newTemplate)
+
+    // replace inner-content if no template
+    // console.log(`-------------------------${meta['filename']}-prerendered=${serverRendered}-needsnewtemplate=${needsNewTemplate}`);
+    let doThing = async (phase) => {
+        replace(theseItems);
+        addTocToSiteMap();
+        addAnchorsToHeaders();
+        await loadScripts(phase);
+    }
+    if(needsNewTemplate){ 
+        document.body.innerHTML =  (await import(`./${newTemplate}.html`) ).default
+        await createNav();
+        doThing(1);
+    }
+    
+    const pageT = document.getElementById('pageTransitioneer'); 
+    pageT && curTemplate && (pageT.style.animation = 'pageTransitioneer 1s alternate 2, gradient 1s alternate 2')
+    serverRendered && curTemplate && setTimeout( async ()=>{ doThing(2); }, 1100) 
+    serverRendered && curTemplate && setTimeout( ()=>{ !pageT?'':pageT.style.animation = 'none' }, 2300);
+
+    window.curTemplate = newTemplate 
 } 
 
+// Load scripts from template.
+const loadScripts = async (phase) => {
+    console.log('loadingscripts', phase)
+    Array.from(document.getElementsByTagName("script")).forEach(script => {
+        if (new RegExp("head|helmet|203", "i").test(script.src)){ script.remove(); return; } // React Snap Only
+        if (new RegExp("25.*.js|main", "i").test(script.src)){  return; } // Client runs once
+        // if (new RegExp("templateScript", "i").test(script.getAttribute('tag'))){}
+        const newScript = document.createElement("script"); 
+        script.textContent && (newScript.textContent = script.textContent);
+        script.src && (newScript.src = script.src);
+        script.async && (newScript.async = script.async);
+        script.type && (newScript.type = script.type);
+        script.parentNode.replaceChild(newScript, script);
+    } );
+}
 
 // 5.
 //  
 const createNav = async () => {  
     // let sitemap = JSON.parse((await import(`./posts/sitemap.json`) ).default) 
     let sitemap = ( await (await fetch((await import(/* webpackChunkName: "sitenav" */ './posts/sitemap.json') ).default)).json() )
-    window.lbl = window.lbl || `
-    <label for="toggle-sitemap">
-    <span>&#x21e8;</span>&emsp;&ensp;Sitemap
-    </label>
-    <hr/>` 
+    window.lbl = window.lbl || ` <label for="toggle-sitemap"> <span>&#x21e8;</span>&emsp;&ensp;Sitemap </label> <hr/>` 
 
     // Add in the TOC to the Sitemap for the given page.
     sitemap = sitemap.map((item) => `<a id="${item.tab==window.meta.tab && 'currentPage'}" href="./${item.filename}.html" title="${item.summary}">${item.tab}</a>`)
     document.getElementById('sitemap').innerHTML = lbl + sitemap.join('')
-    // if (!('toc' in window.meta) || window.meta.toc != 'true') return;
-    addTocToSiteMap();
-    addAnchorsToHeaders();
 } 
 const capFirst = (str) => {let l=12; return str.charAt(0).toUpperCase() + str.slice(1).toLowerCase().replace(':','').slice(0, l) + (str.length > l+1 ? '...' : '') }
 function addTocToSiteMap() {
+    // if (!('toc' in window.meta) || window.meta.toc != 'true') return;
+
+    // un-attach currentPage and reassign to where #sitemap.child.innerHTML == window.meta.tab 
+    let cp = document.getElementById('currentPage'); cp && cp.removeAttribute('id')
+    let tocNode = document.getElementById('toc'); tocNode && tocNode.remove()
+    const sitemap = document.getElementById('sitemap')
+    const currentPage = sitemap.querySelector(`a[title="${window.meta.summary}"]`)
+    currentPage && currentPage.setAttribute('id', 'currentPage')
+
     // Find all headers and add them to the sitemap directly under the current page's link.
     let toc = [...document.querySelectorAll('h2, h3, h4, h5, h6')]
         .map((header) =>{ 
@@ -105,9 +114,8 @@ function addTocToSiteMap() {
             return `${spaces}<a id='anchor_${z}'href='#${z}'>${z}</a>`
         })
     .join('<br/>')
-    let tocNode = document.createElement('div'); tocNode.innerHTML = toc;
-    const cp = document.getElementById('currentPage') 
-    cp.parentNode.insertBefore(tocNode, cp.nextSibling)
+    tocNode = document.createElement('div'); tocNode.setAttribute('id', 'toc'); tocNode.innerHTML = toc; 
+    currentPage.parentNode.insertBefore(tocNode, currentPage.nextSibling)
 }
 function addAnchorsToHeaders() {
     let headers = document.querySelectorAll('h2, h3, h4, h5, h6');
@@ -146,7 +154,6 @@ const observer = new IntersectionObserver((entries) => {
 // Onstart load the URI path's corresponding json file and it's desired template
 (async()=>{
     window.history.replaceState(null, "", "");
-    removeScripts()
     await handleRoute(window.location.pathname);
 } )()  
 // https://www.npmjs.com/package/html-inline-script-webpack-plugin

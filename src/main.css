@@ -121,6 +121,25 @@ Article Content
 #articleContent { max-width: var(--max-width); margin: auto; }
 #articleContent > p {padding: 0px 12px 0px 12px;} 
 /*
+https://anthonyhobday.com/sideprojects/saferules/
+
+General -> Put simple on complex or complex on simple
+Layout -> Make outer padding the same or more than inner padding
+Layout -> no hard divides unless it's an img divider
+Buttons -> Make horizontal padding twice the vertical padding in buttons
+Elements -> should go in order of visual weight (dark to light, fx to none, etc)
+Element -> use multiples of '8'
+
+Border -> Container borders should contrast with both the container and the background
+Border -> For nested divs w rounded corners: interiorItemsRoundedBorder = xteriorspx - paddingpx
+Border -> Make drop shadow blur values double their distance values. 4px on y = 8px blur
+Border -> - closer z-index to camera = more light diffusion/ lower shadow opacity
+
+Colors -> If you saturate your neutrals you should use warm or cool colours, not both
+Colors -> Colours in a palette should have distinct brightness values, not just in hue
+Colors -> bg should get lighter as the z-index increases
+Colors -> The HSB brightness difference between background and container should be within 12%/7% for dark/light interface.
+
 https://blog.logrocket.com/css-before-after-custom-animations-transitions/#before-pseudo-element 
 https://tympanus.net/codrops/2013/05/22/examples-of-pseudo-elements-animations-and-transitions/
 https://cssanimation.rocks/pseudo-elements/
@@ -157,6 +176,7 @@ https://graphemica.com/%E2%98%B0
 */
 /*
   Within the Articles
+  triple ellipsis comment blurbs! -> onFocus/onHover sibling posfixed animate botom -200px - 0px
 - h2:nth-child(4) { animation-delay: 1.5s; }
 - 2 - cards
 - horizontal rulings with animated center piece

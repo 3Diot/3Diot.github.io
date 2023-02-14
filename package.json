@@ -22,7 +22,7 @@
     ],
     "minifyHtml": {
       "collapseWhitespace": true,
-      "removeComments": false
+      "removeComments": true
     },
     "destination": "./docs"
   },

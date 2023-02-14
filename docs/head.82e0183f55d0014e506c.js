@@ -24,126 +24,124 @@ function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { va
 (0,_babel_runtime_helpers_asyncToGenerator__WEBPACK_IMPORTED_MODULE_5__/* ["default"] */ .Z)( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee() {
   var page, hr, forBlog, csp, content, header, rootElement;
   return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee$(_context) {
-    while (1) {
-      switch (_context.prev = _context.next) {
-        case 0:
-          page = window.location.pathname.replace("/", '').replace('.html', '');
-          if (!(page == '404')) {
-            _context.next = 3;
-            break;
-          }
-          return _context.abrupt("return");
-        case 3:
-          _context.t0 = fetch;
-          _context.next = 6;
-          return __webpack_require__.e(/* import() | header-json */ 750).then(__webpack_require__.t.bind(__webpack_require__, 984, 17));
-        case 6:
-          _context.t1 = _context.sent["default"];
-          _context.next = 9;
-          return (0, _context.t0)(_context.t1);
-        case 9:
-          _context.next = 11;
-          return _context.sent.json();
-        case 11:
-          hr = _context.sent;
-          forBlog = !page.includes('admin');
-          csp = "img-src 'self' http://localhost https://unpkg.com/leaflet@1.3.0/dist/images/marker-shadow.png https://unpkg.com/leaflet@1.3.0/dist/images/marker-icon.png https://bniajfi.org/wp-content/uploads/2014/04/bnia_logo_new.png data:;";
-          if (!forBlog) {
-            _context.next = 26;
-            break;
-          }
-          _context.t2 = fetch;
-          _context.next = 18;
-          return __webpack_require__(729)("./".concat(page || 'index', ".json"));
-        case 18:
-          _context.t3 = _context.sent["default"];
-          _context.next = 21;
-          return (0, _context.t2)(_context.t3);
-        case 21:
-          _context.next = 23;
-          return _context.sent.json();
-        case 23:
-          content = _context.sent;
-          hr = _objectSpread(_objectSpread({}, hr), content.meta);
-          csp = "img-src 'self' https://charleskarpati.com/ data:;";
-        case 26:
-          // Hashtags get commented out. careful for "background_color" "theme_color"
-          // <meta name="theme-color" media="(prefers-color-scheme: light)" content="#3880ff" /> 
-          // ion-content > div { margin-left: 25%; padding-top: 40px;  padding-bottom: 40px; }  
-          header = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__.createElement(react_helmet_async__WEBPACK_IMPORTED_MODULE_4__/* .HelmetProvider */ .B6, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__.createElement(react_helmet_async__WEBPACK_IMPORTED_MODULE_4__/* .Helmet */ .ql, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__.createElement("meta", {
-            charset: "UTF-8"
-          }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__.createElement("meta", {
-            "http-equiv": "Content-Security-Policy",
-            content: csp
-          }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__.createElement("meta", {
-            name: "viewport",
-            content: "width=device-width, initial-scale=1, minimum-scale=1"
-          }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__.createElement("title", null, hr.tab || hr.longName), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__.createElement("meta", {
-            name: "author",
-            content: hr.author
-          }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__.createElement("meta", {
-            name: "description",
-            content: hr.description
-          }), !forBlog && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__.createElement("link", {
-            rel: "manifest",
-            href: "/manifest.json"
-          }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__.createElement("link", {
-            rel: "license",
-            href: "https://opensource.org/licenses/MIT"
-          }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__.createElement("link", {
-            rel: "canonical",
-            href: "https://cvminigames.com/".concat(page)
-          }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__.createElement("meta", {
-            name: "theme-color",
-            content: hr.themecolor
-          }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__.createElement("meta", {
-            name: "robots",
-            content: "index,follow"
-          }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__.createElement("noscript", null, "Your browser does not support JavaScript!"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__.createElement("meta", {
-            property: "og:url",
-            content: "http://www.cvminigames.com/".concat(hr.filename || 'admin')
-          }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__.createElement("meta", {
-            property: "og:title",
-            content: hr.title
-          }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__.createElement("meta", {
-            property: "og:description",
-            content: hr.summary || hr.description
-          }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__.createElement("meta", {
-            property: "og:type",
-            content: hr.type
-          }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__.createElement("meta", {
-            property: "og:site_name",
-            content: hr.applicationname
-          }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__.createElement("meta", {
-            property: "og:locale",
-            content: "en_US"
-          }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__.createElement("meta", {
-            property: "op:markup_version",
-            content: "v1.0"
-          }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__.createElement("meta", {
-            property: "fb:article_style",
-            content: "default"
-          }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__.createElement("meta", {
-            property: "og:image",
-            content: hr.image
-          }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__.createElement("meta", {
-            name: "twitter:card",
-            content: hr.summary || hr.description
-          }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__.createElement("meta", {
-            name: "twitter:site",
-            content: hr.twittersite
-          }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__.createElement("meta", {
-            name: "twitter:creator",
-            content: hr.twitterauthor
-          })));
-          rootElement = document.querySelector("#head");
-          if (rootElement) {
-            react_dom_server__WEBPACK_IMPORTED_MODULE_3___default().renderToString(header);
-          }
-        case 29:
-        case "end":
-          return _context.stop();
-      }
+    while (1) switch (_context.prev = _context.next) {
+      case 0:
+        page = window.location.pathname.replace("/", '').replace('.html', '');
+        if (!(page == '404')) {
+          _context.next = 3;
+          break;
+        }
+        return _context.abrupt("return");
+      case 3:
+        _context.t0 = fetch;
+        _context.next = 6;
+        return __webpack_require__.e(/* import() | header-json */ 750).then(__webpack_require__.t.bind(__webpack_require__, 984, 17));
+      case 6:
+        _context.t1 = _context.sent["default"];
+        _context.next = 9;
+        return (0, _context.t0)(_context.t1);
+      case 9:
+        _context.next = 11;
+        return _context.sent.json();
+      case 11:
+        hr = _context.sent;
+        forBlog = !page.includes('admin');
+        csp = "img-src 'self' http://localhost https://unpkg.com/leaflet@1.3.0/dist/images/marker-shadow.png https://unpkg.com/leaflet@1.3.0/dist/images/marker-icon.png https://bniajfi.org/wp-content/uploads/2014/04/bnia_logo_new.png data:;";
+        if (!forBlog) {
+          _context.next = 26;
+          break;
+        }
+        _context.t2 = fetch;
+        _context.next = 18;
+        return __webpack_require__(729)("./".concat(page || 'index', ".json"));
+      case 18:
+        _context.t3 = _context.sent["default"];
+        _context.next = 21;
+        return (0, _context.t2)(_context.t3);
+      case 21:
+        _context.next = 23;
+        return _context.sent.json();
+      case 23:
+        content = _context.sent;
+        hr = _objectSpread(_objectSpread({}, hr), content.meta);
+        csp = "img-src 'self' https://charleskarpati.com/ data:;";
+      case 26:
+        // Hashtags get commented out. careful for "background_color" "theme_color"
+        // <meta name="theme-color" media="(prefers-color-scheme: light)" content="#3880ff" /> 
+        // ion-content > div { margin-left: 25%; padding-top: 40px;  padding-bottom: 40px; }  
+        header = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__.createElement(react_helmet_async__WEBPACK_IMPORTED_MODULE_4__/* .HelmetProvider */ .B6, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__.createElement(react_helmet_async__WEBPACK_IMPORTED_MODULE_4__/* .Helmet */ .ql, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__.createElement("meta", {
+          charset: "UTF-8"
+        }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__.createElement("meta", {
+          "http-equiv": "Content-Security-Policy",
+          content: csp
+        }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__.createElement("meta", {
+          name: "viewport",
+          content: "width=device-width, initial-scale=1, minimum-scale=1"
+        }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__.createElement("title", null, hr.tab || hr.longName), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__.createElement("meta", {
+          name: "author",
+          content: hr.author
+        }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__.createElement("meta", {
+          name: "description",
+          content: hr.description
+        }), !forBlog && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__.createElement("link", {
+          rel: "manifest",
+          href: "/manifest.json"
+        }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__.createElement("link", {
+          rel: "license",
+          href: "https://opensource.org/licenses/MIT"
+        }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__.createElement("link", {
+          rel: "canonical",
+          href: "https://cvminigames.com/".concat(page)
+        }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__.createElement("meta", {
+          name: "theme-color",
+          content: hr.themecolor
+        }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__.createElement("meta", {
+          name: "robots",
+          content: "index,follow"
+        }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__.createElement("noscript", null, "Your browser does not support JavaScript!"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__.createElement("meta", {
+          property: "og:url",
+          content: "http://www.cvminigames.com/".concat(hr.filename || 'admin')
+        }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__.createElement("meta", {
+          property: "og:title",
+          content: hr.title
+        }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__.createElement("meta", {
+          property: "og:description",
+          content: hr.summary || hr.description
+        }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__.createElement("meta", {
+          property: "og:type",
+          content: hr.type
+        }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__.createElement("meta", {
+          property: "og:site_name",
+          content: hr.applicationname
+        }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__.createElement("meta", {
+          property: "og:locale",
+          content: "en_US"
+        }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__.createElement("meta", {
+          property: "op:markup_version",
+          content: "v1.0"
+        }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__.createElement("meta", {
+          property: "fb:article_style",
+          content: "default"
+        }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__.createElement("meta", {
+          property: "og:image",
+          content: hr.image
+        }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__.createElement("meta", {
+          name: "twitter:card",
+          content: hr.summary || hr.description
+        }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__.createElement("meta", {
+          name: "twitter:site",
+          content: hr.twittersite
+        }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__.createElement("meta", {
+          name: "twitter:creator",
+          content: hr.twitterauthor
+        })));
+        rootElement = document.querySelector("#head");
+        if (rootElement) {
+          react_dom_server__WEBPACK_IMPORTED_MODULE_3___default().renderToString(header);
+        }
+      case 29:
+      case "end":
+        return _context.stop();
     }
   }, _callee);
 }))();

@@ -1,6 +1,131 @@
 /******/ (() => { // webpackBootstrap
 /******/ 	var __webpack_modules__ = ({
 
+/***/ 907:
+/***/ (() => {
+
+// extracted by mini-css-extract-plugin
+
+/***/ }),
+
+/***/ 305:
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+var map = {
+	"./index.json": [
+		681,
+		937
+	],
+	"./legal.json": [
+		347,
+		467
+	],
+	"./lore.json": [
+		674,
+		343
+	],
+	"./monetize.json": [
+		190,
+		939
+	],
+	"./parcels.json": [
+		995,
+		183
+	],
+	"./sitemap.json": [
+		532,
+		971
+	],
+	"./toc.json": [
+		172,
+		368
+	],
+	"./tutorials.json": [
+		430,
+		405
+	],
+	"./websites.json": [
+		814,
+		358
+	]
+};
+function webpackAsyncContext(req) {
+	if(!__webpack_require__.o(map, req)) {
+		return Promise.resolve().then(() => {
+			var e = new Error("Cannot find module '" + req + "'");
+			e.code = 'MODULE_NOT_FOUND';
+			throw e;
+		});
+	}
+
+	var ids = map[req], id = ids[0];
+	return __webpack_require__.e(ids[1]).then(() => {
+		return __webpack_require__.t(id, 1 | 16);
+	});
+}
+webpackAsyncContext.keys = () => (Object.keys(map));
+webpackAsyncContext.id = 305;
+module.exports = webpackAsyncContext;
+
+/***/ }),
+
+/***/ 962:
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+var map = {
+	"./404.html": [
+		426,
+		426
+	],
+	"./maps/books.html": [
+		92,
+		92
+	],
+	"./maps/prices.html": [
+		115,
+		115
+	],
+	"./maps/visitors.html": [
+		304,
+		304
+	],
+	"./tables/lore.html": [
+		906,
+		906
+	],
+	"./tables/parcels.html": [
+		600,
+		600
+	],
+	"./template_article.html": [
+		203,
+		203
+	],
+	"./template_unused.html": [
+		151,
+		151
+	]
+};
+function webpackAsyncContext(req) {
+	if(!__webpack_require__.o(map, req)) {
+		return Promise.resolve().then(() => {
+			var e = new Error("Cannot find module '" + req + "'");
+			e.code = 'MODULE_NOT_FOUND';
+			throw e;
+		});
+	}
+
+	var ids = map[req], id = ids[0];
+	return __webpack_require__.e(ids[1]).then(() => {
+		return __webpack_require__.t(id, 1 | 16);
+	});
+}
+webpackAsyncContext.keys = () => (Object.keys(map));
+webpackAsyncContext.id = 962;
+module.exports = webpackAsyncContext;
+
+/***/ }),
+
 /***/ 61:
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
@@ -172,9 +297,7 @@ function _regeneratorRuntime() {
       if (!isNaN(iterable.length)) {
         var i = -1,
           next = function next() {
-            for (; ++i < iterable.length;) {
-              if (hasOwn.call(iterable, i)) return next.value = iterable[i], next.done = !1, next;
-            }
+            for (; ++i < iterable.length;) if (hasOwn.call(iterable, i)) return next.value = iterable[i], next.done = !1, next;
             return next.value = undefined, next.done = !0, next;
           };
         return next.next = next;
@@ -220,9 +343,7 @@ function _regeneratorRuntime() {
   }), exports.keys = function (val) {
     var object = Object(val),
       keys = [];
-    for (var key in object) {
-      keys.push(key);
-    }
+    for (var key in object) keys.push(key);
     return keys.reverse(), function next() {
       for (; keys.length;) {
         var key = keys.pop();
@@ -233,9 +354,7 @@ function _regeneratorRuntime() {
   }, exports.values = values, Context.prototype = {
     constructor: Context,
     reset: function reset(skipTempReset) {
-      if (this.prev = 0, this.next = 0, this.sent = this._sent = undefined, this.done = !1, this.delegate = null, this.method = "next", this.arg = undefined, this.tryEntries.forEach(resetTryEntry), !skipTempReset) for (var name in this) {
-        "t" === name.charAt(0) && hasOwn.call(this, name) && !isNaN(+name.slice(1)) && (this[name] = undefined);
-      }
+      if (this.prev = 0, this.next = 0, this.sent = this._sent = undefined, this.done = !1, this.delegate = null, this.method = "next", this.arg = undefined, this.tryEntries.forEach(resetTryEntry), !skipTempReset) for (var name in this) "t" === name.charAt(0) && hasOwn.call(this, name) && !isNaN(+name.slice(1)) && (this[name] = undefined);
     },
     stop: function stop() {
       this.done = !0;
@@ -397,6 +516,36 @@ try {
 /******/ 		};
 /******/ 	})();
 /******/ 	
+/******/ 	/* webpack/runtime/create fake namespace object */
+/******/ 	(() => {
+/******/ 		var getProto = Object.getPrototypeOf ? (obj) => (Object.getPrototypeOf(obj)) : (obj) => (obj.__proto__);
+/******/ 		var leafPrototypes;
+/******/ 		// create a fake namespace object
+/******/ 		// mode & 1: value is a module id, require it
+/******/ 		// mode & 2: merge all properties of value into the ns
+/******/ 		// mode & 4: return value when already ns object
+/******/ 		// mode & 16: return value when it's Promise-like
+/******/ 		// mode & 8|1: behave like require
+/******/ 		__webpack_require__.t = function(value, mode) {
+/******/ 			if(mode & 1) value = this(value);
+/******/ 			if(mode & 8) return value;
+/******/ 			if(typeof value === 'object' && value) {
+/******/ 				if((mode & 4) && value.__esModule) return value;
+/******/ 				if((mode & 16) && typeof value.then === 'function') return value;
+/******/ 			}
+/******/ 			var ns = Object.create(null);
+/******/ 			__webpack_require__.r(ns);
+/******/ 			var def = {};
+/******/ 			leafPrototypes = leafPrototypes || [null, getProto({}), getProto([]), getProto(getProto)];
+/******/ 			for(var current = mode & 2 && value; typeof current == 'object' && !~leafPrototypes.indexOf(current); current = getProto(current)) {
+/******/ 				Object.getOwnPropertyNames(current).forEach((key) => (def[key] = () => (value[key])));
+/******/ 			}
+/******/ 			def['default'] = () => (value);
+/******/ 			__webpack_require__.d(ns, def);
+/******/ 			return ns;
+/******/ 		};
+/******/ 	})();
+/******/ 	
 /******/ 	/* webpack/runtime/define property getters */
 /******/ 	(() => {
 /******/ 		// define getter functions for harmony exports
@@ -427,7 +576,7 @@ try {
 /******/ 		// This function allow to reference async chunks
 /******/ 		__webpack_require__.u = (chunkId) => {
 /******/ 			// return url for filenames based on template
-/******/ 			return "" + "admin" + ".js";
+/******/ 			return "" + ({"183":"parcels-json","343":"lore-json","358":"websites-json","368":"toc-json","405":"tutorials-json","467":"legal-json","937":"index-json","939":"monetize-json","971":"sitenav"}[chunkId] || chunkId) + ".js";
 /******/ 		};
 /******/ 	})();
 /******/ 	
@@ -505,7 +654,7 @@ try {
 /******/ 		// undefined = chunk not loaded, null = chunk preloaded/prefetched
 /******/ 		// [resolve, reject, Promise] = chunk loading, 0 = chunk loaded
 /******/ 		var installedChunks = {
-/******/ 			826: 0
+/******/ 			179: 0
 /******/ 		};
 /******/ 		
 /******/ 		__webpack_require__.f.j = (chunkId, promises) => {
@@ -596,9 +745,7 @@ var __webpack_exports__ = {};
 ;// CONCATENATED MODULE: ./node_modules/@babel/runtime/helpers/esm/arrayLikeToArray.js
 function _arrayLikeToArray(arr, len) {
   if (len == null || len > arr.length) len = arr.length;
-  for (var i = 0, arr2 = new Array(len); i < len; i++) {
-    arr2[i] = arr[i];
-  }
+  for (var i = 0, arr2 = new Array(len); i < len; i++) arr2[i] = arr[i];
   return arr2;
 }
 ;// CONCATENATED MODULE: ./node_modules/@babel/runtime/helpers/esm/arrayWithoutHoles.js
@@ -666,74 +813,390 @@ function _asyncToGenerator(fn) {
 // EXTERNAL MODULE: ./node_modules/@babel/runtime/regenerator/index.js
 var regenerator = __webpack_require__(687);
 var regenerator_default = /*#__PURE__*/__webpack_require__.n(regenerator);
-;// CONCATENATED MODULE: ./src/admin/index.js
+// EXTERNAL MODULE: ./src/main.css
+var main = __webpack_require__(907);
+;// CONCATENATED MODULE: ./src/main.js
 
 
 
-/*
-#File: Index.js
-#Author: 
-#Date: June 2020
-#Email: @ .
-#Description: Loads the app and inserts it into the div 'start-app'
-#Purpose: We have to kickstart the app somehow!
-#input: Nothin
-#output: The Application and maybe a Service Worker
-*/
 
-_asyncToGenerator( /*#__PURE__*/regenerator_default().mark(function _callee() {
-  var location_search, viewOne, jsv;
-  return regenerator_default().wrap(function _callee$(_context) {
-    while (1) {
-      switch (_context.prev = _context.next) {
+
+// Webpack makes this file 10x larger. The original webpack.config template should have this as a script tag so it doesn't get webpacked but loaded all the same.
+
+// Page Load Logic and Routing
+var prevPage = /*#__PURE__*/function () {
+  var _ref = _asyncToGenerator( /*#__PURE__*/regenerator_default().mark(function _callee() {
+    return regenerator_default().wrap(function _callee$(_context) {
+      while (1) switch (_context.prev = _context.next) {
         case 0:
-          //Get the URL Query String. default: ""
-          location_search = window.location.search; // Check the URL Query String for meaningful information
-          window.GlobalVariable = location_search.replace("?GlobalVariable=", "").replace(".html", "").replace(/([A-Z])/g, ' $1').trim();
-          viewOne = GlobalVariable.includes('viewone'); //
-          // Load a View using the URL Query String for navigation
-          //
-          document.body.innerHTML = '';
-          if (location_search) {
-            _context.next = 12;
-            break;
-          }
-          //
-          // Load the Homepage
-          //
-          console.log('HOMEPAGE');
-          // let myCounties = await import(/* webpackChunkName: "ScriptName" */ './maps/Basemap_of_DC_in_Light_Gray.json')
-          // let body = document.querySelector("#body") 
-          _context.next = 8;
-          return __webpack_require__.e(/* import() | admin */ 328).then(__webpack_require__.bind(__webpack_require__, 988));
-        case 8:
-          jsv = _context.sent;
-          document.body.innerHTML += jsv.body; // `<div id="root">test</div>` 
-          _context.next = 13;
-          break;
-        case 12:
-          if (viewOne) {
-            //
-            // VIEW ONE
-            //
-          } else {
-            //
-            // VIEW TWO
-            //
-          }
-        case 13:
+          window.prevPage = window.location.href.replace(window.origin, '');
+        case 1:
         case "end":
           return _context.stop();
       }
+    }, _callee);
+  }));
+  return function prevPage() {
+    return _ref.apply(this, arguments);
+  };
+}();
+prevPage();
+var redirect = /*#__PURE__*/function () {
+  var _ref2 = _asyncToGenerator( /*#__PURE__*/regenerator_default().mark(function _callee2(event) {
+    return regenerator_default().wrap(function _callee2$(_context2) {
+      while (1) switch (_context2.prev = _context2.next) {
+        case 0:
+          window.history.pushState({}, '', event.target.href);
+          popState(event);
+        case 2:
+        case "end":
+          return _context2.stop();
+      }
+    }, _callee2);
+  }));
+  return function redirect(_x) {
+    return _ref2.apply(this, arguments);
+  };
+}();
+var popState = /*#__PURE__*/function () {
+  var _ref3 = _asyncToGenerator( /*#__PURE__*/regenerator_default().mark(function _callee3(event) {
+    var location, route, t;
+    return regenerator_default().wrap(function _callee3$(_context3) {
+      while (1) switch (_context3.prev = _context3.next) {
+        case 0:
+          event.preventDefault();
+          location = event.target.href || event.target.location.href;
+          route = location.replace(window.origin, '');
+          if (route.split("#")[0] != window.prevPage.split("#")[0]) {
+            prevPage();
+            handleRoute(route);
+          }
+          ;
+          route.indexOf('#') == -1 && window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+          });
+          t = document.getElementById(route.split('#')[1]);
+          t && t.scrollIntoView({
+            behavior: 'smooth'
+          });
+        case 8:
+        case "end":
+          return _context3.stop();
+      }
+    }, _callee3);
+  }));
+  return function popState(_x2) {
+    return _ref3.apply(this, arguments);
+  };
+}();
+window.onpopstate = function (event) {
+  popState(event);
+};
+
+// 2. Loads a route using it's meta data.
+var handleRoute = /*#__PURE__*/function () {
+  var _ref4 = _asyncToGenerator( /*#__PURE__*/regenerator_default().mark(function _callee4(route) {
+    return regenerator_default().wrap(function _callee4$(_context4) {
+      while (1) switch (_context4.prev = _context4.next) {
+        case 0:
+          document.querySelectorAll('a[href^="./"]').forEach(function (link) {
+            return link.removeEventListener('click', redirect);
+          });
+          route = route.replace("/", '').replace('.html', '') || 'index';
+          _context4.next = 4;
+          return getMeta(route);
+        case 4:
+          window.meta = _context4.sent;
+          document.title = window.meta.title; // 3
+          _context4.next = 8;
+          return loadTemplate();
+        case 8:
+          // 4
+          setTimeout(function () {
+            var details = document.querySelectorAll('h2,h3,h4,h5,h6');
+            details.forEach(function (el) {
+              return observer.observe(el);
+            });
+            document.querySelectorAll('a[href^="./"]').forEach(function (link) {
+              return link.addEventListener('click', redirect);
+            });
+          }, 100);
+        case 9:
+        case "end":
+          return _context4.stop();
+      }
+    }, _callee4);
+  }));
+  return function handleRoute(_x3) {
+    return _ref4.apply(this, arguments);
+  };
+}();
+
+// 3.
+// Retrieve page content from the JSON file
+var getMeta = /*#__PURE__*/function () {
+  var _ref5 = _asyncToGenerator( /*#__PURE__*/regenerator_default().mark(function _callee5(page) {
+    var content, meta;
+    return regenerator_default().wrap(function _callee5$(_context5) {
+      while (1) switch (_context5.prev = _context5.next) {
+        case 0:
+          _context5.t0 = fetch;
+          _context5.next = 3;
+          return __webpack_require__(305)("./".concat(page, ".json"));
+        case 3:
+          _context5.t1 = _context5.sent["default"];
+          _context5.next = 6;
+          return (0, _context5.t0)(_context5.t1);
+        case 6:
+          _context5.next = 8;
+          return _context5.sent.json();
+        case 8:
+          content = _context5.sent;
+          // console.log('page', page, content)
+          meta = content.meta;
+          meta.content = content.content;
+          return _context5.abrupt("return", meta);
+        case 12:
+        case "end":
+          return _context5.stop();
+      }
+    }, _callee5);
+  }));
+  return function getMeta(_x4) {
+    return _ref5.apply(this, arguments);
+  };
+}();
+
+// 4. 
+// Load the template and replace the {{content}} with the page content
+var loadTemplate = /*#__PURE__*/function () {
+  var _ref6 = _asyncToGenerator( /*#__PURE__*/regenerator_default().mark(function _callee8() {
+    var replace, theseItems, curTemplate, newTemplate, el, serverRendered, needsNewTemplate, doThing, pageT;
+    return regenerator_default().wrap(function _callee8$(_context8) {
+      while (1) switch (_context8.prev = _context8.next) {
+        case 0:
+          replace = function replace(items) {
+            items.map(function (item) {
+              document.getElementById(item).innerHTML = meta[item];
+            });
+          };
+          theseItems = ['content', 'title', 'summary'];
+          curTemplate = window.curTemplate || false;
+          newTemplate = window.meta.template;
+          el = document.getElementById('content');
+          serverRendered = !!(el && el.innerHTML.trim());
+          needsNewTemplate = !serverRendered || curTemplate && curTemplate != newTemplate; // replace inner-content if no template
+          // console.log(`-------------------------${meta['filename']}-prerendered=${serverRendered}-needsnewtemplate=${needsNewTemplate}`);
+          doThing = /*#__PURE__*/function () {
+            var _ref7 = _asyncToGenerator( /*#__PURE__*/regenerator_default().mark(function _callee6(phase) {
+              return regenerator_default().wrap(function _callee6$(_context6) {
+                while (1) switch (_context6.prev = _context6.next) {
+                  case 0:
+                    replace(theseItems);
+                    addTocToSiteMap();
+                    addAnchorsToHeaders();
+                    _context6.next = 5;
+                    return loadScripts(phase);
+                  case 5:
+                  case "end":
+                    return _context6.stop();
+                }
+              }, _callee6);
+            }));
+            return function doThing(_x5) {
+              return _ref7.apply(this, arguments);
+            };
+          }();
+          if (!needsNewTemplate) {
+            _context8.next = 15;
+            break;
+          }
+          _context8.next = 11;
+          return __webpack_require__(962)("./".concat(newTemplate, ".html"));
+        case 11:
+          document.body.innerHTML = _context8.sent["default"];
+          _context8.next = 14;
+          return createNav();
+        case 14:
+          doThing(1);
+        case 15:
+          pageT = document.getElementById('pageTransitioneer');
+          pageT && curTemplate && (pageT.style.animation = 'pageTransitioneer 1s alternate 2, gradient 1s alternate 2');
+          serverRendered && curTemplate && setTimeout( /*#__PURE__*/_asyncToGenerator( /*#__PURE__*/regenerator_default().mark(function _callee7() {
+            return regenerator_default().wrap(function _callee7$(_context7) {
+              while (1) switch (_context7.prev = _context7.next) {
+                case 0:
+                  doThing(2);
+                case 1:
+                case "end":
+                  return _context7.stop();
+              }
+            }, _callee7);
+          })), 1100);
+          serverRendered && curTemplate && setTimeout(function () {
+            !pageT ? '' : pageT.style.animation = 'none';
+          }, 2300);
+          window.curTemplate = newTemplate;
+        case 20:
+        case "end":
+          return _context8.stop();
+      }
+    }, _callee8);
+  }));
+  return function loadTemplate() {
+    return _ref6.apply(this, arguments);
+  };
+}();
+
+// Load scripts from template.
+var loadScripts = /*#__PURE__*/function () {
+  var _ref9 = _asyncToGenerator( /*#__PURE__*/regenerator_default().mark(function _callee9(phase) {
+    return regenerator_default().wrap(function _callee9$(_context9) {
+      while (1) switch (_context9.prev = _context9.next) {
+        case 0:
+          console.log('loadingscripts', phase);
+          Array.from(document.getElementsByTagName("script")).forEach(function (script) {
+            if (new RegExp("head|helmet|203", "i").test(script.src)) {
+              script.remove();
+              return;
+            } // React Snap Only
+            if (new RegExp("25.*.js|main", "i").test(script.src)) {
+              return;
+            } // Client runs once
+            // if (new RegExp("templateScript", "i").test(script.getAttribute('tag'))){}
+            var newScript = document.createElement("script");
+            script.textContent && (newScript.textContent = script.textContent);
+            script.src && (newScript.src = script.src);
+            script.async && (newScript.async = script.async);
+            script.type && (newScript.type = script.type);
+            script.parentNode.replaceChild(newScript, script);
+          });
+        case 2:
+        case "end":
+          return _context9.stop();
+      }
+    }, _callee9);
+  }));
+  return function loadScripts(_x6) {
+    return _ref9.apply(this, arguments);
+  };
+}();
+
+// 5.
+//  
+var createNav = /*#__PURE__*/function () {
+  var _ref10 = _asyncToGenerator( /*#__PURE__*/regenerator_default().mark(function _callee10() {
+    var sitemap;
+    return regenerator_default().wrap(function _callee10$(_context10) {
+      while (1) switch (_context10.prev = _context10.next) {
+        case 0:
+          _context10.t0 = fetch;
+          _context10.next = 3;
+          return __webpack_require__.e(/* import() | sitenav */ 971).then(__webpack_require__.t.bind(__webpack_require__, 532, 17));
+        case 3:
+          _context10.t1 = _context10.sent["default"];
+          _context10.next = 6;
+          return (0, _context10.t0)(_context10.t1);
+        case 6:
+          _context10.next = 8;
+          return _context10.sent.json();
+        case 8:
+          sitemap = _context10.sent;
+          window.lbl = window.lbl || " <label for=\"toggle-sitemap\"> <span>&#x21e8;</span>&emsp;&ensp;Sitemap </label> <hr/>";
+
+          // Add in the TOC to the Sitemap for the given page.
+          sitemap = sitemap.map(function (item) {
+            return "<a id=\"".concat(item.tab == window.meta.tab && 'currentPage', "\" href=\"./").concat(item.filename, ".html\" title=\"").concat(item.summary, "\">").concat(item.tab, "</a>");
+          });
+          document.getElementById('sitemap').innerHTML = lbl + sitemap.join('');
+        case 12:
+        case "end":
+          return _context10.stop();
+      }
+    }, _callee10);
+  }));
+  return function createNav() {
+    return _ref10.apply(this, arguments);
+  };
+}();
+var capFirst = function capFirst(str) {
+  var l = 12;
+  return str.charAt(0).toUpperCase() + str.slice(1).toLowerCase().replace(':', '').slice(0, l) + (str.length > l + 1 ? '...' : '');
+};
+function addTocToSiteMap() {
+  // if (!('toc' in window.meta) || window.meta.toc != 'true') return;
+
+  // un-attach currentPage and reassign to where #sitemap.child.innerHTML == window.meta.tab 
+  var cp = document.getElementById('currentPage');
+  cp && cp.removeAttribute('id');
+  var tocNode = document.getElementById('toc');
+  tocNode && tocNode.remove();
+  var sitemap = document.getElementById('sitemap');
+  var currentPage = sitemap.querySelector("a[title=\"".concat(window.meta.summary, "\"]"));
+  currentPage && currentPage.setAttribute('id', 'currentPage');
+
+  // Find all headers and add them to the sitemap directly under the current page's link.
+  var toc = _toConsumableArray(document.querySelectorAll('h2, h3, h4, h5, h6')).map(function (header) {
+    var z = capFirst(header.innerText || header.textContent);
+    var spaces = '&emsp;'.repeat(header.tagName.slice(1) - 1);
+    return "".concat(spaces, "<a id='anchor_").concat(z, "'href='#").concat(z, "'>").concat(z, "</a>");
+  }).join('<br/>');
+  tocNode = document.createElement('div');
+  tocNode.setAttribute('id', 'toc');
+  tocNode.innerHTML = toc;
+  currentPage.parentNode.insertBefore(tocNode, currentPage.nextSibling);
+}
+function addAnchorsToHeaders() {
+  var headers = document.querySelectorAll('h2, h3, h4, h5, h6');
+  headers.forEach(function (header) {
+    header.id = capFirst(header.innerText || header.textContent);
+    var anchor = document.createElement('a');
+    header.parentNode.insertBefore(anchor, header.nextSibling);
+  });
+}
+
+// 6 
+// Hit em w/ the ol razzle dazzle; and give em the wiggles~! >:D
+// IntersectionObserver for animations and Highlighting active TOC Anchor link
+// window.reset=()=>{document.querySelectorAll('h2,h3,h4,h5,h6').forEach((el) => observer.unobserve(el));}
+window.activeHeader = null;
+var observer = new IntersectionObserver(function (entries) {
+  entries.forEach(function (entry) {
+    var e = entry.target;
+    var txt = "0.5s ease-in-out 0s 2 normal none running wiggle";
+    // e.tagName == 'SUMMARY' && (txt = "0.5s ease-in-out 0s 3 normal none running spin");
+    var pos = e.getBoundingClientRect().top;
+    if (entry.isIntersecting) {
+      e.style.animation = txt;
+      if (pos < 300 || pos > 300) {
+        /* ' Scrolling', pos>100?'Down: ':'Up */
+        window.activeHeader && (window.activeHeader.style.textDecoration = 'none');
+        var tocLink = document.getElementById('anchor_' + e.id);
+        tocLink && (tocLink.style.animation = txt, tocLink.style.textDecoration = 'line-through');
+        window.activeHeader = tocLink;
+      }
+    } else {
+      e.style.animation == txt && (e.style.animation = '');
     }
-  }, _callee);
-}))();
-var children = _toConsumableArray(document.scripts);
-children.forEach(function (child) {
-  var _child$src;
-  // console.log(child);
-  ((_child$src = child.src) === null || _child$src === void 0 ? void 0 : _child$src.includes('head')) && child.remove();
+  });
 });
+
+// Onstart load the URI path's corresponding json file and it's desired template
+_asyncToGenerator( /*#__PURE__*/regenerator_default().mark(function _callee11() {
+  return regenerator_default().wrap(function _callee11$(_context11) {
+    while (1) switch (_context11.prev = _context11.next) {
+      case 0:
+        window.history.replaceState(null, "", "");
+        _context11.next = 3;
+        return handleRoute(window.location.pathname);
+      case 3:
+      case "end":
+        return _context11.stop();
+    }
+  }, _callee11);
+}))();
+// https://www.npmjs.com/package/html-inline-script-webpack-plugin
 })();
 
 /******/ })()
