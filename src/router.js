@@ -1,5 +1,5 @@
 // Page Load Logic and Routing
-const prevPage = async () => {window.prevPage = window.location.href.replace(window.origin,'')}; prevPage();
+let prevPage = async () => {window.prevPage = window.location.href.replace(window.origin,'')}; prevPage();
 const redirect = async (event) => { window.history.pushState({}, '', event.target.href); popState(event); }
 const popState = async (event) => { event.preventDefault();
     var location = event.target.href || event.target.location.href
@@ -71,7 +71,7 @@ const loadScripts = async (phase) => {
     console.log('loadingscripts', phase)
     Array.from(document.getElementsByTagName("script")).forEach(script => {
         if (new RegExp("head|helmet|203|25.*.js|main", "i").test(script.src)){ script.remove(); return; } // React Snap Only
-        if (new RegExp("main", "i").test(script.src)){  return; } // Client runs once
+        if (new RegExp("main|router", "i").test(script.src)){  return; } // Client runs once
         // if (new RegExp("templateScript", "i").test(script.getAttribute('tag'))){}
         const newScript = document.createElement("script"); 
         script.textContent && (newScript.textContent = script.textContent);

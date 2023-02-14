@@ -28,7 +28,7 @@ module.exports = env => {
   let template1 = `
   <!DOCTYPE html>
   <html lang="en" dir="ltr">
-    <script src='./router.js'></script>
+    <script src='router.js'></script>
     <head id="head"></head>
     <body>
       <div id="body"></div>
