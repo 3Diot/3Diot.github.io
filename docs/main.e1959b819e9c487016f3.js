@@ -1057,11 +1057,11 @@ var loadScripts = /*#__PURE__*/function () {
         case 0:
           console.log('loadingscripts', phase);
           Array.from(document.getElementsByTagName("script")).forEach(function (script) {
-            if (new RegExp("head|helmet|203", "i").test(script.src)) {
+            if (new RegExp("head|helmet|203|25.*.js", "i").test(script.src)) {
               script.remove();
               return;
             } // React Snap Only
-            if (new RegExp("25.*.js|main", "i").test(script.src)) {
+            if (new RegExp("main", "i").test(script.src)) {
               return;
             } // Client runs once
             // if (new RegExp("templateScript", "i").test(script.getAttribute('tag'))){}
