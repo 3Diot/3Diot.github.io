@@ -15,7 +15,7 @@
     "removeStyleTags": false,
     "preloadImages": true,
     "asyncScriptTags": false,
-    "removeScriptTags": false,
+    "removeScriptTags": true,
     "include": [
       "/index.html",
       "/admin/index.html"
