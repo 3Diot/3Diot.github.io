@@ -25,6 +25,15 @@ module.exports = env => {
       <div id="body"></div>
     </body>
   </html>`;
+  let template1 = `
+  <!DOCTYPE html>
+  <html lang="en" dir="ltr">
+    <script src='./router.js'></script>
+    <head id="head"></head>
+    <body>
+      <div id="body"></div>
+    </body>
+  </html>`;
   return {
   entry: {
     head: './src/head.js',
@@ -220,7 +229,7 @@ module.exports = env => {
       filename: 'index.html',
       chunks: ['head','main'],
       excludeChunks: [ 'index'],
-      templateContent: template,
+      templateContent: template1,
       // inlineSource: 'main.*.js$', 
       inject: 'head'
     }),
@@ -271,6 +280,9 @@ module.exports = env => {
         { from: './CNAME', to: 'CNAME', toType: 'file' },
         { from: './src/maps', to: './maps', toType: 'dir' },
         { from: './src/404.html', to: '404.html', toType: 'file' },
+        { from: './src/router.js', to: 'router.js', toType: 'file' },
+        { from: './src/template_article.html', to: 'template_article.html', toType: 'file' },
+        { from: './src/posts', to: './posts', toType: 'dir' },
         { from: './src/tables', to: './tables', toType: 'dir' },
         { from: './src/images', to: './images', toType: 'dir' }
       ]
