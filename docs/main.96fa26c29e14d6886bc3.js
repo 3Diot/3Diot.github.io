@@ -595,14 +595,17 @@ window.addEventListener('templateLoaded', /*#__PURE__*/_asyncToGenerator( /*#__P
         newTemplate = window.curTemplate != window.meta.template;
         _context4.t0 = newTemplate;
         if (!_context4.t0) {
-          _context4.next = 9;
+          _context4.next = 10;
           break;
         }
         _context4.next = 8;
         return createNav();
       case 8:
         doThing();
-      case 9:
+        document.querySelectorAll('a').forEach(function (el) {
+          el.id = el.id || el.innerText;
+        });
+      case 10:
         !newTemplate && setTimeout( /*#__PURE__*/_asyncToGenerator( /*#__PURE__*/regenerator_default().mark(function _callee3() {
           return regenerator_default().wrap(function _callee3$(_context3) {
             while (1) switch (_context3.prev = _context3.next) {
@@ -624,17 +627,14 @@ window.addEventListener('templateLoaded', /*#__PURE__*/_asyncToGenerator( /*#__P
             return observer.observe(el);
           });
         }, 100);
-        setTimeout(function () {
-          document.querySelectorAll('a').forEach(function (el) {
-            el.id = el.id || el.innerText;
-          });
-        }, 100);
       case 15:
       case "end":
         return _context4.stop();
     }
   }, _callee4);
-})));
+})), {
+  passive: true
+});
 
 // 6 
 // Hit em w/ the ol razzle dazzle; and give em the wiggles~! >:D

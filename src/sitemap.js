@@ -54,16 +54,15 @@ window.addEventListener('templateLoaded', async () => {
     }
 
     const newTemplate = window.curTemplate != window.meta.template 
-    newTemplate && ( await createNav(), doThing() )
+    newTemplate && ( await createNav(), doThing(), document.querySelectorAll('a').forEach((el) =>{ el.id = el.id || el.innerText}) )
     !newTemplate && setTimeout( async ()=>{ doThing(2); }, 1100) 
 
     const pageT = document.getElementById('pageTransitioneer'); 
     pageT && !newTemplate && (pageT.style.animation = 'pageTransitioneer 1s alternate 2, gradient 1s alternate 2')
     pageT && !newTemplate && setTimeout( ()=>{ !pageT?'':pageT.style.animation = 'none' }, 2300);
 
-    setTimeout( ()=>{  document.querySelectorAll('h2,h3,h4,h5,h6').forEach((el) => observer.observe(el)); }, 100);
-    setTimeout( ()=>{  document.querySelectorAll('a').forEach((el) =>{ el.id = el.id || el.innerText}) }, 100);
-});
+    setTimeout( ()=>{  document.querySelectorAll('h2,h3,h4,h5,h6').forEach((el) => observer.observe(el)); }, 100); 
+}, {passive: true});
 
 // 6 
 // Hit em w/ the ol razzle dazzle; and give em the wiggles~! >:D
