@@ -7,7 +7,7 @@ const createNav = async () => {
     window.lbl = window.lbl || ` <label for="toggle-sitemap"> <span>&#x21e8;</span>&emsp;&ensp;Sitemap </label> <hr/>` 
 
     // Add in the TOC to the Sitemap for the given page.
-    sitemap = sitemap.map((item) => `<a id="${item.tab==window.meta.tab && 'currentPage'}" href="./${item.filename}.html" title="${item.summary}">${item.tab}</a>`)
+    sitemap = sitemap.map((item) => `<a id="${item.tab==window.meta.tab?'currentPage':('link_'+item.tab)}" id='link_${item.tab}' href="./${item.filename}.html" title="${item.summary}">${item.tab}</a>`)
     document.getElementById('sitemap').innerHTML = lbl + sitemap.join('')
 } 
 const capFirst = (str) => {let l=12; return str.charAt(0).toUpperCase() + str.slice(1).toLowerCase().replace(':','').slice(0, l) + (str.length > l+1 ? '...' : '') }
@@ -26,7 +26,7 @@ function addTocToSiteMap() {
         .map((header) =>{ 
             const z=capFirst(header.innerText || header.textContent);
             const spaces = '&emsp;'.repeat(header.tagName.slice(1)-1)
-            return `${spaces}<a id='anchor_${z}'href='#${z}'>${z}</a>`
+            return `${spaces}<a id='anchor_link_${z}'href='#${z}'>${z}</a>`
         })
     .join('<br/>')
     tocNode = document.createElement('div'); tocNode.setAttribute('id', 'toc'); tocNode.innerHTML = toc; 
@@ -37,6 +37,7 @@ function addAnchorsToHeaders() {
     headers.forEach(header => {
         header.id=capFirst(header.innerText||header.textContent);
         let anchor = document.createElement('a');
+        anchor.id='anchor_'+header.id;
         header.parentNode.insertBefore(anchor, header.nextSibling);
     });
 }
@@ -61,6 +62,7 @@ window.addEventListener('templateLoaded', async () => {
     pageT && !newTemplate && setTimeout( ()=>{ !pageT?'':pageT.style.animation = 'none' }, 2300);
 
     setTimeout( ()=>{  document.querySelectorAll('h2,h3,h4,h5,h6').forEach((el) => observer.observe(el)); }, 100);
+    setTimeout( ()=>{  document.querySelectorAll('a').forEach((el) =>{ el.id = el.id || el.innerText}) }, 100);
 });
 
 // 6 

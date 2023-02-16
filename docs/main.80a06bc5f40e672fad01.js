@@ -514,7 +514,7 @@ var createNav = /*#__PURE__*/function () {
 
           // Add in the TOC to the Sitemap for the given page.
           sitemap = sitemap.map(function (item) {
-            return "<a id=\"".concat(item.tab == window.meta.tab && 'currentPage', "\" href=\"./").concat(item.filename, ".html\" title=\"").concat(item.summary, "\">").concat(item.tab, "</a>");
+            return "<a id=\"".concat(item.tab == window.meta.tab ? 'currentPage' : 'link_' + item.tab, "\" id='link_").concat(item.tab, "' href=\"./").concat(item.filename, ".html\" title=\"").concat(item.summary, "\">").concat(item.tab, "</a>");
           });
           document.getElementById('sitemap').innerHTML = lbl + sitemap.join('');
         case 8:
@@ -547,7 +547,7 @@ function addTocToSiteMap() {
   var toc = _toConsumableArray(document.querySelectorAll('h2, h3, h4, h5, h6')).map(function (header) {
     var z = capFirst(header.innerText || header.textContent);
     var spaces = '&emsp;'.repeat(header.tagName.slice(1) - 1);
-    return "".concat(spaces, "<a id='anchor_").concat(z, "'href='#").concat(z, "'>").concat(z, "</a>");
+    return "".concat(spaces, "<a id='anchor_link_").concat(z, "'href='#").concat(z, "'>").concat(z, "</a>");
   }).join('<br/>');
   tocNode = document.createElement('div');
   tocNode.setAttribute('id', 'toc');
@@ -559,6 +559,7 @@ function addAnchorsToHeaders() {
   headers.forEach(function (header) {
     header.id = capFirst(header.innerText || header.textContent);
     var anchor = document.createElement('a');
+    anchor.id = 'anchor_' + header.id;
     header.parentNode.insertBefore(anchor, header.nextSibling);
   });
 }
@@ -623,7 +624,12 @@ window.addEventListener('templateLoaded', /*#__PURE__*/_asyncToGenerator( /*#__P
             return observer.observe(el);
           });
         }, 100);
-      case 14:
+        setTimeout(function () {
+          document.querySelectorAll('a').forEach(function (el) {
+            el.id = el.id || el.innerText;
+          });
+        }, 100);
+      case 15:
       case "end":
         return _context4.stop();
     }
