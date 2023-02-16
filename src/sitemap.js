@@ -37,7 +37,8 @@ function addAnchorsToHeaders() {
     headers.forEach(header => {
         header.id=capFirst(header.innerText||header.textContent);
         let anchor = document.createElement('a');
-        anchor.id='anchor_'+header.id;
+        anchor.id= anchor.href = 'anchor_'+header.id; 
+        anchor.setAttribute('aria-label', 'Link to ' + header.id);
         header.parentNode.insertBefore(anchor, header.nextSibling);
     });
 }
@@ -54,7 +55,7 @@ window.addEventListener('templateLoaded', async () => {
     }
 
     const newTemplate = window.curTemplate != window.meta.template 
-    newTemplate && ( await createNav(), doThing(), document.querySelectorAll('a').forEach((el) =>{ el.id = el.id || el.innerText}) )
+    newTemplate && ( await createNav(), doThing(), document.querySelectorAll('a').forEach((el) =>{ el.id = el.id || el.innerText + Math.floor(Math.random() * 100)}) )
     !newTemplate && setTimeout( async ()=>{ doThing(2); }, 1100) 
 
     const pageT = document.getElementById('pageTransitioneer'); 

@@ -559,7 +559,8 @@ function addAnchorsToHeaders() {
   headers.forEach(function (header) {
     header.id = capFirst(header.innerText || header.textContent);
     var anchor = document.createElement('a');
-    anchor.id = 'anchor_' + header.id;
+    anchor.id = anchor.href = 'anchor_' + header.id;
+    anchor.setAttribute('aria-label', 'Link to ' + header.id);
     header.parentNode.insertBefore(anchor, header.nextSibling);
   });
 }
@@ -603,7 +604,7 @@ window.addEventListener('templateLoaded', /*#__PURE__*/_asyncToGenerator( /*#__P
       case 8:
         doThing();
         document.querySelectorAll('a').forEach(function (el) {
-          el.id = el.id || el.innerText;
+          el.id = el.id || el.innerText + Math.floor(Math.random() * 100);
         });
       case 10:
         !newTemplate && setTimeout( /*#__PURE__*/_asyncToGenerator( /*#__PURE__*/regenerator_default().mark(function _callee3() {
