@@ -1,17 +1,21 @@
 const path = require('path');
-const { CleanWebpackPlugin } = require('clean-webpack-plugin');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
-const CopyWebpackPlugin = require('copy-webpack-plugin');
-const HtmlWebpackInlineSourcePlugin = require('html-webpack-inline-source-plugin-patched');
-const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const CssMinimizerPlugin = require("css-minimizer-webpack-plugin");
+const { CleanWebpackPlugin } = require('clean-webpack-plugin'); // works as expected
+const HtmlWebpackPlugin = require('html-webpack-plugin'); // works as expected
+
+const MiniCssExtractPlugin = require('mini-css-extract-plugin'); // works as expected
+const CssMinimizerPlugin = require("css-minimizer-webpack-plugin"); // works as expected
+const HTMLInlineCSSWebpackPlugin = require("html-inline-css-webpack-plugin").default; // works as expected
+
+const ScriptExtHtmlWebpackPlugin = require('script-ext-html-webpack-plugin'); // But works as expected
+const HtmlWebpackInlineSourcePlugin = require('html-webpack-inline-source-plugin-patched'); // works as expected
 const TerserPlugin = require('terser-webpack-plugin');
+
+const CopyWebpackPlugin = require('copy-webpack-plugin'); // works as expected
+
 const WorkboxPlugin = require('workbox-webpack-plugin');
-const ScriptExtHtmlWebpackPlugin = require('script-ext-html-webpack-plugin');
 const WebpackPwaManifest = require('webpack-pwa-manifest')
 const hr = require('./src/header.json');
 const ImageMinimizerPlugin = require("image-minimizer-webpack-plugin"); 
-const HTMLInlineCSSWebpackPlugin = require("html-inline-css-webpack-plugin").default;
 
 
 const isDev = process.env.NODE_ENV === 'development'
@@ -25,15 +29,6 @@ module.exports = env => {
       <div id="body"></div>
     </body>
   </html>`;
-  let template1 = `
-  <!DOCTYPE html>
-  <html lang="en" dir="ltr">
-    <script src='router.js'></script>
-    <head id="head"></head>
-    <body>
-      <div id="body"></div>
-    </body>
-  </html>`;
   return {
   entry: {
     head: './src/head.js',
@@ -41,36 +36,8 @@ module.exports = env => {
     main: './src/main.js',
   },
   optimization: {
-    minimize: !!isDev,
+    minimize: true,
     minimizer: [
-      new TerserPlugin({
-        terserOptions: {
-          ecma: undefined,
-          parse: {
-            html5_comments: false,
-          },
-          compress:{ // (default {})
-            pure_funcs: ['console.log'],
-            toplevel: true, 
-          },
-          mangle: { // (default true)
-            toplevel: true,
-          },
-          module: false,
-          // Deprecated
-          output: null,
-          format: null,
-          sourceMap: { // (default false) - Pass true to include source maps in error messages.
-            url: "inline", 
-          },
-          toplevel: true, // (default false) - Pass true to enable top level variable and function name mangling and to drop unused variables and functions.
-          nameCache: null,
-          ie8: false,
-          keep_classnames: undefined,
-          keep_fnames: false,
-          safari10: false,
-        },
-      }),
       new CssMinimizerPlugin({
         minimizerOptions: {
           preset: [
@@ -156,26 +123,13 @@ module.exports = env => {
         }
       },
       {
-        test: /.s?css$/,
+        test: /\.(sc|c)ss$/i,
         use: [
           {
             loader: MiniCssExtractPlugin.loader,
-            options: {
-              hmr: process.env.NODE_ENV === 'development',
-              reloadAll: true,
-              sourceMap: true
-            },
+            options: { hmr: isDev, reloadAll: isDev, sourceMap: isDev, cache: true },
           },
-          {loader:'css-loader', options: {sourceMap: true} },
-          { loader: "postcss-loader",
-            options: {
-              ident: 'postcss',
-              postcssOptions: {
-              plugins: [ require('postcss-preset-env')() ]
-              },
-              sourceMap: true
-            }
-          },
+          {loader:'css-loader', options: {sourceMap: isDev} },
           'sass-loader',
         ],
       },
@@ -229,7 +183,7 @@ module.exports = env => {
       filename: 'index.html',
       chunks: ['head','main'],
       excludeChunks: [ 'index'],
-      templateContent: template1,
+      templateContent: template,
       // inlineSource: 'main.*.js$', 
       inject: 'head'
     }),
@@ -259,7 +213,8 @@ module.exports = env => {
       lang:"ar",
       icons: [ ],
       inject: false
-    } ),/*
+    } ),
+    /*
     !!isDev && new WorkboxPlugin.GenerateSW({
       swDest: './sw.js',
       clientsClaim: true,
@@ -273,7 +228,8 @@ module.exports = env => {
           expiration: { maxEntries: 10 },
         },
       }]
-    }),*/
+    }),
+    */
     new CopyWebpackPlugin({
       patterns: [
         { from: './robots.txt', to: 'robots.txt', toType: 'file' },

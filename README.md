@@ -2,6 +2,50 @@
 
 ## Welcome! 
 
+what we want:
+- render header.js in (react snap/ dev) then dispose of it for (prod).  
+- render main.js in (React snap/ dev) and also for (prod).
+- - render it inline?
+- render template.js in (react snap/ dev) and also for (prod).
+- - Possible to compress template and content, too?
+- Routing event handler triggers events in template.
+
+current problems:
+- preset env nor autoprefixer work
+- header isn't rendering
+- Webpack is adding too much wait and for what? 
+- we want to inline packaged content ( .. what? ) and also lazy load (the router) 
+
+
+attempts:
+- import router.js in template -> yuck
+- 
+
+<script src='router.js'></script>
+<button id="load-module-button">Load Module</button>
+<script>
+    document.getElementById('load-module-button').addEventListener('click', async () => {
+    const module = await import('./router.js');
+    // Do something with the imported module
+    module.doSomething();
+    });
+</script>
+// my-module.js
+export function doSomething() {
+  console.log('Something was done!');
+}
+
+// 
+// I should find a way to move the animations off the router script and into the template. only problem is they depend on the router to know when to run.
+// 
+/**
+    Dispatching is important to diambiguate the router from the animations (which should be in the template)
+/*
+To fix the issue of the animations depending on the router, you could use a technique called event-driven programming.
+You could define a custom event that is triggered by the router when it is finished loading the page and call it something like "pageLoaded". Then, in the template, you could use JavaScript to listen for this event and trigger the animations when the event is received.
+This way, the animations can be decoupled from the router and will only run when the custom event is triggered, ensuring that the animations are synced up with the loading of the page.*
+*/
+
 please visit the official [website](https://cvminigames.com/) for more information
 
 Scrip1 - > exportedComponent

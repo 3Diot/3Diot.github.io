@@ -6,14 +6,14 @@
   "version": "1.0.0",
   "scripts": {
     "start": "webpack serve --open --hot --progress --mode development --devtool eval-source-map",
-    "build": "webpack --env production --mode production --profile --progress",
+    "build": "webpack --mode production --profile --progress",
     "postbuild": "make sitemap && react-snap"
   },
   "reactSnap": {
     "inlineCss": false,
     "source": "./docs",
     "removeStyleTags": false,
-    "preloadImages": true,
+    "preloadImages": false,
     "asyncScriptTags": false,
     "removeScriptTags": false,
     "include": [
@@ -31,6 +31,9 @@
     "@ionic/core": "^6.4.1",
     "chardin.ts": "^1.0.4",
     "core-js": "^3.27.2",
+    "postcss": "^8.4.21",
+    "postcss-cli": "^10.1.0",
+    "postcss-cli-simple": "^4.0.0",
     "preact": "^10.11.3",
     "preact-router": "^4.1.0",
     "react": "^16.13.1",
@@ -46,6 +49,7 @@
     "@babel/preset-react": "^7.10.4",
     "@capacitor/cli": "^2.5.0",
     "@capacitor/core": "^2.5.0",
+    "autoprefixer": "^10.4.13",
     "babel-loader": "^8.3.0",
     "clean-webpack-plugin": "^3.0.0",
     "copy-webpack-plugin": "^9.0.0",
