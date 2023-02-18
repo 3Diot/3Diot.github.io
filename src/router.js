@@ -1,12 +1,16 @@
+import('./sitemap.js')
+
 // Page Load Logic and Routing
 export const navEvent = async (event) => {
+    console.log('navEvent', event)
     let route = (event.target.href || event.target.location.href).replace(window.origin,'');  
     if (route.split("#")[0] != window.oldRoute.split("#")[0]){ await handleRoute( route ); window.oldRoute = route; }; 
     route.indexOf('#') == -1 && window.scrollTo({ top: 0, behavior: 'smooth' });
     let t = document.getElementById(route.split('#')[1]); t && t.scrollIntoView({ behavior: 'smooth' });
 };
 
-export const handleRoute = async (route) => { 
+export const handleRoute = async (route) => {
+    console.log('handleRoute', route) 
     // Loads a route using it's meta data.
     let content = await (await fetch(`./posts/${route.replace("/",'').replace('.html','') || 'index'}.json`)).json(); // Get the Upcoming Files Json Data 
     window.meta = content.meta; meta.content = content.content; document.title = window.meta.title; 
@@ -16,6 +20,7 @@ export const handleRoute = async (route) => {
         window.newTemplate = true;
         document.body.innerHTML = await (await fetch(`./${window.meta.template}.html`)).text();
         await loadScripts(); 
+        // await import(/* webpackChunkName: "sitemap" */ './sitemap.js')
     }
     window.dispatchEvent( new CustomEvent('templateLoaded') );
     setTimeout( ()=>{  

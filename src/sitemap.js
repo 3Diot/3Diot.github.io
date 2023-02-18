@@ -45,12 +45,11 @@ window.addEventListener('templateLoaded', async () => {
         let el = document.getElementById(id); el.innerHTML = ''; 
         el.appendChild( document.createRange().createContextualFragment( meta[id] ));
     } 
-
     let populateTemplate = async () => { 
         ['content', 'title', 'summary'].map((id) => replace( id ) )
-        addTocToSiteMap(); addAnchorsToHeaders();
+        addTocToSiteMap(); 
+        addAnchorsToHeaders();
     }
-    
     window.newTemplate && ( await createNav(), populateTemplate(), document.querySelectorAll('a').forEach((el) =>{ el.id = el.id || el.innerText + Math.floor(Math.random() * 100)}) )
     !window.newTemplate && setTimeout( async ()=>{ populateTemplate(); }, 1100)
     const pageT = document.getElementById('pageTransitioneer'); 

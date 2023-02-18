@@ -33,7 +33,7 @@ module.exports = env => {
         return '[runtime].[id].[hash].js'
       },
       chunkFilename: 'chunk.[name].[chunkhash].js',
-      globalObject: "this",
+      globalObject: "self",
       clean: true,
     },
     optimization: {

@@ -1,1 +1,0 @@
-"use strict";(this.webpackChunkname=this.webpackChunkname||[]).push([[347],{347:function(e,n,s){e.exports=s.p+"legal.json"}}]);
