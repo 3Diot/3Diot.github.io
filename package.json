@@ -27,10 +27,7 @@
     },
     "destination": "./docs"
   },
-  "browserslist": [
-    "last 2 versions",
-    "> 0.5%"
-  ],
+  "browserslist": [ "defaults"],
   "devDependencies": {
     "@babel/core": "^7.12.10",
     "@babel/preset-env": "^7.12.11",
