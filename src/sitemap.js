@@ -1,22 +1,18 @@
 // 5.
 //  
-const createNav = async () => {  
-    // let sitemap = JSON.parse((await import(`./posts/sitemap.json`) ).default) 
-    // let sitemap = ( await (await fetch((await import('./posts/sitemap.json') ).default)).json() )
+const createNav = async () => {   
     let sitemap = await (await fetch('./posts/sitemap.json')).json();
     window.lbl = window.lbl || ` <label for="toggle-sitemap"> <span>&#x21e8;</span>&emsp;&ensp;Sitemap </label> <hr/>` 
-
-    // Add in the TOC to the Sitemap for the given page.
     sitemap = sitemap.map((item) => `<a id="${item.tab==window.meta.tab?'currentPage':('link_'+item.tab)}" id='link_${item.tab}' href="./${item.filename}.html" title="${item.summary}">${item.tab}</a>`)
     document.getElementById('sitemap').innerHTML = lbl + sitemap.join('')
 } 
 const capFirst = (str) => {let l=12; return str.charAt(0).toUpperCase() + str.slice(1).toLowerCase().replace(':','').slice(0, l) + (str.length > l+1 ? '...' : '') }
+
 function addTocToSiteMap() {
     // if (!('toc' in window.meta) || window.meta.toc != 'true') return;
-
-    // un-attach currentPage and reassign to where #sitemap.child.innerHTML == window.meta.tab 
     let cp = document.getElementById('currentPage'); cp && cp.removeAttribute('id')
     let tocNode = document.getElementById('toc'); tocNode && tocNode.remove()
+    
     const sitemap = document.getElementById('sitemap')
     const currentPage = sitemap.querySelector(`a[title="${window.meta.summary}"]`)
     currentPage && currentPage.setAttribute('id', 'currentPage')
@@ -32,6 +28,7 @@ function addTocToSiteMap() {
     tocNode = document.createElement('div'); tocNode.setAttribute('id', 'toc'); tocNode.innerHTML = toc; 
     currentPage.parentNode.insertBefore(tocNode, currentPage.nextSibling)
 }
+
 function addAnchorsToHeaders() {
     let headers = document.querySelectorAll('h2, h3, h4, h5, h6');
     headers.forEach(header => {
@@ -44,23 +41,22 @@ function addAnchorsToHeaders() {
 }
 
 window.addEventListener('templateLoaded', async () => {    
-    let replace = (items) => {items.map((item) => {document.getElementById(item).innerHTML = meta[item] }) }
-    // run animations here
-    console.log('templateLoaded - THE ROUTER LOADED THE TEMPLATE')
+    let replace = (id) => {
+        let el = document.getElementById(id); el.innerHTML = ''; 
+        el.appendChild( document.createRange().createContextualFragment( meta[id] ));
+    } 
 
-    let doThing = async () => { 
-        replace( ['content', 'title', 'summary'] );
-        addTocToSiteMap();
-        addAnchorsToHeaders();
+    let populateTemplate = async () => { 
+        ['content', 'title', 'summary'].map((id) => replace( id ) )
+        addTocToSiteMap(); addAnchorsToHeaders();
     }
-
-    const newTemplate = window.curTemplate != window.meta.template 
-    newTemplate && ( await createNav(), doThing(), document.querySelectorAll('a').forEach((el) =>{ el.id = el.id || el.innerText + Math.floor(Math.random() * 100)}) )
-    !newTemplate && setTimeout( async ()=>{ doThing(2); }, 1100) 
-
+    
+    window.newTemplate && ( await createNav(), populateTemplate(), document.querySelectorAll('a').forEach((el) =>{ el.id = el.id || el.innerText + Math.floor(Math.random() * 100)}) )
+    !window.newTemplate && setTimeout( async ()=>{ populateTemplate(); }, 1100)
     const pageT = document.getElementById('pageTransitioneer'); 
-    pageT && !newTemplate && (pageT.style.animation = 'pageTransitioneer 1s alternate 2, gradient 1s alternate 2')
-    pageT && !newTemplate && setTimeout( ()=>{ !pageT?'':pageT.style.animation = 'none' }, 2300);
+    pageT && !window.newTemplate && (pageT.style.animation = 'pageTransitioneer 1s alternate 2, gradient 1s alternate 2')
+    pageT && !window.newTemplate && setTimeout( ()=>{ !pageT?'':pageT.style.animation = 'none' }, 2300);
+    window.newTemplate = false;
 
     setTimeout( ()=>{  document.querySelectorAll('h2,h3,h4,h5,h6').forEach((el) => observer.observe(el)); }, 100); 
 }, {passive: true});

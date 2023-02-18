@@ -1,16 +1,21 @@
 import "./main.css";
 import "./sitemap.js";
-import { handleRoute } from "./router.js";
 
-(async()=>{
-    if(!!window.content?.innerHTML.trim() ){ return }
-    console.log('Running in dev mode or react-snap!')
-    window.history.replaceState(null, "", "");
-    window.initializing = true
-    handleRoute(window.location.pathname);
-    window.initializing = false
-} )();
-// let content = JSON.parse((await import(`./posts/${page||'index'}.json`) ).default)  
-// let content = await (await fetch((await import(/* webpackChunkName: "[request]" */ `./posts/${page}.json`) ).default)).json()  
-// let content = await (await fetch(`./posts/${route.replace("/",'').replace('.html','') || 'index'}.json`)).json(); 
+const getImports = async()=> !!!window.navEvent && 
+    ({ handleRoute: window.handleRoute, navEvent: window.navEvent } = await import(/* webpackChunkName: "router" */ './router.js'));
 
+window.redirect = (async (event) => { 
+    event.preventDefault();
+    window.history.pushState({}, '', event.target.href); 
+    await getImports();
+    await window.navEvent(event); 
+} );
+
+document.addEventListener('DOMContentLoaded', async () => {
+    if (!!!window.content?.innerHTML.trim()){ 
+        await getImports(); 
+        await window.handleRoute(window.location.pathname);
+    } 
+    window.oldRoute = window.location.pathname.replace(window.origin,'')
+    document.querySelectorAll('a[href^="./"]').forEach(link => link.addEventListener('click', window.redirect ) )
+})

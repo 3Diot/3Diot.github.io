@@ -2,50 +2,6 @@
 
 ## Welcome! 
 
-what we want:
-- render header.js in (react snap/ dev) then dispose of it for (prod).  
-- render main.js in (React snap/ dev) and also for (prod).
-- - render it inline?
-- render template.js in (react snap/ dev) and also for (prod).
-- - Possible to compress template and content, too?
-- Routing event handler triggers events in template.
-
-current problems:
-- preset env nor autoprefixer work
-- header isn't rendering
-- Webpack is adding too much wait and for what? 
-- we want to inline packaged content ( .. what? ) and also lazy load (the router) 
-
-
-attempts:
-- import router.js in template -> yuck
-- 
-
-<script src='router.js'></script>
-<button id="load-module-button">Load Module</button>
-<script>
-    document.getElementById('load-module-button').addEventListener('click', async () => {
-    const module = await import('./router.js');
-    // Do something with the imported module
-    module.doSomething();
-    });
-</script>
-// my-module.js
-export function doSomething() {
-  console.log('Something was done!');
-}
-
-// 
-// I should find a way to move the animations off the router script and into the template. only problem is they depend on the router to know when to run.
-// 
-/**
-    Dispatching is important to diambiguate the router from the animations (which should be in the template)
-/*
-To fix the issue of the animations depending on the router, you could use a technique called event-driven programming.
-You could define a custom event that is triggered by the router when it is finished loading the page and call it something like "pageLoaded". Then, in the template, you could use JavaScript to listen for this event and trigger the animations when the event is received.
-This way, the animations can be decoupled from the router and will only run when the custom event is triggered, ensuring that the animations are synced up with the loading of the page.*
-*/
-
 please visit the official [website](https://cvminigames.com/) for more information
 
 Scrip1 - > exportedComponent
@@ -179,3 +135,102 @@ https://github.com/icelam/html-inline-script-webpack-plugin
 https://github.com/webpack-contrib/json-minimizer-webpack-plugin/tree/master/test
 
 python packaging uses dist and webpack does not.
+
+
+
+what we want:
+- render header.js in (react snap/ dev) then dispose of it for (prod).  
+- render main.js in (React snap/ dev) and also for (prod).
+- - render it inline?
+- render template.js in (react snap/ dev) and also for (prod).
+- - Possible to compress template and content, too?
+- Routing event handler triggers events in template.
+
+current problems:
+- preset env nor autoprefixer work
+- header isn't rendering
+- Webpack is adding too much wait and for what? 
+- we want to lazy load (the router) and transition animations
+gpu accelerated css transitions
+
+browserlists postcss autoprefixerS
+saturate your colors!
+compress the js
+
+
+attempts:
+- import router.js in template -> yuck
+
+
+- main.js is stripped out since the router isn't needed onload.
+- on link hover/ click pull router to deal w/it.. .
+
+reactive explorative interactive
+0. instead of interactive steppers, tabs, fixies, sliders, use scroll and multiples
+1. if you make the reader click or do anything other than scroll, something spectacular has to happen
+2. if you make a tooltip or rollover assume no one will ever see it.
+3. fewer small graphics embedded in articles and more stand-alone visual stories
+4. most visuals are static as a result
+5. if animation or mation is needed. trigger it on scroll
+
+1. triple ellipses comments popup
+2. view counter
+3. social icons
+element.insertAdjacentHTML('afterend', 'txt')
+https://www.joshwcomeau.com/gradient-generator/
+https://www.colourlovers.com/api/palettes/top?jsonCallback=?
+toImage() / capture html canvas as gif/jpg/pdf
+background image behind a blobby svg clip path 
+https://www.vantajs.com/?effect=dots
+https://maxhodak.com/writings/index.html
+scrollsnap
+https://css-tricks.com/full-width-containers-limited-width-parents/
+
+
+<script src='router.js'></script>
+<button id="load-module-button">Load Module</button>
+<script>
+    document.getElementById('load-module-button').addEventListener('click', async () => {
+    const module = await import('./router.js');
+    // Do something with the imported module
+    module.doSomething();
+    });
+</script>
+// my-module.js
+export function doSomething() {
+  console.log('Something was done!');
+}
+
+// 
+// I should find a way to move the animations off the router script and into the template. only problem is they depend on the router to know when to run.
+// 
+/**
+    Dispatching is important to diambiguate the router from the animations (which should be in the template)
+/*
+To fix the issue of the animations depending on the router, you could use a technique called event-driven programming.
+You could define a custom event that is triggered by the router when it is finished loading the page and call it something like "pageLoaded". Then, in the template, you could use JavaScript to listen for this event and trigger the animations when the event is received.
+This way, the animations can be decoupled from the router and will only run when the custom event is 
+triggered, ensuring that the animations are synced up with the loading of the page.*
+
+manually exclude babel compression polyfills on main template.
+*/
+
+
+/*
+https://webpack.js.org/configuration/devtool/
+https://webpack.js.org/configuration/dev-server/#devserverstatic
+https://github.com/stereobooster/react-snap/blob/master/index.js
+https://github.com/terser/terser
+        { from: './src/header.json', to: 'header.json', toType: 'file' },
+        { from: './src/error', to: 'error' },
+        { from: './src/.htaccess', to: '.htaccess', toType: 'file' },
+        { from: './src/robots.txt', to: 'robots.txt', toType: 'file' },
+        { from: './assets/', to: './assets', toType: 'dir' },
+        { from: "./assets/posts", to: "./assets/posts", toType: 'dir' },
+        { from: './assets/images', to: './images', toType: 'dir' }
+
+// let content = JSON.parse((await import(`./posts/${page||'index'}.json`) ).default)  
+// let content = await (await fetch((await import(/* webpackChunkName: "[request]" */ `./posts/${page}.json`) ).default)).json()  
+// let content = await (await fetch(`./posts/${route.replace("/",'').replace('.html','') || 'index'}.json`)).json(); 
+
+*/
