@@ -32,9 +32,8 @@ export const handleRoute = async (route) => {
 // Load scripts from template.
 const loadScripts = async () => {
     Array.from(document.getElementsByTagName("script")).forEach(script => {
-        if (new RegExp("head|helmet", "i").test(script.getAttribute('src'))){ script.remove(); return; } // React Snap Only
-        console.log({script}, script.getAttribute('src') )
-        if (new RegExp("main|router", "i").test(script.getAttribute('src'))){  return; } // Client runs once
+        if (new RegExp("head|helmet", "i").test(script.getAttribute('src'))){ script.remove(); return; } // Dev & React Snap inits Only
+        if (new RegExp("main|router", "i").test(script.getAttribute('src'))){  return; } // Dev & React-Snap & Client runs Init Only.
         if ( !script.getAttribute('tag') ) { return }
         const newScript = document.createElement("script"); 
         script.textContent && (newScript.textContent = script.textContent);

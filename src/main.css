@@ -76,6 +76,11 @@ blockquote span{ color: var(--hint-of); font-style: normal; font-weight: bold; d
 details[open] > summary::marker { content: "💖"; }
 details > summary > * { display: inline; }
 summary::marker { content: "🧡"; } 
+  /*
+details > img {display:block; margin:auto;}
+details[open] > details summary::marker { content: "🧡" }
+details[open] > details[open] summary::marker { content: "💖"; }
+ */
 
 summary{ text-align: center; cursor: pointer; font-size: 20px;}
 details{padding: 12px;} 
@@ -84,11 +89,7 @@ hr{
   margin: 1px 1px 10px 1px;
   border-top: 1px solid rgba(0, 72, 72, 0.4);
 }
-  /*
-details > img {display:block; margin:auto;}
-details[open] > details summary::marker { content: "🧡" }
-details[open] > details[open] summary::marker { content: "💖"; }
- */
+
 /*
 body
 */
@@ -312,184 +313,3 @@ input { position: absolute;  width: 1px; clip: rect(0 0 0 0); overflow: hidden; 
     10% { clip-path: var(--path1) }
     100% { clip-path: var(--path1) }
   }
-
-
-
-/*
-https://anthonyhobday.com/sideprojects/saferules/
-
-General -> Put simple on complex or complex on simple
-Layout -> Make outer padding the same or more than inner padding
-Layout -> no hard divides unless it's an img divider
-Buttons -> Make horizontal padding twice the vertical padding in buttons
-Elements -> should go in order of visual weight (dark to light, fx to none, etc)
-Element -> use multiples of '8'
-
-Border -> Container borders should contrast with both the container and the background
-Border -> For nested divs w rounded corners: interiorItemsRoundedBorder = xteriorspx - paddingpx
-Border -> Make drop shadow blur values double their distance values. 4px on y = 8px blur
-Border -> - closer z-index to camera = more light diffusion/ lower shadow opacity
-
-Colors -> If you saturate your neutrals you should use warm or cool colours, not both
-Colors -> Colours in a palette should have distinct brightness values, not just in hue
-Colors -> bg should get lighter as the z-index increases
-Colors -> The HSB brightness difference between background and container should be within 12%/7% for dark/light interface.
-
-https://blog.logrocket.com/css-before-after-custom-animations-transitions/#before-pseudo-element 
-https://tympanus.net/codrops/2013/05/22/examples-of-pseudo-elements-animations-and-transitions/
-https://cssanimation.rocks/pseudo-elements/
-https://textfac.es/
-https://anthonyhobday.com/sideprojects/saferules/
-https://graphemica.com/%E2%98%B0
-
-  templates
-  -. > parallax background
-  -. > keyframes animate linear gradient background
-  -. > keyframes animate background of randomly generated cubes.
-  -. > Scroll Progress Indicator.
-  -. > Mobile -> sticky top bar? desktop -> Sticky left panel. both -> logo and title
-  -. > Optionally - a table of contents is shown before the article or at the side.
-  -. scrollpos animate an cube tumbling down the divider line with a clip path 
-  -. > svg text flows along the side of a clip path
-  -/ > text-shadow: 3px 3px 40px #7DBAF0; -> animate text shadow on hover?
-  -  style guide - https: - https://neumorphism.io/, http://csshero.org/mesher/ e page transitions https://css-tricks.com/animating-with-clip-path/
-*/
-/*
-  Techniques
-  Avoid Complexity: Sitemap links to nav pages which link to subject-related articles.
-  html-> image or div w/ text to crop w mask
-  css-> animate background-x-position
-  css-> background-image, -attachment: fixed, -size: cover, -position: center
-  css-> -webikit-mask-image:(url) & -repeat: no-repeate; mask-type, -size, -position
-  css-> clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
-  svg+css-> clip-path: url(@svg <clipPath id>)
-  mask-image: linear-gradient(to bottom, transaprent 10%, black) -> dampends image 
-  animate inset box-shadow https://codepen.io/lonekorean/pen/KKVdQPX 
-  mobile dragdrop - https://codepen.io/deepakkadarivel/pen/LrGEdL
-  Glowing BG for Active-Page Link. Glowing Underline for TOC Anchor Link
-  Jazz up section divides by by slapping atop a transform rotated div
-*/
-/*
-  Within the Articles
-  triple ellipsis comment blurbs! -> onFocus/onHover sibling posfixed animate botom -200px - 0px
-- h2:nth-child(4) { animation-delay: 1.5s; }
-- 2 - cards
-- horizontal rulings with animated center piece
-- css :anchor + :target show and hide page content.
-- <a href="#home">John Doe</a>  + section:target { display: block; } -> id matching the URL's fragment
-- ASCII ART
-*/ 
-/*
-  Useful Articles
-  https://www.w3schools.com/howto/tryit.asp?filename=tryhow_css_parallax_percent
-  https://css-tricks.com/almanac/properties/m/mask-image/
-  https://css-tricks.com/almanac/properties/s/shape-outside/
-  https://css-tricks.com/almanac/properties/c/clip-path/
-  https://css-tricks.com/animating-with-clip-path/
-  https://css-irl.info/experimental-layouts/
-  https://cssanimation.rocks/pseudo-elements/ 
-  https://www.joshwcomeau.com/css/designing-shadows/
-  https://www.joshwcomeau.com/css/make-beautiful-gradients/
-  https://garden.bradwoods.io/notes/css/3d
-  https://github.com/codrops/OnScrollPathAnimations/ 
-  https://github.com/codrops/CaptionHoverEffects
-  https://github.com/codrops/ShapeHoverEffectSVG
-  https://blog.logrocket.com/css-before-after-custom-animations-transitions/#before-pseudo-element
-  https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Animations/Using_CSS_animations 
-*/
-
-/*
-    Resources
-https://www.toptal.com/designers/htmlarrows/arrows/
-https://chromium.googlesource.com/chromium/blink/+/master/Source/core/css/html.css
-https://bennettfeely.com/clippy/
-https://animista.net/play/text/focus-in
-https://svg-path-visualizer.netlify.app/
-https://yqnn.github.io/svg-path-editor/
-https://cssbud.com/css-generator/css-glow-generator/#search-header
-https://getwaves.io/
-https://www.blobmaker.app/
-http://csshero.org/mesher/
-https://shadows.brumm.af/
-https://ui.glass/generator/#
-http://css3generator.com/
-http://www.cssfiltergenerator.com/
-https://maxbittker.github.io/broider/
-https://www.svgrepo.com/
-
-https://tympanus.net/codrops/2021/06/01/trigonometry-in-css-and-javascript-introduction-to-trigonometry/
-https://tympanus.net/codrops/2021/06/02/trigonometry-in-css-and-javascript-getting-creative-with-trigonometric-functions/
-https://tympanus.net/codrops/2021/06/04/trigonometry-in-css-and-javascript-beyond-triangles/
-https://tympanus.net/codrops/2021/12/07/coloring-with-code-a-programmatic-approach-to-design/
-*/
-/*
-*/
-
-/*  
-  https://css-tricks.com/animating-with-clip-path/
-  clip-path can use, clip-paths(% relative), or a url to a SVG <clipPath> element
-  clip-path CSS property can use the SVG Path attributes for animated transitions.
-  The same number of vertices in the path cannot change but only manipulated when animating.
-*/
-
-/*
-transition: [property] [duration] [timing-function] [delay];
-transition-property
-The transition-property defines the CSS property where the transition over the element will be applied. 
-We can also apply a transition to a single property (e.g., background-color or transform) or to all the properties in the rule-set.
-div {transition-property: all; transition-property: transform; }
-
-*//*
-https://blog.logrocket.com/understanding-animation-transition-timing-functions-css/#:~:text=There%20are%20two%20ways%20to,changes%20over%20a%20specific%20duration.
-There are two ways to animate web elements in CSS: the animation and transition properties.
-
-The animation property allows you to change the properties of an element over a specific duration, and needs @keyframes. 
-The transition property defines how an element changes over a specific duration.
-animation: <name> <duration> <timing-function>;
-transition: <property> <duration> <timing-function>;
-*/
-
-
-/*
-https://tympanus.net/codrops/2013/05/22/examples-of-pseudo-elements-animations-and-transitions/
-Only supported by modern browsers like Firefox, IE10 and recently Chrome (see this updated support table for more info)
-Does not work in mobile browsers yet
-Pseudo-elements cannot be identified by ID
-Pseudo-elements don’t appear in the DOM.
-Pseudo-elements can’t be animated with JavaScript
-
-*//*
-
-https://cssanimation.rocks/pseudo-elements/
-double colon :: to denote pseudo-elements (as opposed to pseudo-classes like :hover, :first-child).
-When adding pseudo-elements, needs 'content' property before they can be made visible on the page. 
-
-button::after {
-  content: '';
-  position: absolute;
-  top: -50%;
-  right: -50%;
-  bottom: -50%;
-  left: -50%;
-  background: linear-gradient(to bottom, rgba(229, 172, 142, 0), rgba(255,255,255,0.5) 50%, rgba(229, 172, 142, 0));
-  transform: rotateZ(60deg) translate(-5em, 7.5em);
-}
-button:hover::after, button:focus::after {
-  animation: sheen 1s forwards;
-}
-@keyframes sheen {
-  100% {
-    transform: rotateZ(60deg) translate(1em, -9em);
-  }
-}
-
-transform:translate(-50%, -50%); // center the element
-transform:translateX(-50%); // center the element horizontally
-*/
-/*
-  @keyframes deets {
-    0% {     box-shadow: 0 0 0 0 rgba(0,0,0, 0.4); }
-    70% {       box-shadow: 0 0 0 50px rgba(0,0,0, 0); }
-    100% {       box-shadow: 0 0 0 0 rgba(0,0,0, 0); }
-  }
-*/

@@ -6,6 +6,8 @@ const HtmlWebpackInlineSourcePlugin = require('html-webpack-inline-source-plugin
 const HTMLInlineCSSWebpackPlugin = require("html-inline-css-webpack-plugin").default;
 // const ScriptExtHtmlWebpackPlugin = require('script-ext-html-webpack-plugin'); outdated
 const CopyWebpackPlugin = require('copy-webpack-plugin');
+const TerserPlugin = require('terser-webpack-plugin');
+const HtmlMinimizerPlugin = require('html-minimizer-webpack-plugin');
 
 const isDev = process.env.NODE_ENV === 'development'
 
@@ -38,6 +40,20 @@ module.exports = env => {
     },
     optimization: {
       splitChunks: { chunks: 'all', },
+      minimizer: [
+        new TerserPlugin({ // config default parser
+          terserOptions: {
+            parse: { html5_comments: false },
+            compress: { pure_funcs: ['console.log'], toplevel: true },
+            sourceMap: { url: "inline" },
+            keep_classnames: true,
+            keep_fnames: true,
+            nameCache: null, // when set to true it helps speed things up but can deliver outdated cache results
+            keep_classnames: true,
+            keep_fnames: true
+          },
+        })
+      ]
     },
     module: {
       rules: [
@@ -144,7 +160,14 @@ module.exports = env => {
           { from: './src/tables', to: './tables', toType: 'dir' },
           { from: './src/images', to: './images', toType: 'dir' }
         ]
-      } )
+      } ),
+      new HtmlMinimizerPlugin({
+        minimizerOptions: {
+          minifyJS: true, // compress template_article js
+        },
+        // test: /template_article\.html$/,
+        exclude: [/tables/, /maps/],
+      }),
     ],
 
   }
