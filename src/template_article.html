@@ -74,10 +74,10 @@ createAndAnimate(); setInterval(() => { createAndAnimate(20000); }, duration);
   (function() {
     // start = mousepos & objInit = topleft of obj
     var dragStartX, dragStartY, objInitLeft, objInitTop = 0;
-    dragTarget.addEventListener("mousedown", downFN );
+    dragTarget.addEventListener("mousedown", downFN,{ passive:false });
     document.addEventListener("mousemove", moveFN,{ passive:false });
     document.addEventListener("mouseup", function(e) {inDrag = false}); 
-    dragTarget.addEventListener("touchstart", downFN );
+    dragTarget.addEventListener("touchstart", downFN,{ passive:false });
     dragTarget.addEventListener("touchmove", moveFN,{ passive:false });
     dragTarget.addEventListener("touchend", function(e) {inDrag = false;});
   }())
