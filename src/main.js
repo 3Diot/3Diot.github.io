@@ -53,5 +53,5 @@ window.addEventListener('load', () => {
                 else { console.log('Content is cached for offline use.'); } // Everything has been precached.
             };
         };
-    })
-}).catch(error => { console.error('Error during service worker registration:', error); });
+    }).catch(error => { console.error('Error during service worker registration:', error); });
+});
