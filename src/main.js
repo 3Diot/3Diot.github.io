@@ -20,3 +20,20 @@ document.addEventListener('DOMContentLoaded', async () => {
     document.querySelectorAll('a[href^="./"]').forEach(link => link.addEventListener('click', window.redirect ) )
     window.addEventListener('popstate', async () => { loadRouter(); });
 })
+
+if('serviceWorker' in navigator) {
+    window.addEventListener('load', function() {
+        navigator.serviceWorker.register('/service-worker.js')
+        .then(function(registration) { 
+            console.log('ServiceWorker registration successful with scope: ', registration.scope);
+        }, function(err) { 
+            console.log('ServiceWorker registration failed: ', err);
+        });
+    });
+}
+
+if (!/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) & location_search && localStorage.getItem('displayChardin') != 'false') {
+    localStorage.setItem('displayChardin', 'false')
+    // let chardin = new Chardin(document.querySelector('body'));
+    // chardin.start();
+}

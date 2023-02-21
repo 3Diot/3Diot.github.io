@@ -175,7 +175,23 @@ module.exports = env => {
         theme_color: 'red',
         dir:"rtl",
         lang:"ar",
-        icons: [ ],
+        icons: [ 
+          {  
+            src: path.resolve('./images/icon192.png'),
+            sizes: "144x144",  
+            type: "image/png"  
+          },
+          {  
+            src: path.resolve('./images/icon192.png'),
+            sizes: "192x192",  
+            type: "image/png"  
+          }, 
+          {  
+            src: path.resolve('./images/icon512.png'), 
+            sizes: "512x512",  
+            type: "image/png"  
+          } 
+        ],
         inject: false
       } ),
       new HtmlMinimizerPlugin({
@@ -186,7 +202,7 @@ module.exports = env => {
         exclude: [/tables/, /maps/],
       }),
       new WorkboxPlugin.GenerateSW({
-        swDest: './sw.js',
+        swDest: './service-worker.js',
         clientsClaim: true,
         skipWaiting: true,
         exclude: [/\.(?:png|jpg|jpeg|svg)$/],
