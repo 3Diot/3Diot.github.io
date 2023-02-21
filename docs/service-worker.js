@@ -1,0 +1,1 @@
+const urlsToCache=["/","/index.html","/router.js","/sitemap.js","/main.js","/template_article.html",/^\/images\//];self.addEventListener("install",(e=>{e.waitUntil(caches.open("cv-website-cache").then((e=>e.addAll(urlsToCache))))})),self.addEventListener("fetch",(e=>{e.respondWith(caches.match(e.request).then((t=>t||fetch(e.request))))}));
