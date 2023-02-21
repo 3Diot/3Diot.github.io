@@ -7,7 +7,6 @@ const HTMLInlineCSSWebpackPlugin = require("html-inline-css-webpack-plugin").def
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const TerserPlugin = require('terser-webpack-plugin');
 const HtmlMinimizerPlugin = require('html-minimizer-webpack-plugin');
-const WorkboxPlugin = require('workbox-webpack-plugin');
 const hr = require('./src/header.json');
 const WebpackPwaManifest = require('webpack-pwa-manifest');
 const ImageMinimizerPlugin = require("image-minimizer-webpack-plugin"); 
@@ -238,18 +237,10 @@ module.exports = env => {
         inject: false
       } ),
       new HtmlMinimizerPlugin({
-        minimizerOptions: {
-          minifyJS: true, // compress template_article js
-        },
+        minimizerOptions: { minifyJS: true, },
         // test: /template_article\.html$/,
         exclude: [/tables/, /maps/],
       }),
-      new WorkboxPlugin.GenerateSW({
-        swDest: './service-worker.js',
-        clientsClaim: true,
-        skipWaiting: true,
-        exclude: [/\.(?:png|jpg|jpeg|svg)$/],
-      })
     ],
     devServer: {proxy: {'/data': 'http://localhost:80/PROJECTNAME/src/'}}
   }
