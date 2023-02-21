@@ -100,7 +100,7 @@ body {
 html {
   scroll-behavior: smooth;
 }
-@keyframes glow {
+@keyframes shake {
   0% {transform: translate(0, 0);-webkit-transform: translate(0, 0);}
   50% {transform: translate(7px, 0);-webkit-transform: translate(7px, 0);}
   100% {transform: translate(0, 0);-webkit-transform: translate(0, 0);}
@@ -108,8 +108,8 @@ html {
 #currentPage:hover {color: var(--base);}
 #currentPage + div>a:hover{ text-decoration: line-through !important;}
 #currentPage + div {display:block;font-size: 16px;}
-#sitemap>a:hover{ animation:glow 1s linear alternate infinite;}
-#currentPage:hover{animation:gradient 4s linear alternate infinite, glow 1s linear alternate infinite;}
+#sitemap>a:hover{ animation:shake 1s linear alternate infinite;}
+#currentPage:hover{animation:gradient 4s linear alternate infinite, shake 1s linear alternate infinite;}
 #currentPage{ animation:gradient 4s linear alternate infinite;
   background-size: 100% 400%;
   border-radius: 5px;
@@ -128,22 +128,33 @@ Article Content
 
 
 
-#gradient_bg{
+#gradient_bg {
   position: fixed;
   height: 100vh;
-  width: 100vw;
-	background: linear-gradient(180deg, var(--bg1), var(--bg2));
-	background-size: 100% 200%;
-	animation: gradient 60s ease infinite; 
+  width: 100vw;   
   z-index: -99;
+}
+#gradient_bg::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 200%;
+  background: linear-gradient(180deg, var(--bg1), var(--bg2));
+  animation: gradient-scroll 60s linear infinite;
+}
+
+@keyframes gradient-scroll {
+  0% { transform: translate3d(0, 0, 0); }
+  50% { transform: translate3d(0, -50%, 0); }
+  100% { transform: translate3d(0, 0, 0); }
 }
 @keyframes gradient {
 	0% {		background-position: 0% 0%;	} 
 	50% {	  background-position: 100% 100%;	} 
 	100% {	background-position: 0% 0%;	}  
 }
-
-
 
 
 
@@ -170,14 +181,16 @@ body:has(#sitemap:focus-within) {
   border-radius: 12px; 
   box-shadow: 5px 0 20px var(--bg4), -5px 0 20px var(--hint-of-light), inset 0px 0 10px var(--hint-of-light);
 }
-@keyframes pulse { 50% { box-shadow: 5px 0 20px var(--hint-of-light), -5px 0 20px var(--bg4), inset 0px 0 10px var(--bg4); } }
+@keyframes glow { 
+  50% { box-shadow: 5px 0 20px var(--hint-of-light), -5px 0 20px var(--bg4), inset 0px 0 10px var(--bg4);  } 
+}
 
 /* hide checkbox, but still expose it to screen readers.*/
 input { position: absolute;  width: 1px; clip: rect(0 0 0 0); overflow: hidden; white-space: nowrap; }
 
 /* Use Labels to trigger CSS Effects on checkbox checked */
 #toggle-sitemap{ visibility: hidden; }
-#toggle-sitemap:not(:checked) ~ #sitemap { animation: collapse 1s forwards, pulse 6s linear infinite; }
+#toggle-sitemap:not(:checked) ~ #sitemap { animation: collapse 1s forwards, glow 6s linear infinite; }
 #toggle-sitemap:checked ~ #sitemap { animation: expand 1s forwards, pulse 6s linear infinite; }
 @keyframes collapse { from { max-height:75vh} to { max-height:3em; } }
 @keyframes expand { to { max-height:75vh } from { max-height:3em; } }
@@ -304,7 +317,7 @@ input { position: absolute;  width: 1px; clip: rect(0 0 0 0); overflow: hidden; 
     width: 30px; height: 50px; 
   }
   @keyframes move {
-    0% { offset-distance: var(--change1); background: var(--hint-of-light)}
+    0% { transform: translateZ(0); offset-distance: var(--change1); background: var(--hint-of-light)}
     25% {background: var(--bg4)}; 50% {background: var(--hint-of-light)}
     75% {background: var(--bg4)} 100% { offset-distance: var(--change2); background: var(--hint-of-light)}
   } 
@@ -313,3 +326,12 @@ input { position: absolute;  width: 1px; clip: rect(0 0 0 0); overflow: hidden; 
     10% { clip-path: var(--path1) }
     100% { clip-path: var(--path1) }
   }
+
+
+
+#svg_bg{position: fixed;z-index:-99;width:100vw; height:100vh}
+.cube {--startx: 0; --starty: 0; --endx: -100vh; --endy: -120vh; will-change: transform;}
+@keyframes cube-animation { 
+  from { transform: translate3d(var(--startx), var(--starty),0 ) }
+  to { transform: translate3d(var(--endx), var(--endy), 0 ) } 
+}

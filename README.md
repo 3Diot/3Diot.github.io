@@ -99,6 +99,7 @@ https://github.com/CVMiniGames/CVminiGames.github.io/blob/85be897657ea200a79d528
 - https://www.link-assistant.com/news/structured-data-for-seo.html
 - https://github.com/webpack-contrib/json-minimizer-webpack-plugin/tree/master/test
 
+chrome dev tools -> rendering(enable paint flashing to view non-hardware accelerated content). accelerating the cubes improved FPS by 2x)
 ## Components
 
 1. triple ellipses comments popup
@@ -108,6 +109,11 @@ https://github.com/CVMiniGames/CVminiGames.github.io/blob/85be897657ea200a79d528
 5. https://graphemica.com/%E2%98%B0
 6. https://css-tricks.com/full-width-containers-limited-width-parents/
 7. scrollsnaps on img
+
+
+using requestAnimationFrame instead of setInterval to create the animation loop. Using setInterval can be unreliable, and requestAnimationFrame provides better performance, particularly on mobile devices.
+
+ using the animate() method to animate the cubes. While this method is easy to use, it may not provide the smoothest animation performance. A better approach is to use requestAnimationFrame()
 
 # Dependencies
 

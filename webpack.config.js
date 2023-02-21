@@ -169,6 +169,6 @@ module.exports = env => {
         exclude: [/tables/, /maps/],
       }),
     ],
-
+    devServer: {proxy: {'/data': 'http://localhost:80/PROJECTNAME/src/'}}
   }
 }
