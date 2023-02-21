@@ -206,37 +206,26 @@ module.exports = env => {
           { from: './src/images', to: './images', toType: 'dir' }
         ]
       } ),
-      new WebpackPwaManifest( {
-        fingerprints: false,
+      new WebpackPwaManifest({
         name: hr.longName,
         short_name:  hr.shortName,
-        description: hr.description,
-        background_color: 'black',
-        crossorigin: 'use-credentials',
+        description: hr.description, 
+        background_color: '#ff55ff',
+        crossorigin: 'use-credentials', //inject:false glitches and results in the icons not being included..
+        fingerprints: false,
         start_url: './',
         display: "standalone",
-        theme_color: 'red',
+        theme_color: 'yellow',
         dir:"rtl",
-        lang:"ar",
-        icons: [ 
-          {  
-            src: path.resolve('./src/images/icon144.png'),
-            sizes: "144x144",  
-            type: "image/png"  
-          },
-          {  
-            src: path.resolve('./src/images/icon192.png'),
-            sizes: "192x192",  
-            type: "image/png"  
+        lang:"ar", 
+        icons: [
+          {
+            src: path.resolve('docs/images/icon512.webp'),
+            sizes: [96, 128, 192, 256, 384, 512], // multiple sizes
+            type: 'image/webp'
           }, 
-          {  
-            src: path.resolve('./src/images/icon512.png'), 
-            sizes: "512x512",  
-            type: "image/png"  
-          } 
-        ],
-        inject: false
-      } ),
+        ]
+      }),
       new HtmlMinimizerPlugin({
         minimizerOptions: { minifyJS: true, },
         // test: /template_article\.html$/,
