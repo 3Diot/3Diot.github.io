@@ -29,7 +29,7 @@ let header = <HelmetProvider>
         <title>{hr.tab||hr.longName}</title>
         <meta name="author"             content={hr.author}/>
         <meta name="description"        content={hr.description}/>
-        {!forBlog && <link rel="manifest" href="/manifest.json"/> }
+        {forBlog && <link rel="manifest" href="/manifest.json"/> }
         { /*
         <meta name="HandheldFriendly"   content="True"/>
         <meta name="MobileOptimized"    content="420"/>
