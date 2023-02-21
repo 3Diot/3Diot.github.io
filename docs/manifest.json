@@ -1,0 +1,12 @@
+{
+  "name": "CVAdmin",
+  "short_name": "CVAdmin",
+  "orientation": "portrait",
+  "display": "standalone",
+  "start_url": "./",
+  "description": "Create immersive experiences within CV",
+  "background_color": "black",
+  "theme_color": "red",
+  "dir": "rtl",
+  "lang": "ar"
+}

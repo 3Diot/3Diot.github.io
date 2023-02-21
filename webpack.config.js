@@ -4,10 +4,12 @@ const postcssPresetEnv = require("postcss-preset-env");
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const HtmlWebpackInlineSourcePlugin = require('html-webpack-inline-source-plugin-patched');
 const HTMLInlineCSSWebpackPlugin = require("html-inline-css-webpack-plugin").default;
-// const ScriptExtHtmlWebpackPlugin = require('script-ext-html-webpack-plugin'); outdated
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const TerserPlugin = require('terser-webpack-plugin');
 const HtmlMinimizerPlugin = require('html-minimizer-webpack-plugin');
+const WorkboxPlugin = require('workbox-webpack-plugin');
+const hr = require('./src/header.json');
+const WebpackPwaManifest = require('webpack-pwa-manifest');
 
 const isDev = process.env.NODE_ENV === 'development'
 
@@ -161,6 +163,21 @@ module.exports = env => {
           { from: './src/images', to: './images', toType: 'dir' }
         ]
       } ),
+      new WebpackPwaManifest( {
+        fingerprints: false,
+        name: hr.longName,
+        short_name:  hr.shortName,
+        description: hr.description,
+        background_color: 'black',
+        crossorigin: 'use-credentials',
+        start_url: './',
+        display: "standalone",
+        theme_color: 'red',
+        dir:"rtl",
+        lang:"ar",
+        icons: [ ],
+        inject: false
+      } ),
       new HtmlMinimizerPlugin({
         minimizerOptions: {
           minifyJS: true, // compress template_article js
@@ -168,6 +185,12 @@ module.exports = env => {
         // test: /template_article\.html$/,
         exclude: [/tables/, /maps/],
       }),
+      new WorkboxPlugin.GenerateSW({
+        swDest: './sw.js',
+        clientsClaim: true,
+        skipWaiting: true,
+        exclude: [/\.(?:png|jpg|jpeg|svg)$/],
+      })
     ],
     devServer: {proxy: {'/data': 'http://localhost:80/PROJECTNAME/src/'}}
   }

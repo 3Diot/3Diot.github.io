@@ -100,6 +100,7 @@ https://github.com/CVMiniGames/CVminiGames.github.io/blob/85be897657ea200a79d528
 - https://github.com/webpack-contrib/json-minimizer-webpack-plugin/tree/master/test
 
 chrome dev tools -> rendering(enable paint flashing to view non-hardware accelerated content). accelerating the cubes improved FPS by 2x)
+gpu acceleration wont work on (clip-text, svg path transformations, sitemap/h1 borders)
 ## Components
 
 1. triple ellipses comments popup
