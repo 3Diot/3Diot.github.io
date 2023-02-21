@@ -3,11 +3,6 @@ const CACHE_NAME = 'cv-website-cache';
 // List of URLs to cache
 const urlsToCache = [
   '/',
-  '/index.html',
-  '/router.js',
-  '/sitemap.js',
-  '/main.js',
-  '/template_article.html',
   /^\/images\//
 ];
 
