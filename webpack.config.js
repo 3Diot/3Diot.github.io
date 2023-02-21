@@ -10,6 +10,7 @@ const HtmlMinimizerPlugin = require('html-minimizer-webpack-plugin');
 const WorkboxPlugin = require('workbox-webpack-plugin');
 const hr = require('./src/header.json');
 const WebpackPwaManifest = require('webpack-pwa-manifest');
+const ImageMinimizerPlugin = require("image-minimizer-webpack-plugin"); 
 
 const isDev = process.env.NODE_ENV === 'development'
 
@@ -41,7 +42,6 @@ module.exports = env => {
       clean: true,
     },
     optimization: {
-      splitChunks: { chunks: 'all', },
       minimizer: [
         new TerserPlugin({ // config default parser
           terserOptions: {
@@ -54,8 +54,52 @@ module.exports = env => {
             keep_classnames: true,
             keep_fnames: true
           },
-        })
-      ]
+        }),
+        new ImageMinimizerPlugin({
+          minimizer: {
+            implementation: ImageMinimizerPlugin.imageminMinify,
+            options: {
+              plugins: [
+                ["imagemin-gifsicle", { progressive: true }],
+                ["imagemin-mozjpeg", { progressive: true }],
+                ["imagemin-pngquant", { progressive: true }],
+                [
+                  "imagemin-svgo",
+                  {
+                    plugins: [
+                      {
+                        name: "preset-default",
+                        params: {
+                          overrides: {
+                            removeViewBox: false,
+                            addAttributesToSVGElement: {
+                              params: {
+                                attributes: [
+                                  { xmlns: "http://www.w3.org/2000/svg" },
+                                ],
+                              },
+                            },
+                          },
+                        },
+                      },
+                    ],
+                  },
+                ],
+              ],
+            },
+          },
+          generator: [
+            {
+              type: "asset", // Apply generator for copied assets
+              implementation: ImageMinimizerPlugin.imageminGenerate,
+              options: {
+                plugins: ["imagemin-webp"],
+              },
+            },
+          ],
+        }),
+      ],
+      splitChunks: { chunks: 'all', },
     },
     module: {
       rules: [
@@ -154,10 +198,9 @@ module.exports = env => {
         patterns: [
           { from: './robots.txt', to: 'robots.txt', toType: 'file' },
           { from: './CNAME', to: 'CNAME', toType: 'file' },
-          { from: './src/maps', to: './maps', toType: 'dir' },
-          { from: './src/404.html', to: '404.html', toType: 'file' },
-          { from: './src/router.js', to: 'router.js', toType: 'file' },
+          { from: './src/404.html', to: '404.html', toType: 'file' }, 
           { from: './src/template_article.html', to: 'template_article.html', toType: 'file' },
+          { from: './src/maps', to: './maps', toType: 'dir' },
           { from: './src/posts', to: './posts', toType: 'dir' },
           { from: './src/tables', to: './tables', toType: 'dir' },
           { from: './src/images', to: './images', toType: 'dir' }
@@ -177,17 +220,17 @@ module.exports = env => {
         lang:"ar",
         icons: [ 
           {  
-            src: path.resolve('./images/icon192.png'),
+            src: path.resolve('./src/images/icon144.png'),
             sizes: "144x144",  
             type: "image/png"  
           },
           {  
-            src: path.resolve('./images/icon192.png'),
+            src: path.resolve('./src/images/icon192.png'),
             sizes: "192x192",  
             type: "image/png"  
           }, 
           {  
-            src: path.resolve('./images/icon512.png'), 
+            src: path.resolve('./src/images/icon512.png'), 
             sizes: "512x512",  
             type: "image/png"  
           } 

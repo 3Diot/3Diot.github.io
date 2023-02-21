@@ -32,7 +32,10 @@ if('serviceWorker' in navigator) {
     });
 }
 
-if (!/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) & location_search && localStorage.getItem('displayChardin') != 'false') {
+if (!/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
+    // set padding here
+    // set checkbox here
+    // localStorage.getItem('displayChardin')
     localStorage.setItem('displayChardin', 'false')
     // let chardin = new Chardin(document.querySelector('body'));
     // chardin.start();
