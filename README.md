@@ -99,6 +99,18 @@ https://github.com/CVMiniGames/CVminiGames.github.io/blob/85be897657ea200a79d528
 - https://www.link-assistant.com/news/structured-data-for-seo.html
 - https://github.com/webpack-contrib/json-minimizer-webpack-plugin/tree/master/test
 
+// Stick with PNG's for now. Template content is really small. Maybe convert the pwa img to webp only. 
+// just manually convert to webp/ link in my articles.
+// WebP offers 25-35% better compression but alot of the images are from external servers.
+generator: [
+  {
+    filename: '[path]webp_[name][ext]',
+    type: "asset",
+    implementation: ImageMinimizerPlugin.imageminGenerate,
+    options: { plugins: ["imagemin-webp"] },
+  },
+], 
+
 chrome dev tools -> rendering(enable paint flashing to view non-hardware accelerated content). accelerating the cubes improved FPS by 2x)
 gpu acceleration wont work on (clip-text, svg path transformations, sitemap/h1 borders)
 ## Components

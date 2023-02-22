@@ -10,8 +10,38 @@ const HtmlMinimizerPlugin = require('html-minimizer-webpack-plugin');
 const hr = require('./src/header.json');
 const WebpackPwaManifest = require('webpack-pwa-manifest');
 const ImageMinimizerPlugin = require("image-minimizer-webpack-plugin"); 
+const fs = require('fs');
+const sharp = require('sharp');
 
 const isDev = process.env.NODE_ENV === 'development'
+
+const compressionSettings = [
+  ["imagemin-gifsicle", { progressive: true }],
+  ["imagemin-mozjpeg", { progressive: true }],
+  ["imagemin-pngquant", { progressive: true }],
+  [
+    "imagemin-svgo",
+    {
+      plugins: [
+        {
+          name: "preset-default",
+          params: {
+            overrides: {
+              removeViewBox: false,
+              addAttributesToSVGElement: {
+                params: {
+                  attributes: [
+                    { xmlns: "http://www.w3.org/2000/svg" },
+                  ],
+                },
+              },
+            },
+          },
+        },
+      ],
+    },
+  ],
+];
 
 module.exports = env => {
   let template = `
@@ -38,7 +68,7 @@ module.exports = env => {
       },
       chunkFilename: 'chunk.[name].[chunkhash].js',
       globalObject: "self",
-      clean: true,
+      clean: false,
     },
     optimization: {
       minimizer: [
@@ -57,45 +87,8 @@ module.exports = env => {
         new ImageMinimizerPlugin({
           minimizer: {
             implementation: ImageMinimizerPlugin.imageminMinify,
-            options: {
-              plugins: [
-                ["imagemin-gifsicle", { progressive: true }],
-                ["imagemin-mozjpeg", { progressive: true }],
-                ["imagemin-pngquant", { progressive: true }],
-                [
-                  "imagemin-svgo",
-                  {
-                    plugins: [
-                      {
-                        name: "preset-default",
-                        params: {
-                          overrides: {
-                            removeViewBox: false,
-                            addAttributesToSVGElement: {
-                              params: {
-                                attributes: [
-                                  { xmlns: "http://www.w3.org/2000/svg" },
-                                ],
-                              },
-                            },
-                          },
-                        },
-                      },
-                    ],
-                  },
-                ],
-              ],
-            },
-          },
-          generator: [
-            {
-              type: "asset", // Apply generator for copied assets
-              implementation: ImageMinimizerPlugin.imageminGenerate,
-              options: {
-                plugins: ["imagemin-webp"],
-              },
-            },
-          ],
+            options: { plugins: compressionSettings },
+          }, 
         }),
       ],
       splitChunks: { chunks: 'all', },
@@ -165,7 +158,6 @@ module.exports = env => {
         }
       ],
     },
-
     plugins: [
       new MiniCssExtractPlugin({
         filename: "[name].css",
@@ -220,10 +212,15 @@ module.exports = env => {
         lang:"ar", 
         icons: [
           {
-            src: path.resolve('docs/images/icon512.webp'),
+            src: path.resolve('src/images/icon512.png'),
             sizes: [96, 128, 192, 256, 384, 512], // multiple sizes
             type: 'image/webp'
           }, 
+          {
+            src: path.resolve('src/images/icon512.png'),
+            size: '512x512',
+            purpose: 'maskable'
+          }
         ]
       }),
       new HtmlMinimizerPlugin({
@@ -231,7 +228,30 @@ module.exports = env => {
         // test: /template_article\.html$/,
         exclude: [/tables/, /maps/],
       }),
+      new WebpWebpackPlugin()
     ],
     devServer: {proxy: {'/data': 'http://localhost:80/PROJECTNAME/src/'}}
+  }
+}
+
+
+
+class WebpWebpackPlugin {
+  apply(compiler) {
+    compiler.hooks.afterEmit.tap('WebpWebpackPlugin', compilation => {
+      const outputFolder = path.resolve(compiler.options.output.path, 'images');
+      fs.readdir(outputFolder, (err, files) => {
+        if (err) {console.error('Error reading output folder:', err); return;}
+        files.forEach(file => {
+          const inputPath = path.join(outputFolder, file);
+          if (path.extname(inputPath).toLowerCase() === '.png') {
+            const outputPath = path.join(outputFolder, `${path.parse(inputPath).name}.webp`);
+            sharp(inputPath).webp().toFile(outputPath)
+              .then(() => { console.log(`Converted ${inputPath} to ${outputPath}`); })
+              .catch(err => { console.error(`Error converting ${inputPath}:`, err); });
+          }
+        });
+      });
+    });
   }
 }
