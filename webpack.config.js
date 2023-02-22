@@ -68,7 +68,7 @@ module.exports = env => {
       },
       chunkFilename: 'chunk.[name].[chunkhash].js',
       globalObject: "self",
-      clean: false,
+      clean: true,
     },
     optimization: {
       minimizer: [
