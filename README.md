@@ -73,6 +73,20 @@ reactive explorative interactive
 4. most visuals are static as a result
 5. if animation or mation is needed. trigger it on scroll
 
+const isLocalhost = Boolean( window.location.hostname === 'localhost' || window.location.hostname === '[::1]' || window.location.hostname.match( /^127(?:\.(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)){3}$/ ) );
+
+    if(isLocalhost || !('serviceWorker' in navigator)){ return }
+    navigator.serviceWorker.register(`./service-worker.js`).then(registration => {
+    registration.onupdatefound = () => {
+        const installingWorker = registration.installing;
+        installingWorker.onstatechange = () => {
+            if (installingWorker.state != 'installed') return 
+            if (navigator.serviceWorker.controller) {console.log('New content is available; please refresh.'); } // Purge occurred. fresh content added to the cache.
+            else { console.log('Content is cached for offline use.'); } // Everything has been precached.
+        };
+    };
+    }).catch(error => { console.error('Error during service worker registration:', error); });
+    
 ## Tasks
 
 current problems:

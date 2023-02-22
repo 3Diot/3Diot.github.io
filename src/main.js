@@ -41,17 +41,26 @@ if (!/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navig
     // chardin.start();
 }
 
-const isLocalhost = Boolean( window.location.hostname === 'localhost' || window.location.hostname === '[::1]' || window.location.hostname.match( /^127(?:\.(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)){3}$/ ) );
-window.addEventListener('load', () => {
-    if(isLocalhost || !('serviceWorker' in navigator)){ return }
-    navigator.serviceWorker.register(`./service-worker.js`).then(registration => {
+
+const registerServiceWorker = async () => {
+    if (!("serviceWorker" in navigator)) { return }
+    try {
+        const registration = await navigator.serviceWorker.register("/service-worker.js");
+        if (registration.installing) { console.log("Service worker installing"); } 
+        else if (registration.waiting) { console.log("Service worker installed"); } 
+        else if (registration.active) { console.log("Service worker active"); } 
+
         registration.onupdatefound = () => {
             const installingWorker = registration.installing;
             installingWorker.onstatechange = () => {
                 if (installingWorker.state != 'installed') return 
-                if (navigator.serviceWorker.controller) {console.log('New content is available; please refresh.'); } // Purge occurred. fresh content added to the cache.
+                if (navigator.serviceWorker.controller) { console.log('New content is available; please refresh.'); } // Purge occurred. fresh content added to the cache.
                 else { console.log('Content is cached for offline use.'); } // Everything has been precached.
             };
         };
-    }).catch(error => { console.error('Error during service worker registration:', error); });
-});
+
+    }
+    catch (error) { console.error(`Registration failed with ${error}`); }
+};
+
+registerServiceWorker();

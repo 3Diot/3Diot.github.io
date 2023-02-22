@@ -198,7 +198,7 @@ module.exports = env => {
           { from: './src/images', to: './images', toType: 'dir' }
         ]
       } ),
-      new WebpackPwaManifest({
+      !isDev && new WebpackPwaManifest({
         name: hr.longName,
         short_name:  hr.shortName,
         description: hr.description, 
@@ -214,7 +214,7 @@ module.exports = env => {
           {
             src: path.resolve('src/images/icon512.png'),
             sizes: [96, 128, 192, 256, 384, 512], // multiple sizes
-            type: 'image/webp'
+            type: 'image/webp', ios: true
           }, 
           {
             src: path.resolve('src/images/icon512.png'),
@@ -223,12 +223,12 @@ module.exports = env => {
           }
         ]
       }),
-      new HtmlMinimizerPlugin({
+      !isDev && new HtmlMinimizerPlugin({
         minimizerOptions: { minifyJS: true, },
         // test: /template_article\.html$/,
         exclude: [/tables/, /maps/],
       }),
-      new WebpWebpackPlugin()
+      !isDev && new WebpWebpackPlugin()
     ],
     devServer: {proxy: {'/data': 'http://localhost:80/PROJECTNAME/src/'}}
   }
