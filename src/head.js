@@ -39,6 +39,7 @@ let header = <HelmetProvider>
 
         <link rel="license"             href="https://opensource.org/licenses/MIT"/>
         <link rel="canonical"           href={`https://cvminigames.com/${page}`} /> 
+        <link rel="apple-touch-icon"    href={hr.icon192}></link>
         { /*
         <link rel="author"              href={hr.author}/>
         <link rel="me"                  href={hr.owneremail} type="text/html"/>

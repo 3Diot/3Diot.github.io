@@ -214,11 +214,13 @@ module.exports = env => {
           {
             src: path.resolve('src/images/icon512.png'),
             sizes: [96, 128, 192, 256, 384, 512], // multiple sizes
-            type: 'image/webp', ios: true
+            destination: 'docs/images',
+            type: 'image/webp'
           }, 
           {
             src: path.resolve('src/images/icon512.png'),
             size: '512x512',
+            destination: 'docs/images',
             purpose: 'maskable'
           }
         ]

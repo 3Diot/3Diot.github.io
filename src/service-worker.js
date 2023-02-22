@@ -5,7 +5,7 @@
 // so the previous v1 cache isn't disturbed.
 // When no pages are using the previous version, the new worker activates and becomes responsible for fetches.
 
-const CACHE_NAME = 'cv-website-cache-v2';
+const CACHE_NAME = 'cv-website-cache-v3';
 
 // List of URLs to cache
 const urlsToCache = [
