@@ -1,11 +1,11 @@
 //  https://developer.mozilla.org/en-US/docs/Web/API/Service_Worker_API/Using_Service_Workers
-// Change cahacen name to force update, happens in background so only after 2nd load w/ new content
+// Change cache name to force update, happens in background so only after 2nd load w/ new content
 // While the service worker is being installed, the previous version is still responsible for fetches. 
 // The new version is installing in the background. We are calling the new cache v2, 
 // so the previous v1 cache isn't disturbed.
 // When no pages are using the previous version, the new worker activates and becomes responsible for fetches.
 
-const CACHE_NAME = 'cv-website-cache-v3';
+const CACHE_NAME = 'cv-website-cache-v4';
 
 // List of URLs to cache
 const urlsToCache = [
@@ -30,7 +30,7 @@ self.addEventListener('install', async event => {
     event.waitUntil( cache );
     console.log('Service worker done installing...')
   }
-  catch(error){console.error('Cache operation failed:', error)}
+  catch(error){} // console.error('Cache operation failed:', error)}
 });
 
 const putInCache = async (request, response) => {
