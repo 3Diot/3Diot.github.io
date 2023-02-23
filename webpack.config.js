@@ -11,39 +11,19 @@ const hr = require('./src/header.json');
 const WebpackPwaManifest = require('webpack-pwa-manifest');
 const ImageMinimizerPlugin = require("image-minimizer-webpack-plugin"); 
 const fs = require('fs');
-const sharp = require('sharp');
+const sharp = require('sharp'); 
 
-const isDev = process.env.NODE_ENV === 'development'
+const CompressionPlugin = require('compression-webpack-plugin');
+// https://github.com/orgs/community/discussions/21655
+// - no point in using the compression webpack plugin since as github does it anyways
+const compress = false;
+const analyze = false;
 
-const compressionSettings = [
-  ["imagemin-gifsicle", { progressive: true }],
-  ["imagemin-mozjpeg", { progressive: true }],
-  ["imagemin-pngquant", { progressive: true }],
-  [
-    "imagemin-svgo",
-    {
-      plugins: [
-        {
-          name: "preset-default",
-          params: {
-            overrides: {
-              removeViewBox: false,
-              addAttributesToSVGElement: {
-                params: {
-                  attributes: [
-                    { xmlns: "http://www.w3.org/2000/svg" },
-                  ],
-                },
-              },
-            },
-          },
-        },
-      ],
-    },
-  ],
-];
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 
-module.exports = env => {
+module.exports = (env, args) => { 
+  // process.env is different from env here
+  const isDev = args.mode === 'development'
   let template = `
   <!DOCTYPE html>
   <html lang="en" dir="ltr">
@@ -71,6 +51,7 @@ module.exports = env => {
       clean: true,
     },
     optimization: {
+      minimize: isDev ? false : true,
       minimizer: [
         new TerserPlugin({ // config default parser
           terserOptions: {
@@ -87,7 +68,33 @@ module.exports = env => {
         new ImageMinimizerPlugin({
           minimizer: {
             implementation: ImageMinimizerPlugin.imageminMinify,
-            options: { plugins: compressionSettings },
+            options: { plugins: [
+              ["imagemin-gifsicle", { progressive: true }],
+              ["imagemin-mozjpeg", { progressive: true }],
+              ["imagemin-pngquant", { progressive: true }],
+              [
+                "imagemin-svgo",
+                {
+                  plugins: [
+                    {
+                      name: "preset-default",
+                      params: {
+                        overrides: {
+                          removeViewBox: false,
+                          addAttributesToSVGElement: {
+                            params: {
+                              attributes: [
+                                { xmlns: "http://www.w3.org/2000/svg" },
+                              ],
+                            },
+                          },
+                        },
+                      },
+                    },
+                  ],
+                },
+              ],
+            ] },
           }, 
         }),
       ],
@@ -198,7 +205,7 @@ module.exports = env => {
           { from: './src/images', to: './images', toType: 'dir' }
         ]
       } ),
-      !isDev && new WebpackPwaManifest({
+      isDev ? ()=>{} : new WebpackPwaManifest({
         name: hr.longName,
         short_name:  hr.shortName,
         description: hr.description, 
@@ -225,12 +232,31 @@ module.exports = env => {
           }
         ]
       }),
-      !isDev && new HtmlMinimizerPlugin({
+      isDev ? ()=>{} : new HtmlMinimizerPlugin({
         minimizerOptions: { minifyJS: true, },
         // test: /template_article\.html$/,
         exclude: [/tables/, /maps/],
       }),
-      !isDev && new WebpWebpackPlugin()
+      isDev ? ()=>{} : new WebpWebpackPlugin(),
+      !analyze ? ()=>{} : new BundleAnalyzerPlugin(),
+      isDev || !compress ? ()=>{} :  new CompressionPlugin({
+        filename: '[path][base].br',
+        algorithm: 'brotliCompress',
+        test: /\.(js|css|html|svg)$/,
+        compressionOptions: { level: 11 },
+        threshold: 10240,
+        minRatio: 0.8,
+        deleteOriginalAssets: false,
+      }),
+      isDev || !compress ? ()=>{} : new CompressionPlugin({
+        filename: '[path][base].gz',
+        algorithm: 'gzip',
+        test: /\.(js|css|html|svg)$/,
+        compressionOptions: { level: 9 },
+        threshold: 10240,
+        minRatio: 0.8,
+        deleteOriginalAssets: false,
+      }),
     ],
     devServer: {proxy: {'/data': 'http://localhost:80/PROJECTNAME/src/'}}
   }
