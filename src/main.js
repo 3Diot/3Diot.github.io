@@ -21,17 +21,6 @@ document.addEventListener('DOMContentLoaded', async () => {
     window.addEventListener('popstate', async () => { loadRouter(); });
 })
 
-if('serviceWorker' in navigator) {
-    window.addEventListener('load', function() {
-        navigator.serviceWorker.register('/service-worker.js')
-        .then(function(registration) { 
-            console.log('ServiceWorker registration successful with scope: ', registration.scope);
-        }, function(err) { 
-            console.log('ServiceWorker registration failed: ', err);
-        });
-    });
-}
-
 if (!/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
     // set padding here
     // set checkbox here
@@ -40,7 +29,6 @@ if (!/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navig
     // let chardin = new Chardin(document.querySelector('body'));
     // chardin.start();
 }
-
 
 const registerServiceWorker = async () => {
     if (!("serviceWorker" in navigator)) { return }

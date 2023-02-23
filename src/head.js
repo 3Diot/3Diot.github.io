@@ -39,6 +39,7 @@ let header = <HelmetProvider>
 
         <link rel="license"             href="https://opensource.org/licenses/MIT"/>
         <link rel="canonical"           href={`https://cvminigames.com/${page}`} /> 
+        <link rel="apple-touch-icon"    href='l337h4x'></link>
         { /*
         <link rel="author"              href={hr.author}/>
         <link rel="me"                  href={hr.owneremail} type="text/html"/>
@@ -57,8 +58,6 @@ let header = <HelmetProvider>
         <link rel="icon" type="image/ico" sizes="64x64"     href={hr.icon64}/>
         <meta itemprop="image"          content={hr.image}/>
         <meta property="article:author" content={hr.author}/>
-
-        <link rel="apple-touch-icon"    href={hr.icon192}></link>
         */}
         <meta name="theme-color"        content={hr.themecolor}/>
         <meta name="robots"             content="index,follow"/>

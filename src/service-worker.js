@@ -5,13 +5,14 @@
 // so the previous v1 cache isn't disturbed.
 // When no pages are using the previous version, the new worker activates and becomes responsible for fetches.
 
-const CACHE_NAME = 'cv-website-cache-v5';
+const CACHE_NAME = 'cv-website-cache-v6';
 
 // List of URLs to cache
 const urlsToCache = [
   '/',
-  'index.html',
-  'main.*.js',
+  '/*.html',
+  '/*.js',
+  '/*.json',
 ];
 
 // Enable navigation preload

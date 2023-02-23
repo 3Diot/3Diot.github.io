@@ -54,7 +54,6 @@ createAndAnimate(); setInterval(() => { createAndAnimate(20000); }, duration);
 </script>
 
 <script tag="templateScript" type="text/javascript">
-  // gradient_bg
   dragTarget = document.querySelector("#sitemap"); 
   inDrag = window.inDrag ? inDrag : false;
   function downFN(e) {
@@ -95,13 +94,14 @@ function updatePath(bars) {
   document.getElementById("footer_bg").style.animation = "none"; //Glitchy animation fix
   // set css var --path2 to --path1's computed value and update --path1 with new path(d)
   const p = getComputedStyle(document.documentElement).getPropertyValue('--path1');
-  document.getElementById("footer_bg").style.animation = "clip-path-polygon 15s linear";
+  document.getElementById("footer_bg").style.animation = "clip-path-polygon 14s linear";
   document.documentElement.style.setProperty('--path2', p || "path('"+d+"')");
   document.documentElement.style.setProperty('--path1', "path('"+d+"')");
 }
 
 window.w=Math.min(window.innerWidth, 800); 
 updatePath(); setInterval(updatePath,15000);
+
 document.addEventListener('scroll', function() {
   let scrollPercent = (document.documentElement.scrollTop + document.body.scrollTop) / (document.documentElement.scrollHeight - document.documentElement.clientHeight) * 100;
   scrollPercent = (scrollPercent / 100) * 45 + 10;

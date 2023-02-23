@@ -1,6 +1,30 @@
+:root {  
+  --bggradient1: #f7f7f7;
+  --bggradient2: rgb(238 238 238 / 90%);
+  --bggradient3: linear-gradient(45deg, var(--primary), var(--primary-light), var(--primary));
+  --sitemapBg: rgb(238 238 238 / 60%);
+  
+  /* A gradient drop-shadow that follow the clip-paths outline. -> https://neumorphism.io/ */
+  --filterdropshadow: drop-shadow(20px 20px 60px #7e7e7e) drop-shadow(-20px -20px 60px #fff);
+
+  --radial1:radial-gradient(at 52% 13%, hsla(215,77%,79%,1) 0px, transparent 50%),
+  radial-gradient(at 40% 33%, hsla(173,63%,76%,1) 0px, transparent 50%),
+  radial-gradient(at 15% 92%, hsla(166,97%,69%,1) 0px, transparent 50%),
+  radial-gradient(at 97% 78%, hsla(229,94%,76%,1) 0px, transparent 50%),
+  radial-gradient(at 19% 52%, hsla(27,99%,69%,1) 0px, transparent 50%),
+  radial-gradient(at 68% 16%, hsla(339,76%,78%,1) 0px, transparent 50%),
+  radial-gradient(at 25% 1%, hsla(202,73%,63%,1) 0px, transparent 50%);
+  
+  --max-width: min(800px, 100vw);
+  --change1: 0%;
+  --change2: 100%;
+  --path1:path('M 0 0 L 0 2 L 0 0');
+  --path2:0;
+}
+
 h1>a{
     /* transparent text w animated lin gradient bg */
-    background: linear-gradient(90deg, var(--base), gray, var(--base), #000);
+    background: linear-gradient(90deg, var(--base),var(--secondary),var(--base),var(--secondary));
       background-size: 300% 100%; 
     background-clip: text;
     -webkit-background-clip: text;
@@ -51,7 +75,7 @@ h1>a{
     left: 0;
     width: 100%;
     height: 200%;
-    background: linear-gradient(180deg, var(--bg1), var(--bg2));
+    background: linear-gradient(180deg, var(--bggradient1), var(--bggradient2));
     animation: gradient-scroll 60s linear infinite;
   }
   
@@ -87,12 +111,12 @@ h1>a{
   
     backdrop-filter: blur(2px) saturate(100%);
     -webkit-backdrop-filter: blur(2px) saturate(100%);
-    background-color: var(--bg5);
+    background-color: var(--sitemapBg);
     border-radius: 12px; 
-    box-shadow: 5px 0 20px var(--bg4), -5px 0 20px var(--hint-of-light), inset 0px 0 10px var(--hint-of-light);
+    box-shadow: 5px 0 20px var(--secondary), -5px 0 20px var(--primary-light), inset 0px 0 10px var(--primary-light);
   }
   @keyframes glow { 
-    50% { box-shadow: 5px 0 20px var(--hint-of-light), -5px 0 20px var(--bg4), inset 0px 0 10px var(--bg4);  } 
+    50% { box-shadow: 5px 0 20px var(--primary-light), -5px 0 20px var(--secondary), inset 0px 0 10px var(--secondary);  } 
   }
   
   /* hide checkbox, but still expose it to screen readers.*/
@@ -133,13 +157,13 @@ h1>a{
     top:0px;
     width:100%;
     height:100%;   
-    filter: drop-shadow(20px 20px 60px #bebebe) drop-shadow(-20px -20px 60px #ffffff); /* https://neumorphism.io/ */
+    filter: var(--filterdropshadow); 
   }
   #header_bg{  
     border-radius: 50px;
     width:100%;
     height:100%;  
-    background-color: var(--bg3);
+    background: var(--bggradient3);
     clip-path: polygon(33% 38%, 0 43%, 0 0, 100% 0, 100% 43%, 66% 38%, 66% 46%, 100% 60%, 100% 100%, 0 100%, 0 60%, 33% 46%);
     animation:spin 2s linear alternate infinite;
     transition-duration: 2s;
@@ -198,11 +222,12 @@ h1>a{
   #footer_bg_wrapper{
     position: absolute;
     width:100%; height:100%;   
-    filter: drop-shadow(20px 20px 60px #bebebe) drop-shadow(-20px -20px 60px #ffffff);
+    filter: var(--filterdropshadow); 
   }
   #footer_bg{
+    /* This is the animation */
     width:100%; height:100%;
-    background: linear-gradient(45deg, rgba(255, 183, 183,.1), var(--hint-of-light), rgba(240, 248, 255,.4));
+    background: var(--bggradient3);
   } 
   
   
@@ -214,7 +239,12 @@ h1>a{
     max-width: 800px;
     margin: auto;
   }
-  
+  @media only screen and (max-width: 769px){
+    .broider {
+      border-width:  28px 0px;
+    }
+  }
+
   
   
   
@@ -229,9 +259,11 @@ h1>a{
       width: 30px; height: 50px; 
     }
     @keyframes move {
-      0% { transform: translateZ(0); offset-distance: var(--change1); background: var(--hint-of-light)}
-      25% {background: var(--bg4)}; 50% {background: var(--hint-of-light)}
-      75% {background: var(--bg4)} 100% { offset-distance: var(--change2); background: var(--hint-of-light)}
+      0% {  background: var(--primary-light); transform: translateZ(0); offset-distance: var(--change1);}
+      25% { background: var(--secondary)}; 
+      50% { background: var(--primary-light)}
+      75% { background: var(--secondary)} 
+      100% {background: var(--primary-light); offset-distance: var(--change2);}
     } 
     @keyframes clip-path-polygon {
       0% { clip-path: var(--path2) }
