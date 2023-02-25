@@ -1,13 +1,14 @@
-<svg xmlns="http://www.w3.org/2000/svg" id="svg_bg"></svg>
-<div id="gradient_bg"></div>   
+<svg xmlns="http://www.w3.org/2000/svg" id="svg_bg"></svg> 
 <!-- this checkbox holds state of whether modal is visible or not -->
-<input type="checkbox" id="toggle-sitemap">
+<input checked type="checkbox" id="toggle-sitemap">
 <div id="sitemap"> 
   <label for="toggle-sitemap"><span>Hide</span> <span>Show </span>Sitemap</label>
 </div>
 <div id='template' class='template_article'>
 <div id='pageTransitioneer'><p>Don't Look! I'm changing!</p></div>
-<div style="height:30px;"></div>
+
+<div id="gradient_bg"> 
+</div>  
 
 <div id="header">
   <div id="header_nav">
@@ -17,7 +18,6 @@
   </div>
   <span id="header_bg_wrapper"><div id="header_bg"></div></span> 
 </div>
-<div style="height:30px;"></div>
 
 <div class='broider' id='content'>
   <div id="outline"></div>
@@ -25,9 +25,8 @@
 </div>
 <div id="footer">
   <span id="footer_bg_wrapper"><div id="tracer"></div><div id="footer_bg"></div></span> 
-</div>
-<div style="height:200px"></div>
-<p style="padding:10px; text-align:center">Thank's for visiting!</p>
+</div> 
+<p id="thanks">Thank's for visiting!</p>
 
 <script tag="templateScript" type="text/javascript"> // Animated Background Cubes
 // create random # SVG's cubes w random# of sizes,colors,speeds, & positions
@@ -54,7 +53,7 @@ createAndAnimate(); setInterval(() => { createAndAnimate(20000); }, duration);
 </script>
 
 <script tag="templateScript" type="text/javascript">
-  dragTarget = document.querySelector("#sitemap"); 
+  dragTarget = document.querySelector("#sitemap"); // alternately toggle-sitemap if sitemap-content scroll behaviors is not good.
   inDrag = window.inDrag ? inDrag : false;
   function downFN(e) {
       inDrag = true;
@@ -65,6 +64,7 @@ createAndAnimate(); setInterval(() => { createAndAnimate(20000); }, duration);
   function moveFN(e) {
       if (!inDrag) {return;} 
       e.preventDefault();
+      document.getElementById('drag').style.display='none';
       dragToX = e.pageX || e.targetTouches[0].clientX; 
       dragToY = e.pageY || e.targetTouches[0].clientY; 
       dragTarget.style.left = (objInitLeft + dragToX-dragStartX) + "px";
@@ -89,18 +89,23 @@ function generatePath(bars) {
   return ("M0,"+h+path.join('')+addPath(bars, h)+"L0," + h + "Z").replace('undefined', '');
 }
 function updatePath(bars) {
-  const d = generatePath(6);
-  document.getElementById("tracer").style.offsetPath = "path('"+d+"')"; 
-  document.getElementById("footer_bg").style.animation = "none"; //Glitchy animation fix
+  const newPath = "path('"+generatePath(6)+"')"
+  const footer = document.getElementById("footer_bg").style 
   // set css var --path2 to --path1's computed value and update --path1 with new path(d)
-  const p = getComputedStyle(document.documentElement).getPropertyValue('--path1');
-  document.getElementById("footer_bg").style.animation = "clip-path-polygon 14s linear";
-  document.documentElement.style.setProperty('--path2', p || "path('"+d+"')");
-  document.documentElement.style.setProperty('--path1', "path('"+d+"')");
+  const pastPath = getComputedStyle(document.documentElement).getPropertyValue('--path1');
+  footer.clipPath = pastPath;
+  // Using css vars helps ensure auto-prefixing is done correctly 
+  document.documentElement.style.setProperty('--path1', newPath);
+  document.documentElement.style.setProperty('--path2', pastPath || newPath);
+  //Fix for Glitchy animation Otherwise flashes end of animation before starting again.
+  footer.animation = "none"; 
+  setTimeout(()=>{ 
+    document.getElementById("tracer").style.offsetPath = newPath;
+    footer.animation = "clip-path-polygon 1s forwards"; 
+  },10)
 }
-
 window.w=Math.min(window.innerWidth, 800); 
-updatePath(); setInterval(updatePath,15000);
+updatePath(); setInterval(updatePath,8000);
 
 document.addEventListener('scroll', function() {
   let scrollPercent = (document.documentElement.scrollTop + document.body.scrollTop) / (document.documentElement.scrollHeight - document.documentElement.clientHeight) * 100;
@@ -113,4 +118,44 @@ document.addEventListener('scroll', function() {
     document.documentElement.style.setProperty('--change2', "100%");
   }, 1500); 
 });
+</script>
+
+<script tag="templateScript" type="text/javascript">
+// 6 
+// Hit em w/ the ol razzle dazzle; and give em the wiggles~! >:D
+// IntersectionObserver for animations and Highlighting active TOC Anchor link
+window.activeHeader = null
+const observer = new IntersectionObserver((entries) => { 
+    entries.forEach((entry) => {let e=entry.target
+        let txt = "0.5s ease-in-out 0s 2 normal none running wiggle";
+        let pos = e.getBoundingClientRect().top
+        let el = (e.parentNode.nodeName == "SUMMARY" && e.parentNode.style || e.style ) 
+        if (!entry.isIntersecting){ el.animation == txt && (el.animation = ''); return; }
+        el.animation = txt 
+        if(pos<300 || pos>300){ /* ' Scrolling', pos>100?'Down: ':'Up */  
+            window.activeHeader && (window.activeHeader.style.textDecoration='none')
+            let tocLink = document.getElementById('anchor_link_'+e.id)
+            tocLink && ( tocLink.style.animation = txt, tocLink.style.textDecoration='line-through' ) 
+            window.activeHeader = tocLink
+        }
+    });
+});
+
+loadObserver = (t) =>{ document.querySelectorAll('h2,h3,h4,h5,h6').forEach((el) => observer.observe(el) ) };  
+window.addEventListener('templateLoaded', async () =>{ 
+  if(window.isSmall){ document.getElementById('toggle-sitemap').checked=false; }
+  setTimeout( ()=>loadObserver(),2000) 
+} );
+!window.inDev && loadObserver();
+
+</script>
+<script tag="templateScript" type="text/javascript">
+// Wite map styling. The if needs js, the else isn't really needed. Could be done in css too.
+if(window.isSmall){ document.getElementById('toggle-sitemap').checked=false;}
+else{
+  var sitemap = document.getElementById("sitemap");
+  var size = sitemap.offsetWidth;
+  var space = document.querySelector(".broider").getBoundingClientRect().left;
+  if( space > size ){ sitemap.style.left=space-size+"px";}
+}
 </script>

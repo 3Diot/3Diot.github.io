@@ -75,24 +75,7 @@ Reactive Explorative Interactive
 2. if you make a tooltip or rollover assume no one will ever see it.
 3. fewer small graphics embedded in articles and more stand-alone visual stories
 4. most visuals are static as a result
-5. if animation or mation is needed. trigger it on scroll
-
-## Tasks
-
-current problems:
-- serp seo sitemaps
-- the maps and tables need fixing
-
-
-- https://developers.google.com/search/docs/crawling-indexing/qualify-outbound-links
-- https://www.searchenginejournal.com/important-tags-seo/156440/
-- SERP: visit schema.org and see whether they’ve got any tags that can be applied to your types of pages.
-
-- https://developers.google.com/search/docs/crawling-indexing/sitemaps/build-sitemap#autositemap
-- Google: generate sitemap
-- Submit your sitemap to Google: https://www.google.com/ping?sitemap=https://cvminigames.com/sitemap.txt
-
-- https://www.link-assistant.com/news/structured-data-for-seo.html 
+5. if animation or motion is needed. trigger it on scroll
 
 ## Article Components
 

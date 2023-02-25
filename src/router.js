@@ -1,4 +1,19 @@
-import('./sitemap.js')
+/*
+template.html loads
+
+main.js is in the head.
+- redirect fns
+- window.isSmall
+- window.indev
+- register service worker
+
+sitemap smallScreen code in th footer.
+
+mainjs ondomcontentloaded
+- - > does not wait for async scripts to load but yes to module and defer type scripts
+- - > lazy load router
+- - > load sitemap
+*/
 
 // Page Load Logic and Routing
 export const navEvent = async (event) => {
@@ -16,13 +31,14 @@ export const handleRoute = async (route) => {
     window.meta = content.meta; meta.content = content.content; document.title = window.meta.title; 
 
     // Load the template & Dispatch pageLoaded event for template/ content hooks 
+    window.newTemplate = false;
     if (!(window?.template?.className === window.meta.template)){
         window.newTemplate = true;
         document.body.innerHTML = await (await fetch(`./${window.meta.template}.html`)).text();
-        await loadScripts(); 
-        // await import(/* webpackChunkName: "sitemap" */ './sitemap.js')
+        await loadScripts();  
     }
     window.dispatchEvent( new CustomEvent('templateLoaded') );
+    window.dispatchEvent( new CustomEvent('templateRefreshed') );
     setTimeout( ()=>{  
         document.querySelectorAll('a[href^="./"]').forEach(link=>link.removeEventListener('click', window.redirect)); 
         document.querySelectorAll('a[href^="./"]').forEach(link =>link.addEventListener('click', window.redirect )) 
