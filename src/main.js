@@ -13,7 +13,6 @@ const getSitemap = async()=>{
 }
 
 window.isSmall =  window.screen.width <= 800; 
-window.inDev = !!!window.content?.innerHTML.trim();
 // window.isSmall&&{localStorage.setItem('displayChardin', 'false')
 // localStorage.getItem('displayChardin')
 // let chardin = new Chardin(document.querySelector('body'));
@@ -21,7 +20,8 @@ window.inDev = !!!window.content?.innerHTML.trim();
 
 // used by router and in dev
 window.redirect = (async (event) =>{  
-    event.preventDefault();console.log('test1');
+    event.preventDefault();
+    console.log('redirect');
     window.history.pushState({}, '', event.target.href); 
     await getRouter();
     await getSitemap();
@@ -29,33 +29,12 @@ window.redirect = (async (event) =>{
 } )
 
 document.addEventListener('DOMContentLoaded', async () => {
+    window.inDev = !!!window.content?.innerHTML.trim();
+    console.log({inDev: window.inDev, isDev: !!!window.content?.innerHTML.trim(), content:window.content?.innerHTML.trim()})
+    console.log('DOMContentLoaded', window.screen)
     const loadRouter = async() =>{ await getRouter(); await window.handleRoute(window.location.pathname); }
-    if (window.inDev){ loadRouter(); getSitemap(); }
+    if (window.inDev){ console.log('Dev Mode'); loadRouter(); getSitemap(); }
     window.oldRoute = window.location.pathname.replace(window.origin,'');
     window.addEventListener('popstate', async (e) => {e.preventDefault(); console.log('test2'); loadRouter(); });
     document.querySelectorAll('a[href^="./"]').forEach(link => link.addEventListener('click', window.redirect ) )    // 
 })
-
-
-const registerServiceWorker = async () => {
-    if (!("serviceWorker" in navigator)) { return }
-    try {
-        const registration = await navigator.serviceWorker.register("/service-worker.js");
-        if (registration.installing) { console.log("Service worker installing"); } 
-        else if (registration.waiting) { console.log("Service worker installed"); } 
-        else if (registration.active) { console.log("Service worker active"); } 
-
-        registration.onupdatefound = () => {
-            const installingWorker = registration.installing;
-            installingWorker.onstatechange = () => {
-                if (installingWorker.state != 'installed') return 
-                if (navigator.serviceWorker.controller) { console.log('New content is available; please refresh.'); } // Purge occurred. fresh content added to the cache.
-                else { console.log('Content is cached for offline use.'); } // Everything has been precached.
-            };
-        };
-
-    }
-    catch (error) { console.error(`Registration failed with ${error}`); }
-};
-
-if (!inDev) { registerServiceWorker(); }

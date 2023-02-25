@@ -18,6 +18,7 @@ mainjs ondomcontentloaded
 // Page Load Logic and Routing
 export const navEvent = async (event) => {
     console.log('navEvent', event)
+    if (!window.inDev) { registerServiceWorker(); }
     let route = (event.target.href || event.target.location.href).replace(window.origin,'');  
     if (route.split("#")[0] != window.oldRoute.split("#")[0]){ await handleRoute( route ); window.oldRoute = route; }; 
     route.indexOf('#') == -1 && window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -59,3 +60,24 @@ const loadScripts = async () => {
         script.parentNode.replaceChild(newScript, script);
     } );
 }
+
+
+
+const registerServiceWorker = async () => {
+    if (!("serviceWorker" in navigator)) { return }
+    try {
+        const registration = await navigator.serviceWorker.register("/service-worker.js");
+        if (registration.installing) { console.log("Service worker installing"); } 
+        else if (registration.waiting) { console.log("Service worker installed"); } 
+        else if (registration.active) { console.log("Service worker active"); } 
+        registration.onupdatefound = () => {
+            const installingWorker = registration.installing;
+            installingWorker.onstatechange = () => {
+                if (installingWorker.state != 'installed') return 
+                if (navigator.serviceWorker.controller) { console.log('New content is available; please refresh.'); } // Purge occurred. fresh content added to the cache.
+                else { console.log('Content is cached for offline use.'); } // Everything has been precached.
+            };
+        };
+    }
+    catch (error) { console.error(`Registration failed with ${error}`); }
+};
