@@ -151,11 +151,15 @@ window.addEventListener('templateLoaded', async () =>{
 </script>
 <script tag="templateScript" type="text/javascript">
 // Wite map styling. The if needs js, the else isn't really needed. Could be done in css too.
-if(window.isSmall){ document.getElementById('toggle-sitemap').checked=false;}
-else{
-  var sitemap = document.getElementById("sitemap");
-  var size = sitemap.offsetWidth;
-  var space = document.querySelector(".broider").getBoundingClientRect().left;
-  if( space > size ){ sitemap.style.left=space-size+"px";}
-}
+setTimeout( ()=>{ 
+  var sm = document.getElementById("toggle-sitemap");
+  if(window.screen.width <= 800){ sm.checked=false;}
+  else{
+    sm.checked=true;
+    var sitemap = document.getElementById("sitemap");
+    var size = sitemap.offsetWidth;
+    var space = document.querySelector(".broider").getBoundingClientRect().left;
+    if( space > size ){ sitemap.style.left=space-size+"px";}
+  }
+},1000) 
 </script>

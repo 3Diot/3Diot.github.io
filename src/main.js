@@ -5,12 +5,25 @@ console.log('%c Like what you see?', 'font-weight: bold; font-size: 50px;color: 
 console.log("%c Contact me: charleskarpati@gmail.com","color: blue; font-family:sans-serif; font-size: 20px");
 
 const getRouter = async()=>{
-    // lazy load router.js
-    !!!window.navEvent && ({ handleRoute: window.handleRoute, navEvent: window.navEvent } = await import(/* webpackChunkName: "router" */ './router.js'));
+    if (!window.navEvent) {
+        const routerModule = await import(/* webpackChunkName: "router" */ './router.js');
+        window.handleRoute = routerModule.handleRoute;
+        window.navEvent = routerModule.navEvent;
+        console.log('navevent', window.navEvent);
+    }
+    return true;
 }
 const getSitemap = async()=>{
     (!window.inDev || !!!window.navEvent) && ({ handleRoute: window.handleRoute, navEvent: window.navEvent } = await import(/* webpackChunkName: "sitemap" */ './sitemap.js'));
+    return
 }
+
+// used by router and in dev
+window.redirect = (async (event) =>{  
+    event.preventDefault(); 
+    window.history.pushState({}, '', event.target.href); 
+    await getRouter() && getSitemap() && window.navEvent(event);
+} )
 
 window.isSmall =  window.screen.width <= 800; 
 // window.isSmall&&{localStorage.setItem('displayChardin', 'false')
@@ -18,20 +31,8 @@ window.isSmall =  window.screen.width <= 800;
 // let chardin = new Chardin(document.querySelector('body'));
 // chardin.start();}
 
-// used by router and in dev
-window.redirect = (async (event) =>{  
-    event.preventDefault();
-    console.log('redirect');
-    window.history.pushState({}, '', event.target.href); 
-    await getRouter();
-    await getSitemap();
-    await window.navEvent(event); 
-} )
-
 document.addEventListener('DOMContentLoaded', async () => {
-    window.inDev = !!!window.content?.innerHTML.trim();
-    console.log({inDev: window.inDev, isDev: !!!window.content?.innerHTML.trim(), content:window.content?.innerHTML.trim()})
-    console.log('DOMContentLoaded', window.screen)
+    window.inDev = !!!window.content?.innerHTML.trim(); 
     const loadRouter = async() =>{ await getRouter(); await window.handleRoute(window.location.pathname); }
     if (window.inDev){ console.log('Dev Mode'); loadRouter(); getSitemap(); }
     window.oldRoute = window.location.pathname.replace(window.origin,'');

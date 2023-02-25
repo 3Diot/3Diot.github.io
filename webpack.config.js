@@ -43,7 +43,7 @@ module.exports = (env, args) => {
       publicPath: '/',
       filename: (pathData) => {
         // [name] defers to id when it doesn't exist.
-        // console.log('~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~', pathData)
+        console.log('~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~', pathData)
         return '[runtime].[id].[hash].js'
       },
       chunkFilename: 'chunk.[name].[chunkhash].js',
@@ -56,7 +56,7 @@ module.exports = (env, args) => {
         new TerserPlugin({ // config default parser
           terserOptions: {
             parse: { html5_comments: false },
-            compress: { pure_funcs: ['console.log'], toplevel: true },
+            // compress: { pure_funcs: ['console.log'], toplevel: true },
             sourceMap: { url: "inline" },
             keep_classnames: true,
             keep_fnames: true,
