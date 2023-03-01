@@ -5,7 +5,8 @@ hello:
 	echo "Hello, World"
 
 sitemap:
-	nbs2html ./ipynb/ index,001_Legal,002_Parcels,003_Lore,004_Tutorials,005_Monetize,006_Websites ./src/posts/
+	node ./src/convert.js ./ipynb/ index,001_Legal,002_Parcels,003_Lore,004_Tutorials,005_Monetize,006_Websites ./src/posts/
+#nbs2html ./ipynb/ index,001_Legal,002_Parcels,003_Lore,004_Tutorials,005_Monetize,006_Websites ./src/posts/
 
 maker:
 	make nb2py && make bump && make build && make pypi && make clean && make upd

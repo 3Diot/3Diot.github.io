@@ -65,6 +65,7 @@
     "webpack-pwa-manifest": "^4.3.0"
   },
   "dependencies": {
-    "imagemin": "^8.0.1"
+    "imagemin": "^8.0.1",
+    "marked": "^4.2.12"
   }
 }
