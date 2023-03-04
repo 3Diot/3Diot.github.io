@@ -63,7 +63,7 @@ module.exports = (env, args) => {
         new TerserPlugin({ // config default parser
           terserOptions: {
             parse: { html5_comments: false },
-            // compress: { pure_funcs: ['console.log'], toplevel: true },
+            compress: { pure_funcs: ['console.log'], toplevel: true },
             sourceMap: { url: "inline" },
             keep_classnames: true,
             keep_fnames: true,
@@ -206,6 +206,7 @@ module.exports = (env, args) => {
           { from: './src/404.html', to: '404.html', toType: 'file' }, 
           { from: './src/template_article.html', to: 'template_article.html', toType: 'file' },
           { from: './src/service-worker.js', to: 'service-worker.js', toType: 'file' },
+          { from: './src/template_article_lazy.js', to: 'template_article_lazy.js', toType: 'file' },
           { from: './src/maps', to: './maps', toType: 'dir' },
           { from: './src/posts', to: './posts', toType: 'dir' },
           { from: './src/tables', to: './tables', toType: 'dir' },
