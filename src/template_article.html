@@ -1,3 +1,4 @@
+<div id="tracer"></div>
 <svg xmlns="http://www.w3.org/2000/svg" id="svg_bg"></svg> 
 <!-- this checkbox holds state of whether modal is visible or not -->
 <input checked type="checkbox" id="toggle-sitemap">
@@ -24,7 +25,7 @@
 </div>
 <div id="footer">
   <p id="thanks">Thank's for visiting!</p>
-  <span id="footer_bg_wrapper"><div id="tracer"></div><div id="footer_bg"></div></span> 
+  <span id="footer_bg_wrapper"><div id="footer_bg"></div></span> 
 </div> 
 
 <script tag="templateScript" type="text/javascript"> // Animated Background Cubes
@@ -39,16 +40,16 @@ createCube = () => {
   cube.setAttribute('fill', ['red','green','orange', 'blue'][rir(0,3)]);
   cube.classList.add('cube'); return cube;
 };
-createCubes = () => { return Array(rir(15,25)).fill().map( () =>{c=window.createCube(); window.svg_bg.appendChild(c); return c});  };
+createCubes = () => { return Array(rir(8,15)).fill().map( () =>{c=window.createCube(); window.svg_bg.appendChild(c); return c});  };
 animateCubes = () => { [...document.querySelectorAll('.cube')].forEach(cube => { c = cube.style;
     c.setProperty('--startx', `-${rir(0, 10)}vh`); c.setProperty('--endx', `${rir(0, 10)}vh`);
     c.setProperty('--starty', `-${rir(100, 125)}vh`); c.setProperty('--endy', `${rir(100, 125)}vh`);
-    cube.style.animation = `cube-animation ${duration/1000}s forwards`;
+    cube.style.animation = `cube-animation ${duration}ms forwards`;
   }); 
 }; 
 window.duration = 20000
 createAndAnimate = () => { window.svg_bg.innerHTML = ''; window.cubes = createCubes(rir(15, 25)); animateCubes(); };
-createAndAnimate(); setInterval(() => { createAndAnimate(20000); }, duration);
+createAndAnimate(); setInterval(() => { createAndAnimate(duration); }, duration);
 </script>
 
 <!-- 
@@ -87,16 +88,9 @@ createAndAnimate(); setInterval(() => { createAndAnimate(20000); }, duration);
 </script>
 
 <script tag="templateScript" type="text/javascript">
-document.addEventListener('scroll', function() {
-  let scrollPercent = (document.documentElement.scrollTop + document.body.scrollTop) / (document.documentElement.scrollHeight - document.documentElement.clientHeight) * 100;
-  scrollPercent = (scrollPercent / 100) * 45 + 10;
-  document.documentElement.style.setProperty('--change1', scrollPercent+'%' );
-  document.documentElement.style.setProperty('--change2', scrollPercent+'%' );
-  clearInterval(window.scrollTimer);
-  window.scrollTimer = setInterval(() => {
-    document.documentElement.style.setProperty('--change1', "0%");
-    document.documentElement.style.setProperty('--change2', "100%");
-  }, 1500); 
+document.addEventListener('scroll', () => {
+  let scrollPercent = (document.documentElement.scrollTop) / (document.documentElement.scrollHeight - document.documentElement.clientHeight) * 100;
+  document.getElementById('tracer').style.setProperty('--scrollPercent', scrollPercent + '%');
 });
 </script>
 
@@ -118,13 +112,10 @@ function updatePath(bars) {
   document.documentElement.style.setProperty('--path2', pastPath || newPath);
   //Fix for Glitchy animation Otherwise flashes end of animation before starting again.
   footer.animation = "none"; 
-  setTimeout(()=>{ 
-    document.getElementById("tracer").style.offsetPath = newPath;
-    footer.animation = "clip-path-polygon 1s forwards"; 
-  },10)
+  setTimeout(()=>{ footer.animation = "clip-path-polygon 1000ms forwards"; }, 100)
 }
 window.w=Math.min(window.innerWidth, 800); 
-updatePath(); setInterval(updatePath,8000);
+updatePath(); setInterval(updatePath,1500);
 </script>
 
 <script tag="templateScript" type="text/javascript">
@@ -160,7 +151,7 @@ window.addEventListener('templateRefreshed', async () =>{
 // Wite map styling. The if needs js, the else isn't really needed. Could be done in css too.
 setTimeout( ()=>{ 
   var sm = document.getElementById("toggle-sitemap");
-  if(window.screen.width <= 800){ sm.checked=false;}
+  if(window.isSmall){ sm.checked=false;}
   else{
     sm.checked=true;
     var sitemap = document.getElementById("sitemap");

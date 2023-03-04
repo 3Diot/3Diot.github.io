@@ -12,6 +12,7 @@ export const navEvent = async (event) => {
 // 1) Get meta data from route. 2) Register service worker. 3) load template. 
 // 4) Load scripts 5) Dispatch event listeners. 6) Update route change event listeners
 export const handleRoute = async (route) => {
+    await import(/* webpackChunkName: "sitemap" */ './sitemap.js');
     console.log('~~~~~~> handleRoute')
     // Get the Upcoming Files Json Data 
     let content = await (await fetch(`./posts/${route.replace("/",'').replace('.html','') || 'index'}.json`)).json(); 
@@ -23,8 +24,6 @@ export const handleRoute = async (route) => {
         window.newTemplate = true;
         
         if (!window.inDev) { registerServiceWorker(); }
-
-        await import(/* webpackChunkName: "sitemap" */ './sitemap.js');
         
         // Load Template
         document.body.innerHTML = await (await fetch(`./${window.meta.template}.html`)).text(); 

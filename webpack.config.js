@@ -29,6 +29,7 @@ const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPl
 module.exports = (env, args) => { 
   // process.env is different from env here
   const isDev = args.mode === 'development'
+  const addPwa = isDev ? false : false;  // No need to inject PWA
   let template = `
   <!DOCTYPE html>
   <html lang="en" dir="ltr">
@@ -211,7 +212,7 @@ module.exports = (env, args) => {
           { from: './src/images', to: './images', toType: 'dir' }
         ]
       } ),
-      isDev ? ()=>{} : new WebpackPwaManifest({
+      !addPwa ? ()=>{} : new WebpackPwaManifest({
         name: hr.longName,
         short_name:  hr.shortName,
         description: hr.description, 

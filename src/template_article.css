@@ -1,4 +1,4 @@
-#thanks, h1>a{
+h1>a{
   /* transparent text w animated lin gradient bg */
   background: linear-gradient(90deg, 
     rgb(var(--near-black)), 
@@ -12,7 +12,6 @@
   animation: gradient 5s ease infinite; 
 }
 h1>a:hover { text-decoration: underline; color: rgb(var(--near-black)); }
-#thanks{font-size:22px; padding:10px; text-align:center}
 
 /* 
 Article Content 
@@ -226,6 +225,7 @@ input { position: absolute;  width: 1px; clip: rect(0 0 0 0); overflow: hidden; 
   align-items: flex-end; 
   justify-content: center; 
 } 
+#thanks{font-size:22px; padding:10px; text-align:center}
 #footer_bg_wrapper{
   position: absolute;
   top: 0px;
@@ -256,28 +256,18 @@ input { position: absolute;  width: 1px; clip: rect(0 0 0 0); overflow: hidden; 
 
 
 
-
-  /* Move along path 
-    md.style.offsetPath = md.style.offsetPath.replace(/1/g, window.innerWidth).replace(/2/g, window.innerHeight)
-  */   
-  #tracer {
-    offset-path: path('M 0 0 L 0 2 L 0 0'); /* Generated path updates this */
-    animation: move 15s linear infinite;
-    clip-path: path('M27.822 8.205v-2.862h-2.637V2.484h-6.03v2.859h-2.637v2.862h-2.355v-2.862h-2.64V2.484H5.496v2.859H2.859v2.862H.501v5.718h2.358v2.862h2.259v2.859H7.38v2.859h2.637v2.862h3.015v2.859h4.617v-2.859h3.012v-2.862h2.64v-2.859H25.563v-2.859h2.259v-2.862h2.355V8.205z');
-    position:absolute; bottom: 160px;
-    width: 30px; height: 50px; 
-  }
-  @keyframes move {
-    0% {  background: rgb(var(--near-black)); transform: translateZ(0); offset-distance: var(--change1);}
-    25% { background: var(--near-white)}; 
-    50% { background: rgb(var(--near-black))}
-    75% { background: var(--near-white)} 
-    100% {background: rgb(var(--near-black)); offset-distance: var(--change2);}
-  } 
-  @keyframes clip-path-polygon {
-    0% { clip-path: var(--path2) }
-    100% { clip-path: var(--path1) }
-  }
+#tracer { 
+  --scrollPercent:0px;
+  transform: rotate(90deg);
+  background: rgb(var(--near-black));
+  clip-path: path('M27.822 8.205v-2.862h-2.637V2.484h-6.03v2.859h-2.637v2.862h-2.355v-2.862h-2.64V2.484H5.496v2.859H2.859v2.862H.501v5.718h2.358v2.862h2.259v2.859H7.38v2.859h2.637v2.862h3.015v2.859h4.617v-2.859h3.012v-2.862h2.64v-2.859H25.563v-2.859h2.259v-2.862h2.355V8.205z');
+  position:fixed; top: calc( var(--scrollPercent) - 15px );
+  width: 30px; height: 30px; 
+}
+@keyframes clip-path-polygon {
+  0% { clip-path: var(--path2) }
+  100% { clip-path: var(--path1) }
+}
 
 
 
