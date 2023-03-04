@@ -46,9 +46,14 @@ function addAnchorsToHeaders() {
 }
 
 //
-// Message comes from router.js when the template is loaded
+// Dispatched from handleRoute
+// - Used to populate the template with window.meta data
+// - Populates 'sitemap' map 
+// - - if exists with sitemap.json file and newTemplate (set from handleRoute)
+// - - Populates the #currentPage TOC by scanning for H2s, H3s, etc.
+// - Else Runs 'pageTransitioneer' animation if it exists
 //
-window.addEventListener('templateLoaded', async () => { 
+window.addEventListener('templateRefreshed', async () => { 
     let replace = (id) => {
         let el = document.getElementById(id); el.innerHTML = ''; 
         el.appendChild( document.createRange().createContextualFragment( meta[id] ));
@@ -57,9 +62,17 @@ window.addEventListener('templateLoaded', async () => {
         ['content', 'title', 'summary'].map((id) => replace( id ) )
         addTocToSiteMap(); addAnchorsToHeaders();
     }
-    window.newTemplate && ( await createNav(), populateTemplate(), document.querySelectorAll('a').forEach((el) =>{ el.id = el.id || el.innerText + Math.floor(Math.random() * 100)}) )
-    !window.newTemplate && setTimeout( async ()=>{ populateTemplate(); }, 1100)
-    const pageT = document.getElementById('pageTransitioneer'); 
-    pageT && !window.newTemplate && (pageT.style.animation = 'pageTransitioneer 1s alternate 2, gradient 1s alternate 2')
-    pageT && !window.newTemplate && setTimeout( ()=>{ !pageT?'':pageT.style.animation = 'none' }, 2300);  
+    if(window.newTemplate){ 
+            await createNav(), 
+            populateTemplate(), 
+            document.querySelectorAll('a').forEach((el) =>{ el.id = el.id || el.innerText + Math.floor(Math.random() * 100)}) 
+    }
+    else{
+        const pageT = document.getElementById('pageTransitioneer'); 
+        if(pageT && !window.newTemplate) {
+            pageT.style.animation = 'pageTransitioneer 1s alternate 2, gradient 1s alternate 2'
+            setTimeout( ()=>{ !pageT?'':pageT.style.animation = 'none' }, 2300);  
+        }
+        setTimeout( async ()=>{ populateTemplate(); }, 1100)
+    }
 }, {passive: true});

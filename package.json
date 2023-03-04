@@ -5,7 +5,7 @@
   "license": "MIT",
   "version": "1.0.0",
   "scripts": {
-    "start": "webpack serve --open --hot --progress --mode development --devtool eval-source-map",
+    "start": "webpack serve --mode development --devtool eval-source-map --progress",
     "build": "webpack --mode production --profile --progress",
     "postbuild": "make sitemap && react-snap"
   },

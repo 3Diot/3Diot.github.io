@@ -14,12 +14,17 @@ const fs = require('fs');
 const sharp = require('sharp'); 
 
 const CompressionPlugin = require('compression-webpack-plugin');
+// https://webpack.js.org/configuration/dev-server/
+// https://github.com/webpack/webpack-dev-server
 // https://github.com/orgs/community/discussions/21655
 // - no point in using the compression webpack plugin since as github does it anyways
 const compress = false;
 const analyze = false;
 
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
+
+// todo: https://webpack.js.org/configuration/cache/
+// https://github.com/webpack/webpack-dev-server
 
 module.exports = (env, args) => { 
   // process.env is different from env here
@@ -32,6 +37,7 @@ module.exports = (env, args) => {
       <div id="body"></div>
     </body>
   </html>`;
+  // cache: false,
   return {
     entry: { 
       head: './src/head.js',
@@ -258,7 +264,12 @@ module.exports = (env, args) => {
         deleteOriginalAssets: false,
       }),
     ],
-    devServer: {proxy: {'/data': 'http://localhost:80/PROJECTNAME/src/'}}
+    devServer: {
+      open: true,
+      watchFiles: ['src/**/*'],
+      historyApiFallback: { disableDotRule: true, },
+      proxy: {'/data': 'http://localhost:80/PROJECTNAME/src/'}
+    }
   }
 }
 

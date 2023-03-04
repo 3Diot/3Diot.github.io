@@ -23,9 +23,9 @@
   <div id="content"></div>
 </div>
 <div id="footer">
-  <p id="thanks">Thank's for visiting!</p>
   <span id="footer_bg_wrapper"><div id="tracer"></div><div id="footer_bg"></div></span> 
 </div> 
+<p id="thanks">Thank's for visiting!</p>
 
 <script tag="templateScript" type="text/javascript"> // Animated Background Cubes
 // create random # SVG's cubes w random# of sizes,colors,speeds, & positions
@@ -50,11 +50,6 @@ window.duration = 20000
 createAndAnimate = () => { window.svg_bg.innerHTML = ''; window.cubes = createCubes(rir(15, 25)); animateCubes(); };
 createAndAnimate(); setInterval(() => { createAndAnimate(20000); }, duration);
 </script>
-
-<!-- 
-  on scroll load generatePaths stuff.
-  relocate tracer to just span page height.
--->
 
 <script tag="templateScript" type="text/javascript">
   dragTarget = document.querySelector("#sitemap"); // alternately toggle-sitemap if sitemap-content scroll behaviors is not good.
@@ -87,21 +82,6 @@ createAndAnimate(); setInterval(() => { createAndAnimate(20000); }, duration);
 </script>
 
 <script tag="templateScript" type="text/javascript">
-document.addEventListener('scroll', function() {
-  let scrollPercent = (document.documentElement.scrollTop + document.body.scrollTop) / (document.documentElement.scrollHeight - document.documentElement.clientHeight) * 100;
-  scrollPercent = (scrollPercent / 100) * 45 + 10;
-  document.documentElement.style.setProperty('--change1', scrollPercent+'%' );
-  document.documentElement.style.setProperty('--change2', scrollPercent+'%' );
-  clearInterval(window.scrollTimer);
-  window.scrollTimer = setInterval(() => {
-    document.documentElement.style.setProperty('--change1', "0%");
-    document.documentElement.style.setProperty('--change2', "100%");
-  }, 1500); 
-});
-</script>
-
-</script>
-<script tag="templateScript" type="text/javascript">
 function generatePath(bars) { 
   const h = 200; const addPath=(x,y)=>`L${Math.round(x*window.w/bars)},${y}`; 
   const path=Array.from({length:bars},(y,x)=>{y=h-(rir(2,5)*40); return addPath(x,y)+addPath(x+1,y)});
@@ -125,6 +105,18 @@ function updatePath(bars) {
 }
 window.w=Math.min(window.innerWidth, 800); 
 updatePath(); setInterval(updatePath,8000);
+
+document.addEventListener('scroll', function() {
+  let scrollPercent = (document.documentElement.scrollTop + document.body.scrollTop) / (document.documentElement.scrollHeight - document.documentElement.clientHeight) * 100;
+  scrollPercent = (scrollPercent / 100) * 45 + 10;
+  document.documentElement.style.setProperty('--change1', scrollPercent+'%' );
+  document.documentElement.style.setProperty('--change2', scrollPercent+'%' );
+  clearInterval(window.scrollTimer);
+  window.scrollTimer = setInterval(() => {
+    document.documentElement.style.setProperty('--change1', "0%");
+    document.documentElement.style.setProperty('--change2', "100%");
+  }, 1500); 
+});
 </script>
 
 <script tag="templateScript" type="text/javascript">
@@ -149,7 +141,7 @@ const observer = new IntersectionObserver((entries) => {
 });
 
 loadObserver = (t) =>{ document.querySelectorAll('h2,h3,h4,h5,h6').forEach((el) => observer.observe(el) ) };  
-window.addEventListener('templateRefreshed', async () =>{ 
+window.addEventListener('templateLoaded', async () =>{ 
   if(window.isSmall){ document.getElementById('toggle-sitemap').checked=false; }
   setTimeout( ()=>loadObserver(),2000) 
 } );
@@ -168,5 +160,5 @@ setTimeout( ()=>{
     var space = document.querySelector(".broider").getBoundingClientRect().left;
     if( space > size ){ sitemap.style.left=space-size+"px";}
   }
-},1000)
+},1000) 
 </script>

@@ -1,62 +1,51 @@
-/*
-template.html loads
-
-main.js is in the head.
-- redirect fns
-- window.isSmall
-- window.indev
-- register service worker
-
-sitemap smallScreen code in th footer.
-
-mainjs ondomcontentloaded
-- - > does not wait for async scripts to load but yes to module and defer type scripts
-- - > lazy load router
-- - > load sitemap
-*/
-
 // Page Load Logic and Routing
 export const navEvent = async (event) => {
-    console.log('navEvent', event)
-    if (!window.inDev) { registerServiceWorker(); }
+    console.log('~~~~> navEvent')
     let route = (event.target.href || event.target.location.href).replace(window.origin,'');  
     if (route.split("#")[0] != window.oldRoute.split("#")[0]){ await handleRoute( route ); window.oldRoute = route; }; 
     route.indexOf('#') == -1 && window.scrollTo({ top: 0, behavior: 'smooth' });
     let t = document.getElementById(route.split('#')[1]); t && t.scrollIntoView({ behavior: 'smooth' });
 };
 
+
+// Loads a route and it's dependencies via it's meta data obtained from it's path.
+// 1) Get meta data from route. 2) Register service worker. 3) load template. 
+// 4) Load scripts 5) Dispatch event listeners. 6) Update route change event listeners
 export const handleRoute = async (route) => {
-    console.log('handleRoute', route) 
-    // Loads a route using it's meta data.
-    let content = await (await fetch(`./posts/${route.replace("/",'').replace('.html','') || 'index'}.json`)).json(); // Get the Upcoming Files Json Data 
+    console.log('~~~~~~> handleRoute')
+    // Get the Upcoming Files Json Data 
+    let content = await (await fetch(`./posts/${route.replace("/",'').replace('.html','') || 'index'}.json`)).json(); 
     window.meta = content.meta; meta.content = content.content; document.title = window.meta.title; 
 
     // Load the template & Dispatch pageLoaded event for template/ content hooks 
     window.newTemplate = false;
     if (!(window?.template?.className === window.meta.template)){
         window.newTemplate = true;
-        document.body.innerHTML = await (await fetch(`./${window.meta.template}.html`)).text();
-        await loadScripts();  
-    }
-    window.dispatchEvent( new CustomEvent('templateLoaded') );
+        
+        if (!window.inDev) { registerServiceWorker(); }
+
+        await import(/* webpackChunkName: "sitemap" */ './sitemap.js');
+        
+        // Load Template
+        document.body.innerHTML = await (await fetch(`./${window.meta.template}.html`)).text(); 
+        
+        // handle React Snap
+        await loadScripts(); 
+    } 
+    // Listeners in template.html and | sitemap.js -> Populates window.newTemplate & updates toc. 
     window.dispatchEvent( new CustomEvent('templateRefreshed') );
-    setTimeout( ()=>{  
-        document.querySelectorAll('a[href^="./"]').forEach(link=>link.removeEventListener('click', window.redirect)); 
-        document.querySelectorAll('a[href^="./"]').forEach(link =>link.addEventListener('click', window.redirect )) 
-    }, 100); 
+    setTimeout( ()=>{ window.updateRedirectListeners() }, 100);
 }
 
 // Load scripts from template.
 const loadScripts = async () => {
+    console.log('~~~~~~~~> loadScripts');
     Array.from(document.getElementsByTagName("script")).forEach(script => {
         if (new RegExp("head|helmet", "i").test(script.getAttribute('src'))){ script.remove(); return; } // Dev & React Snap inits Only
         if (new RegExp("main|router", "i").test(script.getAttribute('src'))){  return; } // Dev & React-Snap & Client runs Init Only.
         if ( !script.getAttribute('tag') ) { return }
         const newScript = document.createElement("script"); 
-        script.textContent && (newScript.textContent = script.textContent);
-        script.src && (newScript.src = script.src);
-        script.async && (newScript.async = script.async);
-        script.type && (newScript.type = script.type);
+        ['src','type','async','textContent'].forEach( attr => { script[attr] && (newScript[attr] = script[attr]) } );
         script.parentNode.replaceChild(newScript, script);
     } );
 }
@@ -64,6 +53,7 @@ const loadScripts = async () => {
 
 
 const registerServiceWorker = async () => {
+    console.log('~~~~~~~~> registerServiceWorker');
     if (!("serviceWorker" in navigator)) { return }
     try {
         const registration = await navigator.serviceWorker.register("/service-worker.js");
@@ -74,7 +64,7 @@ const registerServiceWorker = async () => {
             const installingWorker = registration.installing;
             installingWorker.onstatechange = () => {
                 if (installingWorker.state != 'installed') return 
-                if (navigator.serviceWorker.controller) { console.log('New content is available; please refresh.'); } // Purge occurred. fresh content added to the cache.
+                if (navigator.serviceWorker.controller) { console.log('New content is available; please refresh.'); } // Purge occurred. fresh content added to the cache. 
                 else { console.log('Content is cached for offline use.'); } // Everything has been precached.
             };
         };

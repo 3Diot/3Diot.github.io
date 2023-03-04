@@ -12,7 +12,7 @@
   animation: gradient 5s ease infinite; 
 }
 h1>a:hover { text-decoration: underline; color: rgb(var(--near-black)); }
-#thanks{margin-top:200px; font-size:22px; padding:10px; text-align:center}
+#thanks{font-size:22px; padding:10px; text-align:center}
 
 /* 
 Article Content 
@@ -60,6 +60,7 @@ body:has(#sitemap:focus-within) {
 } 
 #sitemap{
   position: fixed; 
+  transition: left 0.5s ease-in-out;
   min-width: 8em;
   top: 0;
   left: 0;  
@@ -218,12 +219,17 @@ input { position: absolute;  width: 1px; clip: rect(0 0 0 0); overflow: hidden; 
 
 
 #footer{
-  position:fixed; bottom: 0px; left: 0px; right: 0px; height: 200px;
-  width: min(100vw, 800px); z-index: -6;
-  margin: auto;
+  height: 200px;
+  width: min(100vw, 800px);
+  margin: 30px auto 0px auto;
+  display: flex;
+  align-items: flex-end; 
+  justify-content: center; 
 } 
 #footer_bg_wrapper{
   position: absolute;
+  top: 0px;
+  z-index: -1;
   width:100%; height:100%;   
   filter: var(--filterdropshadowunder); 
 }
