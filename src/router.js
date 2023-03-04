@@ -40,8 +40,7 @@ export const handleRoute = async (route) => {
 const loadScripts = async () => {
     console.log('~~~~~~~~> loadScripts');
     Array.from(document.getElementsByTagName("script")).forEach(script => {
-        if (new RegExp("head|helmet", "i").test(script.getAttribute('src'))){ script.remove(); return; } // Dev & React Snap inits Only
-        if (new RegExp("main|router", "i").test(script.getAttribute('src'))){  return; } // Dev & React-Snap & Client runs Init Only.
+        // if (new RegExp("main", "i").test(script.getAttribute('src'))){  return; } // Runs once on initial load. Gets Inlined in Prod.
         if ( !script.getAttribute('tag') ) { return }
         const newScript = document.createElement("script"); 
         ['src','type','async','textContent'].forEach( attr => { script[attr] && (newScript[attr] = script[attr]) } );

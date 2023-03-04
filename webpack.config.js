@@ -33,7 +33,7 @@ module.exports = (env, args) => {
   let template = `
   <!DOCTYPE html>
   <html lang="en" dir="ltr">
-    <head id="head"></head>
+  <head id="head"></head>
     <body>
       <div id="body"></div>
     </body>
@@ -41,7 +41,7 @@ module.exports = (env, args) => {
   // cache: false,
   return {
     entry: { 
-      head: './src/head.js',
+      head: './src/head.js', 
       index: './src/admin/index.js',
       main: './src/main.js',
     },
@@ -68,8 +68,6 @@ module.exports = (env, args) => {
             keep_classnames: true,
             keep_fnames: true,
             nameCache: null, // when set to true it helps speed things up but can deliver outdated cache results
-            keep_classnames: true,
-            keep_fnames: true
           },
         }),
         new ImageMinimizerPlugin({
@@ -250,7 +248,7 @@ module.exports = (env, args) => {
       isDev || !compress ? ()=>{} :  new CompressionPlugin({
         filename: '[path][base].br',
         algorithm: 'brotliCompress',
-        test: /\.(js|css|html|svg)$/,
+        test: /\.(ico|js|css|html|svg)$/,
         compressionOptions: { level: 11 },
         threshold: 10240,
         minRatio: 0.8,
@@ -259,7 +257,7 @@ module.exports = (env, args) => {
       isDev || !compress ? ()=>{} : new CompressionPlugin({
         filename: '[path][base].gz',
         algorithm: 'gzip',
-        test: /\.(js|css|html|svg)$/,
+        test: /\.(ico|js|css|html|svg)$/,
         compressionOptions: { level: 9 },
         threshold: 10240,
         minRatio: 0.8,

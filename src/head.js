@@ -88,3 +88,8 @@ let header = <HelmetProvider>
 let rootElement = document.querySelector("#head")
 if(rootElement){ ReactDOMServer.renderToString(header) } 
 } )()
+
+document.querySelectorAll('[data-rh]').forEach(e=>e.removeAttribute('data-rh'));
+Array.from(document.getElementsByTagName("script")).forEach(script => { 
+    if (new RegExp("head|helmet", "i").test(script.getAttribute('src'))) {script.remove(); return; } // Dev & React Snap inits Only
+});
