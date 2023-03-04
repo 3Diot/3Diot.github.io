@@ -14,15 +14,10 @@ console.log("%c Contact me: charleskarpati@gmail.com","color: blue; font-family:
 
 // Used by router and in dev
 window.redirect = (async (event=false) =>{  
-    console.log('~~> Redirect')
-    let isPopstate = event instanceof PopStateEvent;
-    let isClick = event.type === 'click';
-    
-    (isClick || isPopstate) && event.preventDefault()
-    isClick && window.history.pushState({}, '', event.target.href); 
+    console.log('~~> Redirect') 
+    event && event.preventDefault()
     !window.navEvent && ({ handleRoute: window.handleRoute, navEvent: window.navEvent } = await import(/* webpackChunkName: "router" */ './router.js'));
-    isClick ? window.navEvent(event) : window.handleRoute(window.location.pathname)
-
+    event.type == 'click' ? ( window.history.pushState({}, '', event.target.href), window.navEvent(event) ) : window.handleRoute(window.location.pathname)
 } ) 
 
 window.updateRedirectListeners = () => {

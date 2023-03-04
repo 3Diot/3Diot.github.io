@@ -45,17 +45,15 @@
       dragToY = e.pageY || e.targetTouches[0].clientY; 
       dragTarget.style.left = (objInitLeft + dragToX-dragStartX) + "px";
       dragTarget.style.top = (objInitTop + dragToY-dragStartY) + "px";
-    } 
-  (function() {
-    // start = mousepos & objInit = topleft of obj
-    var dragStartX, dragStartY, objInitLeft, objInitTop = 0;
-    dragTarget.addEventListener("mousedown", downFN,{ passive:false });
-    document.addEventListener("mousemove", moveFN,{ passive:false });
-    document.addEventListener("mouseup", function(e) {inDrag = false}); 
-    dragTarget.addEventListener("touchstart", downFN,{ passive:false });
-    dragTarget.addEventListener("touchmove", moveFN,{ passive:false });
-    dragTarget.addEventListener("touchend", function(e) {inDrag = false;});
-  }())
+  } 
+  // start = mousepos & objInit = topleft of obj
+  var dragStartX, dragStartY, objInitLeft, objInitTop = 0;
+  dragTarget.addEventListener("mousedown", downFN,{ passive:false });
+  document.addEventListener("mousemove", moveFN,{ passive:false });
+  document.addEventListener("mouseup", function(e) {inDrag = false}); 
+  dragTarget.addEventListener("touchstart", downFN,{ passive:false });
+  dragTarget.addEventListener("touchmove", moveFN,{ passive:false });
+  dragTarget.addEventListener("touchend", function(e) {inDrag = false;});
 </script>
 
 <script tag="templateScript" type="text/javascript">

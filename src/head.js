@@ -43,6 +43,7 @@ let header = <HelmetProvider>
         <link rel="license"             href="https://opensource.org/licenses/MIT"/>
         <link rel="canonical"           href={`https://cvminigames.com/${page}`} /> 
         <link rel="apple-touch-icon"    href='l337h4x'></link>
+        <link rel="icon" type="image/ico" sizes="16x16"     href={hr.icon16}/>
         { /*
         <link rel="author"              href={hr.author}/>
         <link rel="me"                  href={hr.owneremail} type="text/html"/>
@@ -55,7 +56,6 @@ let header = <HelmetProvider>
         <meta name="geo.placename"      content={hr.title} />
         <meta name="geo.position"       content={hr.geoposition} />
         <meta name="ICBM"               content={hr.geoposition} />
-        <link rel="icon" type="image/ico" sizes="16x16"     href={hr.icon16}/>
         <link rel="icon" type="image/ico" sizes="24x24"     href={hr.icon24}/>
         <link rel="icon" type="image/ico" sizes="32x32"     href={hr.icon32}/>
         <link rel="icon" type="image/ico" sizes="64x64"     href={hr.icon64}/>
