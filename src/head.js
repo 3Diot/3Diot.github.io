@@ -16,10 +16,6 @@ if(forBlog){
   hr = {...hr, ...content.meta}
   csp = `img-src 'self' https://charleskarpati.com/ data:;`
 }
-  
-// Hashtags get commented out. careful for "background_color" "theme_color"
-// <meta name="theme-color" media="(prefers-color-scheme: light)" content="#3880ff" /> 
-// ion-content > div { margin-left: 25%; padding-top: 40px;  padding-bottom: 40px; }  
 
 let header = <HelmetProvider>
       <Helmet>    
@@ -86,10 +82,31 @@ let header = <HelmetProvider>
   </HelmetProvider>
   
 let rootElement = document.querySelector("#head")
-if(rootElement){ ReactDOMServer.renderToString(header) } 
-} )()
+if(rootElement){ 
+  ReactDOMServer.renderToString(header) 
+} 
 
-document.querySelectorAll('[data-rh]').forEach(e=>e.removeAttribute('data-rh'));
+// Onload Event
+setTimeout(()=>{  
+  window.redirect&&window.redirect(); 
+
+  setTimeout(()=>{
+    console.log('~~~~~~~~~~~~~~~ EXECUTING snapSaveState ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~')
+    //document.querySelector("#sitemap").setAttribute("data-server-rendered", "true");
+    document.querySelectorAll('[data-rh]').forEach(e=>{
+      console.log('removing', e.asElement? e.asElement().outerHTML : e.outerHTML);
+      // https://pptr.dev/api/puppeteer.jshandle
+      (e.asElement? e.asElement():e).removeAttribute('data-rh')
+    });
+  }, 20) 
+
+}, 200)
+
+// Runs in Dev / React Snap. Removes prerender scripts
 Array.from(document.getElementsByTagName("script")).forEach(script => { 
-    if (new RegExp("head|helmet", "i").test(script.getAttribute('src'))) {script.remove(); return; } // Dev & React Snap inits Only
+    if (new RegExp("head|helmet", "i").test(script.getAttribute('src'))) {
+      script.remove(); return; 
+    }
 });
+
+} )()

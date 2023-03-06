@@ -1,4 +1,5 @@
 // Page Load Logic and Routing
+window.oldRoute = location.pathname.replace(origin,'');
 export const navEvent = async (event) => {
     console.log('~~~~> navEvent')
     let route = (event.target.href || event.target.location.href).replace(window.origin,'');  
@@ -12,8 +13,11 @@ export const navEvent = async (event) => {
 // 1) Get meta data from route. 2) Register service worker. 3) load template. 
 // 4) Load scripts 5) Dispatch event listeners. 6) Update route change event listeners
 export const handleRoute = async (route) => {
+
     await import(/* webpackChunkName: "sitemap" */ './sitemap.js');
+    
     console.log('~~~~~~> handleRoute')
+
     // Get the Upcoming Files Json Data 
     let content = await (await fetch(`./posts/${route.replace("/",'').replace('.html','') || 'index'}.json`)).json(); 
     window.meta = content.meta; meta.content = content.content; document.title = window.meta.title; 
@@ -23,12 +27,11 @@ export const handleRoute = async (route) => {
     if (!(window?.template?.className === window.meta.template)){
         window.newTemplate = true;
         
-        if (!window.inDev) { registerServiceWorker(); }
+        window.inDev = !!!window.content?.innerHTML.trim()
+        if (!window.inDev) { console.log('window.inDev'), registerServiceWorker(); }
         
         // Load Template
         document.body.innerHTML = await (await fetch(`./${window.meta.template}.html`)).text(); 
-        
-        // handle React Snap
         await loadScripts(); 
     } 
     // Listeners in template.html and | sitemap.js -> Populates window.newTemplate & updates toc. 
@@ -40,7 +43,6 @@ export const handleRoute = async (route) => {
 const loadScripts = async () => {
     console.log('~~~~~~~~> loadScripts');
     Array.from(document.getElementsByTagName("script")).forEach(script => {
-        // if (new RegExp("main", "i").test(script.getAttribute('src'))){  return; } // Runs once on initial load. Gets Inlined in Prod.
         if ( !script.getAttribute('tag') ) { return }
         const newScript = document.createElement("script"); 
         ['src','type','async','textContent'].forEach( attr => { script[attr] && (newScript[attr] = script[attr]) } );

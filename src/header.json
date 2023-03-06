@@ -10,7 +10,7 @@
     "shortName":"CVAdmin",
     "geoposition":"39.290385; -76.612189",
     "themecolor":"#0080f0",
-    "icon16":"/images/icon16.ico",
+    "icon16":"/images/favicon.ico",
     "icon24":"/images/icon24.ico",
     "icon32":"/images/icon32.ico",
     "icon64":"/images/icon64.ico",
@@ -24,6 +24,6 @@
     "icon512":"/images/icon512.png", 
     "image":"/images/icon300.png", 
     "type":"city",
-    "twittersite":"@site_account",
-    "twitterauthor":"@individual_account"
+    "twittersite":"@cvminigames",
+    "twitterauthor":"@cvminigames"
 }
