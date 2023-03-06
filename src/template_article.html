@@ -29,47 +29,47 @@
 </div> 
 
 <script tag="templateScript" type="text/javascript">
-  dragTarget = document.querySelector("#sitemap"); // alternately toggle-sitemap if sitemap-content scroll behaviors is not good.
-  inDrag = window.inDrag ? inDrag : false;
-  function downFN(e) {
-      inDrag = true;
-      objInitLeft = dragTarget.offsetLeft; objInitTop = dragTarget.offsetTop;
-      dragStartX = e.pageX || e.targetTouches[0].clientX; 
-      dragStartY = e.pageY || e.targetTouches[0].clientY; 
-  }
-  function moveFN(e) {
-      if (!inDrag) {return;} 
-      e.preventDefault();
-      document.getElementById('drag').style.display='none';
-      dragToX = e.pageX || e.targetTouches[0].clientX; 
-      dragToY = e.pageY || e.targetTouches[0].clientY; 
-      dragTarget.style.left = (objInitLeft + dragToX-dragStartX) + "px";
-      dragTarget.style.top = (objInitTop + dragToY-dragStartY) + "px";
-  } 
-  // start = mousepos & objInit = topleft of obj
-  var dragStartX, dragStartY, objInitLeft, objInitTop = 0;
-  dragTarget.addEventListener("mousedown", downFN,{ passive:false });
-  document.addEventListener("mousemove", moveFN,{ passive:false });
-  document.addEventListener("mouseup", function(e) {inDrag = false}); 
-  dragTarget.addEventListener("touchstart", downFN,{ passive:false });
-  dragTarget.addEventListener("touchmove", moveFN,{ passive:false });
-  dragTarget.addEventListener("touchend", function(e) {inDrag = false;});
-</script>
 
-<script tag="templateScript" type="text/javascript">
-window.loadOnce = false
-document.addEventListener('scroll', () => {
-  window.loadOnce||((document.head||document.documentElement).appendChild(document.createElement('script')).src='template_article_lazy.js');
-  window.loadOnce=true;
-  let scrollPercent = (document.documentElement.scrollTop) / (document.documentElement.scrollHeight - document.documentElement.clientHeight) * 100;
-  document.getElementById('tracer').style.setProperty('--scrollPercent', scrollPercent + '%');
-});
-</script>
+// Onstart: Uncheck & Rollup for mobile Vs. Slide Left on Large Screens
+var tsm = document.getElementById("toggle-sitemap");
+tsm.checked = !window.isSmall
+var sm = document.getElementById("sitemap");
+var size = sm.offsetWidth;
+var space = document.querySelector(".broider").getBoundingClientRect().left;
+if( space > size ){
+  sm.style.left=space-size+"px";
+  sm.style.transition = 'left 0.5s ease-in-out';
+  setTimeout( ()=>sm.style.transition = 'none',500) // CSS transitions .5 seconds
+}
 
-<script tag="templateScript" type="text/javascript">
-// 6 
+// alternately toggle-sitemap if sitemap-content scroll behaviors is not good.
+var inDrag, dragStartX, dragStartY, objInitLeft, objInitTop = 0;
+function downFN(e) {
+    inDrag = true;
+    objInitLeft = sitemap.offsetLeft; objInitTop = sitemap.offsetTop;
+    dragStartX = e.pageX || e.targetTouches[0].clientX; 
+    dragStartY = e.pageY || e.targetTouches[0].clientY; 
+}
+function moveFN(e) {
+    if (!inDrag) {return;} 
+    e.preventDefault();
+    document.getElementById('drag').style.display='none';
+    dragToX = e.pageX || e.targetTouches[0].clientX; 
+    dragToY = e.pageY || e.targetTouches[0].clientY; 
+    sitemap.style.left = (objInitLeft + dragToX-dragStartX) + "px";
+    sitemap.style.top = (objInitTop + dragToY-dragStartY) + "px";
+} 
+[  [["mousedown", "touchstart"], downFN],
+  [["mousemove", "touchmove"], moveFN],
+  [["mouseup", "touchend"], () => inDrag = false],
+].forEach(evt => evt[0].forEach(type => sitemap.addEventListener(type, evt[1], { passive: false })));
+
+
+
+
 // Hit em w/ the ol razzle dazzle; and give em the wiggles~! >:D
 // IntersectionObserver for animations and Highlighting active TOC Anchor link
+// Runs once on load and again on templateRefreshed event
 window.activeHeader = null
 const observer = new IntersectionObserver((entries) => { 
     entries.forEach((entry) => {let e=entry.target
@@ -86,26 +86,21 @@ const observer = new IntersectionObserver((entries) => {
         }
     });
 });
-
 loadObserver = (t) =>{ document.querySelectorAll('h2,h3,h4,h5,h6').forEach((el) => observer.observe(el) ) };  
-window.addEventListener('templateRefreshed', async () =>{ 
-  if(window.isSmall){ document.getElementById('toggle-sitemap').checked=false; }
-  setTimeout( ()=>loadObserver(),2000) 
-} );
-!window.inDev && loadObserver();
+window.addEventListener('templateRefreshed', async () =>{ setTimeout( ()=> loadObserver(), 2000) } );
+loadObserver();
 
-</script>
-<script tag="templateScript" type="text/javascript">
-// Wite map styling. The if needs js, the else isn't really needed. Could be done in css too.
-setTimeout( ()=>{ 
-  var sm = document.getElementById("toggle-sitemap");
-  if(window.isSmall){ sm.checked=false;}
-  else{
-    sm.checked=true;
-    var sitemap = document.getElementById("sitemap");
-    var size = sitemap.offsetWidth;
-    var space = document.querySelector(".broider").getBoundingClientRect().left;
-    if( space > size ){ sitemap.style.left=space-size+"px";}
-  }
-},1000)
+
+// Lazy Load
+window.loadOnce = false
+window.getLazy = () => { 
+  window.loadOnce||((document.head||document.documentElement).appendChild(document.createElement('script')).src='template_article_lazy.js');
+  window.loadOnce=true;
+}
+document.addEventListener('scroll', () => {
+  getLazy();
+  let scrollPercent = (document.documentElement.scrollTop) / (document.documentElement.scrollHeight - document.documentElement.clientHeight) * 100;
+  document.getElementById('tracer').style.setProperty('--scrollPercent', scrollPercent + '%');
+});
+
 </script>

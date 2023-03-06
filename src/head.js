@@ -91,16 +91,15 @@ setTimeout(()=>{
   window.redirect&&window.redirect(); 
 
   setTimeout(()=>{
-    console.log('~~~~~~~~~~~~~~~ EXECUTING snapSaveState ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~')
     //document.querySelector("#sitemap").setAttribute("data-server-rendered", "true");
     document.querySelectorAll('[data-rh]').forEach(e=>{
-      console.log('removing', e.asElement? e.asElement().outerHTML : e.outerHTML);
+      // console.log('removing', e.asElement? e.asElement().outerHTML : e.outerHTML);
       // https://pptr.dev/api/puppeteer.jshandle
       (e.asElement? e.asElement():e).removeAttribute('data-rh')
     });
   }, 20) 
 
-}, 200)
+}, 20)
 
 // Runs in Dev / React Snap. Removes prerender scripts
 Array.from(document.getElementsByTagName("script")).forEach(script => { 

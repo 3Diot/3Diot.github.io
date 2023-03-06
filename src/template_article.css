@@ -59,7 +59,6 @@ body:has(#sitemap:focus-within) {
 } 
 #sitemap{
   position: fixed; 
-  transition: left 0.5s ease-in-out;
   min-width: 8em;
   top: 0;
   left: 0;  
@@ -68,6 +67,7 @@ body:has(#sitemap:focus-within) {
   border-radius: .7rem;
   padding: 1rem;
   padding-top: 0px;
+  overflow-x: hidden;
 
   backdrop-filter: blur(2px) saturate(100%);
   -webkit-backdrop-filter: blur(2px) saturate(100%);
@@ -100,14 +100,16 @@ input { position: absolute;  width: 1px; clip: rect(0 0 0 0); overflow: hidden; 
   text-shadow: 1px 1px 45px rgb(var(--near-black)); 
 } 
 
-#toggle-sitemap:not(:checked) ~ #sitemap > label > span:nth-child(1) { --rotate:90deg; animation: dismiss 1s forwards;  } 
-#toggle-sitemap:checked ~ #sitemap > label > span:nth-child(1) { --rotate:90deg; animation: reveal 500ms forwards;  } 
-@keyframes reveal {  from {transform:rotate(0deg)} to {transform: rotate(var(--rotate)); } }
-@keyframes dismiss { from {transform:rotate(var(--rotate))} to {transform: rotate(0deg); } }
+#toggle-sitemap:not(:checked) ~ #sitemap > label > span { animation: dismiss 1s forwards;  } 
+#toggle-sitemap:checked ~ #sitemap > label > span { animation: reveal 500ms forwards;  }
+#sitemap > label > span:nth-child(2) { --rotate:0deg; } 
+#sitemap > label > span:nth-child(3) { --rotate:45deg; } 
+@keyframes reveal {  from {transform:rotate(var(--rotate))} to {transform: rotate(90deg); } } 
+@keyframes dismiss { from {transform:rotate(90deg)} to {transform: rotate(var(--rotate)); } } 
 
 #sitemap-content{
   display:grid;
-  overflow: auto;
+  overflow-x: hidden;
   max-height: calc(75vh - 6em);
 }
 
