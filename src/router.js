@@ -43,10 +43,13 @@ export const handleRoute = async (route) => {
 const loadScripts = async () => {
     console.log('~~~~~~~~> loadScripts');
     Array.from(document.getElementsByTagName("script")).forEach(script => {
-        if ( !script.getAttribute('tag') ) { return }
+        // console.log('---------------------------------- script', script.src, script.tag, script.type, script.textContent )
+        // if ( !script.getAttribute('tag') ) { return }
         const newScript = document.createElement("script"); 
         ['src','type','async','textContent'].forEach( attr => { script[attr] && (newScript[attr] = script[attr]) } );
-        script.parentNode.replaceChild(newScript, script);
+        // script.parentNode.replaceChild(newScript, script);
+        document.body.appendChild(newScript);
+        script.parentNode.removeChild(script);
     } );
 }
 

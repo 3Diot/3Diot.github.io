@@ -31,6 +31,16 @@ Of note:
 - React-Snap Pre-rendering
 - Strips out _some_ scripts after Pre-rendering 
 
+Manual operations:
+- Webpack - Debug: Toggle purefuncs, Config new same-site Projects
+- Robots.txt - specify sitemaps and nofollow noindex section/links
+- Sitemap - more [info](https://search.google.com/search-console/welcome), [here](https://support.google.com/webmasters/answer/7451001)
+- Head.json
+- Header.js CSP 
+- Images
+- main.CSS
+
+
 ## Design
 
 Templates Contains: 
@@ -94,6 +104,32 @@ Reactive Explorative Interactive
       onerror="this.src='path/to/webpAndPngFailedToLoad.png'" 
       width="1243" height="1500" loading="lazy" decoding="async">
 </picture>
+
+Page SEO:
+-  Titles 
+- - Up to 50-60 characters to avoid SERP truncating.
+- - Frontload Keywords naturally and always include brandname
+- - Match Title and H1 closely
+
+- Descriptions
+- - SERP descriptions truncate at 150-160 characters 
+- - long-tail keywords like [contemporary art-deco sideboards] help
+- - <meta name="description" content=""/> - Keywords show in bold. Tell the reader what they want to hear.
+- - people typically visit for 4 types of content: Transactional Commercial Navigational Informational
+
+- Don't Forget Img Alt Text! 
+
+- Links
+- - Add only a "noindex" wont show on search wheras - "nofollow" wont associate links to page or scan em
+- - <META NAME="robots" CONTENT="noindex,nofollow"> / <a rel="nofollow" href="externalsite">
+- - Robots. txt disallow for whole sections, meta tag for single pages
+
+Structured Data:
+
+- [JSON-LD](https://www.youtube.com/watch?v=hUHjeDylhE8) > Microdata, RDF
+
+- Markup should only have things found in-page.
+- rich results [test](https://search.google.com/test/rich-results/), schema [validator](https://validator.schema.org/), markup [helper](https://www.google.com/webmasters/markup-helper/u/0/?)
 
 # Dependencies
 

@@ -220,7 +220,7 @@ module.exports = (env, args) => {
         fingerprints: false,
         start_url: './',
         display: "standalone",
-        theme_color: 'yellow',
+        theme_color: hr.themecolor,
         dir:"rtl",
         lang:"ar", 
         icons: [

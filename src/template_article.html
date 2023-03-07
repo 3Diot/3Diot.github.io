@@ -28,11 +28,11 @@
   <span id="footer_bg_wrapper"><div id="footer_bg"></div></span> 
 </div> 
 
-<script tag="templateScript" type="text/javascript">
+<script type="text/javascript">
 
 // Onstart: Uncheck & Rollup for mobile Vs. Slide Left on Large Screens
 var tsm = document.getElementById("toggle-sitemap");
-tsm.checked = !window.isSmall
+tsm.checked = !window.innerWidth < 800
 var sm = document.getElementById("sitemap");
 var size = sm.offsetWidth;
 var space = document.querySelector(".broider").getBoundingClientRect().left;
@@ -93,12 +93,9 @@ loadObserver();
 
 // Lazy Load
 window.loadOnce = false
-window.getLazy = () => { 
+document.addEventListener('scroll', () => {
   window.loadOnce||((document.head||document.documentElement).appendChild(document.createElement('script')).src='template_article_lazy.js');
   window.loadOnce=true;
-}
-document.addEventListener('scroll', () => {
-  getLazy();
   let scrollPercent = (document.documentElement.scrollTop) / (document.documentElement.scrollHeight - document.documentElement.clientHeight) * 100;
   document.getElementById('tracer').style.setProperty('--scrollPercent', scrollPercent + '%');
 });
