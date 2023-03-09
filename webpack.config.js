@@ -7,7 +7,11 @@ const HTMLInlineCSSWebpackPlugin = require("html-inline-css-webpack-plugin").def
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const TerserPlugin = require('terser-webpack-plugin');
 const HtmlMinimizerPlugin = require('html-minimizer-webpack-plugin');
+
+// auto-generate a PWA manifest + assets using webpack.config + a header.json file that you can copy to src/ for future deploys. 
+// add '_projectname' to each generated asset and header.js will inject the manifest tag contingently. 
 const hr = require('./src/header.json');
+
 const WebpackPwaManifest = require('webpack-pwa-manifest');
 const ImageMinimizerPlugin = require("image-minimizer-webpack-plugin"); 
 const fs = require('fs');
@@ -63,7 +67,7 @@ module.exports = (env, args) => {
         new TerserPlugin({ // config default parser
           terserOptions: {
             parse: { html5_comments: false },
-            compress: { pure_funcs: ['console.log'], toplevel: true },
+            // compress: { pure_funcs: ['console.log'], toplevel: true },
             sourceMap: { url: "inline" },
             keep_classnames: true,
             keep_fnames: true,
@@ -205,6 +209,7 @@ module.exports = (env, args) => {
           { from: './src/template_article.html', to: 'template_article.html', toType: 'file' },
           { from: './src/service-worker.js', to: 'service-worker.js', toType: 'file' },
           { from: './src/template_article_lazy.js', to: 'template_article_lazy.js', toType: 'file' },
+          { from: './src/ipynb', to: './ipynb', toType: 'dir' },
           { from: './src/maps', to: './maps', toType: 'dir' },
           { from: './src/posts', to: './posts', toType: 'dir' },
           { from: './src/tables', to: './tables', toType: 'dir' },
@@ -267,8 +272,8 @@ module.exports = (env, args) => {
     devServer: {
       open: true,
       watchFiles: ['src/**/*'],
-      historyApiFallback: { disableDotRule: true, },
-      proxy: {'/data': 'http://localhost:80/PROJECTNAME/src/'}
+      historyApiFallback: { disableDotRule: true },
+      proxy: { '/data': 'http://localhost:80/PROJECTNAME/src/' }
     }
   }
 }

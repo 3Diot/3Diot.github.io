@@ -15,9 +15,11 @@ General
 
 What happens:
 - Render header.js in (react snap/ dev) then dispose of it for (prod).  
-- Render main.js in (React snap/ dev) and also for (prod). 
-- Render template.js in (react snap/ dev) and also for (prod).
-- Routing event handler triggers events in template.
+- Render main.js in (React snap/ dev) and inline for (prod). 
+- Render router.js in (react snap/ dev) and lazy load in (prod).
+- - Renders template, retrieves template content, dispatches 'refreshTemplate' 
+- - Events hooks in template and sitemap.js pick up on this
+- - - Sitemap.js injects template content and conditionally refreshes sitemap/TOC 
 
 Of note:
 - No Webpack bloat
@@ -30,16 +32,17 @@ Of note:
 - Compresses Template
 - React-Snap Pre-rendering
 - Strips out _some_ scripts after Pre-rendering 
+- templateRefreshed event
 
-Manual operations:
-- Webpack - Debug: Toggle purefuncs, Config new same-site Projects
-- Robots.txt - specify sitemaps and nofollow noindex section/links
-- Sitemap - more [info](https://search.google.com/search-console/welcome), [here](https://support.google.com/webmasters/answer/7451001)
-- Head.json
-- Header.js CSP 
-- Images
-- main.CSS
-
+Manual TODOs operations:
+- Webpack -> Debug: Toggle purefuncs, Config new same-site Projects
+- Robots.txt -> specify sitemaps and nofollow noindex section/links
+- Sitemap -> more [info](https://search.google.com/search-console/welcome), [here](https://support.google.com/webmasters/answer/7451001)
+- Head.json + src/images/
+- Header.js -> CSP 
+- main.js -> main.CSS
+- sitemap.js -> ./posts/sitemap.json
+- sitemap.js -> pageTransitioneer
 
 ## Design
 
@@ -52,6 +55,7 @@ Templates Contains:
 - > Scrollpos cube flows along the side of a clip path
 - > Animate text shadow on hover
 - > Glowing BG for Active-Page Link. Glowing Underline for TOC Anchor Link
+- > CSS Keyframe names used: gradient-scroll, gradient, glow, collapse, expand, reveal, dismiss, shake, spin-header, wiggle, pageTransitioneer, clip-path-polygon, cube-animation
 
 ## Design Rules
 
@@ -87,6 +91,10 @@ Reactive Explorative Interactive
 4. most visuals are static as a result
 5. if animation or motion is needed. trigger it on scroll
 
+Misc:
+- Each H2 should be a summary for a details pane.
+
+
 ## Article Components
 
 1. triple ellipses comments popup
@@ -97,6 +105,10 @@ Reactive Explorative Interactive
 6. https://css-tricks.com/full-width-containers-limited-width-parents/
 7. scrollsnaps on img
 - Default to using webP when available w/ png fallback.
+8. https://unicodearrows.com/
+9. https://www.toptal.com/designers/htmlarrows/arrows/
+10. footnotes
+
 
 <picture>
   <source srcset="your-image.webp" type="image/webp">
@@ -130,6 +142,20 @@ Structured Data:
 
 - Markup should only have things found in-page.
 - rich results [test](https://search.google.com/test/rich-results/), schema [validator](https://validator.schema.org/), markup [helper](https://www.google.com/webmasters/markup-helper/u/0/?)
+
+https://www.searchenginejournal.com/technical-seo/schema/
+https://www.google.com/webmasters/markup-helper/u/0/?hl=en
+https://developers.google.com/search/docs/appearance/structured-data
+https://developers.facebook.com/tools/debug/?q=https%3A%2F%2Fwww.cvminigames.com
+https://developer.twitter.com/en/docs/twitter-for-websites/cards/guides/getting-started
+
+// https://github.com/joshbuchea/HEAD
+// https://support.google.com/webmasters/answer/9008080?hl=en
+// https://developers.facebook.com/docs/instant-articles/guides/articlecreate
+// https://webmention.io/
+
+XML sitemap generator & deadlink checker https://www.xml-sitemaps.com/details-cvminigames.com-49d3d3298.html
+visual sitemap -> https://octopus.do/import?url=Cvminigames.com
 
 # Dependencies
 
@@ -179,3 +205,5 @@ using requestAnimationFrame instead of setInterval to create the animation loop.
  using the animate() method to animate the cubes. While this method is easy to use, it may not provide the smoothest animation performance. A better approach is to use requestAnimationFrame()
 
  https://www.stefanjudis.com/snippets/a-picture-element-to-load-correctly-resized-webp-images-in-html/
+ 
+ 

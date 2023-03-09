@@ -1,6 +1,9 @@
 /* Basics */
 * {font-family: Helvetica, Arial, sans-serif; }
 *{ user-select: text; box-sizing: border-box; position: relative;}
+
+/* CSS Not used onload => blockquote, blockquote span, blockquote::before, pre, pre>code */
+
 /* 
 more space between contrasts. 
 more or same vertical padding than horizontal.
@@ -119,11 +122,6 @@ ul{
 }
 
 summary{ text-align: center; cursor: pointer; font-size: 20px;padding: 12px 0px;}
-details{padding: 26px;} 
-@media only screen and (max-width: 769px){
-  details{padding: 26px 12px} 
-}
-
 
 hr{
   margin: 1px 1px 10px 1px;

@@ -1,5 +1,8 @@
 // Page Load Logic and Routing
 window.oldRoute = location.pathname.replace(origin,'');
+window.isLocal = window.isLocal || !!!window.content?.innerHTML.trim()
+window.preRendering = /ReactSnap/.test(navigator.userAgent)
+
 export const navEvent = async (event) => {
     console.log('~~~~> navEvent')
     let route = (event.target.href || event.target.location.href).replace(window.origin,'');  
@@ -13,38 +16,44 @@ export const navEvent = async (event) => {
 // 1) Get meta data from route. 2) Register service worker. 3) load template. 
 // 4) Load scripts 5) Dispatch event listeners. 6) Update route change event listeners
 export const handleRoute = async (route) => {
-
-    await import(/* webpackChunkName: "sitemap" */ './sitemap.js');
     
-    console.log('~~~~~~> handleRoute')
+    // Client route change for first time.
+    if (!window.meta && !isLocal) { registerServiceWorker(); } 
+    await import(/* webpackChunkName: "sitemap" */ './sitemap.js');
 
     // Get the Upcoming Files Json Data 
-    let content = await (await fetch(`./posts/${route.replace("/",'').replace('.html','') || 'index'}.json`)).json(); 
+    // IF IN DEV run the raw convert fn to get the json data.
+    let p = route.replace("/",'').replace('.html','') || 'index';
+    let {ipynb_publish} = isLocal && await import(/* webpackChunkName: "convert" */ './convert.mjs')
+    let content = await (isLocal ? ipynb_publish(`./ipynb/${p}.ipynb`) : (await fetch(`./posts/${p}.json`)).json() ); 
+    
+    window.oldMeta = window.meta || { template: window?.template?.className, sitemap: window?.sitemap?.className };
     window.meta = content.meta; meta.content = content.content; document.title = window.meta.title; 
+    window.newSitemap =  window.oldMeta?.sitemap  !== window.meta.sitemap
+    window.newTemplate = window.oldMeta?.template !== window.meta.template
+    // console.log('~~~~~~~~> handleRoute', route, window.oldMeta, window.meta.template, window.newSitemap, window.newTemplate)
 
-    // Load the template & Dispatch pageLoaded event for template/ content hooks 
-    window.newTemplate = false;
-    if (!(window?.template?.className === window.meta.template)){
-        window.newTemplate = true;
-        
-        window.inDev = !!!window.content?.innerHTML.trim()
-        if (!window.inDev) { console.log('window.inDev'), registerServiceWorker(); }
-        
-        // Load Template
+
+    // Load a template on route change or local init
+    if ( newTemplate ){ 
         document.body.innerHTML = await (await fetch(`./${window.meta.template}.html`)).text(); 
         await loadScripts(); 
     } 
+
+    // Dispatch pageLoaded event for template/ content hooks 
     // Listeners in template.html and | sitemap.js -> Populates window.newTemplate & updates toc. 
-    window.dispatchEvent( new CustomEvent('templateRefreshed') );
+    window.dispatchEvent( new CustomEvent('refreshTemplate') );
     setTimeout( ()=>{ window.updateRedirectListeners() }, 100);
 }
 
-// Load scripts from template.
+// Re-Load scripts present on page when a new template is added.
+// Moves main.js to the footer when prerendering. 
+// in dev/ prod this would force a page refresh and is unnecessary.
 const loadScripts = async () => {
     console.log('~~~~~~~~> loadScripts');
     Array.from(document.getElementsByTagName("script")).forEach(script => {
         // console.log('---------------------------------- script', script.src, script.tag, script.type, script.textContent )
-        // if ( !script.getAttribute('tag') ) { return }
+        if ( !window.preRendering && !script.getAttribute('tag') ) { return }
         const newScript = document.createElement("script"); 
         ['src','type','async','textContent'].forEach( attr => { script[attr] && (newScript[attr] = script[attr]) } );
         // script.parentNode.replaceChild(newScript, script);

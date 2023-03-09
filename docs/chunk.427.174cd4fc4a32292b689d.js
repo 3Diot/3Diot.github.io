@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkname=self.webpackChunkname||[]).push([[427],{427:function(s,e,n){s.exports=n.p+"4everkurious_story_assets.json"}}]);

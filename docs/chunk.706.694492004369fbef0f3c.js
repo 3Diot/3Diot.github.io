@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkname=self.webpackChunkname||[]).push([[706],{706:function(s,e,c){s.exports=c.p+"scarcity-discoveries_assets.json"}}]);
