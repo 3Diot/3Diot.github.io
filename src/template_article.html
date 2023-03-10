@@ -5,7 +5,7 @@
 <div id="sitemap"> 
   <label for="toggle-sitemap"><span>Hide</span> <span>Show </span>Sitemap</label>
 </div>
-<div id='template' class='template_article'>
+<link id='template' class='template_article'>
 <div id='pageTransitioneer'><p>Don't Look! I'm changing!</p></div>
 
 <div id="gradient_bg"> 
@@ -27,7 +27,7 @@
   <p id="thanks">Thank's for visiting! - <small><a href='./legal.html'>Terms of use</a></small></p>
   <span id="footer_bg_wrapper"><div id="footer_bg"></div></span> 
 </div> 
-
+<link rel="stylesheet" type="text/css" href="/template_article.css"></link>
 <script type="text/javascript">
 
 // Onstart: Uncheck & Rollup for mobile Vs. Slide Left on Large Screens
@@ -90,10 +90,9 @@ loadObserver = (t) =>{ document.querySelectorAll('h2,h3,h4,h5,h6').forEach((el) 
 window.addEventListener('templateRefreshed', async () =>{ setTimeout( ()=> loadObserver(), 2000) } );
 loadObserver();
 
-
 // Lazy Load
 window.loadOnce = false
-document.addEventListener('scroll', () => {
+document.addEventListener('scroll', () => { 
   window.loadOnce||((document.head||document.documentElement).appendChild(document.createElement('script')).src='template_article_lazy.js');
   window.loadOnce=true;
   let scrollPercent = (document.documentElement.scrollTop) / (document.documentElement.scrollHeight - document.documentElement.clientHeight) * 100;

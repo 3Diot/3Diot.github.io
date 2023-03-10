@@ -30,7 +30,8 @@ Of note:
 - PWA-SW Support
 - Build Optimizations/ Analytics
 - Compresses Template
-- React-Snap Pre-rendering
+- React-Snap Pre-rendering   // mobile first approach w=480,h=850
+
 - Strips out _some_ scripts after Pre-rendering 
 - templateRefreshed event
 

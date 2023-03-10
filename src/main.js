@@ -1,5 +1,4 @@
 import "./main.css"; 
-import "./template_article.css"; 
 
 //
 // App: Loads Ipynb files into a template.

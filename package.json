@@ -38,6 +38,7 @@
     "compression-webpack-plugin": "^10.0.0",
     "copy-webpack-plugin": "^11.0.0",
     "css-loader": "^5.0.1",
+    "cssnano": "^5.1.15",
     "fs": "^0.0.1-security",
     "html-inline-css-webpack-plugin": "^1.11.1",
     "html-minimizer-webpack-plugin": "^4.3.0",

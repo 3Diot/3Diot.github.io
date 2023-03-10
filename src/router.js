@@ -31,7 +31,7 @@ export const handleRoute = async (route) => {
     window.meta = content.meta; meta.content = content.content; document.title = window.meta.title; 
     window.newSitemap =  window.oldMeta?.sitemap  !== window.meta.sitemap
     window.newTemplate = window.oldMeta?.template !== window.meta.template
-    // console.log('~~~~~~~~> handleRoute', route, window.oldMeta, window.meta.template, window.newSitemap, window.newTemplate)
+    // console.log('~~~~~~~~> handleRoute', {route, 'oldmeta':window.oldMeta, 'template':window.meta.template, 'newsitemap':window.newSitemap, 'newtemplate':window.newTemplate})
 
 
     // Load a template on route change or local init
@@ -50,10 +50,12 @@ export const handleRoute = async (route) => {
 // Moves main.js to the footer when prerendering. 
 // in dev/ prod this would force a page refresh and is unnecessary.
 const loadScripts = async () => {
-    // console.log('~~~~~~~~> loadScripts');
+    //console.log('~~~~~~~~> loadScripts');
     Array.from(document.getElementsByTagName("script")).forEach(script => {
-        // console.log('---------------------------------- script', script.src, script.tag, script.type, script.textContent )
-        if ( !window.preRendering && !script.getAttribute('tag') ) { return }
+        // console.log( Array.from(script.attributes) )
+        // console.log( Array.from(script.attributes).map( a => a.name + '="' + a.value + '"' ).join(' ') )
+        // console.log( Array.from(script.attributes) )
+        // console.log('---------------------------------- script', script.type, script.src, script.tag, script.type )  
         const newScript = document.createElement("script"); 
         ['src','type','async','textContent'].forEach( attr => { script[attr] && (newScript[attr] = script[attr]) } );
         // script.parentNode.replaceChild(newScript, script);

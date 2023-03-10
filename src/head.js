@@ -105,9 +105,11 @@ import { Helmet, HelmetProvider } from 'react-helmet-async';
 
   // Runs in Dev / React Snap. Removes prerender scripts
   Array.from(document.getElementsByTagName("script")).forEach(script => { 
-      if (new RegExp("head|helmet", "i").test(script.getAttribute('src'))) {
-        script.remove(); return; 
-      }
-  });
+      if (new RegExp("head|helmet", "i").test(script.getAttribute('src')) ||
+          !script.type && script.src.includes('webpack-dev-server') || 
+          (script.textContent.includes('webpackBootstrap')) ) { 
+            script.remove(); return; 
+      }  
+  });      
 
 } )()

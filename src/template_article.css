@@ -8,6 +8,8 @@ h1>a{
   );
   background-size: 300% 100%; 
   background-clip: text; 
+  /*-webkit-background-clip: text; 
+  */
   color: transparent;
   animation: gradient 5s ease infinite; 
 }

@@ -1,6 +1,8 @@
 const path = require('path');
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const postcssPresetEnv = require("postcss-preset-env");
+const postcss = require('postcss');
+const cssnano = require('cssnano'); // or: https://webpack.js.org/plugins/css-minimizer-webpack-plugin/
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const HtmlWebpackInlineSourcePlugin = require('html-webpack-inline-source-plugin-patched');
 const HTMLInlineCSSWebpackPlugin = require("html-inline-css-webpack-plugin").default;
@@ -42,8 +44,8 @@ module.exports = (env, args) => {
       <div id="body"></div>
     </body>
   </html>`;
-  // cache: false,
   return {
+    cache: false,
     entry: { 
       head: './src/head.js', 
       index: './src/admin/index.js',
@@ -54,7 +56,7 @@ module.exports = (env, args) => {
       publicPath: '/',
       filename: (pathData) => {
         // [name] defers to id when it doesn't exist.
-        console.log('~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~', pathData)
+        // console.log('~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~', pathData)
         return '[runtime].[id].[hash].js'
       },
       chunkFilename: 'chunk.[name].[chunkhash].js',
@@ -129,17 +131,23 @@ module.exports = (env, args) => {
           },
         },
         {
-          test: /\.(sc|c)ss$/i,
+          test: /\.(sc|c)ss$/i, 
           use: [
             {
               loader: MiniCssExtractPlugin.loader
             },
-            "css-loader", {
+            "css-loader", 
+            {
               loader: "postcss-loader",
               options: {
                 postcssOptions: {
-                  plugins: [postcssPresetEnv()],
+                  plugins: [
+                    postcssPresetEnv(),
+                    cssnano(),
+                    // { postcssPlugin: "log-modules", Once(root) {root.walkRules((rule) => {console.log("Testing module: ", rule.source.input.file); });}, },
+                  ],
                 },
+
               },
             },
             // according to the docs, sass-loader should be at the bottom, which
@@ -174,10 +182,11 @@ module.exports = (env, args) => {
         }
       ],
     },
+    
     plugins: [
       new MiniCssExtractPlugin({
         filename: "[name].css",
-        chunkFilename: "[name].[id].css"
+        chunkFilename: "[name].[id].css",
       }),
       new HtmlWebpackPlugin({
         filename: 'admin/index.html',
@@ -199,21 +208,30 @@ module.exports = (env, args) => {
         inlineSource: 'main.*.js$', 
         inject: 'head',
       }),
-      new HtmlWebpackInlineSourcePlugin(HtmlWebpackPlugin),
-      new HTMLInlineCSSWebpackPlugin(),
-      new CopyWebpackPlugin({
-        patterns: [
-          { from: './robots.txt', to: 'robots.txt', toType: 'file' },
-          { from: './CNAME', to: 'CNAME', toType: 'file' },
+      new HtmlWebpackInlineSourcePlugin(HtmlWebpackPlugin), 
+      new HTMLInlineCSSWebpackPlugin({leaveCSSFile: true}), 
+      new CopyWebpackPlugin({ 
+        patterns: [ 
+          { from: './robots.txt', to: 'robots.txt', toType: 'file' }, 
+          { from: './CNAME', to: 'CNAME', toType: 'file' }, 
           { from: './src/404.html', to: '404.html', toType: 'file' }, 
-          { from: './src/template_article.html', to: 'template_article.html', toType: 'file' },
-          { from: './src/service-worker.js', to: 'service-worker.js', toType: 'file' },
+          { from: './src/service-worker.js', to: 'service-worker.js', toType: 'file' }, 
+          { from: './src/template_article.html',    to: 'template_article.html', toType: 'file' },
           { from: './src/template_article_lazy.js', to: 'template_article_lazy.js', toType: 'file' },
           { from: './src/ipynb', to: './ipynb', toType: 'dir' },
           { from: './src/maps', to: './maps', toType: 'dir' },
           { from: './src/posts', to: './posts', toType: 'dir' },
           { from: './src/tables', to: './tables', toType: 'dir' },
-          { from: './src/images', to: './images', toType: 'dir' }
+          { from: './src/images', to: './images', toType: 'dir' },
+          {
+            from: "src/*.css",
+            to: './[name].css',
+            transform: (basePath, path) => {
+              return postcss([postcssPresetEnv(), cssnano()])
+                .process(basePath, { from: path })
+                .then(result => result.css);
+            },
+          },
         ]
       } ),
       !addPwa ? ()=>{} : new WebpackPwaManifest({
@@ -271,8 +289,13 @@ module.exports = (env, args) => {
     ],
     devServer: {
       open: true,
-      watchFiles: ['src/**/*'],
-      historyApiFallback: { disableDotRule: true },
+      static: {
+        directory: 'src',
+        watch: true,
+        serveIndex: true,
+      },
+      // watchFiles: ['src/**/*'],
+      historyApiFallback: { disableDotRule: false },
       proxy: { '/data': 'http://localhost:80/PROJECTNAME/src/' }
     }
   }
