@@ -4,7 +4,7 @@ window.isLocal = window.isLocal || !!!window.content?.innerHTML.trim()
 window.preRendering = /ReactSnap/.test(navigator.userAgent)
 
 export const navEvent = async (event) => {
-    console.log('~~~~> navEvent')
+    // console.log('~~~~> navEvent')
     let route = (event.target.href || event.target.location.href).replace(window.origin,'');  
     if (route.split("#")[0] != window.oldRoute.split("#")[0]){ await handleRoute( route ); window.oldRoute = route; }; 
     route.indexOf('#') == -1 && window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -50,7 +50,7 @@ export const handleRoute = async (route) => {
 // Moves main.js to the footer when prerendering. 
 // in dev/ prod this would force a page refresh and is unnecessary.
 const loadScripts = async () => {
-    console.log('~~~~~~~~> loadScripts');
+    // console.log('~~~~~~~~> loadScripts');
     Array.from(document.getElementsByTagName("script")).forEach(script => {
         // console.log('---------------------------------- script', script.src, script.tag, script.type, script.textContent )
         if ( !window.preRendering && !script.getAttribute('tag') ) { return }
@@ -65,7 +65,7 @@ const loadScripts = async () => {
 
 
 const registerServiceWorker = async () => {
-    console.log('~~~~~~~~> registerServiceWorker');
+    // console.log('~~~~~~~~> registerServiceWorker');
     if (!("serviceWorker" in navigator)) { return }
     try {
         const registration = await navigator.serviceWorker.register("/service-worker.js");

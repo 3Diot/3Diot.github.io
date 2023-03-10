@@ -28,7 +28,7 @@ function addTocToSiteMap() {
         .map((header) =>{ 
             const z=capFirst(header.innerText || header.textContent);
             const spaces = '&emsp;'.repeat(header.tagName.slice(1)-1)
-            return `${spaces}<a id='anchor_link_${z}'href='#${z}'>${z}</a>`
+            return `${spaces}<a id='anchor_link_${z}' href='#${z}'>${z}</a>`
         })
     .join('<br/>')
     tocNode = document.createElement('div'); tocNode.setAttribute('id', 'toc'); tocNode.innerHTML = toc; 
@@ -40,7 +40,7 @@ function addAnchorsToHeaders() {
     headers.forEach(header => {
         header.id=capFirst(header.innerText||header.textContent);
         let anchor = document.createElement('a');
-        anchor.id= anchor.href = 'anchor_'+header.id; 
+        anchor.id= anchor.href = window.meta.filename+'.html#_anchor_'+header.id; 
         anchor.setAttribute('aria-label', 'Link to ' + header.id);
         header.parentNode.insertBefore(anchor, header.nextSibling);
     });
@@ -55,7 +55,7 @@ function addAnchorsToHeaders() {
 // - Else Runs 'pageTransitioneer' animation if it exists
 //
 window.addEventListener('refreshTemplate', async () => { 
-    console.log('~~~~~~~~~~> refreshTemplate');
+    // console.log('~~~~~~~~~~> refreshTemplate');
     window.meta.robots && ( document.querySelector('meta[name="robots"]')?.setAttribute('content', window.meta.robots) )
     const replace = (id) => {
         const el = document.getElementById(id); el.innerHTML = ''; 
