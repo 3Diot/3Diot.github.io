@@ -104,12 +104,13 @@ pre > code { color: var(--foreground) }
 /* Instead of setting a page width use: li { max-width: 80ch; } */
 /* Blockquote */
 blockquote{ 
+  margin: 32px 24px;
   font-style:italic; background-color: rgb(var(--foreground)); 
   color: var(--foreground); border-left:8px solid rgb(var(--foreground)); 
   position: relative; padding: 12px 5px 1px 5px; 
 }
 blockquote::before{ content: "\201C"; color: rgb(var(--foreground)); padding-top: 6px; font-size:4em; position: absolute; left: 10px; top:-10px; }
-blockquote span{ color: rgb(var(--foreground)); font-style: normal; font-weight: bold; display: block; text-align: center; }
+blockquote span{ color: rgb(var(--near-black)); font-style: normal; font-weight: bold; display: block; text-align: center; }
 
 /* Summary */
 .details{ background: rgba(var(--background), 0.4); }
